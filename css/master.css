@@ -1,0 +1,39 @@
+body{
+	background-color: #AB998F;
+	margin: 0;
+}
+
+div.stripe{
+	background-color: #DBBB88;
+}
+
+ul.nav{
+	list-style-type: none;
+}
+
+ul.nav li{
+	display: inline;
+	border:2px solid black;
+	padding:3px;
+}
+
+ul.nav li a{
+	text-decoration: none;
+}
+
+div#logo h1{
+	margin-left:10%;
+}
+
+div#logo p{
+	margin-left:12%;
+}
+
+div#footer{
+	position: fixed;
+	
+}
+
+div {
+	margin: 8;
+}
