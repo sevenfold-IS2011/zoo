@@ -1,52 +1,9 @@
-body{
-	/*background-color: #AB998F;*/
-	margin: 0;
-}
+@import url(misc.css);
 
-div.stripe{
-/*	background-color: #DBBB88;*/
-}
+@import url(homepage.css);
 
-ul.nav{
-	list-style-type: none;
-}
 
-ul.nav li{
-	width: 50px;
-	display: inline;
-	padding:3px;
-	width: 50px;
-	border:2px solid transparent;
-}
 
-ul.nav li:hover{
-	border:2px solid black;
-}
-
-ul.nav li a{
-	text-decoration: none;
-}
-
-div#logo{
-	text-align: center;
-}
-
-div#logo h1{
-	
-}
-
-div#nav{
-	text-align: center;
-}
-
-div#logo p{
-	
-}
-
-div#footer{
-	border-top: 1px solid black;
-	text-align: center;
-}
 /* BOXES */
 
 div.boxes{
@@ -77,11 +34,6 @@ div.boxes .center{
 	width:30%;
 	top:0px;
 	right:0px;
-}
-
-
-div.unit{
-	text-align: center;
 }
 
 div.boxes h3{

@@ -1,0 +1,15 @@
+body{
+	/*background-color: #AB998F;*/
+	margin: 0;
+}
+
+div.figure{
+	text-align: center;
+}
+
+div.figure img{
+	border:2px solid black;
+}
+div.figure p{
+	font-size: 80%;
+}
