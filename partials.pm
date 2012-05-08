@@ -3,7 +3,23 @@
 
 package partials;
 
-use CGI;
+sub login{
+	if(!$_[0]){
+		print
+			'<div id="loginform">
+				<form method="POST" action="/login.cgi">
+			  	Username: <input type="text" name="username" size="15" /><br />
+			  	Password: <input type="password" name="password" size="15" /><br />
+			  	<div align="center">
+			    	<p><input type="submit" value="Login" /></p>
+			  	</div>
+				</form>
+			</div>';
+	}else{
+		print 'ciao utente loggato';
+	}
+
+}
 
 sub header{
 	print 
@@ -21,7 +37,7 @@ sub header{
 					<li><a href="#">Login dipendenti</a></li>
 				</ul>
 			</div>
-		</div>'
+		</div>';
 }
 
 sub footer{
