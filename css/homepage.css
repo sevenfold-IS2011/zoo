@@ -11,19 +11,20 @@ ul.nav li{
 	border:4px solid transparent;
 }
 
-ul.nav li:hover{
+ul.nav li.item:hover{
 	border:4px solid black;
 	background-color:black;
 	color: white;
 }
 
-ul.nav li a{
+
+ul.nav li.item a{
 	font-size: 110%;
 	text-decoration: none;
 	color:black;
 }
 
-ul.nav li a:hover{
+ul.nav li.item:hover a{
 	color: white;
 }
 

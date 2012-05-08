@@ -23,21 +23,22 @@ sub login{
 
 sub header{
 	print 
-	' <div id="header">
-  		<div id="logo" class ="stripe">
-				<h1>Monkey Island</h1>
-				<p><i>Un&apos;esperienza selvaggia.. </i></p>
-			</div>	
-			<div id="nav">
-				<ul class="nav">
-					<li><a href="#">Chi siamo</a></li>
-					<li><a href="#">Aree</a></li>
-					<li><a href="animali.cgi">Animali</a></li>
-					<li><a href="#">Servizi</a></li>
-					<li><a href="#">Login dipendenti</a></li>
-				</ul>
+	'<div id="header">
+		<div id="logo">
+			<div style="text-align:center;">
+				<img src="images/logo.png" width="300"/>
 			</div>
-		</div>';
+		</div>	
+		<div id="nav">
+			<ul class="nav">
+				<li><a href="#">Chi siamo</a></li>
+				<li><a href="aree.html">Aree</a></li>
+				<li><a href="animali.html">Animali</a></li>
+				<li><a href="#">Servizi</a></li>
+				<li><a href="#">Login dipendenti</a></li>
+			</ul>
+		</div>
+	</div>';
 }
 
 sub footer{
