@@ -14,8 +14,10 @@ print $page->header,
 $sid = $page->cookie("CGISESSID") || undef;
 if ($sid eq undef){
 	print 'sid undef';
+}else{
+	print "sid= $sid";
 }
-partials::header($sid);
+partials::header();
 partials::_index();					
 partials::footer();
 							
