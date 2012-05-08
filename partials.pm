@@ -26,9 +26,13 @@ sub login{
 sub header{
 	print 
 	' <div id="header">
-  		<div id="logo" class ="stripe">
-				<h1>Monkey Island</h1>
-				<p><i>Un&apos;esperienza selvaggia.. </i></p>';
+  		<div id="logo">
+				<div style="text-align:center;">
+					<img src="images/logo.png" width="300"/>
+				</div>';
+				
+				
+						
 	
 	if (!$_[0] eq undef){
 		$name=functions::get_name_from_sid($_[0]);
