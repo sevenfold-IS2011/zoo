@@ -13,7 +13,6 @@ print $page->header,
 												-style=>{'src'=>'css/master.css'});
 $logged = true;
 partials::header();
-partials::login();
 partials::animali();					
 partials::footer();
 							
