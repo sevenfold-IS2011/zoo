@@ -34,7 +34,7 @@ sub header{
 					<li><a href="#">Aree</a></li>
 					<li><a href="animali.cgi">Animali</a></li>
 					<li><a href="#">Servizi</a></li>
-					<li><a href="#">Login dipendenti</a></li>
+					<li><a href="login.cgi">Login dipendenti</a></li>
 				</ul>
 			</div>
 		</div>';
@@ -73,6 +73,18 @@ sub animali{
 				<dd>Un oseo a caso e se magna i so ovi.</dd>
 		</dl>
 	</div>'
+}
+
+sub login{
+	print
+	'<div id="login">
+		 <h2>Per favore autenticarsi per l&apos;accesso all&apos;area riservata</h2>
+		 <form action="_login.cgi" method="post" accept-charset="utf-8">
+			 <label for="username">Username</label><input type="text" name="username" value="" placeholder="username"><br />
+			 <label for="password">Password</label><input type="text" name="password" value=""placeholder="password">
+			 <p><input type="submit" value="Authenticate &rarr;"></p>
+		 </form>
+	 </div>';
 }
 
 1;

@@ -11,7 +11,7 @@ print $page->header,
 																	'author' => '?????????'}, 
 												-author => 'gaggi@math.unipd.it',
 												-style=>{'src'=>'css/master.css'});
-partials::header(true);
+partials::header();
 partials::_index();					
 partials::footer();
 							
