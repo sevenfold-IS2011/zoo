@@ -1,11 +1,20 @@
 #!/usr/bin/perl
 
-read(STDIN, $buffer, $ENV{'CONTENT_LENGTH'}); @pairs = split(/&/, $buffer);
-foreach $pair (@pairs) {
-	($name, $value) = split(/=/, $pair);
-	$value =~ tr/+/ /;
-	$value =~ s/%([a-fA-F0-9][a-fA-F0-9])/pack("C", hex($1))/g; 
-	$name =~ tr/+/ /;
-	$name =~ s/%([a-fA-F0-9][a-fA-F0-9])/pack("C",hex($1))/g;
-	$input{$name} = $value;
-}
+use CGI;
+use partials;
+$page = new CGI;
+print $page->header,
+			$page->start_html(-title => "Monkey Island || Lo zoo di Padova",
+			 									-meta => {'keywords' => 'zoo padova animali monkey island',
+																	'description' => 'sito ad utilizzo interno dello zoo Monkey Island di Padova',
+																	'author' => '?????????'}, 
+												-author => 'gaggi@math.unipd.it',
+												-style=>{'src'=>'css/master.css'});
+partials::header();
+partials::login();					
+partials::footer();
+							
+
+print $page->end_html;
+exit;
+
