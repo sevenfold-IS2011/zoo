@@ -45,7 +45,17 @@ sub header{
 					<li><a href="login.cgi">Login dipendenti</a></li>
 				</ul>
 			</div>
-		</div>';
+		</div>	
+		<div id="nav">
+			<ul class="nav">
+				<li><a href="#">Chi siamo</a></li>
+				<li><a href="aree.html">Aree</a></li>
+				<li><a href="animali.html">Animali</a></li>
+				<li><a href="#">Servizi</a></li>
+				<li><a href="#">Login dipendenti</a></li>
+			</ul>
+		</div>
+	</div>';
 }
 
 sub footer{

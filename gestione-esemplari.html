@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="language" content="italian it" />
+		<meta name="author" content=" ©" />
+		<link rel="stylesheet" href="css/master.css" type="text/css" media="screen" charset="utf-8" />
+		<title>Monkey Island || Lo zoo di Padova</title>
+	</head>
+	<body>
+		<div id="header">
+			<div id="logo">
+				<div style="text-align:center;">
+					<img src="images/logo-privato.png" width="300"/>
+				</div>
+			</div>	
+			<div id="nav">
+				<ul class="nav">
+					<li>Gestione: </li>
+					<li class="item"><a href="gestione-aree.html">Aree</a></li>
+					<li class="item"><a href="gestione-esemplari.html">Esemplari</a></li>
+					<li class="item"><a href="gestione-approvigionamenti.html">Approvigionamenti</a><li>
+					<li>Azioni: </li>
+					<li class="item"><a href="area-privata.html">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	
+		<div id="content">
+			<h2>Gestione esemplari</h2>
+			<p>Da questo pannello è possibile aggiungere, rimuovere o modificare specie ed esemplari presenti nello zoo.</p>
+			<h2>Gestione specie</h2>
+			<table cellspacing="5" cellpadding="5" style="margin:0 auto;">
+				<tr><th>Nome specie</th><th>Numero esemplari</th><th>Aree dedicate</th></tr>
+				<tr><td>Orangotango</td><td>1</td><td>Area Scimmie</td></tr>
+				<tr><td colspan="3"><strong>Inserimento nuova specie</strong></td></tr>
+				<tr>	
+					<form action="gestione-esemplari_submit" method="post" accept-charset="utf-8">
+						<td><input type="text" name="specie" value="" placeholder="Nome specie"></td>
+						<td>
+							<select name="area" id="area">
+								<option value="Area Scimmie">Area Scimmie</option>
+								<option value="Area Pesce">Area Pesce</option>
+							</select>
+						</td>
+						<td>
+							<input type="submit" value="Inserisci &rarr;">
+						</td>
+				</form>
+			</tr>
+			</table>
+			<h2>Gestione esemplari</h2>
+			<table border="" cellspacing="5" cellpadding="5" style="margin: 0 auto;">
+				<tr><th>Specie</th><th>Nome esemplare</th></tr>
+				<tr><td>Orangotango</td></tr>
+				<tr><td></td><td>Gigi</td></tr>
+			</table>
+		</div>
+		
+		<div id="footer">
+			<p>Monkey Island S.r.l. | P.I. 0349034129384 | Via le man dae simie 32 | Curtarolo (PD)</p>
+		</div>
+	</body>
+</html>
