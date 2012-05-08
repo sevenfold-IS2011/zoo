@@ -3,8 +3,7 @@
 <animal id="1"
     xmlns="http://www.zoo.com"
     xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
-    xs:schemaLocation="http://www.zoo.com animal.xsd"
->
+    xs:schemaLocation="http://www.zoo.com animal.xsd">
     <name>Gigia</name>
     <gender>Female</gender>
     <age>2</age>
