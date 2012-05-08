@@ -11,7 +11,11 @@ print $page->header,
 																	'author' => '?????????'}, 
 												-author => 'gaggi@math.unipd.it',
 												-style=>{'src'=>'css/master.css'});
-partials::header();
+$sid = $page->cookie("CGISESSID") || undef;
+if ($sid eq undef){
+	print 'sid undef';
+}
+partials::header($sid);
 partials::_index();					
 partials::footer();
 							
