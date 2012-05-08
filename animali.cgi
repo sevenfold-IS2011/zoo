@@ -12,7 +12,7 @@ print $page->header,
 												-author => 'gaggi@math.unipd.it',
 												-style=>{'src'=>'css/master.css'});
 partials::header();
-partials::_index();					
+partials::animali();					
 partials::footer();
 							
 
