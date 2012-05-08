@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<div id="header">
-			<div id="logo">
+			<div id="logo" class ="stripe">
 				<h1>Monkey Island</h1>
 				<p><i>Un&apos;esperienza selvaggia.. </i></p>
 			</div>	
@@ -25,13 +25,14 @@
 		</div>
 	
 		<div id="content">
-			<h3>I nostri eventi</h3>
-			<dl>
-				<dt>Caccia al tesoro</dt>
-					<dd>Ogni primo sabato del mese, organizziamo per i più piccoli una caccia al tesoro</dd>
-				<dt>L&apos;isola selvaggia</dt>
-					<dd>Ogni sabato sera, organizziamo serate tematiche con musica e drink</dd>
-			</dl>
+			<div id="login">
+				<h2>Per favore autenticarsi per l'accesso all'area riservata</h2>
+				<form action="login_submit" method="post" accept-charset="utf-8">
+					<label for="username">Username</label><input type="text" name="username" value="" placeholder="username"><br />
+					<label for="password">Password</label><input type="text" name="password" value=""placeholder="password">
+					<p><input type="submit" value="Authenticate &rarr;"></p>
+				</form>
+			</div>
 		</div>
 		
 		<div id="footer">

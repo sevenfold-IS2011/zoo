@@ -1,22 +1,30 @@
 
 ul.nav{
 	list-style-type: none;
+	margin:0;
 }
 
 ul.nav li{
 	width: 50px;
 	display: inline;
-	padding:3px;
 	width: 50px;
-	border:2px solid transparent;
+	border:4px solid transparent;
 }
 
 ul.nav li:hover{
-	border:2px solid black;
+	border:4px solid black;
+	background-color:black;
+	color: white;
 }
 
 ul.nav li a{
+	font-size: 110%;
 	text-decoration: none;
+	color:black;
+}
+
+ul.nav li a:hover{
+	color: white;
 }
 
 h1 a{
