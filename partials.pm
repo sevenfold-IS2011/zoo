@@ -94,7 +94,7 @@ sub login{
 		 <h2>Per favore autenticarsi per l&apos;accesso all&apos;area riservata</h2>
 		 <form action="_login.cgi" method="post" accept-charset="utf-8">
 			 <label for="username">Username</label><input type="text" name="username" value="" placeholder="username"><br />
-			 <label for="password">Password</label><input type="text" name="password" value=""placeholder="password">
+			 <label for="password">Password</label><input type="password" name="password" value=""placeholder="password">
 			 <p><input type="submit" value="Authenticate &rarr;"></p>
 		 </form>
 	 </div>';

@@ -2,6 +2,7 @@
 use CGI;
 use CGI::Session;
 use File::Spec;
+use functions;
 
 read(STDIN, $buffer, $ENV{'CONTENT_LENGTH'});
 my @pairs = split(/&/, $buffer);
@@ -14,24 +15,19 @@ foreach $pair (@pairs) {
 	$input{$name} = $value;
 }
 
-
-
-
-
-
-
 $page = new CGI;
 
-if ($input{"username"} eq "ciao" && $input{"password"} eq "ciao"){
+if (functions::check_credentials($input{"username"}, $input{"password"}) eq true ){
+#	if (1){
+	
 	$session = new CGI::Session("driver:File", undef, {File::Spec->tmpdir});
 	$session->param("name", "Carcarlo Pravettoni");
 	
 	$cookie = $page->cookie(CGISESSID => $session->id);
-	print $page->redirect( -URL => "index.cgi" -cookie=>$cookie);
-		
+	print $page->redirect( -URL => "index.cgi", -cookie=>$cookie);
+
 }else{
 	print $page->redirect( -URL => "animali.cgi");
 }
-
 
 exit;
