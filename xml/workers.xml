@@ -5,18 +5,24 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
     xs:schemaLocation="http://www.zoo.com employee.xsd">
     <employee>
+        <username>mario</username>
+        <password>de2f15d014d40b93578d255e6221fd60</password>
         <name>Mario</name>
         <gender>Male</gender>
         <age>45</age>
     </employee>
 
     <employee>
+        <username>maria</username>
+        <password>maria</password>
         <name>Maria</name>
         <gender>Female</gender>
         <age>44</age>
     </employee>
 
     <manager>
+        <username>marco</username>
+        <password>marco</password>
         <name>Marco</name>
         <gender>Male</gender>
         <age>25</age>
@@ -24,6 +30,8 @@
     </manager>
 
     <manager>
+        <username>giovanna</username>
+        <password>giovanna</password>
         <name>Giovanna</name>
         <gender>Female</gender>
         <age>24</age>

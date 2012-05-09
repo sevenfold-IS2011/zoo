@@ -9,7 +9,7 @@
 			<div>
 			<h3>Descizione dei dipendenti:</h3>
 			<xsl:for-each select="zoo:employee">
-				<p>--- Ciao, sono <xsl:value-of select="zoo:name"/>, </p>
+				<p>--- Ciao, sono <xsl:value-of select="zoo:name"/> (username:<xsl:value-of select="zoo:username"/>),</p>
 				<p>sono un <xsl:value-of select="zoo:gender"/></p>
 				<p> e ho <xsl:value-of select="zoo:age"/> anni.</p>
 			</xsl:for-each>
@@ -17,7 +17,7 @@
 			<div>
 				<h3>Descizione dei manager:</h3>
 				<xsl:for-each select="zoo:manager">
-					<p>--- Ciao, sono <xsl:value-of select="zoo:name"/>, </p>
+					<p>--- Ciao, sono <xsl:value-of select="zoo:name"/>(username:<xsl:value-of select="zoo:username"/>) , </p>
 					<p>sono un <xsl:value-of select="zoo:gender"/>, </p>
 					<p>ho <xsl:value-of select="zoo:age"/> anni e</p>
 					<p style="color:red">guadagno <xsl:value-of select="zoo:salary"/> euro.</p>
