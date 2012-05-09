@@ -28,16 +28,17 @@ sub header{
 	' <div id="header">
   		<div id="logo">
 				<div style="text-align:center;">
-					<img src="images/logo.png" width="300"/>
+					<a href="index.cgi"><img src="images/logo.png" width="300"/></a>
 				</div>';
 				
-				
-						
-	
 	if (!$_[0] eq undef){
-		$name=functions::get_name_from_sid($_[0]);
-		print "<p>Ciao $name !</p>";
+	  $name=functions::get_name_from_sid($_[0]);
+		if($name){
+			print "<p>Ciao $name !</p>";
+			print '<p><a href="logout.cgi">Logout</a></p>';
+		}
 	}
+	
 	print
 	'</div>	
 			<div id="nav">
@@ -49,8 +50,7 @@ sub header{
 					<li><a href="login.cgi">Login dipendenti</a></li>
 				</ul>
 			</div>
-		</div>	
-	</div>';
+		</div>	';
 }
 
 sub footer{

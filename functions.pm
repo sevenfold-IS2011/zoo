@@ -2,10 +2,13 @@
 
 package functions;
 
+use File::Spec;
+use CGI::Session;
+
 
 sub get_name_from_sid{
-	$session = new CGI::Session("driver:File", $_[0], {File::Spec->tmpdir});
-	return $session->param("name");
+	$session = new CGI::Session(undef, $_[0], {File::Spec->tmpdir});
+  return $session->param("name");
 }
 
 
