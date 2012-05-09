@@ -1,9 +1,10 @@
 #!/usr/bin/perl
 
-package functions;
+package Functions;
 
 use File::Spec;
 use CGI::Session;
+use XML::XPath;
 
 
 sub get_name_from_sid{
@@ -11,6 +12,37 @@ sub get_name_from_sid{
   return $session->param("name");
 }
 
+
+sub check_credentials{
+	my $username = $_[0];
+	my $pswd = $_[1];
+	my $xp = XML::XPath->new(filename=>'xml/workers.xml');
+	my $nodeset = $xp->find("//employee[username=\"$username\"]/password | //manager[username=\"$username\"]/password");
+	my @password;
+	my $password;
+	if (my @nodelist = $nodeset->get_nodelist) {
+		@password = map($_->string_value, @nodelist);
+		$password=@password[0];
+	}
+	if ($pswd eq $password){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+sub get_employee_name{
+	my $username = $_[0];
+	my $xp = XML::XPath->new(filename=>'xml/workers.xml');
+	my $nodeset = $xp->find("//employee[username=\"$username\"]/name | //manager[username=\"$username\"]/name");
+	my @name;
+	my $name;
+	if (my @nodelist = $nodeset->get_nodelist) {
+		@name = map($_->string_value, @nodelist);
+		$name=@name[0];
+	}
+	return $name;
+}
 
 
 1;
