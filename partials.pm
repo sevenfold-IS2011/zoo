@@ -3,7 +3,7 @@
 
 package partials;
 
-use functions;
+use Functions;
 
 sub login{
 	if(!$_[0]){
@@ -32,7 +32,7 @@ sub header{
 				</div>';
 				
 	if (!$_[0] eq undef){
-	  $name=functions::get_name_from_sid($_[0]);
+	  $name=Functions::get_name_from_sid($_[0]);
 		if($name){
 			print "<p>Ciao $name !</p>";
 			print '<p><a href="logout.cgi">Logout</a></p>';
