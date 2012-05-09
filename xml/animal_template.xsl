@@ -6,13 +6,13 @@
 	<xsl:template match="zoo:zoo">
 	<html>
 		<body>
-		<h3>Descizione degli animali:</h3>
+		<h3>Animals descriptions:</h3>
 			<xsl:for-each select="zoo:animal">
-				<p>--- Ciao, sono <xsl:value-of select="zoo:name"/>, </p>
-				<p>sono un <xsl:value-of select="zoo:gender"/>,</p>
-				<p>ho <xsl:value-of select="zoo:age"/> anni, </p>
-				<p>vivo nella <xsl:value-of select="zoo:area/zoo:zona"/></p>
-				<p>e sono: <xsl:value-of select="zoo:area/zoo:species"/>.</p>
+				<p> -- Name: <xsl:value-of select="zoo:name"/></p>
+				<p>Gender: <xsl:value-of select="zoo:gender"/></p>
+				<p>Age: <xsl:value-of select="zoo:age"/></p>
+				<p>Place: <xsl:value-of select="zoo:area/zoo:zona"/></p>
+				<p>Species: <xsl:value-of select="zoo:area/zoo:species"/></p>
 			</xsl:for-each>
 		</body>
 	</html>
