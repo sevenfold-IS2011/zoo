@@ -1,5 +1,7 @@
 #!/usr/bin/perl
+use CGI;
 use CGI::Session;
+use File::Spec;
 
 read(STDIN, $buffer, $ENV{'CONTENT_LENGTH'});
 my @pairs = split(/&/, $buffer);
@@ -20,12 +22,14 @@ foreach $pair (@pairs) {
 
 $page = new CGI;
 
-my $logged=0;
-
-
 if ($input{"username"} eq "ciao" && $input{"password"} eq "ciao"){
-	$session = new CGI::Session("driver:File", undef, {Directory=>"/tmp"});
-	print $page->redirect( -URL => "index.cgi");
+	$session = new CGI::Session("driver:File", undef, {File::Spec->tmpdir});
+	$session->param("name", "Carcarlo Pravettoni");
+	
+	$cookie = $page->cookie(CGISESSID => $session->id);
+	print $page->header( -cookie=>$cookie );
+	
+	
 }else{
 	print $page->redirect( -URL => "animali.cgi");
 }

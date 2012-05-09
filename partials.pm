@@ -3,6 +3,8 @@
 
 package partials;
 
+use functions;
+
 sub login{
 	if(!$_[0]){
 		print
@@ -24,10 +26,20 @@ sub login{
 sub header{
 	print 
 	' <div id="header">
-  		<div id="logo" class ="stripe">
-				<h1>Monkey Island</h1>
-				<p><i>Un&apos;esperienza selvaggia.. </i></p>
-			</div>	
+  		<div id="logo">
+				<div style="text-align:center;">
+					<img src="images/logo.png" width="300"/>
+				</div>';
+				
+				
+						
+	
+	if (!$_[0] eq undef){
+		$name=functions::get_name_from_sid($_[0]);
+		print "<p>Ciao $name !</p>";
+	}
+	print
+	'</div>	
 			<div id="nav">
 				<ul class="nav">
 					<li><a href="#">Chi siamo</a></li>
@@ -37,7 +49,8 @@ sub header{
 					<li><a href="login.cgi">Login dipendenti</a></li>
 				</ul>
 			</div>
-		</div>';
+		</div>	
+	</div>';
 }
 
 sub footer{
