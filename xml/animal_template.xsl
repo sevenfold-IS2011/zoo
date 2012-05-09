@@ -16,6 +16,8 @@
 				<p>vivo nella <xsl:value-of select="zoo:area/zoo:zona"/></p>
 				<p>e sono: <xsl:value-of select="zoo:area/zoo:species"/>.</p>
 			</xsl:for-each>
+		</body>
+	</html>
 	</xsl:template>
 </xsl:stylesheet>
 
