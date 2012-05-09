@@ -4,16 +4,31 @@
     targetNamespace="http://www.zoo.com"
     elementFormDefault="qualified">
 
-<xs:element name="animal">
-    <xs:complexType>
-        <xs:sequence>
-            <xs:element name="name" type ="xs:string"/>
-            <xs:element name="gender" type ="xs:string"/>
-            <xs:element name="age" type ="xs:integer" default="-1"/>
-        </xs:sequence>
-        <xs:attribute name="id" type="xs:integer" use="required"/>
-    </xs:complexType>
-</xs:element>
+<xs:element name="zoo" type="Tzoo"/>
+
+<xs:complexType type="Tzoo">
+    <xs:sequence>
+        <xs:element name="animal" type ="Tanimal"/>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:complexType type="Tanimal">
+    <xs:sequence>
+        <xs:element name="name" type ="xs:string"/>
+        <xs:element name="gender" type ="xs:string"/>
+        <xs:element name="age" type ="xs:integer" default="-1"/>
+        <xs:element name="area" type ="Tarea"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+</xs:complexType>
+
+<xs:complexType type="Tarea">
+    <xs:choice>
+        <xs:element name="zona" type ="xs:string"/>
+        <xs:element name="species" type ="xs:string"/>
+    </xs:choice>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+</xs:complexType>
 
 </xs:schema>
 
