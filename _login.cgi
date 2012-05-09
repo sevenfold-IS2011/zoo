@@ -27,9 +27,8 @@ if ($input{"username"} eq "ciao" && $input{"password"} eq "ciao"){
 	$session->param("name", "Carcarlo Pravettoni");
 	
 	$cookie = $page->cookie(CGISESSID => $session->id);
-	print $page->header( -cookie=>$cookie );
-	
-	
+	print $page->redirect( -URL => "index.cgi" -cookie=>$cookie);
+		
 }else{
 	print $page->redirect( -URL => "animali.cgi");
 }

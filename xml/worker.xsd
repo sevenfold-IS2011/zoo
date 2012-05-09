@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.zoo.com"
+    elementFormDefault="qualified">
+
+<xs:element name="workers" type="Tworkers"/>
+
+<xs:complexType name="Tworkers">
+    <xs:sequence>
+        <xs:element name="employee" type ="Temployee"/>
+        <xs:element name="manager" type ="Tmanager"/>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Temployee">
+    <xs:sequence>
+        <xs:element name="name" type ="xs:string"/>
+        <xs:element name="gender" type ="xs:string"/>
+        <xs:element name="age" type ="xs:integer" default="-1"/>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Tmanager">
+    <xs:sequence>
+        <xs:element name="name" type ="xs:string"/>
+        <xs:element name="gender" type ="xs:string"/>
+        <xs:element name="age" type ="xs:integer" default="-1"/>
+        <xs:element name="salary" type ="xs:integer" default="-1"/>
+    </xs:sequence>
+</xs:complexType>
+
+</xs:schema>
+
