@@ -12,7 +12,8 @@
 				<p>sono un <xsl:value-of select="zoo:gender"/>,</p>
 				<p>ho <xsl:value-of select="zoo:age"/> anni, </p>
 				<p>vivo nella <xsl:value-of select="zoo:area/zoo:zona"/></p>
-				<p>e sono: <xsl:value-of select="zoo:area/zoo:species"/>.</p>
+				<p>e sono: <xsl:value-of select="zoo:area/zoo:species"/>..</p>
+
 			</xsl:for-each>
 		</body>
 	</html>

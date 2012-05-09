@@ -15,6 +15,8 @@
 
 <xs:complexType name="Temployee">
     <xs:sequence>
+        <xs:element name="username" type ="xs:string"/>
+        <xs:element name="password" type ="xs:string"/>
         <xs:element name="name" type ="xs:string"/>
         <xs:element name="gender" type ="xs:string"/>
         <xs:element name="age" type ="xs:integer" default="-1"/>
