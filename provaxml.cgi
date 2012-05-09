@@ -15,18 +15,14 @@ print $page->header,
 												-author => 'gaggi@math.unipd.it',
 												-style=>{'src'=>'css/master.css'});
 $sid = $page->cookie("CGISESSID") || undef;
-if ($sid eq undef){
-	print 'sid undef';
-}else{
-	print "sid= $sid";
-}
+
 partials::header();
 
 
 my $xslt = XML::LibXSLT->new();
 
-my $source = XML::LibXML->load_xml(location => 'xml/animal_0.xml');
-my $style_doc = XML::LibXML->load_xml(location=>'xml/animal_template.xsl', no_cdata=>1);
+my $source = XML::LibXML->load_xml(location => 'xml/animals.xml');
+my $style_doc = XML::LibXML->load_xml(location=>'xml/animal_template_embed.xsl', no_cdata=>1);
 my $stylesheet = $xslt->parse_stylesheet($style_doc);
 my $results = $stylesheet->transform($source);
 print $stylesheet->output_as_bytes($results);	

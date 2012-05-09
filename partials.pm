@@ -28,7 +28,7 @@ sub header{
 	' <div id="header">
   		<div id="logo">
 				<div style="text-align:center;">
-					<a href="index.cgi"><img src="images/logo.png" width="300"/></a>
+					<a href="index.cgi"><img src="images/logo.png" width="300" alt="logo"/></a>
 				</div>';
 				
 	if (!$_[0] eq undef){
