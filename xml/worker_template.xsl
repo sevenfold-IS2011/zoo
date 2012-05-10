@@ -7,20 +7,22 @@
 	<html>
 		<body>
 			<div>
-			<h3>Descizione dei dipendenti:</h3>
+			<h3>Employees description:</h3>
 			<xsl:for-each select="zoo:employee">
-				<p>--- Ciao, sono <xsl:value-of select="zoo:name"/> (username:<xsl:value-of select="zoo:username"/>),</p>
-				<p>sono un <xsl:value-of select="zoo:gender"/></p>
-				<p> e ho <xsl:value-of select="zoo:age"/> anni.</p>
+				<p> - - Name: <xsl:value-of select="zoo:name"/></p>
+				<p>Username: <xsl:value-of select="zoo:username"/></p>
+				<p>Gender: <xsl:value-of select="zoo:gender"/></p>
+				<p>Age: <xsl:value-of select="zoo:age"/></p>
 			</xsl:for-each>
 			</div>
 			<div>
-				<h3>Descizione dei manager:</h3>
+				<h3>Managers description:</h3>
 				<xsl:for-each select="zoo:manager">
-					<p>--- Ciao, sono <xsl:value-of select="zoo:name"/>(username:<xsl:value-of select="zoo:username"/>) , </p>
-					<p>sono un <xsl:value-of select="zoo:gender"/>, </p>
-					<p>ho <xsl:value-of select="zoo:age"/> anni e</p>
-					<p style="color:red">guadagno <xsl:value-of select="zoo:salary"/> euro.</p>
+					<p> - - Name: <xsl:value-of select="zoo:name"/></p>
+					<p>Username: <xsl:value-of select="zoo:username"/></p>
+					<p>Gender: <xsl:value-of select="zoo:gender"/></p>
+					<p>Age: <xsl:value-of select="zoo:age"/></p>
+					<p style="color:red">Salary: <xsl:value-of select="zoo:salary"/></p>
 				</xsl:for-each>
 			</div>
 		</body>
