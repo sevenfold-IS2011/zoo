@@ -23,9 +23,12 @@ partials::header();
 my $xslt = XML::LibXSLT->new();
 
 my $source = XML::LibXML->load_xml(location => 'xml/animals.xml');
+my $nodeset = $source->find("//[@id=\"01\"]");
 my $style_doc = XML::LibXML->load_xml(location=>'xml/animal_template_embed.xsl', no_cdata=>1);
 my $stylesheet = $xslt->parse_stylesheet($style_doc);
-my $results = $stylesheet->transform($source);
+#my $results = $stylesheet->transform($source);
+my $results = $stylesheet->transform($nodeset);
+
 my $text = $stylesheet->output_as_bytes($results);	
 
 
