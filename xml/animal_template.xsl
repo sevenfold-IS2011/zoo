@@ -7,12 +7,13 @@
 	<html>
 		<body>
 		<h3>Animals descriptions:</h3>
-			<xsl:for-each select="zoo:animal">
+			<xsl:for-each select="zoo:area">
+			<h4><xsl:value-of select="./@name"/> list:</h4>
+				<xsl:for-each select="zoo:animal">
 				<p> -- Name: <xsl:value-of select="zoo:name"/></p>
 				<p>Gender: <xsl:value-of select="zoo:gender"/></p>
 				<p>Age: <xsl:value-of select="zoo:age"/></p>
-				<p>Place: <xsl:value-of select="zoo:area/zoo:zona"/></p>
-				<p>Species: <xsl:value-of select="zoo:area/zoo:species"/></p>
+				</xsl:for-each>
 			</xsl:for-each>
 		</body>
 	</html>
