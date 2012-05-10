@@ -25,9 +25,9 @@ sub check_credentials{
 		$password=@password[0];
 	}
 	if ($pswd eq $password){
-		return true;
+		return 1;
 	}else{
-		return false;
+		return undef;
 	}
 }
 
