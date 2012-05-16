@@ -8,12 +8,14 @@
 		<body>
 		<h3>Animals descriptions:</h3>
 			<xsl:for-each select="zoo:area">
+<!--			<xsl:if test="@id=01"> -->
 			<h4><xsl:value-of select="./@name"/> list:</h4>
 				<xsl:for-each select="zoo:animal">
 				<p> -- Name: <xsl:value-of select="zoo:name"/></p>
 				<p>Gender: <xsl:value-of select="zoo:gender"/></p>
 				<p>Age: <xsl:value-of select="zoo:age"/></p>
 				</xsl:for-each>
+<!--			</xsl:if>  -->
 			</xsl:for-each>
 		</body>
 	</html>
