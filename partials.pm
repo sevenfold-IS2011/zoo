@@ -117,7 +117,7 @@ sub area{
 		open(new_xml_file,">xml/animal_template_embed_$areaId.xsl") or die "Can't create file: $!";
 		print new_xml_file $xslt_string;
 		close(new_xml_file);
-		my $style_doc = XML::LibXML->load_xml(location=>'xml/animal_template_embed_02.xsl', no_cdata=>1);
+		my $style_doc = XML::LibXML->load_xml(location=>"xml/animal_template_embed_$areaId.xsl", no_cdata=>1);
 		my $stylesheet = $xslt->parse_stylesheet($style_doc);
 		my $results = $stylesheet->transform($source);
 		my $text = $stylesheet->output_as_bytes($results);	
