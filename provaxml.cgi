@@ -4,9 +4,10 @@
 use CGI;
 use XML::LibXSLT;
 use XML::LibXML;
+use strict;
 
 use partials;
-$page = new CGI;
+my $page = new CGI;
 print $page->header,
 			$page->start_html(-title => "Monkey Island || Lo zoo di Padova",
 			 									-meta => {'keywords' => 'zoo padova animali monkey island',
@@ -14,7 +15,7 @@ print $page->header,
 																	'author' => '?????????'}, 
 												-author => 'gaggi@math.unipd.it',
 												-style=>{'src'=>'css/master.css'});
-$sid = $page->cookie("CGISESSID") || undef;
+my $sid = $page->cookie("CGISESSID") || undef;
 
 partials::header();
 
@@ -22,10 +23,13 @@ partials::header();
 my $xslt = XML::LibXSLT->new();
 
 my $source = XML::LibXML->load_xml(location => 'xml/animals.xml');
+my $nodeset = $source->find("//[@id=\"01\"]");
 my $style_doc = XML::LibXML->load_xml(location=>'xml/animal_template_embed.xsl', no_cdata=>1);
 my $stylesheet = $xslt->parse_stylesheet($style_doc);
-my $results = $stylesheet->transform($source);
-$text = $stylesheet->output_as_bytes($results);	
+#my $results = $stylesheet->transform($source);
+my $results = $stylesheet->transform($nodeset);
+
+my $text = $stylesheet->output_as_bytes($results);	
 
 
 my $find = '<?xml version="1.0"?>';

@@ -5,10 +5,11 @@ package Functions;
 use File::Spec;
 use CGI::Session;
 use XML::XPath;
+use strict;
 
 
 sub get_name_from_sid{
-	$session = new CGI::Session(undef, $_[0], {File::Spec->tmpdir});
+	my $session = new CGI::Session(undef, $_[0], {File::Spec->tmpdir});
   return $session->param("name");
 }
 
@@ -20,14 +21,15 @@ sub check_credentials{
 	my $nodeset = $xp->find("//employee[username=\"$username\"]/password | //manager[username=\"$username\"]/password");
 	my @password;
 	my $password;
+	my $salt = "zxcluywe6r78w6rusdgfbkejwqytri8esyr mhgdku5u65i75687tdluytosreasky6";
 	if (my @nodelist = $nodeset->get_nodelist) {
 		@password = map($_->string_value, @nodelist);
 		$password=@password[0];
 	}
-	if ($pswd eq $password){
-		return true;
+	if (crypt($pswd,$salt) eq $password){
+		return 1;
 	}else{
-		return false;
+		return undef;
 	}
 }
 

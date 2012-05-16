@@ -1,28 +1,37 @@
 <?xml version="1.0"?>
-<?xml-stylesheet type="text/xsl" href="animal_template.xsl"?>
+<?xml-stylesheet type="text/xsl" href="animal_template_embed.xsl"?>
 <zoo
     xmlns="http://www.zoo.com"
     xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
     xs:schemaLocation="http://www.zoo.com employee.xsd">
 
+<area id="01" position="nord" name="scimmie">
     <animal>
         <name>Gigi</name>
         <gender>Male</gender>
         <age>3</age>
-        <area>
-            <zona>foresta</zona>
-            <species>scimmia</species>
-        </area>
     </animal>
 
-        <animal>
+    <animal>
         <name>Gigia</name>
         <gender>Female</gender>
         <age>2</age>
-        <area>
-            <zona>savana</zona>
-            <species>zebra</species>
-        </area>
     </animal>
+</area>
+
+<area id="01" position="nord" name="giraffe">
+    <animal>
+        <name>Giro</name>
+        <gender>Male</gender>
+        <age>6</age>
+    </animal>
+
+    <animal>
+        <name>Gira</name>
+        <gender>Female</gender>
+        <age>5</age>
+    </animal>
+</area>
+
 </zoo>
 

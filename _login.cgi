@@ -3,7 +3,13 @@ use CGI;
 use CGI::Session;
 use File::Spec;
 use Functions;
+use strict;
 
+my $buffer;
+my $name;
+my $value;
+my %input;
+my $pair;
 read(STDIN, $buffer, $ENV{'CONTENT_LENGTH'});
 my @pairs = split(/&/, $buffer);
 foreach $pair (@pairs) {
@@ -15,14 +21,14 @@ foreach $pair (@pairs) {
 	$input{$name} = $value;
 }
 
-$page = new CGI;
+my $page = new CGI;
 
-if (Functions::check_credentials($input{"username"}, $input{"password"}) eq true ){
+if (Functions::check_credentials($input{"username"}, $input{"password"})){
 	
-	$session = new CGI::Session("driver:File", undef, {File::Spec->tmpdir});
+	my $session = new CGI::Session("driver:File", undef, {File::Spec->tmpdir});
 	$name = Functions::get_employee_name($input{"username"});
 	$session->param("name", $name);
-	$cookie = $page->cookie(CGISESSID => $session->id);
+	my $cookie = $page->cookie(CGISESSID => $session->id);
 	print $page->redirect( -URL => "index.cgi", -cookie=>$cookie);
 
 }else{

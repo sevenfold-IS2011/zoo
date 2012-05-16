@@ -4,16 +4,17 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:zoo="http://www.zoo.com">
 	<xsl:template match="zoo:zoo">
-		<h3>DAnimals descriptions:</h3>
-			<xsl:for-each select="zoo:animal">
-				<div class="animal">
+	<h3>Animals descriptions:</h3>
+	<xsl:for-each select="zoo:area">
+		<h4><xsl:value-of select="./@name"/> list:</h4>
+		<xsl:for-each select="zoo:animal">
+			<div class="animal">
 				<p> -- Name: <xsl:value-of select="zoo:name"/></p>
 				<p>Gender: <xsl:value-of select="zoo:gender"/></p>
 				<p>Age: <xsl:value-of select="zoo:age"/></p>
-				<p>Place: <xsl:value-of select="zoo:area/zoo:zona"/></p>
-				<p>Species: <xsl:value-of select="zoo:area/zoo:species"/></p>
-				</div>
-			</xsl:for-each>
+			</div>
+		</xsl:for-each>
+	</xsl:for-each>
 	</xsl:template>
 </xsl:stylesheet>
 
