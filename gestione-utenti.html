@@ -18,7 +18,7 @@
 				<ul class="nav">
 					<li>Gestione: </li>
 					<li class="item"><a href="gestione-aree.html">Aree</a></li>
-					<li class="item"><a href="gestione-animali.html">Esemplari</a></li>
+					<li class="item"><a href="gestione-esemplari.html">Esemplari</a></li>
 					<li class="item"><a href="gestione-approvigionamenti.html">Approvigionamenti</a><li>
 					<li class="item"><a href="gestione-utenti.html">Utenti</a><li>
 					<li>Azioni: </li>
@@ -28,9 +28,21 @@
 		</div>
 	
 		<div id="content">
-			<h1>Benvenuti nell'area privata dello zoo Monkey Island!</h1>
-			<p>Da questo pannello è possibile gestire i contenuti del sito esterno e la gestione degli approvigionamenti dello zoo.<br />
-				Per favore selezionare l'area di azione interessata da menù in alto.</p>
+			<h2>Gestione utenti</h2>
+			<p>Da questo pannello è possibile aggiungere, rimuovere o modificare gli utenti che hanno accesso all'area privata del sito.</p>
+			<h2>Creazione nuovo utente</h2>
+			<form action="gestione-utenti_submit" method="post" accept-charset="utf-8">
+				<label for="username">Username</label><input type="text" name="username" value="" id="username" placeholder="Username">
+				<label for="password">Password</label><input type="password" name="password" value="" id="password" placeholder="Password">
+				<label for="password_confirmation">Conferma password</label><input type="password" name="password_confirmation" value="" id="password_confirmation" placeholder="Ripeti password">
+				
+				<p><input type="submit" value="Crea &rarr;"></p>
+			</form>
+			<h2>Lista utenti attivi</h2>
+			<table border="0" cellspacing="5" cellpadding="5" style="margin: 0 auto;">
+				<tr><th>Nome Utente</th><th>Azioni</th></tr>
+				<tr><td>palominoz</td><td><a href="modifica-utente.html?username=palominoz">Modifica</a> | <a href="elimina-utente.html?username=palominoz">Elimina</a></tr>
+			</table>
 		</div>
 		
 		<div id="footer">
