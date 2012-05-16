@@ -20,6 +20,7 @@
 					<li class="item"><a href="gestione-aree.html">Aree</a></li>
 					<li class="item"><a href="gestione-esemplari.html">Esemplari</a></li>
 					<li class="item"><a href="gestione-approvigionamenti.html">Approvigionamenti</a><li>
+					<li class="item"><a href="gestione-utenti.html">Utenti</a><li>
 					<li>Azioni: </li>
 					<li class="item"><a href="area-privata.html">Logout</a></li>
 				</ul>
@@ -28,7 +29,23 @@
 	
 		<div id="content">
 			<h2>Gestione Approvigionamenti</h2>
-			<p>Da questo pannello è possibile aggiungere, rimuovere o modificare specie ed esemplari presenti nello zoo.</p>
+			<p>Da questo pannello è possibile controllare ed aggiornare lo stato degli approvigionamenti dello zoo.</p>
+			<table border="0" cellspacing="5" cellpadding="5">
+				<tr><th>Qualità</th><th>Quantità giornaliera necessaria</th><th>Quantità in magazzino</th></tr>
+				<tr><td>Cibo gigi</td><td>30kg</td><td>150kg</td></tr>
+				<tr><td>fumo gigi</td><td>50g</td><td>1 panetta</td></tr>
+				<tr><td>noccioline gigi</td><td>cinquecento</td><td>due</td></tr>
+			</table>
+			<form action="gestione-approvigionamenti_submit" method="post" accept-charset="utf-8">
+				<label for="quantita">Quantità</label><input type="text" name="quantita" value="" id="quantita">
+				<select name="qualita" id="qualita" onchange="" size="1">
+					<option value="cibo-gigi">Cibo gigi</option>
+					<option value="fumo-gigi">Fumo gigi</option>
+					<option value="noccioline-gigi">Noccioline gigi</option>
+				</select>
+
+				<p><input type="submit" value="Continue &rarr;"></p>
+			</form>
 		</div>
 		
 		<div id="footer">
