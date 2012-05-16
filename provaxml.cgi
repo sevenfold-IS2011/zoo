@@ -6,6 +6,7 @@ use XML::LibXSLT;
 use XML::LibXML;
 use strict;
 use warnings;
+use File::Slurp;
 
 use partials;
 my $page = new CGI;
@@ -23,16 +24,35 @@ partials::header();
 
 
 my $source = XML::LibXML->load_xml(location => 'xml/animals.xml');
-my $nodeset = $source->find('//area[@id="01"]');
+#my $nodeset = $source->find('//area[@id="01"]');
 #my $nodeset = $source->find('//area');
-
 #my @nodelist = $nodeset->get_nodelist;
-
 #my $new_xml = XML::LibXML::Document->new( "1.0", "UTF-8");
 #$new_xml->setDocumentElement($nodeset);
 
 my $xslt = XML::LibXSLT->new();
-my $style_doc = XML::LibXML->load_xml(location=>'xml/animal_template_embed.xsl', no_cdata=>1);
+
+#my $xslt_file;
+#open xslt_file, 'xml/animal_template_embed.xsl' or die "Couldn't open file: $!"; 
+
+my $xslt_string =  read_file('xml/animal_template_embed.xsl');
+#print $xslt_string; 
+
+my $find = 'test="@id=02"';
+my $replace = 'test="@id=01"';
+$find = quotemeta $find; # escape regex metachars if present
+$xslt_string =~ s/$find/$replace/g;
+
+open(new_xml_file,'>xml/animal_template_embed_01.xsl') or die "Can't create file: $!";
+print new_xml_file $xslt_string;
+close(new_xml_file);
+
+
+
+
+
+
+my $style_doc = XML::LibXML->load_xml(location=>'xml/animal_template_embed_02.xsl', no_cdata=>1);
 my $stylesheet = $xslt->parse_stylesheet($style_doc);
 #my $results = $stylesheet->transform($source);
 #my $results = $stylesheet->transform($nodeset);
@@ -48,8 +68,8 @@ my $results = $stylesheet->transform($source);
 
 my $text = $stylesheet->output_as_bytes($results);	
 
-my $find = '<?xml version="1.0"?>';
-my $replace = "";
+$find = '<?xml version="1.0"?>';
+$replace = "";
 $find = quotemeta $find; # escape regex metachars if present
 
 $text =~ s/$find/$replace/g;

@@ -4,6 +4,10 @@
 package partials;
 use strict;
 use Functions;
+use CGI;
+use XML::LibXSLT;
+use XML::LibXML;
+use File::Slurp;
 
 sub login{
 	if(!$_[0]){
@@ -99,5 +103,35 @@ sub login{
 		 </form>
 	 </div>';
 }
+
+sub area{
+	my $areaId = $_[0];
+	if ($areaId){
+		my $source = XML::LibXML->load_xml(location => 'xml/animals.xml');
+		my $xslt = XML::LibXSLT->new();
+		my $xslt_string =  read_file('xml/animal_template_embed.xsl');
+		my $find = 'test="@id="';
+		my $replace = "test=\"\@id=$areaId\"";
+		$find = quotemeta $find; # escape regex metachars if present
+		$xslt_string =~ s/$find/$replace/g;
+		open(new_xml_file,">xml/animal_template_embed_$areaId.xsl") or die "Can't create file: $!";
+		print new_xml_file $xslt_string;
+		close(new_xml_file);
+		my $style_doc = XML::LibXML->load_xml(location=>'xml/animal_template_embed_02.xsl', no_cdata=>1);
+		my $stylesheet = $xslt->parse_stylesheet($style_doc);
+		my $results = $stylesheet->transform($source);
+		my $text = $stylesheet->output_as_bytes($results);	
+		$find = '<?xml version="1.0"?>';
+		$replace = "";
+		$find = quotemeta $find; # escape regex metachars if present
+		$text =~ s/$find/$replace/g;
+		print $text;
+	} else {
+		print "error, no id in URI";
+	}
+	
+}
+
+
 
 1;

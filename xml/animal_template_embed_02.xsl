@@ -7,7 +7,7 @@
 	<xsl:template match="zoo:zoo">
 		<h3>Animals descriptions:</h3>
 			<xsl:for-each select="zoo:area">
-			<xsl:if test="@id=">
+			<xsl:if test="@id=02">
 				<h4><xsl:value-of select="./@name"/> list:</h4>
 					<xsl:for-each select="zoo:animal">
 						<p> -- Name: <xsl:value-of select="zoo:name"/></p>
