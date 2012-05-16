@@ -19,7 +19,7 @@
     </animal>
 </area>
 
-<area id="01" position="nord" name="giraffe">
+<area id="02" position="nord" name="giraffe">
     <animal>
         <name>Giro</name>
         <gender>Male</gender>
