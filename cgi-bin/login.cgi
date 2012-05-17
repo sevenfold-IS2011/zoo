@@ -1,7 +1,5 @@
 #!/usr/bin/perl
 use strict;
-
-
 use CGI;
 use partials;
 my $page = new CGI;
@@ -11,10 +9,9 @@ print $page->header,
 																	'description' => 'sito ad utilizzo interno dello zoo Monkey Island di Padova',
 																	'author' => '?????????'}, 
 												-author => 'gaggi@math.unipd.it',
-												-style=>{'src'=>'css/master.css'});
-my $sid = $page->cookie("CGISESSID") || undef;
-partials::header($sid);
-partials::_index();					
+												-style=>{'src'=>'../css/master.css'});
+partials::header();
+partials::login();					
 partials::footer();
 							
 

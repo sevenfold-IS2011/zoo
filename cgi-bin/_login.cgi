@@ -30,7 +30,6 @@ if (Functions::check_credentials($input{"username"}, $input{"password"})){
 	$session->param("name", $name);
 	my $cookie = $page->cookie(CGISESSID => $session->id);
 	print $page->redirect( -URL => "index.cgi", -cookie=>$cookie);
-
 }else{
 	print $page->redirect( -URL => "animali.cgi");
 }

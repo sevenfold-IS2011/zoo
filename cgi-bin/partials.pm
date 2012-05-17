@@ -32,7 +32,7 @@ sub header{
 	' <div id="header">
   		<div id="logo">
 				<div style="text-align:center;">
-					<a href="index.cgi"><img src="images/logo.png" width="300" alt="logo"/></a>
+					<a href="index.cgi"><img src="../images/logo.png" width="300" alt="logo"/></a>
 				</div>';
 				
 	if (!$_[0] eq undef){
@@ -47,11 +47,11 @@ sub header{
 	'</div>	
 			<div id="nav">
 				<ul class="nav">
-					<li><a href="#">Chi siamo</a></li>
-					<li><a href="#">Aree</a></li>
-					<li><a href="animali.cgi">Animali</a></li>
-					<li><a href="#">Servizi</a></li>
-					<li><a href="login.cgi">Login dipendenti</a></li>
+					<li class="item"><a href="#">Chi siamo</a></li>
+					<li class="item"><a href="#">Aree</a></li>
+					<li class="item"><a href="animali.cgi">Animali</a></li>
+					<li class="item"><a href="#">Servizi</a></li>
+					<li class="item"><a href="login.cgi">Login dipendenti</a></li>
 				</ul>
 			</div>
 		</div>	';
@@ -107,17 +107,17 @@ sub login{
 sub area{
 	my $areaId = $_[0];
 	if ($areaId){
-		my $source = XML::LibXML->load_xml(location => 'xml/animals.xml');
+		my $source = XML::LibXML->load_xml(location => '../xml/animals.xml');
 		my $xslt = XML::LibXSLT->new();
-		my $xslt_string =  read_file('xml/animal_template_embed.xsl');
+		my $xslt_string =  read_file('../xml/animal_template_embed.xsl');
 		my $find = 'test="@id="';
 		my $replace = "test=\"\@id=$areaId\"";
 		$find = quotemeta $find; # escape regex metachars if present
 		$xslt_string =~ s/$find/$replace/g;
-		open(new_xml_file,">xml/animal_template_embed_$areaId.xsl") or die "Can't create file: $!";
+		open(new_xml_file,">../xml/animal_template_embed_$areaId.xsl") or die "Can't create file: $!";
 		print new_xml_file $xslt_string;
 		close(new_xml_file);
-		my $style_doc = XML::LibXML->load_xml(location=>"xml/animal_template_embed_$areaId.xsl", no_cdata=>1);
+		my $style_doc = XML::LibXML->load_xml(location=>"../xml/animal_template_embed_$areaId.xsl", no_cdata=>1);
 		my $stylesheet = $xslt->parse_stylesheet($style_doc);
 		my $results = $stylesheet->transform($source);
 		my $text = $stylesheet->output_as_bytes($results);	
@@ -130,6 +130,22 @@ sub area{
 		print "error, no id in URI";
 	}
 	
+}
+
+
+sub userForm{
+	print'<div id="content">
+		<h2>Gestione utenti</h2>
+		<p>Da questo pannello è possibile aggiungere, rimuovere o modificare gli utenti che hanno accesso all&apos;area privata del sito.</p>
+		<h2>Creazione nuovo utente</h2>
+		<form action="gestione-utenti_submit" method="post" accept-charset="utf-8">
+			<label for="username">Username</label><input type="text" name="username" value="" id="username" placeholder="Username">
+			<label for="password">Password</label><input type="password" name="password" value="" id="password" placeholder="Password">
+			<label for="password_confirmation">Conferma password</label><input type="password" name="password_confirmation" value="" id="password_confirmation" placeholder="Ripeti password">
+			
+			<p><input type="submit" value="Crea &rarr;"></p>
+		</form>
+		</div>';
 }
 
 
