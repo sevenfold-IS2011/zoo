@@ -5,6 +5,7 @@ package Functions;
 use File::Spec;
 use CGI::Session;
 use XML::XPath;
+use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use strict;
 
 

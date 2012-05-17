@@ -8,6 +8,7 @@ use CGI;
 use XML::LibXSLT;
 use XML::LibXML;
 use File::Slurp;
+use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 
 sub login{
 	if(!$_[0]){
@@ -132,20 +133,26 @@ sub area{
 	
 }
 
-
 sub userForm{
-	print'<div id="content">
-		<h2>Gestione utenti</h2>
-		<p>Da questo pannello è possibile aggiungere, rimuovere o modificare gli utenti che hanno accesso all&apos;area privata del sito.</p>
-		<h2>Creazione nuovo utente</h2>
-		<form action="gestione-utenti_submit" method="post" accept-charset="utf-8">
-			<label for="username">Username</label><input type="text" name="username" value="" id="username" placeholder="Username">
-			<label for="password">Password</label><input type="password" name="password" value="" id="password" placeholder="Password">
-			<label for="password_confirmation">Conferma password</label><input type="password" name="password_confirmation" value="" id="password_confirmation" placeholder="Ripeti password">
-			
-			<p><input type="submit" value="Crea &rarr;"></p>
-		</form>
-		</div>';
+	my $action = $_[0];
+	if($action eq "new"){
+		print'<div id="content">
+			<h2>Gestione utenti</h2>
+			<p>Da questo pannello è possibile aggiungere, rimuovere o modificare gli utenti che hanno accesso all&apos;area privata del sito.</p>
+			<h2>Creazione nuovo utente</h2>
+			<form action="gestione-utenti_submit" method="post" accept-charset="utf-8">
+				<label for="username">Username</label><input type="text" name="username" value="" id="username" placeholder="Username">
+				<label for="password">Password</label><input type="password" name="password" value="" id="password" placeholder="Password">
+				<label for="password_confirmation">Conferma password</label><input type="password" name="password_confirmation" value="" id="password_confirmation" placeholder="Ripeti password">
+
+				<p><input type="submit" value="Crea &rarr;"></p>
+			</form>
+			</div>';
+	}
+#qua altri elsif a cascata
+else
+	
+	
 }
 
 

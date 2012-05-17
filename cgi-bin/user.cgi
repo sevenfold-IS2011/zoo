@@ -1,10 +1,10 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
+use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 
 
 use CGI;
-use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use partials;
 my $page = new CGI;
 print $page->header,
@@ -16,7 +16,7 @@ print $page->header,
 												-style=>{'src'=>'../css/master.css'});
 my $sid = $page->cookie("CGISESSID") || undef;
 partials::header($sid);
-partials::_index();					
+partials::user(CGI::param('action'));					
 partials::footer();
 							
 

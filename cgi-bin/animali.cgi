@@ -2,6 +2,7 @@
 
 
 use CGI;
+use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use partials;
 $page = new CGI;
 print $page->header,

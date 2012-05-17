@@ -4,6 +4,7 @@ use CGI::Session;
 use File::Spec;
 use Functions;
 use strict;
+    use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 
 my $buffer;
 my $name;

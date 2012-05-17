@@ -7,6 +7,7 @@ use XML::LibXML;
 use strict;
 use warnings;
 use File::Slurp;
+use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 
 use partials;
 my $page = new CGI;
