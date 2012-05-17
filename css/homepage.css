@@ -57,6 +57,7 @@ div#footer{
 
 div#header{
 	border-bottom: 5px solid black;
+	border-top: 5px solid black;
 }
 
 div#content{

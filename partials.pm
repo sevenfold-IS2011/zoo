@@ -47,11 +47,11 @@ sub header{
 	'</div>	
 			<div id="nav">
 				<ul class="nav">
-					<li><a href="#">Chi siamo</a></li>
-					<li><a href="#">Aree</a></li>
-					<li><a href="animali.cgi">Animali</a></li>
-					<li><a href="#">Servizi</a></li>
-					<li><a href="login.cgi">Login dipendenti</a></li>
+					<li class="item"><a href="#">Chi siamo</a></li>
+					<li class="item"><a href="#">Aree</a></li>
+					<li class="item"><a href="animali.cgi">Animali</a></li>
+					<li class="item"><a href="#">Servizi</a></li>
+					<li class="item"><a href="login.cgi">Login dipendenti</a></li>
 				</ul>
 			</div>
 		</div>	';
