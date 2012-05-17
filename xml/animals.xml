@@ -10,12 +10,14 @@
         <name>Gigi</name>
         <gender>Male</gender>
         <age>3</age>
+        <img>Orangutan.jpg</img>
     </animal>
 
     <animal>
         <name>Gigia</name>
         <gender>Female</gender>
         <age>2</age>
+        <img>Orangutan.jpg</img>
     </animal>
 </area>
 
@@ -24,12 +26,14 @@
         <name>Giro</name>
         <gender>Male</gender>
         <age>6</age>
+        <img>Orangutan.jpg</img>
     </animal>
 
     <animal>
         <name>Gira</name>
         <gender>Female</gender>
         <age>5</age>
+        <img>Orangutan.jpg</img>
     </animal>
 </area>
 
