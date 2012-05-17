@@ -29,13 +29,13 @@ sub login{
 }
 
 sub header{
-	print 
+	print
 	' <div id="header">
   		<div id="logo">
 				<div style="text-align:center;">
 					<a href="index.cgi"><img src="../images/logo.png" width="300" alt="logo"/></a>
 				</div>';
-				
+
 	if (!$_[0] eq undef){
 	  my $name=Functions::get_name_from_sid($_[0]);
 		if($name){
@@ -43,9 +43,9 @@ sub header{
 			print '<p><a href="logout.cgi">Logout</a></p>';
 		}
 	}
-	
+
 	print
-	'</div>	
+	'</div>
 			<div id="nav">
 				<ul class="nav">
 					<li class="item"><a href="#">Chi siamo</a></li>
@@ -66,9 +66,9 @@ sub footer{
 }
 
 sub _index{
-	print 
+	print
 	'<div id="content">
-     <h3>I nostri eventi</h3>	
+     <h3>I nostri eventi</h3>
   	 <dl>
 	     <dt>Caccia al tesoro</dt>
 		   <dd>Ogni primo sabato del mese, organizziamo per i pi&ugrave; piccoli una caccia al tesoro</dd>
@@ -79,7 +79,7 @@ sub _index{
 }
 
 sub animali{
-	print 
+	print
 	'<div id="content">
 		<h3>I nostri animali</h3>
 		<dl>
@@ -121,7 +121,7 @@ sub area{
 		my $style_doc = XML::LibXML->load_xml(location=>"../xml/animal_template_embed_$areaId.xsl", no_cdata=>1);
 		my $stylesheet = $xslt->parse_stylesheet($style_doc);
 		my $results = $stylesheet->transform($source);
-		my $text = $stylesheet->output_as_bytes($results);	
+		my $text = $stylesheet->output_as_bytes($results);
 		$find = '<?xml version="1.0"?>';
 		$replace = "";
 		$find = quotemeta $find; # escape regex metachars if present
@@ -130,7 +130,7 @@ sub area{
 	} else {
 		print "error, no id in URI";
 	}
-	
+
 }
 
 sub userForm{
@@ -150,11 +150,12 @@ sub userForm{
 			</div>';
 	}
 #qua altri elsif a cascata
-else
-	
-	
+
+
+
 }
 
 
 
 1;
+
