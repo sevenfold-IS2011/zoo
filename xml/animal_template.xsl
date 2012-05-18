@@ -14,6 +14,13 @@
 				<p> -- Name: <xsl:value-of select="zoo:name"/></p>
 				<p>Gender: <xsl:value-of select="zoo:gender"/></p>
 				<p>Age: <xsl:value-of select="zoo:age"/></p>
+				<p>photo:
+			  <img>
+      	  <xsl:attribute name="src">
+            <xsl:value-of select="zoo:img" />
+        	</xsl:attribute>
+    		</img>
+				</p>
 				</xsl:for-each>
 <!--			</xsl:if>  -->
 			</xsl:for-each>

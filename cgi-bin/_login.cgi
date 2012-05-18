@@ -4,6 +4,7 @@ use CGI::Session;
 use File::Spec;
 use Functions;
 use strict;
+    use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 
 my $buffer;
 my $name;
@@ -30,7 +31,6 @@ if (Functions::check_credentials($input{"username"}, $input{"password"})){
 	$session->param("name", $name);
 	my $cookie = $page->cookie(CGISESSID => $session->id);
 	print $page->redirect( -URL => "index.cgi", -cookie=>$cookie);
-
 }else{
 	print $page->redirect( -URL => "animali.cgi");
 }

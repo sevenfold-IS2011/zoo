@@ -2,6 +2,7 @@
 
 
 use CGI;
+use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use partials;
 $page = new CGI;
 print $page->header,
@@ -10,7 +11,7 @@ print $page->header,
 																	'description' => 'sito ad utilizzo interno dello zoo Monkey Island di Padova',
 																	'author' => '?????????'}, 
 												-author => 'gaggi@math.unipd.it',
-												-style=>{'src'=>'css/master.css'});
+												-style=>{'src'=>'../css/master.css'});
 $logged = true;
 partials::header();
 partials::animali();					

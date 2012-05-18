@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<?xml-stylesheet type="text/xsl" href="animal_template_embed.xsl"?>
+<?xml-stylesheet type="text/xsl" href="animal_template.xsl"?>
 <zoo
     xmlns="http://www.zoo.com"
     xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
@@ -10,12 +10,14 @@
         <name>Gigi</name>
         <gender>Male</gender>
         <age>3</age>
+        <img>../images/Gigi.png</img>
     </animal>
 
     <animal>
         <name>Gigia</name>
         <gender>Female</gender>
         <age>2</age>
+        <img>../images/Gigia.png</img>
     </animal>
 </area>
 
@@ -24,12 +26,14 @@
         <name>Giro</name>
         <gender>Male</gender>
         <age>6</age>
+        <img>../images/Giro.png</img>
     </animal>
 
     <animal>
         <name>Gira</name>
         <gender>Female</gender>
         <age>5</age>
+        <img>../images/Gira.png</img>
     </animal>
 </area>
 

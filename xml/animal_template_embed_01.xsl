@@ -3,7 +3,6 @@
 	version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:zoo="http://www.zoo.com">
-
 	<xsl:template match="zoo:zoo">
 		<h3>Animals descriptions:</h3>
 			<xsl:for-each select="zoo:area">

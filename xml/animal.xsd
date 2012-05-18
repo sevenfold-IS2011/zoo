@@ -26,6 +26,7 @@
         <xs:element name="name" type="xs:string"/>
         <xs:element name="gender" type="xs:string"/>
         <xs:element name="age" type="xs:integer" default="-1"/>
+        <xs:element name="img" type="xs:string">
     </xs:sequence>
 </xs:complexType>
 

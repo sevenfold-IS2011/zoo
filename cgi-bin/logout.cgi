@@ -2,6 +2,7 @@
 use strict;
 use CGI;
 use CGI::Session;
+use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use File::Spec;
 
 my $page = new CGI;

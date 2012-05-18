@@ -5,6 +5,7 @@ package Functions;
 use File::Spec;
 use CGI::Session;
 use XML::XPath;
+use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use strict;
 
 
@@ -17,7 +18,7 @@ sub get_name_from_sid{
 sub check_credentials{
 	my $username = $_[0];
 	my $pswd = $_[1];
-	my $xp = XML::XPath->new(filename=>'xml/workers.xml');
+	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
 	my $nodeset = $xp->find("//employee[username=\"$username\"]/password | //manager[username=\"$username\"]/password");
 	my @password;
 	my $password;
@@ -35,7 +36,7 @@ sub check_credentials{
 
 sub get_employee_name{
 	my $username = $_[0];
-	my $xp = XML::XPath->new(filename=>'xml/workers.xml');
+	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
 	my $nodeset = $xp->find("//employee[username=\"$username\"]/name | //manager[username=\"$username\"]/name");
 	my @name;
 	my $name;

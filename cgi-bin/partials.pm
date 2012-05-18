@@ -8,6 +8,7 @@ use CGI;
 use XML::LibXSLT;
 use XML::LibXML;
 use File::Slurp;
+use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 
 sub login{
 	if(!$_[0]){
@@ -28,13 +29,13 @@ sub login{
 }
 
 sub header{
-	print 
+	print
 	' <div id="header">
   		<div id="logo">
 				<div style="text-align:center;">
-					<a href="index.cgi"><img src="images/logo.png" width="300" alt="logo"/></a>
+					<a href="index.cgi"><img src="../images/logo.png" width="300" alt="logo"/></a>
 				</div>';
-				
+
 	if (!$_[0] eq undef){
 	  my $name=Functions::get_name_from_sid($_[0]);
 		if($name){
@@ -42,9 +43,9 @@ sub header{
 			print '<p><a href="logout.cgi">Logout</a></p>';
 		}
 	}
-	
+
 	print
-	'</div>	
+	'</div>
 			<div id="nav">
 				<ul class="nav">
 					<li class="item"><a href="#">Chi siamo</a></li>
@@ -65,9 +66,9 @@ sub footer{
 }
 
 sub _index{
-	print 
+	print
 	'<div id="content">
-     <h3>I nostri eventi</h3>	
+     <h3>I nostri eventi</h3>
   	 <dl>
 	     <dt>Caccia al tesoro</dt>
 		   <dd>Ogni primo sabato del mese, organizziamo per i pi&ugrave; piccoli una caccia al tesoro</dd>
@@ -78,7 +79,7 @@ sub _index{
 }
 
 sub animali{
-	print 
+	print
 	'<div id="content">
 		<h3>I nostri animali</h3>
 		<dl>
@@ -131,20 +132,20 @@ sub login{
 sub area{
 	my $areaId = $_[0];
 	if ($areaId){
-		my $source = XML::LibXML->load_xml(location => 'xml/animals.xml');
+		my $source = XML::LibXML->load_xml(location => '../xml/animals.xml');
 		my $xslt = XML::LibXSLT->new();
-		my $xslt_string =  read_file('xml/animal_template_embed.xsl');
+		my $xslt_string =  read_file('../xml/animal_template_embed.xsl');
 		my $find = 'test="@id="';
 		my $replace = "test=\"\@id=$areaId\"";
 		$find = quotemeta $find; # escape regex metachars if present
 		$xslt_string =~ s/$find/$replace/g;
-		open(new_xml_file,">xml/animal_template_embed_$areaId.xsl") or die "Can't create file: $!";
+		open(new_xml_file,">../xml/animal_template_embed_$areaId.xsl") or die "Can't create file: $!";
 		print new_xml_file $xslt_string;
 		close(new_xml_file);
-		my $style_doc = XML::LibXML->load_xml(location=>"xml/animal_template_embed_$areaId.xsl", no_cdata=>1);
+		my $style_doc = XML::LibXML->load_xml(location=>"../xml/animal_template_embed_$areaId.xsl", no_cdata=>1);
 		my $stylesheet = $xslt->parse_stylesheet($style_doc);
 		my $results = $stylesheet->transform($source);
-		my $text = $stylesheet->output_as_bytes($results);	
+		my $text = $stylesheet->output_as_bytes($results);
 		$find = '<?xml version="1.0"?>';
 		$replace = "";
 		$find = quotemeta $find; # escape regex metachars if present
@@ -167,9 +168,32 @@ sub area{
 			</dl>
 		</div>';
 	}
-	
+
+}
+
+sub userForm{
+	my $action = $_[0];
+	if($action eq "new"){
+		print'<div id="content">
+			<h2>Gestione utenti</h2>
+			<p>Da questo pannello è possibile aggiungere, rimuovere o modificare gli utenti che hanno accesso all&apos;area privata del sito.</p>
+			<h2>Creazione nuovo utente</h2>
+			<form action="gestione-utenti_submit" method="post" accept-charset="utf-8">
+				<label for="username">Username</label><input type="text" name="username" value="" id="username" placeholder="Username">
+				<label for="password">Password</label><input type="password" name="password" value="" id="password" placeholder="Password">
+				<label for="password_confirmation">Conferma password</label><input type="password" name="password_confirmation" value="" id="password_confirmation" placeholder="Ripeti password">
+
+				<p><input type="submit" value="Crea &rarr;"></p>
+			</form>
+			</div>';
+	}
+#qua altri elsif a cascata
+
+
+
 }
 
 
 
 1;
+
