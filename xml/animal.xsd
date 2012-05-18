@@ -8,7 +8,7 @@
 
 <xs:complexType type="Tzoo">
     <xs:sequence>
-        <xs:element name="area" type="Tarea"/>
+        <xs:element name="area" type="Tarea" />
     </xs:sequence>
 </xs:complexType>
 

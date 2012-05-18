@@ -48,9 +48,9 @@ sub header{
 			<div id="nav">
 				<ul class="nav">
 					<li class="item"><a href="#">Chi siamo</a></li>
-					<li class="item"><a href="#">Aree</a></li>
+					<li class="item"><a href="aree.cgi">Aree</a></li>
 					<li class="item"><a href="animali.cgi">Animali</a></li>
-					<li class="item"><a href="#">Servizi</a></li>
+					<li class="item"><a href="servizi.cgi">Servizi</a></li>
 					<li class="item"><a href="login.cgi">Login dipendenti</a></li>
 				</ul>
 			</div>
@@ -92,6 +92,30 @@ sub animali{
 	</div>'
 }
 
+sub servizi{
+	print 
+	'<div id="content">
+		<h3>I nostri servizi</h3>
+		<h4>Eventi</h4>
+		<p>Il nostro personale è preparato alla gestione di ogni tipo di eventi. Se la tua famiglia festeggia qualche evenienza particolare, mettiti in contatto con la nostra gestione eventi per organizzare al meglio la vostra giornata!</p>
+		<h4>Accoglienza gruppi</h4>
+		<p>Lo zoo prevede uno sconto per grandi gruppi di visitatori. E&apos; attrezzato inoltre con un parcheggio per bus e vengono organizzati su richiesta guide turistiche specializzate che offriranno alla vostra comitiva la loro conoscenza sulle specie e la loro vita selvatica. Per ulteriori informazioni visitare la pagina <a href="contatti.html">contatti</a>
+		<h4>Sicurezza</h4>
+		<p>Il nostro zoo è conforme a tutte le normative europee in materia di sicurezza. Gli animali pericolosi sono gestiti da personale preparato secondo processi professionali. Le nostre attrezzature sono le più moderne nel mercato e garantiscono la sicurezza del personale, dei visitatori e degli animali.</p>
+		<h4>Accessibilità</h4>
+		<p>Lo zoo è attrezzato per accogliere tutti, dai grandi ai piccini senza dimenticare le persone con difficoltà a deambulare.
+		In particolare abbiamo: <br />
+		<ul>
+			<li>Servizi igienici attrezzati con fasciatoio</li>
+			<li>Servizi igienici per portatori di handicap</li>
+			<li>Rampe su tutti i dislivelli architettonici</li>
+			<li>Servizio touchscreen su totem per l&apos;accesso alle informazioni dello zoo</li>
+			<li>Mini club</li>
+			<li>Fontane disperse per il parco per le giornate di calura</li>
+		</ul>
+	</div>'
+}
+
 sub login{
 	print
 	'<div id="login">
@@ -127,7 +151,21 @@ sub area{
 		$text =~ s/$find/$replace/g;
 		print $text;
 	} else {
-		print "error, no id in URI";
+		print '<div id="content">
+			<h3>Il nostro parco</h3>
+			<p>All&apos; interno dello spazio dedicato ai visitatori è possibile visitare il percorso safari o a piedi. Si possono trovare zone di ristoro e divertimento per i più piccoli.</p>
+			<h3>Mappa</h3>
+			<div class="figure">
+				<img src="images/map.png">
+				<p>La mappa del parco Monkey Island</p>
+			</div>
+			<dl>
+				<dt>Caccia al tesoro</dt>
+					<dd>Ogni primo sabato del mese, organizziamo per i più piccoli una caccia al tesoro</dd>
+				<dt>L&apos;isola selvaggia</dt>
+					<dd>Ogni sabato sera, organizziamo serate tematiche con musica e drink</dd>
+			</dl>
+		</div>';
 	}
 	
 }
