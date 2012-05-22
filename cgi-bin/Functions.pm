@@ -48,5 +48,24 @@ sub get_employee_name{
 }
 
 
+sub get_areas{
+	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+	my $nodeset = $xp->find('//@name | //@id');
+	my @stuff;
+	my $node;
+	if (my @nodelist = $nodeset->get_nodelist) {
+		my $j = 0; 
+		foreach $node (@nodelist){
+			@stuff[$j]=$node->getData;
+			#print $node->getData;
+			#print $j;
+			$j = $j + 1;
+		}
+	}
+	return @stuff;
+	
+}
+
+
 
 1;
