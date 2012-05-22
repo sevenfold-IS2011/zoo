@@ -1,4 +1,3 @@
-#!/usr/bin/perl
 use CGI;
 use CGI::Session;
 use File::Spec;
@@ -23,16 +22,11 @@ foreach $pair (@pairs) {
 }
 
 my $page = new CGI;
-
-if (Functions::check_credentials($input{"username"}, $input{"password"})){
-	
-	my $session = new CGI::Session("driver:File", undef, {File::Spec->tmpdir});
-	$name = Functions::get_employee_name($input{"username"});
-	$session->param("name", $name);
-	my $cookie = $page->cookie(CGISESSID => $session->id);
-	print $page->redirect( -URL => "area_privata.cgi", -cookie=>$cookie);
+my $sid = $page->cookie("CGISESSID") || undef;
+if (!$sid){
+  print $page->redirect( -URL => "login.cgi");
 }else{
-	print $page->redirect( -URL => "animali.cgi");
-}
+  $areaName=$input{"nome"};
+  $areaPos=$input{"posizione"};
 
-exit;
+}
