@@ -217,11 +217,14 @@ sub newArea{
 	privateMenu($_[0], $_[1]);
 	print '
 	<div id = content>
-		<form action="_login.cgi" method="post" accept-charset="utf-8">
-			 <label for="name">Nome</label><input type="text" name="nome" value="" placeholder="nome"><br />
-			 <label for="posizione">Paosizione</label><input type="text" name="posizione" value=""placeholder="">
-			 <p><input type="submit" value="Crea Area"></p>
-		</form>
+		<h3>Nuova Area</h3>
+		<div class = form>
+			<form action="_login.cgi" method="post" accept-charset="utf-8">
+			  <label for="name">Nome</label><input type="text" name="nome" value="" placeholder="nome"><br />
+			  <label for="posizione">Paosizione</label><input type="text" name="posizione" value=""placeholder="">
+			  <p><input type="submit" value="Crea Area"></p>
+			</form>
+		</div>
 		'
 }
 

@@ -5,7 +5,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
     xs:schemaLocation="http://www.zoo.com employee.xsd">
 
-<area id="01" position="nord" name="scimmie">
+<area id="1" position="nord" name="scimmie">
     <animal>
         <name>Gigi</name>
         <gender>Male</gender>
@@ -21,7 +21,7 @@
     </animal>
 </area>
 
-<area id="02" position="nord" name="giraffe">
+<area id="2" position="nord" name="giraffe">
     <animal>
         <name>Giro</name>
         <gender>Male</gender>
