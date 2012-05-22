@@ -5,22 +5,40 @@
 	xmlns:zoo="http://www.zoo.com">
 	<xsl:template match="zoo:zoo">
 	<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="../css/master.css" />
+	</head>
 		<body>
-		<h3>Animals descriptions:</h3>
+		<h3>Descrizione degli animali:</h3>
 			<xsl:for-each select="zoo:area">
 <!--			<xsl:if test="@id=01"> -->
-			<h4><xsl:value-of select="./@name"/> list:</h4>
-				<xsl:for-each select="zoo:animal">
-				<p> -- Name: <xsl:value-of select="zoo:name"/></p>
-				<p>Gender: <xsl:value-of select="zoo:gender"/></p>
-				<p>Age: <xsl:value-of select="zoo:age"/></p>
-				<p>photo:
-			  <img>
-      	  <xsl:attribute name="src">
-            <xsl:value-of select="zoo:img" />
-        	</xsl:attribute>
-    		</img>
-				</p>
+
+  		<h4>Area <xsl:value-of select="./@nome"/>:</h4>
+  		<xsl:for-each select="zoo:animale">
+  			<table class="animal">
+  				<tr>
+						<td>Name</td>
+						<td><xsl:value-of select="zoo:nome"/></td>
+					</tr>
+					<tr>
+						<td>Gender</td>
+						<td><xsl:value-of select="zoo:sesso"/></td>
+					</tr>
+					<tr>
+						<td>Age</td>
+						<td><xsl:value-of select="zoo:età"/></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<img>
+      					<xsl:attribute name="src">
+      						<xsl:value-of select="zoo:img" />
+      					</xsl:attribute>
+    					</img>
+    				</td>
+					</tr>
+				</table>
 				</xsl:for-each>
 <!--			</xsl:if>  -->
 			</xsl:for-each>

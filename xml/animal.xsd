@@ -14,18 +14,18 @@
 
 <xs:complexType type="Tarea">
     <xs:sequence>
-        <xs:element name="animal" type="Tanimal"/>
+        <xs:element name="animale" type="Tanimale"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:integer" use="required"/>
-    <xs:attribute name="position" type="xs:integer" use="required"/>
-    <xs:attribute name="name" type="xs:integer" use="required"/>
+    <xs:attribute name="posizione" type="xs:integer" use="required"/>
+    <xs:attribute name="nome" type="xs:integer" use="required"/>
 </xs:complexType>
 
-<xs:complexType type="Tanimal">
+<xs:complexType type="Tanimale">
     <xs:sequence>
-        <xs:element name="name" type="xs:string"/>
-        <xs:element name="gender" type="xs:string"/>
-        <xs:element name="age" type="xs:integer" default="-1"/>
+        <xs:element name="nome" type="xs:string"/>
+        <xs:element name="esso" type="xs:string"/>
+        <xs:element name="età" type="xs:integer" default="-1"/>
         <xs:element name="img" type="xs:string">
     </xs:sequence>
 </xs:complexType>
