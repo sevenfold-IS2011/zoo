@@ -41,5 +41,31 @@ div.boxes h3{
 }
 
 div.boxes dl dt{
-	
+
 }
+
+table.animal
+{
+background-color:#ffffff;
+border:1px solid #c3c3c3;
+border-collapse:collapse;
+
+}
+
+table.animal th
+{
+border:1px solid #c3c3c3;
+padding:3px;
+text-align:left;
+vertical-align:top;
+}
+
+table.animal td
+{
+border:1px solid #c3c3c3;
+padding:3px;
+width:150px;
+text-align:left;
+vertical-align:top;
+}
+

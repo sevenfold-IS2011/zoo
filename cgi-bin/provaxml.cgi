@@ -15,7 +15,7 @@ print $page->header,
 			$page->start_html(-title => "Monkey Island || Lo zoo di Padova",
 			 									-meta => {'keywords' => 'zoo padova animali monkey island',
 																	'description' => 'sito ad utilizzo interno dello zoo Monkey Island di Padova',
-																	'author' => '?????????'}, 
+																	'author' => '?????????'},
 												-author => 'gaggi@math.unipd.it',
 												-style=>{'src'=>'../css/master.css'});
 my $sid = $page->cookie("CGISESSID") || undef;
@@ -34,10 +34,10 @@ my $source = XML::LibXML->load_xml(location => '../xml/animals.xml');
 my $xslt = XML::LibXSLT->new();
 
 #my $xslt_file;
-#open xslt_file, 'xml/animal_template_embed.xsl' or die "Couldn't open file: $!"; 
+#open xslt_file, 'xml/animal_template_embed.xsl' or die "Couldn't open file: $!";
 
 my $xslt_string =  read_file('../xml/animal_template_embed.xsl');
-#print $xslt_string; 
+#print $xslt_string;
 
 my $find = 'test="@id=02"';
 my $replace = 'test="@id=01"';
@@ -67,7 +67,7 @@ my $stylesheet = $xslt->parse_stylesheet($style_doc);
 my $results = $stylesheet->transform($source);
 
 
-my $text = $stylesheet->output_as_bytes($results);	
+my $text = $stylesheet->output_as_bytes($results);
 
 $find = '<?xml version="1.0"?>';
 $replace = "";
