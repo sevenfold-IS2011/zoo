@@ -17,15 +17,15 @@
   		<xsl:for-each select="zoo:animale">
   			<table class="animal">
   				<tr>
-						<td>Name</td>
+						<td>Nome</td>
 						<td><xsl:value-of select="zoo:nome"/></td>
 					</tr>
 					<tr>
-						<td>Gender</td>
+						<td>Sesso</td>
 						<td><xsl:value-of select="zoo:sesso"/></td>
 					</tr>
 					<tr>
-						<td>Age</td>
+						<td>Età</td>
 						<td><xsl:value-of select="zoo:età"/></td>
 					</tr>
 					<tr>
