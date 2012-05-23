@@ -4,14 +4,14 @@
     <animale>
         <nome>Gigi</nome>
         <sesso>Male</sesso>
-        <etÃ >3</etÃ >
+        <età>3</età>
         <img>../images/Gigi.png</img>
     </animale>
 
     <animale>
         <nome>Gigia</nome>
         <sesso>Female</sesso>
-        <etÃ >2</etÃ >
+        <età>2</età>
         <img>../images/Gigia.png</img>
     </animale>
 </area>
@@ -20,16 +20,16 @@
     <animale>
         <nome>Giro</nome>
         <sesso>Male</sesso>
-        <etÃ >6</etÃ >
+        <età>6</età>
         <img>../images/Giro.png</img>
     </animale>
 
     <animale>
         <nome>Gira</nome>
         <sesso>Female</sesso>
-        <etÃ >5</etÃ >
+        <età>5</età>
         <img>../images/Gira.png</img>
     </animale>
 </area>
 
-<area id="7" posizione="C7" nome="cammelli"/></zoo>
+<area id="7" posizione="C7" nome="cammelli"/><area id="7" posizione="A8" nome="Gorilla"/></zoo>
