@@ -1,11 +1,14 @@
+#!/usr/bin/perl
+
 use CGI;
 use CGI::Session;
 use File::Spec;
 use Functions;
 use strict;
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
+use XML::LibXML;
 
-my $buffer;
+my $buffer; 
 my $name;
 my $value;
 my %input;
@@ -26,7 +29,32 @@ my $sid = $page->cookie("CGISESSID") || undef;
 if (!$sid){
   print $page->redirect( -URL => "login.cgi");
 }else{
-  $areaName=$input{"nome"};
-  $areaPos=$input{"posizione"};
+  my $areaName = $input{"nome"};
+  my $areaPos = $input{"posizione"};
+  my $areaId = Functions::max_area_id + 1;
+  
+  
+  my $parser = XML::LibXML->new;
+  my $doc = $parser->parse_file("../xml/animals.xml");
+  my $root = $doc->getDocumentElement();
+
+  my $new_element= $doc->createElement("area");
+  $new_element->setAttribute("id", $areaId);
+  $new_element->setAttribute("posizione", $areaPos);
+  $new_element->setAttribute("nome", $areaName);
+  $root->appendChild($new_element);
+	#print $root->toString(1);
+	open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
+	print XML $root->toString();
+	close(XML);	
+	print $page->redirect( -URL => "nuova_area.cgi");
+  
 
 }
+
+
+
+
+
+
+exit;

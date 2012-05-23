@@ -1,9 +1,4 @@
-<?xml version="1.0"?>
-<?xml-stylesheet type="text/xsl" href="animal_template.xsl"?>
-<zoo
-    xmlns="http://www.zoo.com"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
-    xs:schemaLocation="http://www.zoo.com employee.xsd">
+<zoo xmlns="http://www.zoo.com" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.zoo.com employee.xsd">
 
 <area id="1" position="nord" name="scimmie">
     <animal>
@@ -37,5 +32,4 @@
     </animal>
 </area>
 
-</zoo>
-
+<area id="7" posizione="C7" nome="cammelli"/></zoo>
