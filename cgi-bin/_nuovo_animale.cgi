@@ -26,8 +26,7 @@ foreach $pair (@pairs) {
 
 my $page = new CGI;
 
-my $nome = $input{"nome"};
-my $sesso = $input{"sesso"};
+print 'ddd';
 
 exit;
 
