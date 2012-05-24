@@ -21,7 +21,6 @@ if (!$sid){
 	partials::privateHeader($sid);
 	my $watDo = "areas";
 	partials::manageArea($sid, $watDo);					
-	partials::footer();
 	print $page->end_html;
 }
 

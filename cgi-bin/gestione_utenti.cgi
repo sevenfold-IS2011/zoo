@@ -19,8 +19,8 @@ if (!$sid){
 													-author => 'gaggi@math.unipd.it',
 													-style=>{'src'=>'../css/master.css'});
 	partials::privateHeader($sid);
-	my $watDo = "areas";
-	partials::newArea($sid, $watDo);					
+	my $watDo = "users";
+	partials::manageUsers($sid, $watDo);					
 	print $page->end_html;
 }
 
