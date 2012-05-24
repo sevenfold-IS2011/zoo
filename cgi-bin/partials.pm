@@ -250,10 +250,10 @@ sub newArea{
 	print '
 	<div id = "right">
 		<h3>Nuova Area</h3>
-		<div class = form>
+		<div class = "form-wrapper">
 			<form action="_nuova_area.cgi" method="post" accept-charset="utf-8">
 			  <label for="name">Nome</label><input type="text" name="nome" value="" placeholder="nome"><br />
-			  <label for="posizione">Posizione</label><input type="text" name="posizione" value="" placeholder="">
+			  <label for="posizione">Posizione</label><input type="text" name="posizione" value="" placeholder="Posizione">
 			  <p><input type="submit" value="Crea Area"></p>
 			</form>
 		</div>

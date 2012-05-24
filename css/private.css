@@ -23,7 +23,7 @@ div#left ul li:hover{
 div#left ul li a{
 	font-size: 110%;
 	text-decoration: none;
-	color: blackleft;
+	color: black;
 }
 
 div#left ul li:hover a{
@@ -34,4 +34,11 @@ div#left ul li:hover a{
 div#right{
 	float: right;
 	width: 82%;
+}
+
+/* form nuova area */
+
+div.form-wrapper{
+width: 20%;
+text-align: right;
 }
