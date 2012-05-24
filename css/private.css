@@ -1,4 +1,6 @@
-div#left-menu{
+
+/* menù a sinistra */
+div#left{
 	position: relative;
 	top: 0;
 	left: 0;
@@ -6,26 +8,34 @@ div#left-menu{
 	width: 17%;
 }
 
-div#left-menu ul{
+div#left ul{
 	list-style-type: none;
 }
 
-div#left-menu ul li{
+div#left ul li{
 	border:4px solid transparent;
 }
 
-div#left-menu ul li:hover{
+div#left ul li:hover{
 	border:4px solid black;
 	background-color:black;
 	color: white;
 }
 
-div#left-menu ul li a{
+div#left ul li a{
 	font-size: 110%;
 	text-decoration: none;
-	color: black;
+	color: blackleft;
 }
 
-div#left-menu ul li:hover a{
+div#left ul li:hover a{
 	color: white;
+}
+
+/* menu a destra */
+div#right{
+	position: relative;
+	top: 0;
+	right: 0;
+	width: 83%;
 }
