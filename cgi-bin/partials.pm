@@ -49,9 +49,9 @@ sub header{
 			<div id="nav">
 				<ul class="nav">
 					<li class="item"><a href="#">Chi siamo</a></li>
-					<li class="item"><a href="aree.cgi">Aree</a></li>
+					<li class="item"><a href="area.cgi">Aree</a></li>
 					<li class="item"><a href="animali.cgi">Animali</a></li>
-					<li class="item"><a href="servizi.cgi">Servizi</a></li>
+					<li class="item"><a href="#">Servizi</a></li>
 					<li class="item"><a href="login.cgi">Login dipendenti</a></li>
 				</ul>
 			</div>
@@ -231,6 +231,7 @@ sub privateArea{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
 	print '<div id = "right"> CONTENUTO </div>';
+	footer;
 	print '</div>';
 }
 
@@ -238,7 +239,7 @@ sub manageArea{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
 	print '<div id = "right"> CONTENUTO </div>';
-	#manaca il content
+	footer;	
 	print '</div>';
 
 }
@@ -257,7 +258,17 @@ sub newArea{
 			</form>
 		</div>
 	</div>';
+	footer;
 	print '</div>';
+}
+
+sub manageUsers{
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+	print '<div id = "right"> CONTENUTO </div>';
+	footer;
+	print '</div>';
+	
 }
 
 sub newAnimal{
@@ -282,22 +293,22 @@ sub privateMenu{
 	print
 				'<div id ="left">
 					<ul>
-				  	<li class="item"><a href="gestione_area.cgi">Gestione Aree</a></li>';
+				  	<li><a href="gestione_area.cgi">Gestione Aree</a></li>';
 	if ($watDo eq "areas"){
 		print'
 						<ul>
-							<li class = "subitem"><a href="nuova_area.cgi">Nuova Area</a></li>
-							<li class = "subitem"><a href="#">Visualizza Area</a></li>
+							<li><a href="nuova_area.cgi">Nuova Area</a></li>
+							<li><a href="#">Visualizza Area</a></li>
 						</ul>';
 
 					}
-	print'		<li class="item"><a href="#">Gestione Magazzino</a></li>
-						<li class="item"><a href="#">Gestione Utenti</a></li>';
+	print'		<li><a href="#">Gestione Magazzino</a></li>
+						<li><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
 	if ($watDo eq "users"){
 		print'
 						<ul>
-							<li class = "subitem"><a href="#">Gestisci utenti</a></li>
-							<li class = "subitem"><a href="#">Inserisci utente</a></li>
+							<li><a href="#">Gestisci utenti</a></li>
+							<li><a href="#">Inserisci utente</a></li>
 						</ul>';
 	}
 	print'

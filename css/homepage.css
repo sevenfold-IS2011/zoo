@@ -52,6 +52,7 @@ div#logo p{
 div#footer{
 	border-top: 1px solid black;
 	text-align: center;
+	clear:both;
 }
 
 div#header{
