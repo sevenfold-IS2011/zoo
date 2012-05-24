@@ -190,7 +190,7 @@ sub privateHeader{
 			<div style="text-align:center;">
 				<a href= "area_privata.cgi"><img src="../images/logo-privato.png" width="300"/></a>
 			</div>
-		</div>	
+		</div>
 		<div id="nav">
 			<ul class="nav">
 				<li class="item"><a href="#">Chi siamo</a></li>
@@ -199,7 +199,7 @@ sub privateHeader{
 				<li class="item"><a href="#">Servizi</a></li>
 				<li class="item"><a href="logout.cgi">Logout</a></li>
 			</ul>
-		</div>	
+		</div>
 	</div>';
 }
 
@@ -216,7 +216,7 @@ sub manageArea{
 	print '<div id = "right"> CONTENUTO </div>';
 	#manaca il content
 	print '</div>';
-	
+
 }
 
 sub newArea{
@@ -236,10 +236,26 @@ sub newArea{
 	print '</div>';
 }
 
+sub newAnimal{
+	privateMenu($_[0], $_[1]);
+	print '
+	<div id = content>
+		<h3>Nuovo animale:</h3>
+		<div class = form>
+			<form action="_nuovo_animale.cgi" method="post" accept-charset="utf-8">
+			  <label for="nome">nome</label><input type="text" name="nome" value="" placeholder="nome"><br />
+			  <label for="sesso">sesso</label><input type="text" name="sesso" value="" placeholder="m/f">
+			  <label for="età">età</label><input type="text" name="età" value="" placeholder="5">
+			  <p><input type="submit" value="Aggiungi animale"></p>
+			</form>
+		</div>
+		'
+}
+
 sub privateMenu{
 	my $sid = $_[0];
 	my $watDo =$_[1];
-	print 
+	print
 				'<div id ="left">
 					<ul>
 				  	<li class="item"><a href="gestione_area.cgi">Gestione Aree</a></li>';
@@ -249,7 +265,7 @@ sub privateMenu{
 							<li class = "subitem"><a href="nuova_area.cgi">Nuova Area</a></li>
 							<li class = "subitem"><a href="#">Visualizza Area</a></li>
 						</ul>';
-						
+
 					}
 	print'		<li class="item"><a href="#">Gestione Magazzino</a></li>
 						<li class="item"><a href="#">Gestione Utenti</a></li>';
