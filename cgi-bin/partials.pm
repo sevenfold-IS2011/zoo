@@ -233,6 +233,7 @@ sub privateArea{
 }
 
 sub manageArea{
+	
 	privateMenu($_[0], $_[1]);
 	#manaca il content
 	
@@ -257,7 +258,7 @@ sub privateMenu{
 	my $sid = $_[0];
 	my $watDo =$_[1];
 	print 
-				'<div id ="leftMenu">
+				'<div id ="left-menu">
 					<ul>
 				  	<li class="item"><a href="gestione_area.cgi">Gestione Aree</a></li>';
 	if ($watDo eq "areas"){
