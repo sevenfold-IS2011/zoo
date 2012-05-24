@@ -188,9 +188,9 @@ sub privateHeader{
 	print '<div id="header">
 		<div id="logo">
 			<div style="text-align:center;">
-				<a href= "area_privata.cgi"><img src="../images/logo-privato.png" width="300"/>
+				<a href= "area_privata.cgi"><img src="../images/logo-privato.png" width="300"/></a>
 			</div>
-		</div>
+		</div>	
 		<div id="nav">
 			<ul class="nav">
 				<li class="item"><a href="#">Chi siamo</a></li>
@@ -199,57 +199,48 @@ sub privateHeader{
 				<li class="item"><a href="#">Servizi</a></li>
 				<li class="item"><a href="logout.cgi">Logout</a></li>
 			</ul>
-		</div>
+		</div>	
 	</div>';
 }
 
 sub privateArea{
+	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
-	#manaca il content
+	print '<div id = "right"> CONTENUTO </div>';
+	print '</div>';
 }
 
 sub manageArea{
+	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
+	print '<div id = "right"> CONTENUTO </div>';
 	#manaca il content
-
+	print '</div>';
+	
 }
 
 sub newArea{
+	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
 	print '
-	<div id = content>
+	<div id = "right">
 		<h3>Nuova Area</h3>
 		<div class = form>
 			<form action="_nuova_area.cgi" method="post" accept-charset="utf-8">
 			  <label for="name">Nome</label><input type="text" name="nome" value="" placeholder="nome"><br />
-			  <label for="posizione">Paosizione</label><input type="text" name="posizione" value=""placeholder="">
+			  <label for="posizione">Posizione</label><input type="text" name="posizione" value="" placeholder="">
 			  <p><input type="submit" value="Crea Area"></p>
 			</form>
 		</div>
-		'
-}
-
-sub newAnimal{
-	privateMenu($_[0], $_[1]);
-	print '
-	<div id = content>
-		<h3>Nuovo animale:</h3>
-		<div class = form>
-			<form action="_nuovo_animale.cgi" method="post" accept-charset="utf-8">
-			  <label for="nome">nome</label><input type="text" name="nome" value="" placeholder="nome"><br />
-			  <label for="sesso">sesso</label><input type="text" name="sesso" value="" placeholder="m/f">
-			  <label for="età">età</label><input type="text" name="età" value="" placeholder="5">
-			  <p><input type="submit" value="Aggiungi animale"></p>
-			</form>
-		</div>
-		'
+	</div>';
+	print '</div>';
 }
 
 sub privateMenu{
 	my $sid = $_[0];
 	my $watDo =$_[1];
-	print
-				'<div id ="leftMenu">
+	print 
+				'<div id ="left">
 					<ul>
 				  	<li class="item"><a href="gestione_area.cgi">Gestione Aree</a></li>';
 	if ($watDo eq "areas"){
@@ -258,10 +249,18 @@ sub privateMenu{
 							<li class = "subitem"><a href="nuova_area.cgi">Nuova Area</a></li>
 							<li class = "subitem"><a href="#">Visualizza Area</a></li>
 						</ul>';
+						
+					}
+	print'		<li class="item"><a href="#">Gestione Magazzino</a></li>
+						<li class="item"><a href="#">Gestione Utenti</a></li>';
+	if ($watDo eq "users"){
+		print'
+						<ul>
+							<li class = "subitem"><a href="#">Gestisci utenti</a></li>
+							<li class = "subitem"><a href="#">Inserisci utente</a></li>
+						</ul>';
 	}
 	print'
-						<li class="item"><a href="#">Gestione Magazzino</a></li>
-						<li class="item"><a href="#">Gestione Utenti</a></li>
 					</ul>
 				</div>';
 }
