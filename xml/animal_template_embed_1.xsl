@@ -4,28 +4,22 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:zoo="http://www.zoo.com">
 	<xsl:template match="zoo:zoo">
-	<html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="../css/master.css" />
-	</head>
-		<body>
-		<h3>Descrizione degli animali:</h3>
+		<h3>Animals descriptions:</h3>
 			<xsl:for-each select="zoo:area">
-<!--			<xsl:if test="@id=01"> -->
-
-  		<h4>Area <xsl:value-of select="./@nome"/>:</h4>
-  		<xsl:for-each select="zoo:animale">
-  			<table class="animal">
+			<xsl:if test="@id=1">
+				<h4><xsl:value-of select="./@nome"/> list:</h4>
+					<xsl:for-each select="zoo:animale">
+					<table class="animal">
   				<tr>
-						<td>Nome</td>
+						<td>Name</td>
 						<td><xsl:value-of select="zoo:nome"/></td>
 					</tr>
 					<tr>
-						<td>Sesso</td>
+						<td>Gender</td>
 						<td><xsl:value-of select="zoo:sesso"/></td>
 					</tr>
 					<tr>
-						<td>Età</td>
+						<td>Age</td>
 						<td><xsl:value-of select="zoo:età"/></td>
 					</tr>
 					<tr>
@@ -39,11 +33,9 @@
     				</td>
 					</tr>
 				</table>
-				</xsl:for-each>
-<!--			</xsl:if>  -->
+					</xsl:for-each>
+			</xsl:if>
 			</xsl:for-each>
-		</body>
-	</html>
 	</xsl:template>
 </xsl:stylesheet>
 

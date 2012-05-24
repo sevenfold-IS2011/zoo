@@ -154,21 +154,35 @@ sub area{
 	} else {
 		print '<div id="content">
 			<h3>Il nostro parco</h3>
-			<p>All&apos; interno dello spazio dedicato ai visitatori è possibile visitare il percorso safari o a piedi. Si possono trovare zone di ristoro e divertimento per i più piccoli.</p>
+			<p>All&apos;interno dello spazio dedicato ai visitatori &egrave; possibile visitare il percorso safari o a piedi. Si possono trovare zone di ristoro e divertimento per i pi&ugrave; piccoli.</p>
 			<h3>Mappa</h3>
 			<div class="figure">
-				<img src="images/map.png">
+				<img src="../images/map.png">
 				<p>La mappa del parco Monkey Island</p>
 			</div>
-			<dl>
-				<dt>Caccia al tesoro</dt>
-					<dd>Ogni primo sabato del mese, organizziamo per i più piccoli una caccia al tesoro</dd>
-				<dt>L&apos;isola selvaggia</dt>
-					<dd>Ogni sabato sera, organizziamo serate tematiche con musica e drink</dd>
-			</dl>
+			<div class="list">
+				<h3>Aree dello Zoo:</h3>';
+			areaList(Functions::get_areas);
+			print'
+			</div>
 		</div>';
 	}
+}
 
+
+sub areaList{
+	my @stuff = @_;
+	my $item;
+	my $j = 0;
+	print @stuff;
+	foreach $item (@stuff){
+		if ($j % 2 eq 0){
+			print "<li><a href= area.cgi?id=$item>";
+		}else{
+			print "Area $item</a></li>";
+		}
+		$j = $j + 1;
+	}
 }
 
 sub userForm{
@@ -191,6 +205,73 @@ sub userForm{
 
 
 
+}
+
+
+sub privateHeader{
+	print '<div id="header">
+		<div id="logo">
+			<div style="text-align:center;">
+				<a href= "area_privata.cgi"><img src="../images/logo-privato.png" width="300"/>
+			</div>
+		</div>	
+		<div id="nav">
+			<ul class="nav">
+				<li class="item"><a href="#">Chi siamo</a></li>
+				<li class="item"><a href="area.cgi">Aree</a></li>
+				<li class="item"><a href="animali.cgi">Animali</a></li>
+				<li class="item"><a href="#">Servizi</a></li>
+				<li class="item"><a href="logout.cgi">Logout</a></li>
+			</ul>
+		</div>	
+	</div>';
+}
+
+sub privateArea{
+	privateMenu($_[0], $_[1]);
+	#manaca il content
+}
+
+sub manageArea{
+	privateMenu($_[0], $_[1]);
+	#manaca il content
+	
+}
+
+sub newArea{
+	privateMenu($_[0], $_[1]);
+	print '
+	<div id = content>
+		<h3>Nuova Area</h3>
+		<div class = form>
+			<form action="_nuova_area.cgi" method="post" accept-charset="utf-8">
+			  <label for="name">Nome</label><input type="text" name="nome" value="" placeholder="nome"><br />
+			  <label for="posizione">Paosizione</label><input type="text" name="posizione" value=""placeholder="">
+			  <p><input type="submit" value="Crea Area"></p>
+			</form>
+		</div>
+		'
+}
+
+sub privateMenu{
+	my $sid = $_[0];
+	my $watDo =$_[1];
+	print 
+				'<div id ="leftMenu">
+					<ul>
+				  	<li class="item"><a href="gestione_area.cgi">Gestione Aree</a></li>';
+	if ($watDo eq "areas"){
+		print'
+						<ul>
+							<li class = "subitem"><a href="nuova_area.cgi">Nuova Area</a></li>
+							<li class = "subitem"><a href="#">Visualizza Area</a></li>
+						</ul>';
+	}
+	print'
+						<li class="item"><a href="#">Gestione Magazzino</a></li>
+						<li class="item"><a href="#">Gestione Utenti</a></li>
+					</ul>
+				</div>';
 }
 
 

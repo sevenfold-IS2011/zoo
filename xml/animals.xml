@@ -1,41 +1,36 @@
-<?xml version="1.0"?>
-<?xml-stylesheet type="text/xsl" href="animal_template.xsl"?>
-<zoo
-    xmlns="http://www.zoo.com"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
-    xs:schemaLocation="http://www.zoo.com employee.xsd">
+<zoo xmlns="http://www.zoo.com" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.zoo.com employee.xsd">
 
-<area id="01" position="nord" name="scimmie">
-    <animal>
-        <name>Gigi</name>
-        <gender>Male</gender>
-        <age>3</age>
+<area id="1" posizione="nord" nome="scimmie">
+    <animale>
+        <nome>Gigi</nome>
+        <sesso>Male</sesso>
+        <eta>3</eta>
         <img>../images/Gigi.png</img>
-    </animal>
+    </animale>
 
-    <animal>
-        <name>Gigia</name>
-        <gender>Female</gender>
-        <age>2</age>
+    <animale>
+        <nome>Gigia</nome>
+        <sesso>Female</sesso>
+        <eta>2</eta>
         <img>../images/Gigia.png</img>
-    </animal>
+    </animale>
 </area>
 
-<area id="02" position="nord" name="giraffe">
-    <animal>
-        <name>Giro</name>
-        <gender>Male</gender>
-        <age>6</age>
+<area id="2" posizione="nord" nome="giraffe">
+    <animale>
+        <nome>Giro</nome>
+        <sesso>Male</sesso>
+        <eta>6</eta>
         <img>../images/Giro.png</img>
-    </animal>
+    </animale>
 
-    <animal>
-        <name>Gira</name>
-        <gender>Female</gender>
-        <age>5</age>
+    <animale>
+        <nome>Gira</nome>
+        <sesso>Female</sesso>
+        <eta>5</eta>
         <img>../images/Gira.png</img>
-    </animal>
+    </animale>
 </area>
 
-</zoo>
+<area id="7" posizione="C7" nome="cammelli"/><area id="7" posizione="A8" nome="Gorilla"/></zoo>
 
