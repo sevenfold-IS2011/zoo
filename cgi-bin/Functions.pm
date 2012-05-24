@@ -74,11 +74,11 @@ sub max_area_id{
 		my $j = 0;
 		my $id;
 		foreach $id (@nodelist){
-			if ($id > $max_id){
-				$max_id = $id;
+			if ($id->getData() > $max_id){
+				$max_id = $id->getData();
 			} 
 		}
-		return $max_id;
+		return $max_id + 1;
 	} else {
 		return 1;
 	}
