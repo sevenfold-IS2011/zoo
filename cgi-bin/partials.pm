@@ -188,7 +188,7 @@ sub privateHeader{
 	print '<div id="header">
 		<div id="logo">
 			<div style="text-align:center;">
-				<a href= "area_privata.cgi"><img src="../images/logo-privato.png" width="300"/>
+				<a href= "area_privata.cgi"><img src="../images/logo-privato.png" width="300"/></a>
 			</div>
 		</div>	
 		<div id="nav">
@@ -204,30 +204,34 @@ sub privateHeader{
 }
 
 sub privateArea{
+	print '<div id = content>';
 	privateMenu($_[0], $_[1]);
 	#manaca il content
+	print '</div>';
 }
 
 sub manageArea{
-	
+	print '<div id = content>';
 	privateMenu($_[0], $_[1]);
 	#manaca il content
+	print '</div>';
 	
 }
 
 sub newArea{
+	print '<div id = content>';
 	privateMenu($_[0], $_[1]);
 	print '
-	<div id = content>
 		<h3>Nuova Area</h3>
 		<div class = form>
 			<form action="_nuova_area.cgi" method="post" accept-charset="utf-8">
 			  <label for="name">Nome</label><input type="text" name="nome" value="" placeholder="nome"><br />
-			  <label for="posizione">Paosizione</label><input type="text" name="posizione" value=""placeholder="">
+			  <label for="posizione">Posizione</label><input type="text" name="posizione" value="" placeholder="">
 			  <p><input type="submit" value="Crea Area"></p>
 			</form>
 		</div>
-		'
+		';
+		print '</div>';
 }
 
 sub privateMenu{
