@@ -25,7 +25,7 @@
     <xs:sequence>
         <xs:element name="nome" type="xs:string"/>
         <xs:element name="esso" type="xs:string"/>
-        <xs:element name="età" type="xs:integer" default="-1"/>
+        <xs:element name="et" type="xs:integer" default="-1"/>
         <xs:element name="img" type="xs:string">
     </xs:sequence>
 </xs:complexType>
