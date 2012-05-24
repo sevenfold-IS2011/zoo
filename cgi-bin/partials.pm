@@ -93,6 +93,30 @@ sub animali{
 	</div>'
 }
 
+sub servizi{
+	print 
+	'<div id="content">
+		<h3>I nostri servizi</h3>
+		<h4>Eventi</h4>
+		<p>Il nostro personale è preparato alla gestione di ogni tipo di eventi. Se la tua famiglia festeggia qualche evenienza particolare, mettiti in contatto con la nostra gestione eventi per organizzare al meglio la vostra giornata!</p>
+		<h4>Accoglienza gruppi</h4>
+		<p>Lo zoo prevede uno sconto per grandi gruppi di visitatori. E&apos; attrezzato inoltre con un parcheggio per bus e vengono organizzati su richiesta guide turistiche specializzate che offriranno alla vostra comitiva la loro conoscenza sulle specie e la loro vita selvatica. Per ulteriori informazioni visitare la pagina <a href="contatti.html">contatti</a>
+		<h4>Sicurezza</h4>
+		<p>Il nostro zoo è conforme a tutte le normative europee in materia di sicurezza. Gli animali pericolosi sono gestiti da personale preparato secondo processi professionali. Le nostre attrezzature sono le più moderne nel mercato e garantiscono la sicurezza del personale, dei visitatori e degli animali.</p>
+		<h4>Accessibilità</h4>
+		<p>Lo zoo è attrezzato per accogliere tutti, dai grandi ai piccini senza dimenticare le persone con difficoltà a deambulare.
+		In particolare abbiamo: <br />
+		<ul>
+			<li>Servizi igienici attrezzati con fasciatoio</li>
+			<li>Servizi igienici per portatori di handicap</li>
+			<li>Rampe su tutti i dislivelli architettonici</li>
+			<li>Servizio touchscreen su totem per l&apos;accesso alle informazioni dello zoo</li>
+			<li>Mini club</li>
+			<li>Fontane disperse per il parco per le giornate di calura</li>
+		</ul>
+	</div>'
+}
+
 sub login{
 	print
 	'<div id="login">
@@ -190,7 +214,7 @@ sub privateHeader{
 			<div style="text-align:center;">
 				<a href= "area_privata.cgi"><img src="../images/logo-privato.png" width="300"/></a>
 			</div>
-		</div>	
+		</div>
 		<div id="nav">
 			<ul class="nav">
 				<li class="item"><a href="#">Chi siamo</a></li>
@@ -199,7 +223,7 @@ sub privateHeader{
 				<li class="item"><a href="#">Servizi</a></li>
 				<li class="item"><a href="logout.cgi">Logout</a></li>
 			</ul>
-		</div>	
+		</div>
 	</div>';
 }
 
@@ -217,7 +241,7 @@ sub manageArea{
 	print '<div id = "right"> CONTENUTO </div>';
 	footer;	
 	print '</div>';
-	
+
 }
 
 sub newArea{
@@ -247,10 +271,26 @@ sub manageUsers{
 	
 }
 
+sub newAnimal{
+	privateMenu($_[0], $_[1]);
+	print '
+	<div id = content>
+		<h3>Nuovo animale:</h3>
+		<div class = form>
+			<form action="_nuovo_animale.cgi" method="post" accept-charset="utf-8">
+			  <label for="nome">nome</label><input type="text" name="nome" value="" placeholder="nome"><br />
+			  <label for="sesso">sesso</label><input type="text" name="sesso" value="" placeholder="m/f">
+			  <label for="età">età</label><input type="text" name="età" value="" placeholder="5">
+			  <p><input type="submit" value="Aggiungi animale"></p>
+			</form>
+		</div>
+		'
+}
+
 sub privateMenu{
 	my $sid = $_[0];
 	my $watDo =$_[1];
-	print 
+	print
 				'<div id ="left">
 					<ul>
 				  	<li><a href="gestione_area.cgi">Gestione Aree</a></li>';
@@ -260,7 +300,7 @@ sub privateMenu{
 							<li><a href="nuova_area.cgi">Nuova Area</a></li>
 							<li><a href="#">Visualizza Area</a></li>
 						</ul>';
-						
+
 					}
 	print'		<li><a href="#">Gestione Magazzino</a></li>
 						<li><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
