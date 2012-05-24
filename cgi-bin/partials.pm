@@ -206,14 +206,14 @@ sub privateHeader{
 sub privateArea{
 	print '<div id = content>';
 	privateMenu($_[0], $_[1]);
-	print '<div id = "right"> CONTENUTO </div>'
+	print '<div id = "right"> CONTENUTO </div>';
 	print '</div>';
 }
 
 sub manageArea{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
-	print '<div id = "right"> CONTENUTO </div>'
+	print '<div id = "right"> CONTENUTO </div>';
 	#manaca il content
 	print '</div>';
 	
@@ -232,9 +232,8 @@ sub newArea{
 			  <p><input type="submit" value="Crea Area"></p>
 			</form>
 		</div>
-	</div>
-		';
-		print '</div>';
+	</div>';
+	print '</div>';
 }
 
 sub privateMenu{
@@ -251,6 +250,7 @@ sub privateMenu{
 							<li class = "subitem"><a href="#">Visualizza Area</a></li>
 						</ul>
 						<li class="item"><a href="#">Gestione Magazzino</a></li>';
+					}
 	print'
 						<li class="item"><a href="#">Gestione Utenti</a></li>
 					</ul>
