@@ -228,7 +228,7 @@ sub privateHeader{
 }
 
 sub privateArea{
-	print '<div id = content>';
+	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
 	print '<div id = "right"> CONTENUTO </div>';
 	print '</div>';
@@ -244,7 +244,7 @@ sub manageArea{
 }
 
 sub newArea{
-	print '<div id = content>';
+	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
 	print '
 	<div id = "right">
@@ -272,11 +272,19 @@ sub privateMenu{
 						<ul>
 							<li class = "subitem"><a href="nuova_area.cgi">Nuova Area</a></li>
 							<li class = "subitem"><a href="#">Visualizza Area</a></li>
-						</ul>
-						<li class="item"><a href="#">Gestione Magazzino</a></li>';
+						</ul>';
+						
 					}
+	print'		<li class="item"><a href="#">Gestione Magazzino</a></li>
+						<li class="item"><a href="#">Gestione Utenti</a></li>';
+	if ($watDo eq "users"){
+		print'
+						<ul>
+							<li class = "subitem"><a href="#">Gestisci utenti</a></li>
+							<li class = "subitem"><a href="#">Inserisci utente</a></li>
+						</ul>';
+	}
 	print'
-						<li class="item"><a href="#">Gestione Utenti</a></li>
 					</ul>
 				</div>';
 }
