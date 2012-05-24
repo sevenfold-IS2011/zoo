@@ -1,9 +1,7 @@
 
 /* menù a sinistra */
 div#left{
-	position: relative;
-	top: 0;
-	left: 0;
+	float: left;
 	border-right: 1px solid black;
 	width: 17%;
 }
@@ -34,8 +32,6 @@ div#left ul li:hover a{
 
 /* menu a destra */
 div#right{
-	position: relative;
-	top: 0;
-	right: 0;
-	width: 83%;
+	float: right;
+	width: 82%;
 }
