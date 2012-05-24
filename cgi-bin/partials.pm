@@ -150,6 +150,7 @@ sub areaList{
 	my @stuff = @_;
 	my $item;
 	my $j = 0;
+	print @stuff;
 	foreach $item (@stuff){
 		if ($j % 2 eq 0){
 			print "<li><a href= area.cgi?id=$item>";

@@ -50,7 +50,7 @@ sub get_employee_name{
 
 sub get_areas{
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
-	my $nodeset = $xp->find('//@name | //@id');
+	my $nodeset = $xp->find('//@nome | //@id');
 	my @stuff;
 	my $node;
 	if (my @nodelist = $nodeset->get_nodelist) {
