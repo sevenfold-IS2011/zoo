@@ -2,7 +2,8 @@ div#left-menu{
 	position: relative;
 	top: 0;
 	left: 0;
-	border-right: 3px solid black;
+	border-right: 1px solid black;
+	width: 17%;
 }
 
 div#left-menu ul{
@@ -22,5 +23,9 @@ div#left-menu ul li:hover{
 div#left-menu ul li a{
 	font-size: 110%;
 	text-decoration: none;
-	color:black;
+	color: black;
+}
+
+div#left-menu ul li:hover a{
+	color: white;
 }
