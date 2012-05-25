@@ -304,6 +304,14 @@ sub privateMenu{
 						</ul>';
 
 					}
+	print'    <li><a href="#">Gestione Animali</a></li>';
+	if ($watDo eq "animals"){
+		print'
+						<ul>
+							<li><a href="#">Gestisci animali</a></li>
+							<li><a href="#">Inserisci animale</a></li>
+						</ul>';
+	}
 	print'		<li><a href="#">Gestione Magazzino</a></li>
 						<li><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
 	if ($watDo eq "users"){
