@@ -262,6 +262,24 @@ sub newArea{
 	print '</div>';
 }
 
+sub newUser{
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+	print '
+	<div id = "right">
+		<h3>Nuovo Utente</h3>
+		<div class = "form-wrapper">
+			<form action="_nuovo_utente.cgi" method="post" accept-charset="utf-8">
+			  <label for="username">Username</label><input type="text" name="nome" value="" placeholder="username"><br />
+			  <label for="password">Password</label><input type="password" name="password" value="" placeholder="Password">
+			  <p><input type="submit" value="Crea Utente"></p>
+			</form>
+		</div>
+	</div>';
+	footer;
+	print '</div>';
+}
+
 sub manageUsers{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
@@ -310,7 +328,7 @@ sub privateMenu{
 		print'
 						<ul>
 							<li><a href="#">Gestisci utenti</a></li>
-							<li><a href="#">Inserisci utente</a></li>
+							<li><a href="nuovo_utente.cgi">Inserisci utente</a></li>
 						</ul>';
 	}
 	print'
