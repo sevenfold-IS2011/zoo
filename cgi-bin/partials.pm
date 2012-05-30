@@ -211,7 +211,7 @@ sub privateHeader{
 	print '<div id="header">
 		<div id="logo">
 			<div style="text-align:center;">
-				<a href= "area_privata.cgi"><img src="../images/logo-privato.png" width="300"/></a>
+				<a href= "area_privata.cgi"><img src="../images/logo-privato.png" width="300" alt = "logo privato"/></a>
 			</div>
 		</div>
 		<div id="nav">
@@ -286,18 +286,18 @@ sub newAnimal{
 	print '<div id = "right"> <h3>Nuovo animale:</h3>
 		<div class = "form-wrapper">
 			<form action="_nuovo_animale.cgi" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-				<label for="area: ">area</label><select name="area">';
+				<label for="area">area</label><select name="area" id="area">';
 	areaSelect(Functions::get_areas);
 	print ' 
 				</select><br/>
-			  <label for="nome">nome: </label><input type="text" name="nome" value="" placeholder="nome"><br />
-			  <label for="sesso">sesso: </label><select name="sesso">
+			  <label for="nome">nome: </label><input type="text" name="nome" id="nome"/><br />
+			  <label for="sesso">sesso: </label><select name="sesso" id="sesso">
 					<option value="Male">M</option>
 					<option value="Female">F</option>
 				</select><br />
-			  <label for="eta;">et&agrave;: </label><input type="text" name="eta" value="" placeholder="5"><br />
-			  <label for="image";">foto: <input type="file" name="image" value="carica foto"><br />
-			  <p><input type="submit" value="Aggiungi animale"></p>
+			  <label for="eta">et&agrave;: </label><input type="text" name="eta"  placeholder="5" id="eta"/><br />
+			  <label for="image">foto:</label> <input type="file" name="image" value="carica foto" id="image"/><br />
+			  <p><input type="submit" value="Aggiungi animale" /></p>
 			</form>
 		</div> </div>';
 		footer;
