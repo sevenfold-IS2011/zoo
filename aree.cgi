@@ -20,4 +20,3 @@ partials::footer();
 
 print $page->end_html;
 exit;
-

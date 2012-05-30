@@ -271,6 +271,15 @@ sub manageUsers{
 
 }
 
+sub manageAnimals{
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+	print '<div id = "right"> CONTENUTO </div>';
+	footer;
+	print '</div>';
+
+}
+
 sub newAnimal{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
@@ -304,12 +313,12 @@ sub privateMenu{
 						</ul>';
 
 					}
-	print'    <li><a href="#">Gestione Animali</a></li>';
+	print'    <li><a href="gestione_animali.cgi">Gestione Animali</a></li>';
 	if ($watDo eq "animals"){
 		print'
 						<ul>
 							<li><a href="#">Gestisci animali</a></li>
-							<li><a href="#">Inserisci animale</a></li>
+							<li><a href="nuovo_animale.cgi">Inserisci animale</a></li>
 						</ul>';
 	}
 	print'		<li><a href="#">Gestione Magazzino</a></li>
