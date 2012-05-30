@@ -286,14 +286,17 @@ sub newAnimal{
 	print '<div id = "right"> <h3>Nuovo animale:</h3>
 		<div class = "form-wrapper">
 			<form action="_nuovo_animale.cgi" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-				<label for="area">area</label><select name="area">';
+				<label for="area: ">area</label><select name="area">';
 	areaSelect(Functions::get_areas);
 	print ' 
-				</select>
-			  <label for="nome">nome</label><input type="text" name="nome" value="" placeholder="nome"><br />
-			  <label for="sesso">sesso</label><input type="text" name="sesso" value="" placeholder="m/f"><br />
-			  <label for="eta;">et&agrave;</label><input type="text" name="eta" value="" placeholder="5"><br />
-			  <label for="image";">foto<input type="file" name="image" value="carica foto"><br />
+				</select><br/>
+			  <label for="nome">nome: </label><input type="text" name="nome" value="" placeholder="nome"><br />
+			  <label for="sesso">sesso: </label><select name="sesso">
+					<option value="Male">M</option>
+					<option value="Female">F</option>
+				</select><br />
+			  <label for="eta;">et&agrave;: </label><input type="text" name="eta" value="" placeholder="5"><br />
+			  <label for="image";">foto: <input type="file" name="image" value="carica foto"><br />
 			  <p><input type="submit" value="Aggiungi animale"></p>
 			</form>
 		</div> </div>';
