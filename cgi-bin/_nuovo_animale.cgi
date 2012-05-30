@@ -50,10 +50,39 @@ if ($age < 0 || $age > 150){ # bisogna fare il controllo o con una regexp o con 
 	exit;
 }
 
+my $parser = XML::LibXML->new;
+my $doc = $parser->parse_file("../xml/animals.xml");
+my $root = $doc->getDocumentElement();
+
+my $new_animal = $doc->createElement("animale");
+
+my $name_element = $doc->createElement("nome");
+$name_element->appendTextNode($name);
+
+my $gender_element = $doc->createElement("sesso");
+$gender_element->appendTextNode($gender);
+
+my $age_element = $doc->createElement("eta");
+$age_element->appendTextNode($age);
+#manca l'immagine
+$new_animal->appendChild($name_element);
+$new_animal->appendChild($gender_element);
+$new_animal->appendChild($age_element);
+
+my $area_element = $root -> findnodes("area[\@id=$area]")->get_node(1); #xpath parte da 1 
+#$area_element->appendChild($new_animal);
+##print $root->toString(1);
+#open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
+#print XML $root->toString();
+#close(XML);
+
 
 
 print $page->header();
-print "Area $area, nome $name, genere $gender e età $age";
+print "Area $area, nome $name, genere $gender e età $age - ";
+#print $area_element->toString();
+print $root -> findnodes("/")->size();
+#print $new_animal -> toString();
 
 exit;
 
