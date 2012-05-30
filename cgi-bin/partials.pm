@@ -270,6 +270,31 @@ sub manageUsers{
 
 }
 
+sub newUser{
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+
+	print '<div id = "right"> <h3>Nuovo utente - form da sistemare:</h3>
+		<div class = "form-wrapper">
+			<form action="_nuovo_utente.cgi" method="post" accept-charset="utf-8">
+				<label for="area">area</label><select name="area" id="area">';
+	areaSelect(Functions::get_areas);
+	print ' 
+				</select><br/>
+			  <label for="nome">nome: </label><input type="text" name="nome" id="nome"/><br />
+			  <label for="sesso">sesso: </label><select name="sesso" id="sesso">
+					<option value="Male">M</option>
+					<option value="Female">F</option>
+				</select><br />
+			  <label for="eta">et&agrave;: </label><input type="text" name="eta"  placeholder="5" id="eta"/><br />
+			  <label for="image">foto:</label> <input type="file" name="image" value="carica foto" id="image"/><br />
+			  <p><input type="submit" value="Aggiungi animale" /></p>
+			</form>
+		</div> </div>';
+		footer;
+		print '</div>';
+}
+
 sub manageAnimals{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);

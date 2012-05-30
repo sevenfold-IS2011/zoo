@@ -13,6 +13,12 @@ $CGI::POST_MAX = 1024 * 5000;
 my $upload_dir = "/images/animals";
 
 my $page = new CGI; 
+my $sid = $page->cookie("CGISESSID") || undef;
+if (!$sid){
+  print $page->redirect( -URL => "login.cgi");
+	exit;
+}
+
 my $filename = $page->param("image"); 
 if (!$filename){ 
 	print $page->header();

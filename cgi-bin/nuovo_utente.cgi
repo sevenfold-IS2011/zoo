@@ -18,9 +18,8 @@ if (!$sid){
 													-author => '?????????',
 													-style=>{'src'=>'../css/master.css'});
 	partials::privateHeader($sid);
-	my $watDo = "animals";
-	partials::newAnimal($sid, $watDo);
+	my $watDo = "users";
+	partials::newUser($sid, $watDo);
 	print $page->end_html;
 }
 exit;
-

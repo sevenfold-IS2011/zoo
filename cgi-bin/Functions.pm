@@ -6,6 +6,7 @@ use File::Spec;
 use CGI::Session;
 use XML::XPath;
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
+#use HTML::Tidy;
 use strict;
 
 
@@ -106,6 +107,38 @@ sub name_in_area_taken{
 		return undef;
 	}
 }
+
+#sub orderXML{
+#        my $hashParameters = shift;
+#        my $encoding = $hashParameters->{encoding};
+#        if (!defined($encoding)){
+#                $encoding = "raw";
+#        }
+#       
+#        # use HTML::Tidy to order the HTML generated!
+#        my $tidy = HTML::Tidy->new({
+#                'indent'          => 1,
+#                'break-before-br' => 1,
+#                'output-xhtml'    => 1,
+#                'char-encoding'   => $encoding,
+#                'doctype'         => 'strict',
+#        });
+       
+#        my $htmlText = $hashParameters->{htmlText};
+       
+        # decode the output to utf-8 so it works correctly
+ #       $htmlText = decode("utf-8", $htmlText);
+        # clean the HTML
+  #      $htmlText = $tidy->clean($htmlText);
+        # encode it in utf-8 as used in the html pages
+   #     $htmlText = encode("utf-8", $htmlText);
+        # delete the generator produced by HTML Tidy. It's simply useless. Here it's an example:
+        #<meta name="generator" content="HTML Tidy for Linux/x86 (vers 25 March 2009), see www.w3.org" />
+    #    $htmlText =~ s/<meta name="generator".*? \/>\n//;
+        # the transformation may give this error, an empty (and useless) xmlns attribute, better to delete it
+     #   $htmlText =~ s/ ?xmlns="" ?/ /g;
+      #  return $htmlText;
+#}
 
 
 
