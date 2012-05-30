@@ -84,6 +84,29 @@ sub max_area_id{
 	}
 }
 
+sub area_exists{
+	my $areaid = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+	my $nodeset = $xp->find("//area[\@id=$areaid]");
+	if ($nodeset->size > 0){
+		return 1;
+	} else {
+		return undef;
+	}
+}
+
+sub name_in_area_taken{
+	my $areaid = $_[0];
+	my $name = $_[1];
+	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+	my $nodeset = $xp->find("//area[\@id=$areaid]//animale[nome=\"$name\"]");
+	if ($nodeset->size > 0){
+		return 1;
+	} else {
+		return undef;
+	}
+}
+
 
 
 1;
