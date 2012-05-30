@@ -69,19 +69,30 @@ $new_animal->appendChild($name_element);
 $new_animal->appendChild($gender_element);
 $new_animal->appendChild($age_element);
 
-my $area_element = $root -> findnodes("area[\@id=$area]")->get_node(1); #xpath parte da 1 
-#$area_element->appendChild($new_animal);
+my $xpc = XML::LibXML::XPathContext->new;
+$xpc->registerNs('zoo', 'http://www.zoo.com');
+
+
+my $area_element = $xpc -> findnodes("//zoo:area[\@id=$area]", $doc)->get_node(1); #xpath parte da 1 
+#my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+#my @nodelist = ($xp->find("//area[\@id=$area]")->get_nodelist);
+#my $area_element = @nodelist[0];
+#print $page->header();
+#print $area_element;
+$area_element->appendChild($new_animal);
 ##print $root->toString(1);
-#open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
-#print XML $root->toString();
-#close(XML);
+open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
+print XML $root->toString();
+close(XML);
 
 
 
 print $page->header();
 print "Area $area, nome $name, genere $gender e età $age - ";
+print XML $area_element->toString(1);
+
 #print $area_element->toString();
-print $root -> findnodes("/")->size();
+#print $area_element->toString();
 #print $new_animal -> toString();
 
 exit;
