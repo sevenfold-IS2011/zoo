@@ -94,7 +94,7 @@ sub animali{
 }
 
 sub servizi{
-	print 
+	print
 	'<div id="content">
 		<h3>I nostri servizi</h3>
 		<h4>Eventi</h4>
@@ -239,7 +239,7 @@ sub manageArea{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
 	print '<div id = "right"> CONTENUTO </div>';
-	footer;	
+	footer;
 	print '</div>';
 
 }
@@ -268,23 +268,25 @@ sub manageUsers{
 	print '<div id = "right"> CONTENUTO </div>';
 	footer;
 	print '</div>';
-	
+
 }
 
 sub newAnimal{
+	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
-	print '
-	<div id = content>
-		<h3>Nuovo animale:</h3>
-		<div class = form>
+
+	print '<div id = "right"> <h3>Nuovo animale:</h3>
+		<div class = "form-wrapper">
 			<form action="_nuovo_animale.cgi" method="post" accept-charset="utf-8">
 			  <label for="nome">nome</label><input type="text" name="nome" value="" placeholder="nome"><br />
-			  <label for="sesso">sesso</label><input type="text" name="sesso" value="" placeholder="m/f">
-			  <label for="età">età</label><input type="text" name="età" value="" placeholder="5">
+			  <label for="sesso">sesso</label><input type="text" name="sesso" value="" placeholder="m/f"><br />
+			  <label for="et&agrave;">et&agrave;</label><input type="text" name="eta" value="" placeholder="5"><br />
+			  <label for="foto";">foto<input type="button" value="carica foto"><br />
 			  <p><input type="submit" value="Aggiungi animale"></p>
 			</form>
-		</div>
-		'
+		</div> </div>';
+		footer;
+		print '</div>';
 }
 
 sub privateMenu{

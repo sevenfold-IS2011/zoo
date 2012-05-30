@@ -67,14 +67,21 @@ sub get_areas{
 }
 
 sub max_area_id{
-#	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
-#	my $nodeset = $xp->find('max(//@id)');
-#	my $max_id = 0;
-#	if (my @nodelist = $nodeset->get_nodelist) {
-#		$max_id = @nodelist[0]
-#	}
-#	return $max_id;
-	return 7;
+	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+	my $nodeset = $xp->find('//@id');
+	if (my @nodelist = $nodeset->get_nodelist) {
+		my $max_id = 0;
+		my $j = 0;
+		my $id;
+		foreach $id (@nodelist){
+			if ($id->getData() > $max_id){
+				$max_id = $id->getData();
+			} 
+		}
+		return $max_id + 1;
+	} else {
+		return 1;
+	}
 }
 
 

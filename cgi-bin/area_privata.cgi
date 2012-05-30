@@ -21,7 +21,6 @@ if (!$sid){
 													-style=>{'src'=>'../css/master.css'});
 	partials::privateHeader($sid);
 	partials::privateArea($sid);					
-	partials::footer();
 	print $page->end_html;
 }
 

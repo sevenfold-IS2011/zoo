@@ -19,7 +19,6 @@ if (!$sid){
 													-style=>{'src'=>'../css/master.css'});
 	partials::privateHeader($sid);
 	partials::newAnimal($sid);
-	partials::footer();
 	print $page->end_html;
 }
 exit;
