@@ -3,14 +3,14 @@
 use CGI;
 use CGI::Session;
 use File::Spec;
+use File::Basename;
 use Functions;
 use strict;
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use XML::LibXML;
 
-
 $CGI::POST_MAX = 1024 * 5000;
-my $upload_dir = "/images/animals";
+
 
 my $page = new CGI; 
 my $sid = $page->cookie("CGISESSID") || undef;
@@ -19,20 +19,15 @@ if (!$sid){
 	exit;
 }
 
-my $filename = $page->param("image"); 
-if (!$filename){ 
-	print $page->header();
-	print "There was a problem uploading your photo (try a smaller file). Questi errori andranno gestiti con un div apposito nella pagina precedente";
-	exit;
-	}
+
 my $area = $page->param("area");
 if(!Functions::area_exists($area)){
 	print $page->header();
 	print "Area non esistente. Questi errori andranno gestiti con un div apposito nella pagina precedente";
 	exit;
 }
-my $name = $page->param("nome");
-if(Functions::name_in_area_taken($area, $name)){
+my $animal_name = $page->param("nome");
+if(Functions::name_in_area_taken($area, $animal_name)){
 	print $page->header();
 	print "Nome già presoin quell'area. Questi errori andranno gestiti con un div apposito nella pagina precedente";
 	exit;
@@ -56,6 +51,28 @@ if ($age < 0 || $age > 150){ # bisogna fare il controllo o con una regexp o con 
 	exit;
 }
 
+my $filename = $page->param("image"); 
+if (!$filename){ 
+	print $page->header();
+	print "There was a problem uploading your photo (try a smaller file). Questi errori andranno gestiti con un div apposito nella pagina precedente";
+	exit;
+	}
+
+my $upload_dir = "../images/animals";
+
+my ($name, $path, $extension) = fileparse($filename, '\..*');
+$filename = $name.$extension;
+
+#manca un check sull'image name, occhio
+
+my $upload_filehandle = $page->upload("image");
+open (UPLOADFILE, ">$upload_dir/$filename" ) or die "$!";
+binmode UPLOADFILE; 
+while (<$upload_filehandle>){ 
+	print UPLOADFILE;
+	 }
+close UPLOADFILE;
+
 my $parser = XML::LibXML->new;
 my $doc = $parser->parse_file("../xml/animals.xml");
 my $root = $doc->getDocumentElement();
@@ -63,17 +80,23 @@ my $root = $doc->getDocumentElement();
 my $new_animal = $doc->createElement("animale");
 
 my $name_element = $doc->createElement("nome");
-$name_element->appendTextNode($name);
+$name_element->appendTextNode($animal_name);
 
 my $gender_element = $doc->createElement("sesso");
 $gender_element->appendTextNode($gender);
 
+my $img_element = $doc->createElement("img");
+my $img_path = $upload_dir.'/'.$filename;
+$img_element->appendTextNode($img_path);
+
+
 my $age_element = $doc->createElement("eta");
 $age_element->appendTextNode($age);
-#manca l'immagine
+
 $new_animal->appendChild($name_element);
 $new_animal->appendChild($gender_element);
 $new_animal->appendChild($age_element);
+$new_animal->appendChild($img_element);
 
 my $xpc = XML::LibXML::XPathContext->new;
 $xpc->registerNs('zoo', 'http://www.zoo.com');
@@ -94,7 +117,7 @@ close(XML);
 
 
 print $page->header();
-print "Area $area, nome $name, genere $gender e età $age - ";
+print "Area $area, nome $animal_name, genere $gender e età $age - ";
 print XML $area_element->toString(1);
 
 #print $area_element->toString();
