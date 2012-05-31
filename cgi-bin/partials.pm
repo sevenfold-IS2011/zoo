@@ -261,24 +261,6 @@ sub newArea{
 	print '</div>';
 }
 
-sub newUser{
-	print '<div id = "content">';
-	privateMenu($_[0], $_[1]);
-	print '
-	<div id = "right">
-		<h3>Nuovo Utente</h3>
-		<div class = "form-wrapper">
-			<form action="_nuovo_utente.cgi" method="post" accept-charset="utf-8">
-			  <label for="username">Username</label><input type="text" name="nome" value="" placeholder="username"><br />
-			  <label for="password">Password</label><input type="password" name="password" value="" placeholder="Password">
-			  <p><input type="submit" value="Crea Utente"></p>
-			</form>
-		</div>
-	</div>';
-	footer;
-	print '</div>';
-}
-
 sub viewWarehouse{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
@@ -325,26 +307,19 @@ sub manageUsers{
 sub newUser{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
-
-	print '<div id = "right"> <h3>Nuovo utente - form da sistemare:</h3>
+	print '
+	<div id = "right">
+		<h3>Nuovo Utente</h3>
 		<div class = "form-wrapper">
 			<form action="_nuovo_utente.cgi" method="post" accept-charset="utf-8">
-				<label for="area">area</label><select name="area" id="area">';
-	areaSelect(Functions::get_areas);
-	print ' 
-				</select><br/>
-			  <label for="nome">nome: </label><input type="text" name="nome" id="nome"/><br />
-			  <label for="sesso">sesso: </label><select name="sesso" id="sesso">
-					<option value="Male">M</option>
-					<option value="Female">F</option>
-				</select><br />
-			  <label for="eta">et&agrave;: </label><input type="text" name="eta"  placeholder="5" id="eta"/><br />
-			  <label for="image">foto:</label> <input type="file" name="image" value="carica foto" id="image"/><br />
-			  <p><input type="submit" value="Aggiungi animale" /></p>
+			  <label for="username">Username</label><input type="text" name="nome" value="" placeholder="Username"><br />
+			  <label for="password">Password</label><input type="password" name="password" value="" placeholder="Password">
+			  <p><input type="submit" value="Crea Utente"></p>
 			</form>
-		</div> </div>';
-		footer;
-		print '</div>';
+		</div>
+	</div>';
+	footer;
+	print '</div>';
 }
 
 sub manageAnimals{
@@ -420,7 +395,6 @@ sub privateMenu{
 						</ul>';
 
 					}
-	print'					<li><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
 	print'    <li><a href="gestione_animali.cgi">Gestione Animali</a></li>';
 	if ($watDo eq "animals"){
 		print'
@@ -429,12 +403,12 @@ sub privateMenu{
 							<li><a href="nuovo_animale.cgi">Inserisci animale</a></li>
 						</ul>';
 	}
-	print'		<li><a href="#">Gestione Magazzino</a></li>
-						<li><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
+	print'<li><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
 	if ($watDo eq "users"){
 		print'
 						<ul>
-							<li><a href="nuovo_utente.cgi">Inserisci utente</a></li>
+							<li><a href="_nuovo_utente.cgi">Inserisci utente</a></li>
+							<li><a href="_modifica_password.cgi">Modifica password</a></li>
 						</ul>';
 	}
 	print'
