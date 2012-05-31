@@ -11,7 +11,7 @@ print $page->header,
 			 									-meta => {'keywords' => 'zoo padova animali monkey island',
 																	'description' => 'sito ad utilizzo interno dello zoo Monkey Island di Padova',
 																	'author' => '?????????'}, 
-												-author => 'gaggi@math.unipd.it',
+												-author => 'gaggi@math.unipd.it'
 												-style=>{'src'=>'../css/master.css'});
 my $sid = $page->cookie("CGISESSID") || undef;
 partials::header($sid);
