@@ -280,6 +280,40 @@ sub newUser{
 	print '</div>';
 }
 
+sub viewWarehouse{
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+	print '
+	<div id = "right">
+		<h3>Contenuto del magazzino</h3>
+		<table>
+			<tr><th>Esempio</th></tr>
+			<tr<td>CIBO</td></tr>
+		</table>
+	</div>';
+	footer;
+	print '</div>';
+}
+
+sub updateWarehouse{
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+	print '
+	<div id = "right">
+		<h3>Aggiorna Magazzino</h3>
+		<h4>Aggiungi rifornimento</h4>
+		<div class = "form-wrapper">
+			<form action="_aggiungi_specialita.cgi" method="post" accept-charset="utf-8">
+			  <label for="specialita">Specialità</label><select name ="specialita"><option value="banane">Banane</option></select><br />
+			  <label for="quanitita">Quantita</label><input type="text" name="quantita" value="" placeholder="Quantita" />
+			  <p><input type="submit" value="Aggiungi" /></p>
+			</form>
+		</div>
+	</div>';
+	footer;
+	print '</div>';
+}
+
 sub manageUsers{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
@@ -322,12 +356,19 @@ sub privateMenu{
 						</ul>';
 
 					}
-	print'		<li><a href="#">Gestione Magazzino</a></li>
-						<li><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
+	print'		<li><a href="gestione_magazzino.cgi">Gestione Magazzino</a></li>';
+	if ($watDo eq "warehouse"){
+		print'
+						<ul>
+							<li><a href="visualizza_magazzino.cgi">Visualizza</a></li>
+							<li><a href="aggiorna_magazzino.cgi">Aggiorna</a></li>
+						</ul>';
+
+					}
+	print'					<li><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
 	if ($watDo eq "users"){
 		print'
 						<ul>
-							<li><a href="#">Gestisci utenti</a></li>
 							<li><a href="nuovo_utente.cgi">Inserisci utente</a></li>
 						</ul>';
 	}
