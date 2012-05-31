@@ -6,6 +6,7 @@ use warnings;
 use CGI;
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use partials;
+use XML::LibXML;
 my $page = new CGI;
 my $sid = $page->cookie("CGISESSID") || undef;
 
@@ -35,10 +36,31 @@ if ($watDo eq "animals")
 		if (!$name) {
 			print $page->header();
 			print '
-						<h2>Richiesta errata - parametro name incorretto</h2>';
+						<h2>Richiesta errata - parametro name undefined</h2>';
 			exit;
 		}
+		my $parser = XML::LibXML->new;
+		my $doc = $parser->parse_file("../xml/animals.xml");
+		my $root = $doc->getDocumentElement();
+		my $xpc = XML::LibXML::XPathContext->new;
+		$xpc->registerNs('zoo', 'http://www.zoo.com');
+		my $animal = $xpc -> findnodes("//zoo:animale[nome=\"$name\"]", $doc)->get_node(1);
+		if (!$animal) {
+			print $page->header();
+			print '
+						<h2>Richiesta errata - nessun animale con questo nome</h2>'; #nome univoco in tutto lo zoo o all'interno dell'area??
+			exit;
+		}
+		my $area = $animal->getParent();
+		$area->removeChild($animal); #non suicidi, ma figlicidi
 		
+		open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
+		print XML $root->toString();
+		close(XML);
+		
+		print $page->header();
+		print Functions:animal_table;
+		exit;
 	}
 	
 }
