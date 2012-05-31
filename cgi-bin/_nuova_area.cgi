@@ -32,8 +32,6 @@ if (!$sid){
   my $areaName = $input{"nome"};
   my $areaPos = $input{"posizione"};
   my $areaId = Functions::max_area_id + 1;
-  
-  
   my $parser = XML::LibXML->new;
   my $doc = $parser->parse_file("../xml/animals.xml");
   my $root = $doc->getDocumentElement();

@@ -174,7 +174,6 @@ sub areaList{
 	my @stuff = @_;
 	my $item;
 	my $j = 0;
-	print @stuff;
 	foreach $item (@stuff){
 		if ($j % 2 eq 0){
 			print "<li><a href= area.cgi?id=$item>";
@@ -212,7 +211,7 @@ sub privateHeader{
 	print '<div id="header">
 		<div id="logo">
 			<div style="text-align:center;">
-				<a href= "area_privata.cgi"><img src="../images/logo-privato.png" width="300"/></a>
+				<a href= "area_privata.cgi"><img src="../images/logo-privato.png" width="300" alt = "logo privato"/></a>
 			</div>
 		</div>
 		<div id="nav">
@@ -323,23 +322,79 @@ sub manageUsers{
 
 }
 
+sub newUser{
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+
+	print '<div id = "right"> <h3>Nuovo utente - form da sistemare:</h3>
+		<div class = "form-wrapper">
+			<form action="_nuovo_utente.cgi" method="post" accept-charset="utf-8">
+				<label for="area">area</label><select name="area" id="area">';
+	areaSelect(Functions::get_areas);
+	print ' 
+				</select><br/>
+			  <label for="nome">nome: </label><input type="text" name="nome" id="nome"/><br />
+			  <label for="sesso">sesso: </label><select name="sesso" id="sesso">
+					<option value="Male">M</option>
+					<option value="Female">F</option>
+				</select><br />
+			  <label for="eta">et&agrave;: </label><input type="text" name="eta"  placeholder="5" id="eta"/><br />
+			  <label for="image">foto:</label> <input type="file" name="image" value="carica foto" id="image"/><br />
+			  <p><input type="submit" value="Aggiungi animale" /></p>
+			</form>
+		</div> </div>';
+		footer;
+		print '</div>';
+}
+
+sub manageAnimals{
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+	print '<div id = "right"> CONTENUTO </div>';
+	footer;
+	print '</div>';
+
+}
+
 sub newAnimal{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
 
 	print '<div id = "right"> <h3>Nuovo animale:</h3>
 		<div class = "form-wrapper">
-			<form action="_nuovo_animale.cgi" method="post" accept-charset="utf-8">
-			  <label for="nome">nome</label><input type="text" name="nome" value="" placeholder="nome"><br />
-			  <label for="sesso">sesso</label><input type="text" name="sesso" value="" placeholder="m/f"><br />
-			  <label for="et&agrave;">et&agrave;</label><input type="text" name="eta" value="" placeholder="5"><br />
-			  <label for="foto";">foto<input type="button" value="carica foto"><br />
-			  <p><input type="submit" value="Aggiungi animale"></p>
+			<form action="_nuovo_animale.cgi" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+				<label for="area">area</label><select name="area" id="area">';
+	areaSelect(Functions::get_areas);
+	print ' 
+				</select><br/>
+			  <label for="nome">nome: </label><input type="text" name="nome" id="nome"/><br />
+			  <label for="sesso">sesso: </label><select name="sesso" id="sesso">
+					<option value="Male">M</option>
+					<option value="Female">F</option>
+				</select><br />
+			  <label for="eta">et&agrave;: </label><input type="text" name="eta"  placeholder="5" id="eta"/><br />
+			  <label for="image">foto:</label> <input type="file" name="image" value="carica foto" id="image"/><br />
+			  <p><input type="submit" value="Aggiungi animale" /></p>
 			</form>
 		</div> </div>';
 		footer;
 		print '</div>';
 }
+
+sub areaSelect{
+	my @stuff = @_;
+	my $item;
+	my $j = 0;
+	foreach $item (@stuff){
+		if ($j % 2 eq 0){
+			print "<option value=\"$item\">";
+		}else{
+			print "Area $item</option>";
+		}
+		$j = $j + 1;
+	}
+}
+
 
 sub privateMenu{
 	my $sid = $_[0];
@@ -366,6 +421,16 @@ sub privateMenu{
 
 					}
 	print'					<li><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
+	print'    <li><a href="gestione_animali.cgi">Gestione Animali</a></li>';
+	if ($watDo eq "animals"){
+		print'
+						<ul>
+							<li><a href="#">Gestisci animali</a></li>
+							<li><a href="nuovo_animale.cgi">Inserisci animale</a></li>
+						</ul>';
+	}
+	print'		<li><a href="#">Gestione Magazzino</a></li>
+						<li><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
 	if ($watDo eq "users"){
 		print'
 						<ul>

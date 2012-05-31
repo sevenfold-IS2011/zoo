@@ -14,7 +14,7 @@
         <eta>2</eta>
         <img>../images/Gigia.png</img>
     </animale>
-</area>
+<animale><nome>Andrea</nome><sesso>Female</sesso><eta>16</eta><img>../images/animals/Ragazza_addenta_pane_con_pene.jpg</img></animale></area>
 
 <area id="2" posizione="nord" nome="giraffe">
     <animale>
@@ -31,4 +31,5 @@
         <img>../images/Gira.png</img>
     </animale>
 </area>
-<area id="3" posizione="D8" nome="Cammelli"/></zoo>
+<area id="3" posizione="D8" nome="Cammelli"/>
+</zoo>
