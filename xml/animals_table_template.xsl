@@ -6,17 +6,20 @@
 	<xsl:template match="zoo:zoo">
 		<h3>Animali:</h3>
 		<table>
-			<th>
-				<td>Area</td>
-				<td>Nome</td>
-				<td>Et&grave;</td>
-				<td>Sesso</td>
-				<td>Immagine</td>
-			</th>
+			<tr>
+				<th colspan="2">Azioni</th>
+				<th>Area</th>
+				<th>Nome</th>
+				<th>Eta'</th>
+				<th>Sesso</th>
+				<th>Immagine</th>
+			</tr>
 			<xsl:for-each select="zoo:area">
 				<xsl:for-each select="zoo:animale">
 					<tr>
-						<td><xsl:value-of select="./@nome"/></td>
+						<td><a href="#">Modifica</a></td>
+						<td><a href="#">Elimina</a></td>
+						<td><xsl:value-of select="../@nome"/></td>
 						<td><xsl:value-of select="zoo:nome"/></td>
 						<td><xsl:value-of select="zoo:eta"/></td>
 						<td><xsl:value-of select="zoo:sesso"/></td>
@@ -24,7 +27,7 @@
 					</tr>
 				</xsl:for-each>
 			</xsl:for-each>
-		<table>
+		</table>
 	</xsl:template>
 </xsl:stylesheet>
 
