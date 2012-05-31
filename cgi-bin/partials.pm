@@ -249,11 +249,45 @@ sub newArea{
 	print '
 	<div id = "right">
 		<h3>Nuova Area</h3>
-		<div class = form>
+		<div class = "form-wrapper">
 			<form action="_nuova_area.cgi" method="post" accept-charset="utf-8">
 			  <label for="name">Nome</label><input type="text" name="nome" value="" placeholder="nome"><br />
-			  <label for="posizione">Posizione</label><input type="text" name="posizione" value="" placeholder="">
+			  <label for="posizione">Posizione</label><input type="text" name="posizione" value="" placeholder="Posizione">
 			  <p><input type="submit" value="Crea Area"></p>
+			</form>
+		</div>
+	</div>';
+	footer;
+	print '</div>';
+}
+
+sub viewWarehouse{
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+	print '
+	<div id = "right">
+		<h3>Contenuto del magazzino</h3>
+		<table>
+			<tr><th>Esempio</th></tr>
+			<tr<td>CIBO</td></tr>
+		</table>
+	</div>';
+	footer;
+	print '</div>';
+}
+
+sub updateWarehouse{
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+	print '
+	<div id = "right">
+		<h3>Aggiorna Magazzino</h3>
+		<h4>Aggiungi rifornimento</h4>
+		<div class = "form-wrapper">
+			<form action="_aggiungi_specialita.cgi" method="post" accept-charset="utf-8">
+			  <label for="specialita">Specialità</label><select name ="specialita"><option value="banane">Banane</option></select><br />
+			  <label for="quanitita">Quantita</label><input type="text" name="quantita" value="" placeholder="Quantita" />
+			  <p><input type="submit" value="Aggiungi" /></p>
 			</form>
 		</div>
 	</div>';
@@ -273,26 +307,19 @@ sub manageUsers{
 sub newUser{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
-
-	print '<div id = "right"> <h3>Nuovo utente - form da sistemare:</h3>
+	print '
+	<div id = "right">
+		<h3>Nuovo Utente</h3>
 		<div class = "form-wrapper">
 			<form action="_nuovo_utente.cgi" method="post" accept-charset="utf-8">
-				<label for="area">area</label><select name="area" id="area">';
-	areaSelect(Functions::get_areas);
-	print ' 
-				</select><br/>
-			  <label for="nome">nome: </label><input type="text" name="nome" id="nome"/><br />
-			  <label for="sesso">sesso: </label><select name="sesso" id="sesso">
-					<option value="Male">M</option>
-					<option value="Female">F</option>
-				</select><br />
-			  <label for="eta">et&agrave;: </label><input type="text" name="eta"  placeholder="5" id="eta"/><br />
-			  <label for="image">foto:</label> <input type="file" name="image" value="carica foto" id="image"/><br />
-			  <p><input type="submit" value="Aggiungi animale" /></p>
+			  <label for="username">Username</label><input type="text" name="nome" value="" placeholder="Username"><br />
+			  <label for="password">Password</label><input type="password" name="password" value="" placeholder="Password">
+			  <p><input type="submit" value="Crea Utente"></p>
 			</form>
-		</div> </div>';
-		footer;
-		print '</div>';
+		</div>
+	</div>';
+	footer;
+	print '</div>';
 }
 
 sub manageAnimals{
@@ -359,6 +386,15 @@ sub privateMenu{
 						</ul>';
 
 					}
+	print'		<li><a href="gestione_magazzino.cgi">Gestione Magazzino</a></li>';
+	if ($watDo eq "warehouse"){
+		print'
+						<ul>
+							<li><a href="visualizza_magazzino.cgi">Visualizza</a></li>
+							<li><a href="aggiorna_magazzino.cgi">Aggiorna</a></li>
+						</ul>';
+
+					}
 	print'    <li><a href="gestione_animali.cgi">Gestione Animali</a></li>';
 	if ($watDo eq "animals"){
 		print'
@@ -367,13 +403,12 @@ sub privateMenu{
 							<li><a href="nuovo_animale.cgi">Inserisci animale</a></li>
 						</ul>';
 	}
-	print'		<li><a href="#">Gestione Magazzino</a></li>
-						<li><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
+	print'<li><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
 	if ($watDo eq "users"){
 		print'
 						<ul>
-							<li><a href="#">Gestisci utenti</a></li>
-							<li><a href="#">Inserisci utente</a></li>
+							<li><a href="_nuovo_utente.cgi">Inserisci utente</a></li>
+							<li><a href="_modifica_password.cgi">Modifica password</a></li>
 						</ul>';
 	}
 	print'
