@@ -322,6 +322,25 @@ sub newUser{
 	print '</div>';
 }
 
+sub editPassword{
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+	print '
+	<div id = "right">
+		<h3>Modifica password</h3>
+		<div class = "form-wrapper">
+			<form action="_modifica_password.cgi" method="post" accept-charset="utf-8">
+			  <label for="username">Username</label><input type="text" name="nome" value="" placeholder="Username"><br />
+			  <label for="old_password">Vecchia</label><input type="password" name="old_password" value="" placeholder="Vecchia password"><br />
+			  <label for="password">Nuova</label><input type="password" name="password" value="" placeholder="Nuova password">
+			  <p><input type="submit" value="Modifica password"></p>
+			</form>
+		</div>
+	</div>';
+	footer;
+	print '</div>';
+}
+
 sub manageAnimals{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
@@ -407,8 +426,8 @@ sub privateMenu{
 	if ($watDo eq "users"){
 		print'
 						<ul>
-							<li><a href="_nuovo_utente.cgi">Inserisci utente</a></li>
-							<li><a href="_modifica_password.cgi">Modifica password</a></li>
+							<li><a href="nuovo_utente.cgi">Inserisci utente</a></li>
+							<li><a href="modifica_password.cgi">Modifica password</a></li>
 						</ul>';
 	}
 	print'
