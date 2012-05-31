@@ -14,7 +14,7 @@
         <eta>2</eta>
         <img>../images/Gigia.png</img>
     </animale>
-<animale><nome>Andrea</nome><sesso>Female</sesso><eta>16</eta><img>../images/animals/Ragazza_addenta_pane_con_pene.jpg</img></animale></area>
+<animale><nome>Andrea</nome><sesso>Female</sesso><eta>16</eta><img>../images/animals/Ragazza_addenta_pane_con_pene.jpg</img></animale><animale><nome>Giovanni</nome><sesso>Male</sesso><eta>5</eta><img>../images/animals/1327823991536.gif</img></animale></area>
 
 <area id="2" posizione="nord" nome="giraffe">
     <animale>

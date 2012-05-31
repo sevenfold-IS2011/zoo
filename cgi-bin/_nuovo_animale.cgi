@@ -8,6 +8,7 @@ use Functions;
 use strict;
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use XML::LibXML;
+use Scalar::Util::Numeric qw(isnum isint isfloat);
 
 $CGI::POST_MAX = 1024 * 5000;
 
@@ -45,7 +46,7 @@ my $replace = '';
 $find = quotemeta $find; # escape regex metachars if present
 $age =~ s/$find/$replace/g;
 
-if ($age < 0 || $age > 150){ # bisogna fare il controllo o con una regexp o con scalar::utils
+if (!isint($age)){ # bisogna fare il controllo o con una regexp o con scalar::utils
 	print $page->header();
 	print "age insensato. Questi errori andranno gestiti con un div apposito nella pagina precedente";
 	exit;

@@ -51,8 +51,13 @@ sub header{
 					<li class="item"><a href="#">Chi siamo</a></li>
 					<li class="item"><a href="area.cgi">Aree</a></li>
 					<li class="item"><a href="animali.cgi">Animali</a></li>
-					<li class="item"><a href="#">Servizi</a></li>
-					<li class="item"><a href="login.cgi">Login dipendenti</a></li>
+					<li class="item"><a href="#">Servizi</a></li>';
+	if ($_[0] eq undef){
+					print '<li class="item"><a href="login.cgi">Login dipendenti</a></li>';
+				}else{
+					print '<li class="item"><a href="area_privata.cgi">Area privata</a></li>';
+				}
+	print' 
 				</ul>
 			</div>
 		</div>	';

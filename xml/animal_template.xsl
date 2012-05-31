@@ -26,7 +26,7 @@
 					</tr>
 					<tr>
 						<td>Età</td>
-						<td><xsl:value-of select="zoo:età"/></td>
+						<td><xsl:value-of select="zoo:eta"/></td>
 					</tr>
 					<tr>
 						<td></td>
