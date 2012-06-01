@@ -17,6 +17,7 @@ if (!$sid){
 																		'description' => 'sito ad utilizzo interno dello zoo Monkey Island di Padova',
 																		'author' => '?????????'}, 
 													-author => 'gaggi@math.unipd.it',
+													-script=>[{-type=>'JAVASCRIPT', -src=>'../javascript/ajax.js'},{-type=>'javascript', -src=>'../javascript/gestione_animali.js'}],
 													-style=>{'src'=>'../css/master.css'});
 	partials::privateHeader($sid);
 	my $watDo = "animals";

@@ -16,7 +16,7 @@
 
 		<form action="../cgi-bin/_gestione_utenti.cgi" method="post" accept-charset="utf-8">
 			<h4>Impiegati:</h4>
-			<table class="worker">
+			<table class="standard">
 				<tr>
 					<td>Username:</td>
 					<td>Nome</td>
@@ -48,7 +48,7 @@
 			</table>
 
 			<h4>Manager:</h4>
-			<table class="worker">
+			<table class="standard">
 				<tr>
 					<td>Username:</td>
 					<td>Nome</td>

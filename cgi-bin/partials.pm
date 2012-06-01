@@ -60,6 +60,9 @@ sub header{
 	print' 
 				</ul>
 			</div>
+			<div class="errors">
+				<p>errore</p>
+			</div>
 		</div>	';
 }
 
@@ -228,6 +231,9 @@ sub privateHeader{
 				<li class="item"><a href="logout.cgi">Logout</a></li>
 			</ul>
 		</div>
+	</div>
+	<div class ="errors">
+		<p>errore</p>
 	</div>';
 }
 
