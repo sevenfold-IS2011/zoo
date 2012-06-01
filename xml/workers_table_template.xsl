@@ -20,16 +20,14 @@
 						<td><xsl:value-of select="zoo:gender"/></td>
 						<td class="button">
 							<input type="button" value="Modifica">
-								<xsl:attribute name="id">
-									 <xsl:value-of select="zoo:username"/>
-								</xsl:attribute>
+								<xsl:attribute name="OnClick">funcion update.ajax</xsl:attribute>
+								<xsl:attribute name="username"><td><xsl:value-of select="zoo:username"/></td></xsl:attribute>
 							</input>
 						</td>
 						<td class="button">
-							<input type="submit" name="Rimuovi" value="Rimuovi">
-								<xsl:attribute name="id">
-								 <xsl:value-of select="zoo:username"/>
-								</xsl:attribute>
+							<input type="button" value="Rimuovi">
+								<xsl:attribute name="OnClick">funcion delete.ajax</xsl:attribute>
+								<xsl:attribute name="username"><td><xsl:value-of select="zoo:username"/></td></xsl:attribute>
 							</input>
 						</td>
 					</tr>
@@ -51,17 +49,15 @@
 						<td><xsl:value-of select="zoo:gender"/></td>
 						<td><xsl:value-of select="zoo:salary"/></td>
 						<td class="button">
-							<input type="submit" name="Modifica" value="Modifica">
-								<xsl:attribute name="id">
-								 <xsl:value-of select="zoo:username"/>
-								</xsl:attribute>
+							<input type="button" value="Modifica">
+								<xsl:attribute name="OnClick">funcion update.ajax</xsl:attribute>
+								<xsl:attribute name="username"><td><xsl:value-of select="zoo:username"/></td></xsl:attribute>
 							</input>
 						</td>
 						<td class="button">
-							<input type="submit" name="Rimuovi" value="Rimuovi">
-								<xsl:attribute name="id">
-								 <xsl:value-of select="zoo:username"/>
-								</xsl:attribute>
+							<input type="button" value="Rimuovi">
+								<xsl:attribute name="OnClick">funcion delete.ajax</xsl:attribute>
+								<xsl:attribute name="username"><td><xsl:value-of select="zoo:username"/></td></xsl:attribute>
 							</input>
 						</td>
 					</tr>

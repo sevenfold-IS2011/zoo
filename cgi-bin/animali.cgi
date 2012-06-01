@@ -12,7 +12,6 @@ print $page->header(-charset => 'utf-8'),
 																	'author' => '?????????'}, 
 												-author => 'gaggi@math.unipd.it',
 												-style=>{'src'=>'../css/master.css'});
-$logged = true;
 partials::header();
 partials::animali();					
 partials::footer();
