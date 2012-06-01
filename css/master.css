@@ -7,9 +7,8 @@
 
 /* BOXES */
 
-h4{
-margin:10px;
-}
+html,body{margin:15px; padding:0px;}
+
 
 div.boxes{
 	width:100%;
@@ -79,5 +78,21 @@ background-color:#87A84B;
 table.standard td.button
 {
 border:0px;
+}
+div.animale
+{
+margin:5px;
+overflow:auto;
+background-color:#F5C659;
+}
+div.animale div.testo
+{
+float:left;
+margin:15px;
+}
+img.animal
+{
+margin:15px;
+float:left;
 }
 
