@@ -7,6 +7,10 @@
 
 /* BOXES */
 
+h4{
+margin:10px;
+}
+
 div.boxes{
 	width:100%;
 }
@@ -68,11 +72,11 @@ padding:3px;
 min-width:75px;
 text-align:center;
 }
-table.worker tr.title
+table.standard tr.title
 {
-background-color:#6666CC;
+background-color:#87A84B;
 }
-table.worker td.button
+table.standard td.button
 {
 border:0px;
 }

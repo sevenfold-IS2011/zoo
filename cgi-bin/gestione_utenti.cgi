@@ -11,16 +11,16 @@ my $sid = $page->cookie("CGISESSID") || undef;
 if (!$sid){
   print $page->redirect( -URL => "login.cgi");
 }else{
-	print $page->header,
+	print $page->header(-charset => 'utf-8'),
 				$page->start_html(-title => "Monkey Island || Lo zoo di Padova",
 				 									-meta => {'keywords' => 'zoo padova animali monkey island',
 																		'description' => 'sito ad utilizzo interno dello zoo Monkey Island di Padova',
-																		'author' => '?????????'}, 
+																		'author' => '?????????'},
 													-author => 'gaggi@math.unipd.it',
 													-style=>{'src'=>'../css/master.css'});
 	partials::privateHeader($sid);
 	my $watDo = "users";
-	partials::manageUsers($sid, $watDo);					
+	partials::manageUsers($sid, $watDo);
 	print $page->end_html;
 }
 
