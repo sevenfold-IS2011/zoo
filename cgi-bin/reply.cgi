@@ -34,14 +34,14 @@ if ($watDo eq "animals")
 {
 	my $action = $page->param("action");
 	check_action($action);
+	my $name = $page->param("name");
+	if (!$name) {
+		print $page->header();
+		print '
+					<h2>Richiesta errata - parametro name undefined</h2>';
+		exit;
+		}
 	if ($action eq "destroy") {
-		my $name = $page->param("name");
-		if (!$name) {
-			print $page->header();
-			print '
-						<h2>Richiesta errata - parametro name undefined</h2>';
-			exit;
-			}
 		my $parser = XML::LibXML->new;
 		my $doc = $parser->parse_file("../xml/animals.xml");
 		my $root = $doc->getDocumentElement();
@@ -65,6 +65,12 @@ if ($watDo eq "animals")
 		print Functions:animal_table;
 		exit;
 	}
+	
+	if ($action = "edit") {
+		
+		
+	}
+	
 	
 }
 
