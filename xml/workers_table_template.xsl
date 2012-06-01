@@ -19,7 +19,7 @@
 						<td><xsl:value-of select="zoo:age"/></td>
 						<td><xsl:value-of select="zoo:gender"/></td>
 						<td class="button">
-							<input type="button" onClick value="Modifica">
+							<input type="button" value="Modifica">
 								<xsl:attribute name="id">
 									 <xsl:value-of select="zoo:username"/>
 								</xsl:attribute>
