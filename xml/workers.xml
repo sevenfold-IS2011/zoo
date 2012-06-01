@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<?xml-stylesheet type="text/xsl" href="worker_template.xsl"?>
+<?xml-stylesheet type="text/xsl" href="workers_table_template.xsl"?>
 <workers
     xmlns="http://www.zoo.com"
     xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
@@ -8,7 +8,7 @@
         <username>mario</username>
         <password>de2f15d014d40b93578d255e6221fd60</password>
         <name>Mario</name>
-        <gender>Male</gender>
+        <gender>M</gender>
         <age>45</age>
     </employee>
 
@@ -16,15 +16,31 @@
         <username>maria</username>
         <password>maria</password>
         <name>Maria</name>
-        <gender>Female</gender>
+        <gender>F</gender>
         <age>44</age>
+    </employee>
+
+    <employee>
+        <username>mirco</username>
+        <password>mirco</password>
+        <name>Mirco</name>
+        <gender>M</gender>
+        <age>28</age>
+    </employee>
+
+    <employee>
+        <username>martina</username>
+        <password>martina</password>
+        <name>Martina</name>
+        <gender>M</gender>
+        <age>26</age>
     </employee>
 
     <manager>
         <username>marco</username>
         <password>marco</password>
         <name>Marco</name>
-        <gender>Male</gender>
+        <gender>M</gender>
         <age>25</age>
         <salary>1650</salary>
     </manager>
@@ -33,7 +49,7 @@
         <username>giovanna</username>
         <password>zxVcGz0BPdHkY</password>
         <name>Giovanna</name>
-        <gender>Female</gender>
+        <gender>F</gender>
         <age>24</age>
         <salary>1600</salary>
     </manager>

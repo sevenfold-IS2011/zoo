@@ -5,7 +5,7 @@
 	xmlns:zoo="http://www.zoo.com">
 	<xsl:template match="zoo:zoo">
 		<h3>Animali:</h3>
-		<table>
+		<table class = "standard">
 			<tr>
 				<th colspan="2">Azioni</th>
 				<th>Area</th>
@@ -17,8 +17,8 @@
 			<xsl:for-each select="zoo:area">
 				<xsl:for-each select="zoo:animale">
 					<tr>
-						<td><a href="#">Modifica</a></td>
-						<td><a href="#">Elimina</a></td>
+						<td><button>Modifica</button></td>
+						<td><button>Elimina</button></td>
 						<td><xsl:value-of select="../@nome"/></td>
 						<td><xsl:value-of select="zoo:nome"/></td>
 						<td><xsl:value-of select="zoo:eta"/></td>

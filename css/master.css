@@ -45,15 +45,15 @@ div.boxes dl dt{
 
 }
 
-table.animal
+table.standard
 {
 background-color:#ffffff;
-border:1px solid #c3c3c3;
+border:0px solid #c3c3c3;
 border-collapse:collapse;
-
+margin:10px;
 }
 
-table.animal th
+table.standard th
 {
 border:1px solid #c3c3c3;
 padding:3px;
@@ -61,12 +61,19 @@ text-align:left;
 vertical-align:top;
 }
 
-table.animal td
+table.standard td
 {
 border:1px solid #c3c3c3;
 padding:3px;
-width:150px;
-text-align:left;
-vertical-align:top;
+min-width:75px;
+text-align:center;
+}
+table.worker tr.title
+{
+background-color:#6666CC;
+}
+table.worker td.button
+{
+border:0px;
 }
 
