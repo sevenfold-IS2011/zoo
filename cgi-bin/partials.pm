@@ -51,8 +51,13 @@ sub header{
 					<li class="item"><a href="#">Chi siamo</a></li>
 					<li class="item"><a href="area.cgi">Aree</a></li>
 					<li class="item"><a href="animali.cgi">Animali</a></li>
-					<li class="item"><a href="#">Servizi</a></li>
-					<li class="item"><a href="login.cgi">Login dipendenti</a></li>
+					<li class="item"><a href="#">Servizi</a></li>';
+	if ($_[0] eq undef){
+					print '<li class="item"><a href="login.cgi">Login dipendenti</a></li>';
+				}else{
+					print '<li class="item"><a href="area_privata.cgi">Area privata</a></li>';
+				}
+	print' 
 				</ul>
 			</div>
 		</div>	';
@@ -298,10 +303,21 @@ sub updateWarehouse{
 sub manageUsers{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
-	print '<div id = "right"> CONTENUTO </div>';
+	print '<div id = "right">';
+	my $xslt = XML::LibXSLT->new();
+	my $source = XML::LibXML->load_xml(location => '../xml/workers.xml');
+	my $style_doc = XML::LibXML->load_xml(location=>"../xml/workers_table_template.xsl", no_cdata=>1);
+	my $stylesheet = $xslt->parse_stylesheet($style_doc);
+	my $results = $stylesheet->transform($source);
+	my $text = $stylesheet->output_as_bytes($results);
+	my $find = '<?xml version="1.0"?>';
+	my $replace = "";
+	$find = quotemeta $find; # escape regex metachars if present
+	$text =~ s/$find/$replace/g;
+	print $text;
+	print '</div>';
 	footer;
 	print '</div>';
-
 }
 
 sub newUser{
@@ -322,13 +338,35 @@ sub newUser{
 	print '</div>';
 }
 
+sub editPassword{
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+	print '
+	<div id = "right">
+		<h3>Modifica password</h3>
+		<div class = "form-wrapper">
+			<fieldset>
+				<form action="_modifica_password.cgi" method="post" accept-charset="utf-8">
+			  	<label for="old_password">Vecchia password</label><input type="password" name="old_password" value="" placeholder="Vecchia password"><br />
+			  	<label for="password">Nuova password</label><input type="password" name="password" value="" placeholder="Nuova password">
+			  	<label for="password_confirm">Conferma nuova Password:</label><input type="password" name="password_confirm" value="" placeholder="Nuova password">
+			  	<p><input type="submit" value="Modifica password"></p>
+				</form>
+			</fieldset>
+		</div>
+	</div>';
+	footer;
+	print '</div>';
+}
+
 sub manageAnimals{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
-	print '<div id = "right"> CONTENUTO </div>';
+	print '<div id = "right">';
+	print Functions:animal_table();
+	print '</div>';
 	footer;
 	print '</div>';
-
 }
 
 sub newAnimal{
@@ -338,18 +376,20 @@ sub newAnimal{
 	print '<div id = "right"> <h3>Nuovo animale:</h3>
 		<div class = "form-wrapper">
 			<form action="_nuovo_animale.cgi" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-				<label for="area">area</label><select name="area" id="area">';
+				<fieldset>
+					<label for="area">area</label><select name="area" id="area">';
 	areaSelect(Functions::get_areas);
 	print ' 
-				</select><br/>
-			  <label for="nome">nome: </label><input type="text" name="nome" id="nome"/><br />
-			  <label for="sesso">sesso: </label><select name="sesso" id="sesso">
-					<option value="Male">M</option>
-					<option value="Female">F</option>
-				</select><br />
-			  <label for="eta">et&agrave;: </label><input type="text" name="eta"  placeholder="5" id="eta"/><br />
-			  <label for="image">foto:</label> <input type="file" name="image" value="carica foto" id="image"/><br />
-			  <p><input type="submit" value="Aggiungi animale" /></p>
+					</select><br/>
+			  	<label for="nome">nome: </label><input type="text" name="nome" id="nome"/><br />
+			  	<label for="sesso">sesso: </label><select name="sesso" id="sesso">
+						<option value="Male">M</option>
+						<option value="Female">F</option>
+					</select><br />
+			  	<label for="eta">et&agrave;: </label><input type="text" name="eta"  placeholder="5" id="eta"/><br />
+			  	<label for="image">foto:</label> <input type="file" name="image" value="carica foto" id="image"/><br />
+			  	<p><input type="submit" value="Aggiungi animale" /></p>
+				</fieldset>
 			</form>
 		</div> </div>';
 		footer;
@@ -407,8 +447,8 @@ sub privateMenu{
 	if ($watDo eq "users"){
 		print'
 						<ul>
-							<li><a href="_nuovo_utente.cgi">Inserisci utente</a></li>
-							<li><a href="_modifica_password.cgi">Modifica password</a></li>
+							<li><a href="nuovo_utente.cgi">Inserisci utente</a></li>
+							<li><a href="modifica_password.cgi">Modifica password</a></li>
 						</ul>';
 	}
 	print'
