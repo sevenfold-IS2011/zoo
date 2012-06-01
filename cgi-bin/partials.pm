@@ -62,7 +62,7 @@ sub header{
 			</div>
 			<div class="errors">
 				<p>errore</p>
-			</div>
+			</div> 
 		</div>	';
 }
 

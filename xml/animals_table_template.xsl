@@ -17,8 +17,22 @@
 			<xsl:for-each select="zoo:area">
 				<xsl:for-each select="zoo:animale">
 					<tr>
-						<td><button>Modifica</button></td>
-						<td><button>Elimina</button></td>
+						<td>
+							<button onclick='edit(this)'>
+								<xsl:attribute name="animal_name">
+									<xsl:value-of select="zoo:nome"/>
+								</xsl:attribute>
+								Modifica
+							</button>
+						</td>
+						<td>
+							<button onclick='destroy(this)'>
+								<xsl:attribute name="animal_name">
+									<xsl:value-of select="zoo:nome"/>
+								</xsl:attribute>
+								Elimina
+							</button>
+						</td>
 						<td><xsl:value-of select="../@nome"/></td>
 						<td><xsl:value-of select="zoo:nome"/></td>
 						<td><xsl:value-of select="zoo:eta"/></td>
