@@ -4,6 +4,7 @@ div#left{
 	float: left;
 	border-right: 1px solid black;
 	width: 17%;
+	height: 100%;
 }
 
 div#left ul{

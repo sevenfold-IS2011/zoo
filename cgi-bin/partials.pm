@@ -60,6 +60,9 @@ sub header{
 	print' 
 				</ul>
 			</div>
+			<div class="errors">
+				<p>errore</p>
+			</div>
 		</div>	';
 }
 
@@ -228,6 +231,9 @@ sub privateHeader{
 				<li class="item"><a href="logout.cgi">Logout</a></li>
 			</ul>
 		</div>
+	</div>
+	<div class ="errors">
+		<p>errore</p>
 	</div>';
 }
 
@@ -363,7 +369,7 @@ sub manageAnimals{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
 	print '<div id = "right">';
-	print Functions:animal_table();
+	print Functions::animal_table();
 	print '</div>';
 	footer;
 	print '</div>';

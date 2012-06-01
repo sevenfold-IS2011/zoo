@@ -45,7 +45,7 @@ div.boxes dl dt{
 
 }
 
-table.worker
+table.standard
 {
 background-color:#ffffff;
 border:0px solid #c3c3c3;
@@ -53,7 +53,7 @@ border-collapse:collapse;
 margin:10px;
 }
 
-table.worker th
+table.standard th
 {
 border:1px solid #c3c3c3;
 padding:3px;
@@ -61,7 +61,7 @@ text-align:left;
 vertical-align:top;
 }
 
-table.worker td
+table.standard td
 {
 border:1px solid #c3c3c3;
 padding:3px;
