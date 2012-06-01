@@ -310,17 +310,7 @@ sub manageUsers{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
 	print '<div id = "right">';
-	my $xslt = XML::LibXSLT->new();
-	my $source = XML::LibXML->load_xml(location => '../xml/workers.xml');
-	my $style_doc = XML::LibXML->load_xml(location=>"../xml/workers_table_template.xsl", no_cdata=>1);
-	my $stylesheet = $xslt->parse_stylesheet($style_doc);
-	my $results = $stylesheet->transform($source);
-	my $text = $stylesheet->output_as_bytes($results);
-	my $find = '<?xml version="1.0"?>';
-	my $replace = "";
-	$find = quotemeta $find; # escape regex metachars if present
-	$text =~ s/$find/$replace/g;
-	print $text;
+	print Functions::users_table();
 	print '</div>';
 	footer;
 	print '</div>';
