@@ -45,15 +45,15 @@ div.boxes dl dt{
 
 }
 
-table.animal
+table.worker
 {
 background-color:#ffffff;
 border:1px solid #c3c3c3;
 border-collapse:collapse;
-
+margin:10px;
 }
 
-table.animal th
+table.worker th
 {
 border:1px solid #c3c3c3;
 padding:3px;
@@ -61,7 +61,7 @@ text-align:left;
 vertical-align:top;
 }
 
-table.animal td
+table.worker td
 {
 border:1px solid #c3c3c3;
 padding:3px;
