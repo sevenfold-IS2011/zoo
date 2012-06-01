@@ -117,9 +117,7 @@ close(XML);
 
 
 
-print $page->header();
-print "Area $area, nome $animal_name, genere $gender e età $age - ";
-print XML $area_element->toString(1);
+print $page->redirect( -URL => "gestione_animali.cgi");
 
 #print $area_element->toString();
 #print $area_element->toString();
