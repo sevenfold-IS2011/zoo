@@ -20,6 +20,22 @@
         <age>44</age>
     </employee>
 
+    <employee>
+        <username>mirco</username>
+        <password>mirco</password>
+        <name>Mirco</name>
+        <gender>M</gender>
+        <age>28</age>
+    </employee>
+
+    <employee>
+        <username>martina</username>
+        <password>martina</password>
+        <name>Martina</name>
+        <gender>M</gender>
+        <age>26</age>
+    </employee>
+
     <manager>
         <username>marco</username>
         <password>marco</password>
