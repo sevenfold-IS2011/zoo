@@ -1,5 +1,5 @@
 function handle_response(){
-	alert(xmlhttp.responseText);
+	document.getElementById('right').innerHTML = xmlhttp.responseText;
 }
 
 
