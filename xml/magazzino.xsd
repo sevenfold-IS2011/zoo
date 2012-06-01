@@ -8,26 +8,22 @@
 
 <xs:complexType type="Tzoo">
     <xs:sequence>
-        <xs:element name="area" type="Tarea" />
+        <xs:element name="magazzino" type="Tmagazzino" />
     </xs:sequence>
 </xs:complexType>
 
-<xs:complexType type="Tarea">
+<xs:complexType type="Tmagazzino">
     <xs:sequence>
-        <xs:element name="animale" type="Tanimale"/>
+        <xs:element name="cibo" type="Tcibo"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:integer" use="required"/>
-    <xs:attribute name="posizione" type="xs:integer" use="required"/>
     <xs:attribute name="nome" type="xs:integer" use="required"/>
-    <xs:attribute name="cibo_giornaliero" type="xs:integer"/>
+    <xs:attribute name="area" type="xs:integer" use="required"/>
 </xs:complexType>
 
-<xs:complexType type="Tanimale">
+<xs:complexType type="Tcibo">
     <xs:sequence>
         <xs:element name="nome" type="xs:string"/>
-        <xs:element name="esso" type="xs:string"/>
-        <xs:element name="eta" type="xs:integer" default="-1"/>
-        <xs:element name="img" type="xs:string">
     </xs:sequence>
 </xs:complexType>
 
