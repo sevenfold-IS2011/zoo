@@ -7,6 +7,9 @@ use CGI;
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use partials;
 use XML::LibXML;
+
+
+
 my $page = new CGI;
 my $sid = $page->cookie("CGISESSID") || undef;
 
@@ -38,7 +41,7 @@ if ($watDo eq "animals")
 			print '
 						<h2>Richiesta errata - parametro name undefined</h2>';
 			exit;
-		}
+			}
 		my $parser = XML::LibXML->new;
 		my $doc = $parser->parse_file("../xml/animals.xml");
 		my $root = $doc->getDocumentElement();
@@ -68,10 +71,6 @@ if ($watDo eq "animals")
 
 
 
-
-
-
-
 sub check_action{
 	my $action = $_[0];
 	if ($action eq undef || (!$action eq "destroy" && !$action eq "edit" && !$action eq "update")) {
@@ -81,3 +80,6 @@ sub check_action{
 		exit;
 	}
 }
+
+
+
