@@ -20,6 +20,6 @@
         <eta>5</eta>
         <img>../images/Gira.png</img>
     </animale>
-</area>
+<animale><nome>Roberta</nome><sesso>Female</sesso><eta>90</eta><img>../images/animals/segretaria.jpg</img></animale></area>
 <area id="3" posizione="D8" nome="Cammelli"/>
 </zoo>

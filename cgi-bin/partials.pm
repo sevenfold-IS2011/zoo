@@ -435,7 +435,6 @@ sub privateMenu{
 	if ($watDo eq "animals"){
 		print'
 						<ul>
-							<li><a href="#">Gestisci animali</a></li>
 							<li><a href="nuovo_animale.cgi">Inserisci animale</a></li>
 						</ul>';
 	}
