@@ -439,14 +439,17 @@ sub privateMenu{
 							<li><a href="nuovo_animale.cgi">Inserisci animale</a></li>
 						</ul>';
 	}
-	print'<li><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
-	if ($watDo eq "users"){
-		print'
-						<ul>
-							<li><a href="nuovo_utente.cgi">Inserisci utente</a></li>
-							<li><a href="modifica_password.cgi">Modifica password</a></li>
-						</ul>';
+	if (Functions::is_manager($sid)){
+		if ($watDo eq "users"){
+			print'
+							<ul>
+								<li><a href="nuovo_utente.cgi">Inserisci utente</a></li>
+								<li><a href="modifica_password.cgi">Modifica password</a></li>
+							</ul>';
+		}
 	}
+	print'<li><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
+	
 	print'
 					</ul>
 				</div>';

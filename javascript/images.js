@@ -5,7 +5,7 @@ function show_image(button){
 }
 
 
-var image_div = '<div id="image_background" onclick="hide()"></div><img  id="centered_image" src="" />'
+var image_div = '<div id="image_background" class="hidden" onclick="hide()"></div><img class="hidden" id="centered_image" src="" />'
 
 window.onload = function ()
 {

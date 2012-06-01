@@ -48,6 +48,18 @@ sub get_employee_name{
 	return $name;
 }
 
+sub is_manager{
+	my $username = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
+	my $nodeset = $xp->find("//manager[username=\"$username\"]/name");
+	if ($nodeset->size() > 0) {
+		return 1;
+	}else{
+		return undef;
+	}
+	
+}
+
 
 sub get_areas{
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
