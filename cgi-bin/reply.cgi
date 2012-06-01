@@ -47,14 +47,24 @@ if ($watDo eq "animals")
 		my $root = $doc->getDocumentElement();
 		my $xpc = XML::LibXML::XPathContext->new;
 		$xpc->registerNs('zoo', 'http://www.zoo.com');
-		my $animal = $xpc -> findnodes("//zoo:animale[nome=\"$name\"]", $doc)->get_node(1);
+		my $xpath_exp = "//zoo:animale[zoo:nome='".$name."']";
+		my $animal = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
+		my $asize = $xpc -> findnodes($xpath_exp, $doc)->size();
 		if (!$animal) {
 			print $page->header();
 			print '
-						<h2>Richiesta errata - nessun animale con questo nome</h2>'; #nome univoco in tutto lo zoo o all'interno dell'area??
+						<h2>Richiesta errata - nessun animale con questo nome</h2>';
+			print "il nome era: $name, ho trovato $asize nodi, xpath era $xpath_exp"; #nome univoco in tutto lo zoo o all'interno dell'area??
 			exit;
 		}
-		my $area = $animal->getParent();
+		
+		$xpath_exp = $xpath_exp."/zoo:img";
+		my $image_path =  $xpc -> findnodes($xpath_exp, $doc)->get_node(1)->textContent();
+		if($image_path){
+			unlink($image_path);
+		}
+		
+		my $area = $animal->parentNode();
 		$area->removeChild($animal); #non suicidi, ma figlicidi
 		
 		open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
@@ -62,14 +72,17 @@ if ($watDo eq "animals")
 		close(XML);
 		
 		print $page->header();
-		print Functions:animal_table;
+		print Functions::animal_table;
+		#print $image_path;
 		exit;
 	}
 	
-	if ($action = "edit") {
-		
-		
+	if ($action == "edit") {
+	#form per la modifica
+	exit;
 	}
+	
+	
 	
 	
 }
