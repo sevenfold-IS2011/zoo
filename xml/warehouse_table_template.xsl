@@ -9,14 +9,12 @@
 			<h4>Scorte:</h4>
 			<table class="standard">
 				<tr class="title">
-					<td>id</td>
-					<td>nome</td>
-					<td>area</td>
-					<td>quantità</td>
+					<td>Nome</td>
+					<td>Area</td>
+					<td>Quantità</td>
 				</tr>
 				<xsl:for-each select="zoo:cibo">
 					<tr>
-						<td><xsl:value-of select="@id"/></td>
 						<td><xsl:value-of select="@nome"/></td>
 						<td><xsl:value-of select="@area"/></td>
 						<td><xsl:value-of select="zoo:quantita"/></td>

@@ -21,7 +21,7 @@ if (!$sid){
 													-style=>{'src'=>'../css/master.css'});
 	partials::privateHeader($sid);
 	my $watDo = "warehouse";
-	partials::manageArea($sid, $watDo);
+	partials::manageWarehouse($sid, $watDo);
 	print $page->end_html;
 }
 
