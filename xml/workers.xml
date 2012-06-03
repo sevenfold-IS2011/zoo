@@ -1,7 +1,7 @@
 <workers
     xmlns="http://www.zoo.com"
     xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
-    xs:schemaLocation="http://www.zoo.com employee.xsd">
+    xs:schemaLocation="http://www.zoo.com worker.xsd">
     <employee>
         <username>mario</username>
         <password>de2f15d014d40b93578d255e6221fd60</password>
