@@ -36,13 +36,13 @@ sub header{
 					<a href="index.cgi"><img src="../images/logo.png" width="300" alt="logo"/></a>
 				</div>';
 
-	if (!$_[0] eq undef){
-	  my $name=Functions::get_name_from_sid($_[0]);
-		if($name){
-			print "<p>Ciao $name !</p>";
-			print '<p><a href="logout.cgi">Logout</a></p>';
-		}
-	}
+#	if (!$_[0] eq undef){
+#	  my $name=Functions::get_name_from_sid($_[0]);
+#		if($name){
+#			print "<p>Ciao $name !</p>";
+#			print '<p><a href="logout.cgi">Logout</a></p>';
+#		}
+#	}
 
 	print
 	'</div>
@@ -345,14 +345,46 @@ sub newUser{
 		<h3>Nuovo Utente</h3>
 		<div class = "form-wrapper">
 			<form action="_nuovo_utente.cgi" method="post" accept-charset="utf-8">
-			  <label for="username">Username</label><input type="text" name="nome" value="" placeholder="Username"><br />
+			  <fieldset>
+			  <label for="tipo">Tipo</label><select name="tipo"><option value="dipendente">Dipendente</option><option value="manager">Manager</option></select><br />
+			  <label for="nome">Nome</label><input type="text" name="nome" value="" placeholder="Nome e cognome"><br />
+			  <label for="username">Username</label><input type="text" name="username" value="" placeholder="Username"><br />
 			  <label for="password">Password</label><input type="password" name="password" value="" placeholder="Password">
+			  <label for="password">Conferma </label><input type="password" name="password2" value="" placeholder="Una diversa da prima">
 			  <p><input type="submit" value="Crea Utente"></p>
+			  </fieldset>
 			</form>
 		</div>
 	</div>';
 	footer;
 	print '</div>';
+}
+
+sub editAnimal{
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+
+	print '<div id = "right"> <h3>Modifica '.$_[2].'</h3>
+		<div class = "form-wrapper">
+			<form action="_aggiorna_animale.cgi" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+				<fieldset>
+					<label for="area">area</label><select name="area" id="area">';
+	areaSelect(Functions::get_areas);
+	print '
+					</select><br/>
+			  	<label for="nome">nome: </label><input type="text" name="nome" id="nome" value="'.$_[2].'"/><br />
+			  	<label for="sesso">sesso: </label><select name="sesso" id="sesso">
+						<option value="Male">M</option>
+						<option value="Female">F</option>
+					</select><br />
+			  	<label for="eta">et&agrave;: </label><input type="text" name="eta"  placeholder="5" id="eta"/><br />
+			  	<label for="image">foto:</label> <input type="file" name="image" value="carica foto" id="image"/><br />
+			  	<p><input type="submit" value="Aggiungi animale" /></p>
+				</fieldset>
+			</form>
+		</div> </div>';
+		footer;
+		print '</div>';
 }
 
 sub editPassword{
