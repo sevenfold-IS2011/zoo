@@ -21,6 +21,22 @@
 						<td><xsl:value-of select="zoo:gender"/></td>
 						<td>Impiegato</td>
 						<td>nd</td>
+						<td class="button">
+							<button onclick='edit(this)'>
+								<xsl:attribute name="username">
+									<xsl:value-of select="zoo:username"/>
+								</xsl:attribute>
+								Modifica
+							</button>
+						</td>
+						<td class="button">
+							<button onclick='destroy(this)'>
+								<xsl:attribute name="username">
+									<xsl:value-of select="zoo:username"/>
+								</xsl:attribute>
+								Rimuovi
+							</button>
+						</td>
 					</tr>
 				</xsl:for-each>
 				<xsl:for-each select="zoo:manager">
@@ -30,9 +46,43 @@
 						<td><xsl:value-of select="zoo:gender"/></td>
 						<td>Managrer</td>
 						<td><xsl:value-of select="zoo:salary"/></td>
+						<td class="button">
+							<button onclick='edit(this)'>
+								<xsl:attribute name="username">
+									<xsl:value-of select="zoo:username"/>
+								</xsl:attribute>
+								Modifica
+							</button>
+						</td>
+						<td class="button">
+							<button onclick='destroy(this)'>
+								<xsl:attribute name="username">
+									<xsl:value-of select="zoo:username"/>
+								</xsl:attribute>
+								Rimuovi
+							</button>
+						</td>
 					</tr>
 				</xsl:for-each>
 			</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	</xsl:template>
 </xsl:stylesheet>

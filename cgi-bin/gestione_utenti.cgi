@@ -16,7 +16,7 @@ if (!$sid){
 				 									-meta => {'keywords' => 'zoo padova animali monkey island',
 																		'description' => 'sito ad utilizzo interno dello zoo Monkey Island di Padova',
 																		'author' => '?????????'},
-													-author => 'gaggi@math.unipd.it',
+													-author => '?????????',
 													-script=>[{-type=>'JAVASCRIPT', -src=>'../javascript/ajax.js'},{-type=>'javascript', -src=>'../javascript/gestione_utenti.js'}],
 													-style=>{'src'=>'../css/master.css'});
 	partials::privateHeader($sid);

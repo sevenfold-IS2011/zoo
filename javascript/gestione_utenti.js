@@ -1,10 +1,10 @@
 function handle_response(){
-	alert(xmlhttp.responseText);
+	document.getElementById('right').innerHTML = xmlhttp.responseText;
 }
 
 
 function edit(button){
-
+	location.reload("modifica_utente.cgi?username="+button.getAttribute("username"));
 }
 
 function destroy(button){
