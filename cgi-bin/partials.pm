@@ -324,9 +324,14 @@ sub newUser{
 		<h3>Nuovo Utente</h3>
 		<div class = "form-wrapper">
 			<form action="_nuovo_utente.cgi" method="post" accept-charset="utf-8">
-			  <label for="username">Username</label><input type="text" name="nome" value="" placeholder="Username"><br />
+			  <fieldset>
+			  <label for="tipo">Tipo</label><select name="tipo"><option value="dipendente">Dipendente</option><option value="manager">Manager</option></select><br />
+			  <label for="nome">Nome</label><input type="text" name="nome" value="" placeholder="Nome e cognome"><br />
+			  <label for="username">Username</label><input type="text" name="username" value="" placeholder="Username"><br />
 			  <label for="password">Password</label><input type="password" name="password" value="" placeholder="Password">
+			  <label for="password">Conferma </label><input type="password" name="password2" value="" placeholder="Una diversa da prima">
 			  <p><input type="submit" value="Crea Utente"></p>
+			  </fieldset>
 			</form>
 		</div>
 	</div>';
