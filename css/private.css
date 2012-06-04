@@ -2,9 +2,18 @@
 /* menù a sinistra */
 div#left{
 	float: left;
-	border-right: 1px solid black;
-	width: 17%;
+	width: 18%;
 	height: 100%;
+}
+
+div#line {
+    position: absolute;
+    top: 0;
+    left: 18%;
+    height: 100%;
+    width: .2em;
+    margin: 0 0 0 -.1em;
+    background: black;
 }
 
 div#left ul{
@@ -34,9 +43,8 @@ div#left ul li:hover a{
 /* menu a destra */
 div#right{
 	float: right;
-	width: 82%;
+	width:80%;
 }
-
 /* form nuova area */
 
 div.form-wrapper{
