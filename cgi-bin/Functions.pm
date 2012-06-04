@@ -15,11 +15,16 @@ sub get_name_from_sid{
   return $session->param("name");
 }
 
+sub get_username_from_sid{
+	my $session = new CGI::Session(undef, $_[0], {File::Spec->tmpdir});
+  return $session->param("username");
+}
+
 sub edit_animal{
 	my $name = $_[0];
 	print '';
 }
-	
+
 
 sub check_credentials{
 	my $username = $_[0];
