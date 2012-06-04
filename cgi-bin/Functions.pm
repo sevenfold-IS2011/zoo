@@ -15,6 +15,10 @@ sub get_name_from_sid{
   return $session->param("name");
 }
 
+sub get_username_from_sid{
+	my $session = new CGI::Session(undef, $_[0], {File::Spec->tmpdir});
+  return $session->param("username");
+}
 
 sub check_credentials{
 	my $username = $_[0];
@@ -49,7 +53,7 @@ sub get_employee_name{
 }
 
 sub is_manager{
-	my $username = $_[0];
+	my $username = get_username_from_sid($_[0]);
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
 	my $nodeset = $xp->find("//manager[username=\"$username\"]/name");
 	if ($nodeset->size() > 0) {
