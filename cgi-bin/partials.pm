@@ -248,7 +248,9 @@ sub privateArea{
 sub manageArea{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
-	print '<div id = "right"> CONTENUTO </div>';
+	print '<div id = "right">';
+	areaList(Functions::get_areas);
+	print '</div>';
 	footer;
 	print '</div>';
 }
