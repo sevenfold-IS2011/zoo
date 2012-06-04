@@ -1,14 +1,14 @@
 function handle_response(){
-	alert(xmlhttp.responseText);
+	document.getElementById('right').innerHTML = xmlhttp.responseText;
 }
 
 
 function edit(button){
-
+	location.reload("modifica_utente.cgi?username="+button.getAttribute("username"));
 }
 
 function destroy(button){
-	xmlhttp.open("GET","reply.cgi?watDo=users&action=destroy&name="+button.getAttribute("username"),true);
+	xmlhttp.open("GET","reply.cgi?watDo=users&action=destroy&username="+button.getAttribute("username"),true);
 	xmlhttp.send();
 }
 
