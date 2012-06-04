@@ -439,7 +439,9 @@ sub privateMenu{
 							<li><a href="nuovo_animale.cgi">Inserisci animale</a></li>
 						</ul>';
 	}
+	
 	if (Functions::is_manager($sid)){
+		print'<li><a href="gestione_utenti.cgi">Gestione Utenti</a>';
 		if ($watDo eq "users"){
 			print'
 							<ul>
@@ -447,8 +449,8 @@ sub privateMenu{
 								<li><a href="modifica_password.cgi">Modifica password</a></li>
 							</ul>';
 		}
+		print '</li>';
 	}
-	print'<li><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
 	
 	print'
 					</ul>
