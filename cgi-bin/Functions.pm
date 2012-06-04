@@ -15,6 +15,11 @@ sub get_name_from_sid{
   return $session->param("name");
 }
 
+sub edit_animal{
+	my $name = $_[0];
+	print '';
+}
+	
 
 sub check_credentials{
 	my $username = $_[0];

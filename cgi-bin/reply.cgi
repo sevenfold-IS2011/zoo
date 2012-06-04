@@ -78,7 +78,14 @@ if ($watDo eq "animals")
 	}
 	
 	if ($action == "edit") {
-	#form per la modifica
+		use CGI;
+		my $query=new CGI;
+		print $query->redirect('modifica_animale.cgi?name='.$name);
+	exit;
+	}
+	
+	if ($action == "update") {
+	# aggiorna xml
 	exit;
 	}
 	
