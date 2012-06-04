@@ -48,6 +48,18 @@ sub get_employee_name{
 	return $name;
 }
 
+sub is_manager{
+	my $username = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
+	my $nodeset = $xp->find("//manager[username=\"$username\"]/name");
+	if ($nodeset->size() > 0) {
+		return 1;
+	}else{
+		return undef;
+	}
+
+}
+
 
 sub get_areas{
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
@@ -55,7 +67,7 @@ sub get_areas{
 	my @stuff;
 	my $node;
 	if (my @nodelist = $nodeset->get_nodelist) {
-		my $j = 0; 
+		my $j = 0;
 		foreach $node (@nodelist){
 			@stuff[$j]=$node->getData;
 			#print $node->getData;
@@ -64,7 +76,7 @@ sub get_areas{
 		}
 	}
 	return @stuff;
-	
+
 }
 
 sub max_area_id{
@@ -77,7 +89,7 @@ sub max_area_id{
 		foreach $id (@nodelist){
 			if ($id->getData() > $max_id){
 				$max_id = $id->getData();
-			} 
+			}
 		}
 		return $max_id + 1;
 	} else {
@@ -125,7 +137,14 @@ sub animal_table{
 sub users_table{
 	my $source = XML::LibXML->load_xml(location => '../xml/workers.xml');
 	my $xslt = XML::LibXSLT->new();
-	my $style_doc = XML::LibXML->load_xml(location=>"../xml/workers_table_template.xsl", no_cdata=>1);
+ 	my $sid = $_[0];
+ 	my $style_doc;
+ 	if (Functions::is_manager($sid)){
+		$style_doc = XML::LibXML->load_xml(location=>"../xml/workers_table_template_manager.xsl", no_cdata=>1);
+	}
+	else{
+		$style_doc = XML::LibXML->load_xml(location=>"../xml/workers_table_template.xsl", no_cdata=>1);
+	}
 	my $stylesheet = $xslt->parse_stylesheet($style_doc);
 	my $results = $stylesheet->transform($source);
 	my $text = $stylesheet->output_as_bytes($results);
@@ -136,7 +155,19 @@ sub users_table{
 	return $text;
 }
 
-
+sub warehouse_table(){
+	my $source = XML::LibXML->load_xml(location => '../xml/warehouse.xml');
+	my $xslt = XML::LibXSLT->new();
+	my $style_doc = XML::LibXML->load_xml(location=>"../xml/warehouse_table_template.xsl", no_cdata=>1);
+	my $stylesheet = $xslt->parse_stylesheet($style_doc);
+	my $results = $stylesheet->transform($source);
+	my $text = $stylesheet->output_as_bytes($results);
+	my $find = '<?xml version="1.0"?>';
+	my $replace = "";
+	$find = quotemeta $find; # escape regex metachars if present
+	$text =~ s/$find/$replace/g;
+	return $text;
+}
 
 #sub orderXML{
 #        my $hashParameters = shift;
@@ -144,7 +175,7 @@ sub users_table{
 #        if (!defined($encoding)){
 #                $encoding = "raw";
 #        }
-#       
+#
 #        # use HTML::Tidy to order the HTML generated!
 #        my $tidy = HTML::Tidy->new({
 #                'indent'          => 1,
@@ -153,9 +184,9 @@ sub users_table{
 #                'char-encoding'   => $encoding,
 #                'doctype'         => 'strict',
 #        });
-       
+
 #        my $htmlText = $hashParameters->{htmlText};
-       
+
         # decode the output to utf-8 so it works correctly
  #       $htmlText = decode("utf-8", $htmlText);
         # clean the HTML
@@ -173,3 +204,4 @@ sub users_table{
 
 
 1;
+

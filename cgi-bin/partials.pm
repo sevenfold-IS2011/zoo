@@ -57,12 +57,12 @@ sub header{
 				}else{
 					print '<li class="item"><a href="area_privata.cgi">Area privata</a></li>';
 				}
-	print' 
+	print'
 				</ul>
 			</div>
 			<div class="errors">
 				<p>errore</p>
-			</div> 
+			</div>
 		</div>	';
 }
 
@@ -251,7 +251,6 @@ sub manageArea{
 	print '<div id = "right"> CONTENUTO </div>';
 	footer;
 	print '</div>';
-
 }
 
 sub newArea{
@@ -306,7 +305,27 @@ sub updateWarehouse{
 	print '</div>';
 }
 
+sub manageWarehouse{
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+	print '<div id = "right">';
+	print Functions::warehouse_table();
+	print '</div>';
+	footer;
+	print '</div>';
+}
+
 sub manageUsers{
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+	print '<div id = "right">';
+	print Functions::users_table($_[0]);
+	print '</div>';
+	footer;
+	print '</div>';
+}
+
+sub manageMagazzino{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
 	print '<div id = "right">';
@@ -380,7 +399,7 @@ sub newAnimal{
 				<fieldset>
 					<label for="area">area</label><select name="area" id="area">';
 	areaSelect(Functions::get_areas);
-	print ' 
+	print '
 					</select><br/>
 			  	<label for="nome">nome: </label><input type="text" name="nome" id="nome"/><br />
 			  	<label for="sesso">sesso: </label><select name="sesso" id="sesso">
@@ -423,7 +442,6 @@ sub privateMenu{
 		print'
 						<ul>
 							<li><a href="nuova_area.cgi">Nuova Area</a></li>
-							<li><a href="#">Visualizza Area</a></li>
 						</ul>';
 
 					}
@@ -431,8 +449,7 @@ sub privateMenu{
 	if ($watDo eq "warehouse"){
 		print'
 						<ul>
-							<li><a href="visualizza_magazzino.cgi">Visualizza</a></li>
-							<li><a href="aggiorna_magazzino.cgi">Aggiorna</a></li>
+							<li><a href="aggiorna_magazzino.cgi">Aggiungi cibo</a></li>
 						</ul>';
 
 					}
@@ -444,12 +461,14 @@ sub privateMenu{
 						</ul>';
 	}
 	print'<li><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
-	if ($watDo eq "users"){
-		print'
-						<ul>
-							<li><a href="nuovo_utente.cgi">Inserisci utente</a></li>
-							<li><a href="modifica_password.cgi">Modifica password</a></li>
-						</ul>';
+	if (Functions::is_manager($sid)){
+		if ($watDo eq "users"){
+			print'
+							<ul>
+								<li><a href="nuovo_utente.cgi">Inserisci utente</a></li>
+								<li><a href="modifica_password.cgi">Modifica password</a></li>
+							</ul>';
+		}
 	}
 	print'
 					</ul>
