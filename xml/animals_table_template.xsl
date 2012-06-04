@@ -6,7 +6,7 @@
 	<xsl:template match="zoo:zoo">
 		<h3>Animali:</h3>
 		<table class = "standard">
-			<tr>
+			<tr class="title">
 				<th colspan="2">Azioni</th>
 				<th>Area</th>
 				<th>Nome</th>
