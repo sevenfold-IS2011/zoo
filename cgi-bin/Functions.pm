@@ -132,12 +132,13 @@ sub name_in_area_taken{
 
 sub animal_table{
 	my $source = XML::LibXML->load_xml(location => '../xml/animals.xml');
-	my $xslt = XML::LibXSLT->new();  
-	if ($_[0] == "true"){
-	  my $style_doc = XML::LibXML->load_xml(location=>"../xml/animals_table_template.xsl", no_cdata=>1);     
+	my $xslt = XML::LibXSLT->new();
+	my $style_doc = undef;  
+	if ($_[0] eq "true"){
+	  $style_doc = XML::LibXML->load_xml(location=>"../xml/animals_table_noscript_template.xsl", no_cdata=>1);     
 	}
 	else{
-	  my $style_doc = XML::LibXML->load_xml(location=>"../xml/animals_table_noscript_template.xsl", no_cdata=>1);  
+	  $style_doc = XML::LibXML->load_xml(location=>"../xml/animals_table_template.xsl", no_cdata=>1);
 	}
 	my $stylesheet = $xslt->parse_stylesheet($style_doc);
 	my $results = $stylesheet->transform($source);

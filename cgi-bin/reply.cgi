@@ -41,7 +41,9 @@ if ($watDo eq "animals")
 					<h2>Richiesta errata - parametro name undefined</h2>';
 		exit;
 		}
-	if ($action eq "destroy") {
+	if ($action eq "destroy") { 
+		
+		# hai un parametro noscript = true se devi ricomporre la pagina
 		my $parser = XML::LibXML->new;
 		my $doc = $parser->parse_file("../xml/animals.xml");
 		my $root = $doc->getDocumentElement();
