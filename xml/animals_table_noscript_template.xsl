@@ -18,20 +18,27 @@
 				<xsl:for-each select="zoo:animale">
 					<tr>
 						<td>
-							<button onclick='edit(this)'>
-								<xsl:attribute name="animal_name">
-									<xsl:value-of select="zoo:nome"/>
-								</xsl:attribute>
-								Modifica
-							</button>
+							<form action="modifica_animale.cgi" method="get">
+								<input type="hidden" name="animal_name">
+									<xsl:attribute name="value">
+										<xsl:value-of select="zoo:nome"/>
+									</xsl:attribute>
+								</input>
+								<input type ="submit" value="Modifica" />
+							</form>
 						</td>
-						<td>
-							<button onclick='destroy(this)'>
-								<xsl:attribute name="animal_name">
-									<xsl:value-of select="zoo:nome"/>
-								</xsl:attribute>
-								Elimina
-							</button>
+						<td>                      watDo=animals&action=destroy&name
+							<form action="reply.cgi" method="get">
+								<input type="hidden" name="animal_name">
+									<xsl:attribute name="value">
+										<xsl:value-of select="zoo:nome"/>
+									</xsl:attribute>
+								</input>
+								<input type="hidden" name="watDo" value="animals" /> 
+								<input type="hidden" name="action" value="destroy" /> 
+								<input type="hidden" name="noscript" value="true" /> 
+								<input type ="submit" value="Elimina" />
+							</form>
 						</td>
 						<td><xsl:value-of select="../@nome"/></td>
 						<td><xsl:value-of select="zoo:nome"/></td>
