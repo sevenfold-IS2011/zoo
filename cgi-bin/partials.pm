@@ -291,15 +291,37 @@ sub viewWarehouse{
 sub updateWarehouse{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
+
+  my $cgi = new CGI;
+  my $id = $cgi->param('id');
+  print "$id";
 	print '
 	<div id = "right">
-		<h3>Aggiorna Magazzino</h3>
-		<h4>Aggiungi rifornimento</h4>
+		<h4>Aggiungi tipologia di cibo:</h4>
 		<div class = "form-wrapper">
 			<form action="_aggiungi_specialita.cgi" method="post" accept-charset="utf-8">
-			  <label for="specialita">Specialità</label><select name ="specialita"><option value="banane">Banane</option></select><br />
-			  <label for="quanitita">Quantita</label><input type="text" name="quantita" value="" placeholder="Quantita" />
+			  <label for="nome">Nome: </label><input type="text" name="nome" value="" placeholder="Nome" />
+			  <label for="quanitita">Quantita: </label><input type="text" name="quantita" value="" placeholder="Quantita" />
 			  <p><input type="submit" value="Aggiungi" /></p>
+			</form>
+		</div>
+	</div>';
+	footer;
+	print '</div>';
+}
+
+sub editWarehouse{
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+  my $cgi = new CGI;
+  my $id = $cgi->param('id');
+  print '
+	<div id = "right">
+		<h4>Modifica la quantità id: $id</h4>
+		<div class = "form-wrapper">
+			<form action="_aggiungi_specialita.cgi" method="post" accept-charset="utf-8">
+			  <label for="quanitita">Quantita: </label><input type="text" name="quantita" value="" placeholder="Quantita" />
+			  <p><input type="submit" value="Aggiungi" /> <input type="submit" value="Rimuovi" /></p>
 			</form>
 		</div>
 	</div>';

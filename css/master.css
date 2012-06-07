@@ -80,6 +80,10 @@ table.standard td.button
 {
 border:0px;
 }
+
+table.standard input{
+width:50px;
+}
 div.animale
 {
 margin:5px;

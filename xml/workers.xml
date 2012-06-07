@@ -8,6 +8,7 @@
         <name>Mario</name>
         <gender>M</gender>
         <age>45</age>
+        <salary>1285</salary>
     </employee>
 
     <employee>
@@ -16,6 +17,7 @@
         <name>Maria</name>
         <gender>F</gender>
         <age>44</age>
+        <salary>1180</salary>
     </employee>
 
     <employee>
@@ -24,6 +26,7 @@
         <name>Mirco</name>
         <gender>M</gender>
         <age>28</age>
+          <salary>1120</salary>
     </employee>
 
     <employee>
@@ -32,6 +35,7 @@
         <name>Martina</name>
         <gender>M</gender>
         <age>26</age>
+          <salary>1110</salary>
     </employee>
 
     <manager>

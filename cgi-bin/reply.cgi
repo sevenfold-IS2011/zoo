@@ -91,15 +91,14 @@ if ($watDo eq "animals")
 }
 
 
-
-if ($watDo eq "users"){
+if ($watDo eq "warehouse"){
 	my $action = $page->param("action");
 	check_action($action);
-	my $username = $page->param("username");
-	if (!$username) {
+	my $cibo_id = $page->param("cibo");
+	if (!$cibo_id) {
 		print $page->header();
 		print '
-					<h2>Richiesta errata - parametro name undefined</h2>';
+					<h2>Richiesta errata - parametro cibo_id undefined</h2>';
 		exit;
 		}
 	if ($action eq "destroy") {
