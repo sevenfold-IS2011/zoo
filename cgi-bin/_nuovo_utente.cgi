@@ -21,3 +21,4 @@ if (!is_manager($sid)){
   print $page->redirect( -URL => "area_privata.cgi");
 	exit;
 }
+
