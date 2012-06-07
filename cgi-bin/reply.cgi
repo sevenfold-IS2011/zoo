@@ -49,12 +49,12 @@ if ($watDo eq "animals")
 		$xpc->registerNs('zoo', 'http://www.zoo.com');
 		my $xpath_exp = "//zoo:animale[zoo:nome='".$name."']";
 		my $animal = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
-		my $asize = $xpc -> findnodes($xpath_exp, $doc)->size();
+		#my $asize = $xpc -> findnodes($xpath_exp, $doc)->size();
 		if (!$animal) {
 			print $page->header();
 			print '
 						<h2>Richiesta errata - nessun animale con questo nome</h2>';
-			print "il nome era: $name, ho trovato $asize nodi, xpath era $xpath_exp"; #nome univoco in tutto lo zoo o all'interno dell'area??
+			#print "il nome era: $name, ho trovato $asize nodi, xpath era $xpath_exp"; #nome univoco in tutto lo zoo o all'interno dell'area??
 			exit;
 		}
 
@@ -73,7 +73,6 @@ if ($watDo eq "animals")
 
 		print $page->header();
 		print Functions::animal_table;
-		#print $image_path;
 		exit;
 	}
 
@@ -90,15 +89,46 @@ if ($watDo eq "animals")
 	}
 }
 
-
-if ($watDo eq "warehouse"){
+if ($watDo == "users") {
 	my $action = $page->param("action");
 	check_action($action);
-	my $cibo_id = $page->param("cibo");
-	if (!$cibo_id) {
+	my $username = $page->param("username");
+	if (!$username) {
 		print $page->header();
 		print '
-					<h2>Richiesta errata - parametro cibo_id undefined</h2>';
+					<h2>Richiesta errata - parametro username undefined</h2>';
+		exit;
+		}
+	if ($action eq "destroy") {
+		my $parser = XML::LibXML->new;
+		my $doc = $parser->parse_file("../xml/workers.xml");
+		my $root = $doc->getDocumentElement();
+		my $xpc = XML::LibXML::XPathContext->new;
+		$xpc->registerNs('zoo', 'http://www.zoo.com');
+		my $xpath_exp = "//zoo:employee[zoo:username='".$username."'] | //zoo:manager[zoo:username=']".$username."']";
+		my $user = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
+		#my $asize = $xpc -> findnodes($xpath_exp, $doc)->size();
+		if (!$user) {
+			print $page->header();
+			print '
+						<h2>Richiesta errata - nessun animale con questo nome</h2>';
+			#print "il nome era: $name, ho trovato $asize nodi, xpath era $xpath_exp"; #nome univoco in tutto lo zoo o all'interno dell'area??
+			exit;
+		}
+		print $page->header();
+		print 'l\'ho trovato';
+		}	
+
+}
+
+if ($watDo eq "users"){
+	my $action = $page->param("action");
+	check_action($action);
+	my $username = $page->param("username");
+	if (!$username) {
+		print $page->header();
+		print '
+					<h2>Richiesta errata - parametro name undefined</h2>';
 		exit;
 		}
 	if ($action eq "destroy") {

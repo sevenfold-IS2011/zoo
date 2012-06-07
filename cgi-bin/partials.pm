@@ -434,7 +434,7 @@ sub manageAnimals{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
 	print '<div id = "right">';
-	print Functions::animal_table();
+	print Functions::animal_table($_[2]);
 	print '</div>';
 	footer;
 	print '</div>';
@@ -481,6 +481,11 @@ sub areaSelect{
 	}
 }
 
+sub noscript{
+	print '<noscript>
+	                <meta http-equiv="Refresh" content="1;url='.$_[0].'" />
+	        </noscript>';
+}
 
 sub privateMenu{
 	my $sid = $_[0];
