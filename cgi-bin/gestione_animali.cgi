@@ -22,8 +22,10 @@ if (!$sid){
 															  {-type=>'javascript', -src=>'../javascript/images.js'},],
 													-style=>{'src'=>'../css/master.css'});
 	partials::privateHeader($sid);
+	partials::noscript("gestione_animali.cgi?noscript=true");
 	my $watDo = "animals";
-	partials::manageAnimals($sid, $watDo);					
+	my $noscript = $page -> param("noscript") || "false";
+	partials::manageAnimals($sid, $watDo, $noscript);					
 	print $page->end_html;
 }
 

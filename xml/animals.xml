@@ -1,7 +1,4 @@
-<zoo
-	xmlns="http://www.zoo.com"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
-	xs:schemaLocation="http://www.zoo.com animal.xsd">
+<zoo xmlns="http://www.zoo.com" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.zoo.com animal.xsd">
 
 	<area id="1" posizione="nord" nome="scimmie" cibo_giornaliero="7">
 		<animale>
@@ -83,5 +80,4 @@
 		</animale>
 	</area>
 
-</zoo>
-
+<area id="4" posizione="18" nome="Area Tigri"/></zoo>
