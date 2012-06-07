@@ -20,7 +20,7 @@
 						<td><xsl:value-of select="zoo:quantita"/></td>
 						<td class="button">
 							<button onclick='edit(this)'>
-								<xsl:attribute name="username">
+								<xsl:attribute name="id">
 									<xsl:value-of select="@id"/>
 								</xsl:attribute>
 								Modifica
