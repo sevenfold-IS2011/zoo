@@ -75,7 +75,7 @@ if ($watDo eq "animals")
 		if ($noscript eq "true") {
 			$page->redirect(-URL => "gestione_animali.cgi");
 		}
-		
+
 		print $page->header();
 		print Functions::animal_table;
 		exit;
@@ -121,7 +121,7 @@ if ($watDo eq "users") {
 		}
 		print $page->header();
 		print 'l\'ho trovato';
-		}	
+		}
 
 }
 
@@ -129,25 +129,44 @@ if ($watDo eq "warehouse"){
 	my $action = $page->param("action");
 	check_action($action);
 	my $cibo_id = $page->param("cibo");
-	print $page->header();
 	if(!$cibo_id) {
-		print '
-					<h2>Richiesta errata - parametro cibo non definit</h2>';
+	  print $page->header();
+		print '<h2>Richiesta errata - parametro cibo non definit</h2>';
 		exit;
 	}
 	my $amount = $page->param("amount");
 	#TO DO: controllare che $amount sia un double
 	if ($action eq "add") {
+		print $page->header(-charset => 'utf-8');
 		print "vuoi aggiungere $amount al cibo $cibo_id";
+		print Functions::warehouse_table;
 	}
 	if ($action eq "remove") {
+    print $page->header(-charset => 'utf-8');
 		print "vuoi rimuovere $amount al cibo $cibo_id";
+		print Functions::warehouse_table;
 	}
 	if ($action eq "destroy") {
-		print "vuoi distruggere il cibo $cibo_id";
+		my $parser = XML::LibXML->new;
+		my $doc = $parser->parse_file("../xml/warehouse.xml");
+		my $root = $doc->getDocumentElement();
+		my $xpc = XML::LibXML::XPathContext->new;
+		$xpc->registerNs('zoo', 'http://www.zoo.com');
+		my $xpath_exp = "//zoo:cibo[\@id='".$cibo_id."']";
+		my $cibo = $xpc->findnodes($xpath_exp, $doc)->get_node(0);
+		if (!$cibo) {
+			print '<h2>Richiesta errata - nessun cibo ha questo id</h2>';
+			exit;
+		}
+		my $zoo = $cibo->parentNode();
+		$zoo->removeChild($cibo);
+		open(XML,'>../xml/warehouse.xml') || die("Cannot Open file $!");
+		print XML $root->toString();
+		close(XML);
+		print Functions::warehouse_table;
+		exit;
 	}
 }
-
 
 sub check_action{
 	my $action = $_[0];
