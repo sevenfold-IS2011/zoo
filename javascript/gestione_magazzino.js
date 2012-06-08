@@ -2,14 +2,15 @@ function handle_response(){
 	document.getElementById('right').innerHTML = xmlhttp.responseText;
 }
 
-
 function add(button){
-	xmlhttp.open("GET","reply.cgi?watDo=warehouse&action=add&cibo="+button.getAttribute("id"),true);
+	var amount = button.parentNode.parentNode.childNodes[3].childNodes[0].value;
+	xmlhttp.open("GET","reply.cgi?watDo=warehouse&action=add&amount="+amount+"&cibo="+button.getAttribute("id"),true);
 	xmlhttp.send();
 }
 
 function remove(button){
-	xmlhttp.open("GET","reply.cgi?watDo=warehouse&action=remove&cibo="+button.getAttribute("id"),true);
+	var amount = button.parentNode.parentNode.childNodes[3].childNodes[0].value;
+	xmlhttp.open("GET","reply.cgi?watDo=warehouse&action=remove&amount="+amount+"&cibo="+button.getAttribute("id"),true);
 	xmlhttp.send();
 }
 

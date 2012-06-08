@@ -5,7 +5,6 @@
 	<xsl:template match="zoo:workers">
 
 			<h4>Di seguito è riportata la lista del personale dello zoo con i relativi dati modificabili (solo per Manager).</h4>
-
 			<table class="standard">
 				<tr class="title">
 					<td>Nome</td>
@@ -65,24 +64,6 @@
 					</tr>
 				</xsl:for-each>
 			</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	</xsl:template>
 </xsl:stylesheet>

@@ -125,24 +125,28 @@ if ($watDo eq "users") {
 
 }
 
-if ($watDo eq "users"){
+if ($watDo eq "warehouse"){
 	my $action = $page->param("action");
 	check_action($action);
-	my $username = $page->param("username");
-	if (!$username) {
-		print $page->header();
+	my $cibo_id = $page->param("cibo");
+	print $page->header();
+	if(!$cibo_id) {
 		print '
-					<h2>Richiesta errata - parametro name undefined</h2>';
+					<h2>Richiesta errata - parametro cibo non definit</h2>';
 		exit;
-		}
+	}
+	my $amount = $page->param("amount");
+	#TO DO: controllare che $amount sia un double
+	if ($action eq "add") {
+		print "vuoi aggiungere $amount al cibo $cibo_id";
+	}
+	if ($action eq "remove") {
+		print "vuoi rimuovere $amount al cibo $cibo_id";
+	}
 	if ($action eq "destroy") {
-
+		print "vuoi distruggere il cibo $cibo_id";
 	}
 }
-
-
-
-
 
 
 sub check_action{
