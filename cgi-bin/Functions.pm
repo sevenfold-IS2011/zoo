@@ -133,11 +133,12 @@ sub name_in_area_taken{
 sub animal_table{
 	my $source = XML::LibXML->load_xml(location => '../xml/animals.xml');
 	my $xslt = XML::LibXSLT->new();  
+	my $style_doc;
 	if ($_[0] == "true"){
-	  my $style_doc = XML::LibXML->load_xml(location=>"../xml/animals_table_template.xsl", no_cdata=>1);     
+	  $style_doc = XML::LibXML->load_xml(location=>"../xml/animals_table_template.xsl", no_cdata=>1);     
 	}
 	else{
-	  my $style_doc = XML::LibXML->load_xml(location=>"../xml/animals_table_noscript_template.xsl", no_cdata=>1);  
+	  $style_doc = XML::LibXML->load_xml(location=>"../xml/animals_table_noscript_template.xsl", no_cdata=>1);  
 	}
 	my $stylesheet = $xslt->parse_stylesheet($style_doc);
 	my $results = $stylesheet->transform($source);
@@ -182,6 +183,17 @@ sub warehouse_table(){
 	$find = quotemeta $find; # escape regex metachars if present
 	$text =~ s/$find/$replace/g;
 	return $text;
+}
+
+sub username_taken{
+	my $username = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
+	my $nodeset = $xp->find("//[username="$username"]");
+	if ($nodeset->size > 0){
+		return 1;
+	} else {
+		return undef;
+	}
 }
 
 #sub orderXML{
