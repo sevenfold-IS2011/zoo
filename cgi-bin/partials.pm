@@ -370,6 +370,8 @@ sub newUser{
 			  <fieldset>
 			  <label for="tipo">Tipo</label><select name="tipo"><option value="dipendente">Dipendente</option><option value="manager">Manager</option></select><br />
 			  <label for="nome">Nome</label><input type="text" name="nome" value="" placeholder="Nome e cognome"><br />
+			  <label for="sesso">Sesso</label><select name="sesso"><option value="M">M</option><option value="F">F</option></select><br />
+			  <label for="eta">Et&agrave;</label><input type="text" name="eta" value=""><br />
 			  <label for="username">Username</label><input type="text" name="username" value="" placeholder="Username"><br />
 			  <label for="password">Password</label><input type="password" name="password" value="" placeholder="Password">
 			  <label for="password">Conferma </label><input type="password" name="password2" value="" placeholder="Una diversa da prima">

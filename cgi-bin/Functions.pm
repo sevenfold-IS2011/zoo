@@ -45,6 +45,12 @@ sub check_credentials{
 	}
 }
 
+sub crypt_password{
+	my $password = $_[0];
+	my $salt = "zxcluywe6r78w6rusdgfbkejwqytri8esyr mhgdku5u65i75687tdluytosreasky6";
+	return crypt($password, $salt);
+}
+
 sub get_employee_name{
 	my $username = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
@@ -188,7 +194,7 @@ sub warehouse_table(){
 sub username_taken{
 	my $username = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
-	my $nodeset = $xp->find("//[username="$username"]");
+	my $nodeset = $xp->find("//[username=\"$username\"]");
 	if ($nodeset->size > 0){
 		return 1;
 	} else {
