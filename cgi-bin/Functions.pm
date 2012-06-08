@@ -191,6 +191,20 @@ sub warehouse_table(){
 	return $text;
 }
 
+sub area_table(){
+	my $source = XML::LibXML->load_xml(location => '../xml/animals.xml');
+	my $xslt = XML::LibXSLT->new();
+	my $style_doc = XML::LibXML->load_xml(location=>"../xml/area_table_template.xsl", no_cdata=>1);
+	my $stylesheet = $xslt->parse_stylesheet($style_doc);
+	my $results = $stylesheet->transform($source);
+	my $text = $stylesheet->output_as_bytes($results);
+	my $find = '<?xml version="1.0"?>';
+	my $replace = "";
+	$find = quotemeta $find; # escape regex metachars if present
+	$text =~ s/$find/$replace/g;
+	return $text;
+}
+
 sub username_taken{
 	my $username = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');

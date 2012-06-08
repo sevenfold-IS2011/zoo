@@ -12,7 +12,7 @@ if($session->is_expired() || $session->is_empty()){
 	exit;
 }
 my $sid = $session->id();
-print print $page->header(-charset => 'utf-8'),
+print $page->header(-charset => 'utf-8'),
 			$page->start_html(-title => "Monkey Island || Lo zoo di Padova",
 			 									-meta => {'keywords' => 'zoo padova animali monkey island',
 																	'description' => 'sito ad utilizzo interno dello zoo Monkey Island di Padova',
@@ -23,6 +23,5 @@ partials::privateHeader($sid);
 my $watDo = "warehouse";
 partials::updateWarehouse($sid, $watDo);
 print $page->end_html;
-
 exit;
 
