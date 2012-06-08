@@ -8,19 +8,19 @@
 
 <xs:complexType name="Tworkers">
     <xs:sequence>
-        <xs:element name="employee" type ="Temployee"/>
+        <xs:element name="impiegato" type ="Timpiegato"/>
         <xs:element name="manager" type ="Tmanager"/>
     </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="Temployee">
+<xs:complexType name="Timpiegato">
     <xs:sequence>
         <xs:element name="username" type ="xs:string"/>
         <xs:element name="password" type ="xs:string"/>
-        <xs:element name="name" type ="xs:string"/>
-        <xs:element name="gender" type ="xs:string"/>
-        <xs:element name="age" type ="xs:integer" default="-1"/>
-         <xs:element name="salary" type ="xs:integer" default="-1"/>
+        <xs:element name="nome" type ="xs:string"/>
+        <xs:element name="sesso" type ="xs:string"/>
+        <xs:element name="eta" type ="xs:integer" default="-1"/>
+         <xs:element name="salario" type ="xs:integer" default="-1"/>
     </xs:sequence>
 </xs:complexType>
 
@@ -28,10 +28,10 @@
     <xs:sequence>
         <xs:element name="username" type ="xs:string"/>
         <xs:element name="password" type ="xs:string"/>
-        <xs:element name="name" type ="xs:string"/>
-        <xs:element name="gender" type ="xs:string"/>
-        <xs:element name="age" type ="xs:integer" default="-1"/>
-        <xs:element name="salary" type ="xs:integer" default="-1"/>
+        <xs:element name="nome" type ="xs:string"/>
+        <xs:element name="esso" type ="xs:string"/>
+        <xs:element name="eta" type ="xs:integer" default="-1"/>
+        <xs:element name="salario" type ="xs:integer" default="-1"/>
     </xs:sequence>
 </xs:complexType>
 
