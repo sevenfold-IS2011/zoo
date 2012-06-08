@@ -25,27 +25,29 @@ foreach $pair (@pairs) {
 }
 
 my $page = new CGI;
-my $sid = $page->cookie("CGISESSID") || undef;
-if (!$sid){
+my $session = CGI::Session->load();
+if($session->is_expired() || $session->is_empty()){
   print $page->redirect( -URL => "login.cgi");
-}else{
-  my $areaName = $input{"nome"};
-  my $areaPos = $input{"posizione"};
-  my $areaId = Functions::max_area_id + 1;
-  my $parser = XML::LibXML->new;
-  my $doc = $parser->parse_file("../xml/animals.xml");
-  my $root = $doc->getDocumentElement();
+	exit;
+}
+my $sid = $session->id();
+my $areaName = $input{"nome"};
+my $areaPos = $input{"posizione"};
+my $areaId = Functions::max_area_id + 1;
+my $parser = XML::LibXML->new;
+my $doc = $parser->parse_file("../xml/animals.xml");
+my $root = $doc->getDocumentElement();
 
-  my $new_element= $doc->createElement("area");
-  $new_element->setAttribute("id", $areaId);
-  $new_element->setAttribute("posizione", $areaPos);
-  $new_element->setAttribute("nome", $areaName);
-  $root->appendChild($new_element);
+my $new_element= $doc->createElement("area");
+$new_element->setAttribute("id", $areaId);
+$new_element->setAttribute("posizione", $areaPos);
+$new_element->setAttribute("nome", $areaName);
+$root->appendChild($new_element);
 	#print $root->toString(1);
-	open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
-	print XML $root->toString();
-	close(XML);	
-	print $page->redirect( -URL => "nuova_area.cgi");
+open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
+print XML $root->toString();
+close(XML);	
+print $page->redirect( -URL => "nuova_area.cgi");
   
 
 }

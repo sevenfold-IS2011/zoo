@@ -194,8 +194,8 @@ sub warehouse_table(){
 sub username_taken{
 	my $username = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
-	my $nodeset = $xp->find("//[username=\"$username\"]");
-	if ($nodeset->size > 0){
+#	my $nodeset = $xp->find("//username=\"$username\"");
+	if ($xp->find("//username=\"$username\"")){
 		return 1;
 	} else {
 		return undef;

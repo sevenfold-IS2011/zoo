@@ -13,7 +13,10 @@ print $page->header,
 																	'author' => '?????????'},
 												-author => '?????????',
 												-style=>{'src'=>'../css/master.css'});
-my $sid = $page->cookie("CGISESSID") || undef;
+
+
+my $session = CGI::Session->load();
+my $sid = $session->id();
 partials::header($sid);
 partials::_index();
 partials::footer();
