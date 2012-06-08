@@ -12,21 +12,28 @@
 					<td>Nome</td>
 					<td>Area</td>
 					<td>Quantità</td>
-					<td colspan="4">Modifica</td>
+					<td colspan="3">Aggiungi/Rimuovi</td>
+					<td>Elimina</td>
 				</tr>
 				<xsl:for-each select="zoo:cibo">
 					<tr>
 						<td><xsl:value-of select="@nome"/></td>
-						<td><xsl:value-of select="@area"/></td>
-						<td><xsl:value-of select="zoo:quantita"/></td>
+						<td>
+							<xsl:for-each select="zoo:area">
+								<a>
+									<xsl:attribute name="href">area.cgi?id=<xsl:value-of select="."/></xsl:attribute>
+								<xsl:value-of select="."/>
+								</a>&#160;
+							</xsl:for-each>
+						</td>
+						<td><xsl:value-of select="@quantita"/></td>
 						<td class="button">
-							<input>
+							<input placeholder="Quantità">
 								<xsl:attribute name="id">
 									<xsl:value-of select="@id"/>
 								</xsl:attribute>
 							</input>
 						</td>
-
 						<td class="button">
 							<button onclick='add(this)'>
 								<xsl:attribute name="id">
@@ -54,7 +61,6 @@
 					</tr>
 				</xsl:for-each>
 			</table>
-
 	</xsl:template>
 </xsl:stylesheet>
 

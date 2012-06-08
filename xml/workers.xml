@@ -52,4 +52,5 @@
         <eta>24</eta>
         <stipendio>1600</stipendio>
     </manager>
-<manager><username>lucanervi</username><password>zxePlNSDQjsxg</password><nome>Luca Nervi</nome><sesso>M</sesso><eta>23</eta><stipendio/></manager><impiegato><username>paolobitta</username><password>zx2kL4qmDw3kg</password><nome>Paolo Bitta</nome><sesso>M</sesso><eta>35</eta><stipendio/></impiegato></workers>
+<manager><username>lucanervi</username><password>zxePlNSDQjsxg</password><nome>Luca Nervi</nome><sesso>M</sesso><eta>23</eta><stipendio>1175</stipendio></manager><impiegato><username>paolobitta</username><password>zx2kL4qmDw3kg</password><nome>Paolo Bitta</nome><sesso>M</sesso><eta>35</eta><stipendio>1270</stipendio></impiegato></workers>
+

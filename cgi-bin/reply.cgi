@@ -131,12 +131,12 @@ if ($watDo eq "warehouse"){
 					<h2>Richiesta errata - parametro cibo non definit</h2>';
 		exit;
 	}
+	my $amount = $page->param("amount");
+	#TO DO: controllare che $amount sia un double
 	if ($action eq "add") {
-		my $amount = $page->param("amount");
 		print "vuoi aggiungere $amount al cibo $cibo_id";
 	}
 	if ($action eq "remove") {
-		my $amount = $page->param("amount");
 		print "vuoi rimuovere $amount al cibo $cibo_id";
 	}
 	if ($action eq "destroy") {
