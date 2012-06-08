@@ -14,11 +14,12 @@ $CGI::POST_MAX = 1024 * 5000;
 
 
 my $page = new CGI; 
-my $sid = $page->cookie("CGISESSID") || undef;
-if (!$sid){
+my $session = CGI::Session->load();
+if($session->is_expired() || $session->is_empty()){
   print $page->redirect( -URL => "login.cgi");
 	exit;
 }
+my $sid = $session->id();
 
 
 my $area = $page->param("area");

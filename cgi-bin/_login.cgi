@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 use CGI;
-use CGI::Session;
+use CGI::Session qw/-ip-match/;
 use File::Spec;
 use Functions;
 use strict;
@@ -30,6 +30,7 @@ if (Functions::check_credentials($input{"username"}, $input{"password"})){
 	$name = Functions::get_employee_name($input{"username"});
 	$session->param("name", $name);
 	$session->param("username", $input{"username"});
+	$session->expire('+15m');
 	my $cookie = $page->cookie(CGISESSID => $session->id);
 	print $page->redirect( -URL => "area_privata.cgi", -cookie=>$cookie);
 }else{

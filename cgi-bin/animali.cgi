@@ -12,7 +12,8 @@ print $page->header(-charset => 'utf-8'),
 																	'author' => '?????????'}, 
 												-author => 'gaggi@math.unipd.it',
 												-style=>{'src'=>'../css/master.css'});
-my $sid = $page->cookie("CGISESSID") || undef;
+my $session = CGI::Session->load();
+my $sid = $session->id();
 partials::header($sid);
 partials::animali();					
 partials::footer();
