@@ -22,6 +22,7 @@ if($session->is_expired() || $session->is_empty()){
 }
 
 my $watDo = $page->param("watDo");
+my $noscript = $page->param("noscript");
 
 if ($watDo eq undef || (!$watDo eq "animals" && !$watDo eq "warehouse" && !$watDo eq "areas" && !$watDo eq "users") ){
 	print $page->header();
@@ -71,25 +72,28 @@ if ($watDo eq "animals")
 		print XML $root->toString();
 		close(XML);
 
+		if ($noscript eq "true") {
+			$page->redirect(-URL => "gestione_animali.cgi");
+		}
+		
 		print $page->header();
 		print Functions::animal_table;
 		exit;
 	}
 
-	if ($action == "edit") {
-		use CGI;
+	if ($action eq "edit") {
 		my $query=new CGI;
 		print $query->redirect('modifica_animale.cgi?name='.$name);
 	exit;
 	}
 
-	if ($action == "update") {
+	if ($action eq "update") {
 	# aggiorna xml
 	exit;
 	}
 }
 
-if ($watDo == "users") {
+if ($watDo eq "users") {
 	my $action = $page->param("action");
 	check_action($action);
 	my $username = $page->param("username");
