@@ -11,16 +11,16 @@ use XML::LibXML;
 
 
 my $page = new CGI;
-my $sid = $page->cookie("CGISESSID") || undef;
-
-if ($sid eq undef){
-	print $page->header();
+my $session = CGI::Session->load();
+if($session->is_expired() || $session->is_empty()){
+  print $page->header();
 	print '
 				<h2> Risorsa non accessibile - probabilmente la sessione è stata chiusa od è scaduta.</h2>
 					<br />
 				<h3> Si prega di rieffettuare il <a href="login.cgi">login </h3>';
 	exit;
 }
+
 my $watDo = $page->param("watDo");
 
 if ($watDo eq undef || (!$watDo eq "animals" && !$watDo eq "warehouse" && !$watDo eq "areas" && !$watDo eq "users") ){
