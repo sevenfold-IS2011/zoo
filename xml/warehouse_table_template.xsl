@@ -19,7 +19,6 @@
 						<td><xsl:value-of select="@nome"/></td>
 						<td><xsl:value-of select="@area"/></td>
 						<td><xsl:value-of select="zoo:quantita"/></td>
-
 						<td class="button">
 							<input>
 								<xsl:attribute name="id">
@@ -36,8 +35,6 @@
 								Aggiungi
 							</button>
 						</td>
-
-
 						<td class="button">
 							<button onclick='remove(this)'>
 								<xsl:attribute name="id">
@@ -46,7 +43,6 @@
 								Rimuovi
 							</button>
 						</td>
-
 						<td class="button">
 							<button onclick='destroy(this)'>
 								<xsl:attribute name="id">

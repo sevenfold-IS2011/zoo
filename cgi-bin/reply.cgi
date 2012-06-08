@@ -76,20 +76,20 @@ if ($watDo eq "animals")
 		exit;
 	}
 
-	if ($action == "edit") {
+	if ($action eq "edit") {
 		use CGI;
 		my $query=new CGI;
 		print $query->redirect('modifica_animale.cgi?name='.$name);
 	exit;
 	}
 
-	if ($action == "update") {
+	if ($action eq "update") {
 	# aggiorna xml
 	exit;
 	}
 }
 
-if ($watDo == "users") {
+if ($watDo eq "users") {
 	my $action = $page->param("action");
 	check_action($action);
 	my $username = $page->param("username");
@@ -117,28 +117,32 @@ if ($watDo == "users") {
 		}
 		print $page->header();
 		print 'l\'ho trovato';
-		}	
+		}
 
 }
 
-if ($watDo eq "users"){
+if ($watDo eq "warehouse"){
 	my $action = $page->param("action");
 	check_action($action);
-	my $username = $page->param("username");
-	if (!$username) {
-		print $page->header();
+	my $cibo_id = $page->param("cibo");
+	print $page->header();
+	if(!$cibo_id) {
 		print '
-					<h2>Richiesta errata - parametro name undefined</h2>';
+					<h2>Richiesta errata - parametro cibo non definit</h2>';
 		exit;
-		}
+	}
+	if ($action eq "add") {
+		my $amount = $page->param("amount");
+		print "vuoi aggiungere $amount al cibo $cibo_id";
+	}
+	if ($action eq "remove") {
+		my $amount = $page->param("amount");
+		print "vuoi rimuovere $amount al cibo $cibo_id";
+	}
 	if ($action eq "destroy") {
-
+		print "vuoi distruggere il cibo $cibo_id";
 	}
 }
-
-
-
-
 
 
 sub check_action{
