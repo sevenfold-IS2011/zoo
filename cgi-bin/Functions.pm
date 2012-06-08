@@ -30,7 +30,7 @@ sub check_credentials{
 	my $username = $_[0];
 	my $pswd = $_[1];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
-	my $nodeset = $xp->find("//employee[username=\"$username\"]/password | //manager[username=\"$username\"]/password");
+	my $nodeset = $xp->find("//impiegato[username=\"$username\"]/password | //manager[username=\"$username\"]/password");
 	my @password;
 	my $password;
 	my $salt = "zxcluywe6r78w6rusdgfbkejwqytri8esyr mhgdku5u65i75687tdluytosreasky6";
@@ -48,7 +48,7 @@ sub check_credentials{
 sub get_employee_name{
 	my $username = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
-	my $nodeset = $xp->find("//employee[username=\"$username\"]/name | //manager[username=\"$username\"]/name");
+	my $nodeset = $xp->find("//impiegato[username=\"$username\"]/nome | //manager[username=\"$username\"]/nome");
 	my @name;
 	my $name;
 	if (my @nodelist = $nodeset->get_nodelist) {
@@ -61,7 +61,7 @@ sub get_employee_name{
 sub is_manager{
 	my $username = get_username_from_sid($_[0]);
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
-	my $nodeset = $xp->find("//manager[username=\"$username\"]/name");
+	my $nodeset = $xp->find("//manager[username=\"$username\"]/nome");
 	if ($nodeset->size() > 0) {
 		return 1;
 	}else{
@@ -132,13 +132,13 @@ sub name_in_area_taken{
 
 sub animal_table{
 	my $source = XML::LibXML->load_xml(location => '../xml/animals.xml');
-	my $xslt = XML::LibXSLT->new();  
+	my $xslt = XML::LibXSLT->new();
 	my $style_doc;
 	if ($_[0] == "true"){
-	  $style_doc = XML::LibXML->load_xml(location=>"../xml/animals_table_template.xsl", no_cdata=>1);     
+	  $style_doc = XML::LibXML->load_xml(location=>"../xml/animals_table_template.xsl", no_cdata=>1);
 	}
 	else{
-	  $style_doc = XML::LibXML->load_xml(location=>"../xml/animals_table_noscript_template.xsl", no_cdata=>1);  
+	  $style_doc = XML::LibXML->load_xml(location=>"../xml/animals_table_noscript_template.xsl", no_cdata=>1);
 	}
 	my $stylesheet = $xslt->parse_stylesheet($style_doc);
 	my $results = $stylesheet->transform($source);
@@ -188,7 +188,7 @@ sub warehouse_table(){
 sub username_taken{
 	my $username = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
-	my $nodeset = $xp->find("//[username="$username"]");
+	my $nodeset = $xp->find("//[username=\"$username\"]");
 	if ($nodeset->size > 0){
 		return 1;
 	} else {
