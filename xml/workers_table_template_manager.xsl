@@ -20,7 +20,7 @@
 						<td><xsl:value-of select="zoo:age"/></td>
 						<td><xsl:value-of select="zoo:gender"/></td>
 						<td>Impiegato</td>
-						<td>nd</td>
+						<td><xsl:value-of select="zoo:salary"/></td>
 						<td class="button">
 							<button onclick='edit(this)'>
 								<xsl:attribute name="username">
@@ -44,7 +44,7 @@
 						<td><xsl:value-of select="zoo:name"/></td>
 						<td><xsl:value-of select="zoo:age"/></td>
 						<td><xsl:value-of select="zoo:gender"/></td>
-						<td>Managrer</td>
+						<td>Manager</td>
 						<td><xsl:value-of select="zoo:salary"/></td>
 						<td class="button">
 							<button onclick='edit(this)'>

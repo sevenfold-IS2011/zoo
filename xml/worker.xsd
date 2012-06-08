@@ -20,11 +20,14 @@
         <xs:element name="name" type ="xs:string"/>
         <xs:element name="gender" type ="xs:string"/>
         <xs:element name="age" type ="xs:integer" default="-1"/>
+         <xs:element name="salary" type ="xs:integer" default="-1"/>
     </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="Tmanager">
     <xs:sequence>
+        <xs:element name="username" type ="xs:string"/>
+        <xs:element name="password" type ="xs:string"/>
         <xs:element name="name" type ="xs:string"/>
         <xs:element name="gender" type ="xs:string"/>
         <xs:element name="age" type ="xs:integer" default="-1"/>

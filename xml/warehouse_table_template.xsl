@@ -12,18 +12,47 @@
 					<td>Nome</td>
 					<td>Area</td>
 					<td>Quantità</td>
+					<td colspan="4">Modifica</td>
 				</tr>
 				<xsl:for-each select="zoo:cibo">
 					<tr>
 						<td><xsl:value-of select="@nome"/></td>
 						<td><xsl:value-of select="@area"/></td>
 						<td><xsl:value-of select="zoo:quantita"/></td>
+
 						<td class="button">
-							<button onclick='edit(this)'>
+							<input>
 								<xsl:attribute name="id">
 									<xsl:value-of select="@id"/>
 								</xsl:attribute>
-								Modifica
+							</input>
+						</td>
+
+						<td class="button">
+							<button onclick='add(this)'>
+								<xsl:attribute name="id">
+									<xsl:value-of select="@id"/>
+								</xsl:attribute>
+								Aggiungi
+							</button>
+						</td>
+
+
+						<td class="button">
+							<button onclick='remove(this)'>
+								<xsl:attribute name="id">
+									<xsl:value-of select="@id"/>
+								</xsl:attribute>
+								Rimuovi
+							</button>
+						</td>
+
+						<td class="button">
+							<button onclick='destroy(this)'>
+								<xsl:attribute name="id">
+									<xsl:value-of select="@id"/>
+								</xsl:attribute>
+								Elimina
 							</button>
 						</td>
 					</tr>
