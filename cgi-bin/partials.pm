@@ -368,7 +368,7 @@ sub newUser{
 		<div class = "form-wrapper">
 			<form action="_nuovo_utente.cgi" method="post" accept-charset="utf-8">
 			  <fieldset>
-			  <label for="tipo">Tipo</label><select name="tipo"><option value="dipendente">Dipendente</option><option value="manager">Manager</option></select><br />
+			  <label for="tipo">Tipo</label><select name="tipo"><option value="impiegato">Impiegato</option><option value="manager">Manager</option></select><br />
 			  <label for="nome">Nome</label><input type="text" name="nome" value="" placeholder="Nome e cognome"><br />
 			  <label for="sesso">Sesso</label><select name="sesso"><option value="M">M</option><option value="F">F</option></select><br />
 			  <label for="eta">Et&agrave;</label><input type="text" name="eta" value=""><br />

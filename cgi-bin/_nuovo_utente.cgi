@@ -26,7 +26,7 @@ if (!is_manager($sid)){
 
 my $role = $page -> param("tipo");
 
-if (!$role || (!($role eq "manager") && !($role eq "dipendente")) {
+if (!$role || (!($role eq "manager") && !($role eq "impiegato")) {
 	print $page->header();
 	print '<h1> Ruolo non corretto (errori da sistemare)</h1>';
 	exit;
