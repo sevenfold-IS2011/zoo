@@ -228,12 +228,22 @@ sub area_table(){
 sub username_taken{
 	my $username = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
+	my $idlist = $xp->find('//');
+	
 #	my $nodeset = $xp->find("//username=\"$username\"");
 	if ($xp->find("//username=\"$username\"")){
 		return 1;
 	} else {
 		return undef;
 	}
+}
+
+sub get_animal_gender{
+	my $animal_name = $_[0];
+	my $area = $_[1];
+	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+	return $xp->find("//area[\@id=$area]/animale[nome=\"$animal_name\"]\sesso")->string_value();
+	
 }
 
 #sub orderXML{

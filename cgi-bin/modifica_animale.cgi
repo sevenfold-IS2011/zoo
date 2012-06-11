@@ -25,15 +25,13 @@ my $animal_name = $page -> param("name");
 my $area = $page -> param("area");
 
 if (!$animal_name || !$area){
-	print $page -> header();
 	print "<h1> Nome animale o area non presenti</h1>";
 	exit;
 }
 my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
 my $size = $xp->find("//area[\@id=$area]/animale[nome=\"$animal_name\"]")->size();
 
-if (size < 1){
-	print $page -> header();
+if ($size < 1){
 	print "<h1> Animale richiesto non trovato</h1>";
 	exit;
 }
