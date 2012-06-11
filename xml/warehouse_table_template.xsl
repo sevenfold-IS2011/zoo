@@ -26,37 +26,41 @@
 							</xsl:for-each>
 						</td>
 						<td><xsl:value-of select="@quantita"/></td>
-						<td class="button">
-							<input placeholder="Quantità">
-								<xsl:attribute name="id">
-									<xsl:value-of select="@id"/>
-								</xsl:attribute>
-							</input>
-						</td>
-						<td class="button">
-							<button onclick='add(this)'>
-								<xsl:attribute name="id">
-									<xsl:value-of select="@id"/>
-								</xsl:attribute>
-								Aggiungi
-							</button>
-						</td>
-						<td class="button">
-							<button onclick='remove(this)'>
-								<xsl:attribute name="id">
-									<xsl:value-of select="@id"/>
-								</xsl:attribute>
-								Rimuovi
-							</button>
-						</td>
-						<td class="button">
-							<button onclick='destroy(this)'>
-								<xsl:attribute name="id">
-									<xsl:value-of select="@id"/>
-								</xsl:attribute>
-								Elimina
-							</button>
-						</td>
+						
+						<form action="reply.cgi" method="get">
+							<input type="hidden" name="noscript" value="true" />
+							<td class="button">
+								<input placeholder="Quantità">
+									<xsl:attribute name="id">
+										<xsl:value-of select="@id"/>
+									</xsl:attribute>
+								</input>
+							</td>
+							<td class="button">
+								<input type="submit" onclick='add(this);return false;'>
+									<xsl:attribute name="id">
+										<xsl:value-of select="@id"/>
+									</xsl:attribute>
+									Aggiungi
+								</input>
+							</td>
+							<td class="button">
+								<a class = "button" onclick='remove(this);return false'>
+									<xsl:attribute name="id">
+										<xsl:value-of select="@id"/>
+									</xsl:attribute>
+									Rimuovi
+								</a>
+							</td>
+							<td class="button">
+								<a class = "button" onclick='destroy(this);return false'>
+									<xsl:attribute name="id">
+										<xsl:value-of select="@id"/>
+									</xsl:attribute>
+									Elimina
+								</a>
+							</td> 
+						</form>
 					</tr>
 				</xsl:for-each>
 			</table>
