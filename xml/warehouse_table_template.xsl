@@ -15,6 +15,7 @@
 					<td>Elimina</td>
 				</tr>
 				<xsl:for-each select="zoo:cibo">
+				<xsl:sort select="@id"/>
 					<tr>
 						<td><xsl:value-of select="@nome"/></td>
 						<td>
