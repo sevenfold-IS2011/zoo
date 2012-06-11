@@ -1,10 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="warehouse_table_template.xsl"?>
-
-<zoo
-    xmlns="http://www.zoo.com"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
-    xs:schemaLocation="http://www.zoo.com magazzino.xsd">
+<zoo xmlns="http://www.zoo.com" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.zoo.com warehouse.xsd">
 
     <cibo id="1" nome="banane" quantita="33">
         <area>1</area>

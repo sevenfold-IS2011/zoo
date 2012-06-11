@@ -31,6 +31,7 @@ if ($watDo eq undef || (!$watDo eq "animals" && !$watDo eq "warehouse" && !$watD
 	exit;
 }
 
+#------------------------------------------------------------------------ANIMALS
 if ($watDo eq "animals")
 {
 	my $action = $page->param("action");
@@ -93,6 +94,7 @@ if ($watDo eq "animals")
 	}
 }
 
+#--------------------------------------------------------------------------USERS
 if ($watDo eq "users") {
 	my $action = $page->param("action");
 	check_action($action);
@@ -125,6 +127,7 @@ if ($watDo eq "users") {
 
 }
 
+#----------------------------------------------------------------------WAREHOUSE
 if ($watDo eq "warehouse"){
 	my $action = $page->param("action");
 	check_action($action);
@@ -135,10 +138,49 @@ if ($watDo eq "warehouse"){
 		exit;
 	}
 	my $amount = $page->param("amount");
-	#TO DO: controllare che $amount sia un double
+	#--------------------TO DO: controllare che $amount sia un double
 	if ($action eq "add") {
 		print $page->header(-charset => 'utf-8');
-		print "vuoi aggiungere $amount al cibo $cibo_id";
+		#print "vuoi aggiungere $amount al cibo $cibo_id";
+
+		my $parser = XML::LibXML->new;
+		my $doc = $parser->parse_file("../xml/warehouse.xml");
+		my $root = $doc->getDocumentElement();
+		my $xpc = XML::LibXML::XPathContext->new;
+		$xpc->registerNs('zoo', 'http://www.zoo.com');
+
+		my $xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/\@nome";#prendo il nome del cibo
+		my $nome = $xpc->findnodes($xpath_exp, $doc)->get_node(0);
+		#print $nome->getData;
+
+		$xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/\@quantita";#prendo la quantità del cibo
+		my $quantita = $xpc->findnodes($xpath_exp, $doc)->get_node(0);
+		#print $quantita->getData;
+
+		$xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/zoo:area";#perchè non funziona?
+		my @areaarray = $xpc->findnodes($xpath_exp, $doc)->get_nodelist;
+
+		my $new_cibo = $doc->createElement("cibo");
+
+		my $cont = 0;
+		foreach my $temp (@areaarray){
+			my $new_area = $doc->createElement("area");#creo il nuovo cibo
+			$new_area->appendTextNode($temp->getData);
+			$new_cibo->appendChild($new_area);
+			#TO DO: settara gli attributi del nuovo cibo
+			$cont = $cont + 1;
+		}
+
+		my $xpath_exp = "//zoo:cibo[\@id='".$cibo_id."']";#rimuovo il vecchio cibo
+		my $cibo = $xpc->findnodes($xpath_exp, $doc)->get_node(0);
+		my $zoo = $cibo->parentNode();
+		$zoo->removeChild($cibo);
+
+		$root->appendChild($new_cibo);#appendo il nuovo cibo
+		open(XML,'>../xml/warehouse.xml') || die("Cannot Open file $!");
+		print XML $root->toString();
+		close(XML);
+
 		print Functions::warehouse_table;
 	}
 	if ($action eq "remove") {
