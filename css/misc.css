@@ -24,3 +24,14 @@ div.errors{
 .hidden{
 	display:none;
 }
+
+a.button{
+	text-decoration: none;
+	color: white;
+	background-color:#87A84B;
+	border: 3px solid #87A84B;
+	margin: 5px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+}
+

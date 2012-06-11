@@ -390,7 +390,7 @@ sub manageAnimals{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
 	print '<div id = "right">';
-	print Functions::animal_table($_[2]);
+	print Functions::animal_table();
 	print '</div>';
 	footer;
 	print '</div>';

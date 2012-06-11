@@ -19,7 +19,7 @@
 					<tr>
 						<td>
 							<form action="modifica_animale.cgi" method="get">
-								<input type="hidden" name="animal_name">
+								<input type="hidden" name="name">
 									<xsl:attribute name="value">
 										<xsl:value-of select="zoo:nome"/>
 									</xsl:attribute>
@@ -27,9 +27,9 @@
 								<input type ="submit" value="Modifica" />
 							</form>
 						</td>
-						<td>                      watDo=animals&action=destroy&name
+						<td>      
 							<form action="reply.cgi" method="get">
-								<input type="hidden" name="animal_name">
+								<input type="hidden" name="name">
 									<xsl:attribute name="value">
 										<xsl:value-of select="zoo:nome"/>
 									</xsl:attribute>
