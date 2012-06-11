@@ -21,20 +21,26 @@
 						<td>Impiegato</td>
 						<td><xsl:value-of select="zoo:stipendio"/></td>
 						<td class="button">
-							<button onclick='edit(this)'>
+							<a class="button" onclick='edit(this);return false'>
 								<xsl:attribute name="username">
 									<xsl:value-of select="zoo:username"/>
+								</xsl:attribute>
+								<xsl:attribute name="href">
+									modifica_utente.cgi?user=<xsl:value-of select="zoo:username"/>
 								</xsl:attribute>
 								Modifica
-							</button>
+							</a>
 						</td>
 						<td class="button">
-							<button onclick='destroy(this)'>
+							<a class="button" onclick='destroy(this);return false'>
 								<xsl:attribute name="username">
 									<xsl:value-of select="zoo:username"/>
 								</xsl:attribute>
+								<xsl:attribute name="href">
+									reply.cgi?noscript=true&amp;watDo=users&amp;action=destroy&amp;user=<xsl:value-of select="zoo:username"/>
+								</xsl:attribute>
 								Rimuovi
-							</button>
+							</a>
 						</td>
 					</tr>
 				</xsl:for-each>
@@ -46,20 +52,26 @@
 						<td>Manager</td>
 						<td><xsl:value-of select="zoo:stipendio"/></td>
 						<td class="button">
-							<button onclick='edit(this)'>
+							<a class="button" onclick='edit(this);return false'>
 								<xsl:attribute name="username">
 									<xsl:value-of select="zoo:username"/>
+								</xsl:attribute>
+								<xsl:attribute name="href">
+									modifica_utente.cgi?user=<xsl:value-of select="zoo:username"/>
 								</xsl:attribute>
 								Modifica
-							</button>
+							</a>
 						</td>
 						<td class="button">
-							<button onclick='destroy(this)'>
+							<a class="button" onclick='destroy(this);return false'>
 								<xsl:attribute name="username">
 									<xsl:value-of select="zoo:username"/>
+								</xsl:attribute> 
+								<xsl:attribute name="href">
+									reply.cgi?noscript=true&amp;watDo=users&amp;action=destroy&amp;user=<xsl:value-of select="zoo:username"/>
 								</xsl:attribute>
 								Rimuovi
-							</button>
+							</a>
 						</td>
 					</tr>
 				</xsl:for-each>
