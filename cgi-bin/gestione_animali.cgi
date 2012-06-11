@@ -23,11 +23,11 @@ print $page->header(-charset => 'utf-8'),
 														  {-type=>'javascript', -src=>'../javascript/gestione_animali.js'},
 														  {-type=>'javascript', -src=>'../javascript/images.js'},],
 												-style=>{'src'=>'../css/master.css'});
+
 partials::privateHeader($sid);
-partials::noscript("gestione_animali.cgi?noscript=true");
 my $watDo = "animals";
-my $noscript = $page -> param("noscript") || "false";
-partials::manageAnimals($sid, $watDo, $noscript);					
+
+partials::manageAnimals($sid, $watDo);					
 print $page->end_html;
 
 
