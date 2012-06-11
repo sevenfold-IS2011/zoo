@@ -80,5 +80,4 @@
 		</animale>
 	</area>
 
-<area id="4" posizione="18" nome="Area Tigri"/></zoo>
-
+<area id="4" posizione="18" nome="Area Tigri"/><area id="5" posizione="B-8" nome="Canguri" cibo_giornaliero="12.3"/></zoo>

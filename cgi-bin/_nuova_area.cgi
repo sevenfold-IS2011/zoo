@@ -39,7 +39,7 @@ my $replace = '';
 $find = quotemeta $find; # escape regex metachars if present
 $area_food =~ s/$find/$replace/g;
 
-if (!isfloat($area_food)){ # bisogna fare il controllo o con una regexp o con scalar::utils
+if (!isfloat($area_food)){ 
 	print $page->header();
 	print "quantità di cibo insensato. Questi errori andranno gestiti con un div apposito nella pagina precedente - $area_food";
 	exit;
