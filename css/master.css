@@ -61,8 +61,8 @@ table.standard th
 {
 border:1px solid #c3c3c3;
 padding:3px;
-text-align:left;
-vertical-align:top;
+min-width:75px;
+text-align:center;
 }
 
 table.standard td

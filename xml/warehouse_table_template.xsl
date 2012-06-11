@@ -5,7 +5,6 @@
 	xmlns:zoo="http://www.zoo.com">
 	<xsl:template match="zoo:zoo">
 
-
 			<h4>Di seguito è riportata la lista delle scorte presenti nel magazzino.</h4>
 			<table class="standard">
 				<tr class="title">

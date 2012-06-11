@@ -249,7 +249,7 @@ sub manageArea{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
 	print '<div id = "right">';
-	areaList(Functions::get_areas);
+	print Functions::area_table;
 	print '</div>';
 	footer;
 	print '</div>';
@@ -276,55 +276,16 @@ sub newArea{
 	print '</div>';
 }
 
-sub viewWarehouse{
-	print '<div id = "content">';
-	privateMenu($_[0], $_[1]);
-	print '
-	<div id = "right">
-		<h3>Contenuto del magazzino</h3>
-		<table>
-			<tr><th>Esempio</th></tr>
-			<tr<td>CIBO</td></tr>
-		</table>
-	</div>';
-	footer;
-	print '</div>';
-}
-
 sub updateWarehouse{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
-
-  my $cgi = new CGI;
-  my $id = $cgi->param('id');
-  print "$id";
-	print '
-	<div id = "right">
+	print '	<div id = "right">
 		<h4>Aggiungi tipologia di cibo:</h4>
 		<div class = "form-wrapper">
 			<form action="_aggiungi_specialita.cgi" method="post" accept-charset="utf-8">
 			  <label for="nome">Nome: </label><input type="text" name="nome" value="" placeholder="Nome" />
 			  <label for="quanitita">Quantita: </label><input type="text" name="quantita" value="" placeholder="Quantita" />
 			  <p><input type="submit" value="Aggiungi" /></p>
-			</form>
-		</div>
-	</div>';
-	footer;
-	print '</div>';
-}
-
-sub editWarehouse{
-	print '<div id = "content">';
-	privateMenu($_[0], $_[1]);
-  my $cgi = new CGI;
-  my $id = $cgi->param('id');
-  print '
-	<div id = "right">
-		<h4>Modifica la quantità id: $id</h4>
-		<div class = "form-wrapper">
-			<form action="_aggiungi_specialita.cgi" method="post" accept-charset="utf-8">
-			  <label for="quanitita">Quantita: </label><input type="text" name="quantita" value="" placeholder="Quantita" />
-			  <p><input type="submit" value="Aggiungi" /> <input type="submit" value="Rimuovi" /></p>
 			</form>
 		</div>
 	</div>';
@@ -352,15 +313,6 @@ sub manageUsers{
 	print '</div>';
 }
 
-sub manageMagazzino{
-	print '<div id = "content">';
-	privateMenu($_[0], $_[1]);
-	print '<div id = "right">';
-	print Functions::users_table();
-	print '</div>';
-	footer;
-	print '</div>';
-}
 
 sub newUser{
 	print '<div id = "content">';
@@ -535,8 +487,5 @@ sub privateMenu{
 					</ul>
 				</div>';
 }
-
-
-
 1;
 
