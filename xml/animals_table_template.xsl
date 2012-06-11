@@ -18,32 +18,37 @@
 				<xsl:for-each select="zoo:animale">
 					<tr>
 						<td>
-							<button onclick='edit(this)'>
+							<a class="button" onclick='edit(this);return false'>
 								<xsl:attribute name="animal_name">
 									<xsl:value-of select="zoo:nome"/>
+								</xsl:attribute> 
+								<xsl:attribute name="href">
+									modifica_animale.cgi?noscript=true&amp;name=<xsl:value-of select="zoo:nome"/>
 								</xsl:attribute>
 								Modifica
-							</button>
+							</a>
 						</td>
 						<td>
-							<button onclick='destroy(this)'>
+							<a href="reply.cgi?.." class="button" onclick='destroy(this);return false'>                         <xsl:attribute name="href">
+								reply.cgi?noscript=true&amp;watDo=animals&amp;action=destroy&amp;name=<xsl:value-of select="zoo:nome"/>
+								</xsl:attribute>
 								<xsl:attribute name="animal_name">
 									<xsl:value-of select="zoo:nome"/>
 								</xsl:attribute>
 								Elimina
-							</button>
+							</a>
 						</td>
 						<td><xsl:value-of select="../@nome"/></td>
 						<td><xsl:value-of select="zoo:nome"/></td>
 						<td><xsl:value-of select="zoo:eta"/></td>
 						<td><xsl:value-of select="zoo:sesso"/></td>
 						<td>
-							<button onclick='show_image(this)'>
+							<a class="button" href ="#" onclick='show_image(this);return false'>
 								<xsl:attribute name="image_path">
 									<xsl:value-of select="zoo:img"/>
 								</xsl:attribute>
 								Visualizza
-							</button>
+							</a>
 						</td>
 					</tr>
 				</xsl:for-each>

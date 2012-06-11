@@ -1,33 +1,14 @@
 <zoo xmlns="http://www.zoo.com" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.zoo.com animal.xsd">
 
 	<area id="1" posizione="nord" nome="scimmie" cibo_giornaliero="7">
-		<animale>
-			<nome>Andrea</nome>
-			<sesso>Female</sesso>
-			<eta>16</eta>
-			<img>../images/animals/Ragazza_addenta_pane_con_pene.jpg</img>
-		</animale>
-		<animale>
-			<nome>Giovanni</nome>
-			<sesso>Male</sesso><eta>5</eta>
-			<img>../images/animals/1327823991536.gif</img>
-		</animale>
+		
+		
 	</area>
 
 	<area id="2" posizione="nord" nome="giraffe" cibo_giornaliero="15">
-		<animale>
-			<nome>Giro</nome>
-			<sesso>Male</sesso>
-			<eta>6</eta>
-			<img>../images/Giro.jpg</img>
-		</animale>
+		
 
-		<animale>
-			<nome>Gira</nome>
-			<sesso>Female</sesso>
-			<eta>5</eta>
-			<img>../images/Gira.jpg</img>
-		</animale>
+		
 		<animale>
 			<nome>Roberta</nome>
 			<sesso>Female</sesso>

@@ -347,15 +347,14 @@ sub newUser{
 sub editAnimal{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
+	my $gender = Functions::get_animal_gender($_[2], $_[3]);
+	print $gender;
+	
 
 	print '<div id = "right"> <h3>Modifica '.$_[2].'</h3>
 		<div class = "form-wrapper">
 			<form action="_aggiorna_animale.cgi" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 				<fieldset>
-					<label for="area">area</label><select name="area" id="area">';
-	areaSelect(Functions::get_areas);
-	print '
-					</select><br/>
 			  	<label for="nome">nome: </label><input type="text" name="nome" id="nome" value="'.$_[2].'"/><br />
 			  	<label for="sesso">sesso: </label><select name="sesso" id="sesso">
 						<option value="Male">M</option>
@@ -396,7 +395,7 @@ sub manageAnimals{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
 	print '<div id = "right">';
-	print Functions::animal_table($_[2]);
+	print Functions::animal_table();
 	print '</div>';
 	footer;
 	print '</div>';
