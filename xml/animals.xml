@@ -38,7 +38,7 @@
 	</area>
 
 
-	<area id="3" posizione="D8" nome="Cammelli" cibo_giornaliero="30">
+	<area id="3" posizione="D8" nome="cammelli" cibo_giornaliero="30">
 		<animale>
 			<nome>Carmelo</nome>
 			<sesso>Male</sesso>
@@ -61,4 +61,5 @@
 		</animale>
 	</area>
 
-<area id="4" posizione="18" nome="Area Tigri"/><area id="5" posizione="B-8" nome="Canguri" cibo_giornaliero="12.3"/></zoo>
+<area id="4" posizione="18" nome="tigri" cibo_giornaliero="24.3"/><area id="5" posizione="B-8" nome="canguri" cibo_giornaliero="12.3"/></zoo>
+

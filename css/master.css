@@ -70,6 +70,7 @@ table.standard td
 border:1px solid #c3c3c3;
 padding:3px;
 min-width:75px;
+max-width:150px;
 text-align:center;
 }
 table.standard tr.title
@@ -80,10 +81,10 @@ table.standard td.button
 {
 border:0px;
 }
-
 table.standard input{
 width:55px;
 }
+
 div.animale
 {
 margin:5px;
