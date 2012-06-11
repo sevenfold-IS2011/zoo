@@ -20,6 +20,8 @@ print $page->header,
 												-author => '?????????',
 												-style=>{'src'=>'../css/master.css'});
 partials::privateHeader($sid);
+my $watDo = "users";
+partials::editUsers($sid, $watDo,$page->param("name") );
 print $page->end_html;
 
 exit;
