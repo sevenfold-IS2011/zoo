@@ -139,7 +139,7 @@ if ($watDo eq "warehouse"){
 	}
 	my $amount = $page->param("amount");
 	#--------------------TO DO: controllare che $amount sia un double
-	if ($action eq "add") {
+	if ($action eq "add" | $action eq "remove" ) {
 		print $page->header(-charset => 'utf-8');
 		#print "vuoi aggiungere $amount al cibo $cibo_id";
 
@@ -158,34 +158,44 @@ if ($watDo eq "warehouse"){
 		#print $quantita->getData;
 
 		$xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/zoo:area";#perchè non funziona?
-		my @areaarray = $xpc->findnodes($xpath_exp, $doc)->get_nodelist;
+		my $arealist = $xpc->findnodes($xpath_exp, $doc);
+		my $size = $xpc->findnodes($xpath_exp, $doc)->size;
 
 		my $new_cibo = $doc->createElement("cibo");
-
-		my $cont = 0;
-		foreach my $temp (@areaarray){
-			my $new_area = $doc->createElement("area");#creo il nuovo cibo
-			$new_area->appendTextNode($temp->getData);
+		my $new_area;
+		$new_cibo->setAttribute("id",$cibo_id);
+		$new_cibo->setAttribute("nome",$nome->getData);
+		my $new_quantita;
+		if ($action eq "add") {
+			$new_quantita = $quantita->getData + $amount;
+		}
+		else{
+			if ($action eq "remove") {
+				$new_quantita = $quantita->getData - $amount;
+			}
+		}
+		$new_cibo->setAttribute("quantita",$new_quantita);
+		my $temp;
+		my $size = $arealist->size;
+		for(my $count = 1; $count <= $size ; $count = $count+1){
+			$temp = $arealist->get_node($count);
+			$new_area = $doc->createElement("area");#creo il nuovo cibo
+			$new_area->appendTextNode($temp->textContent);
 			$new_cibo->appendChild($new_area);
-			#TO DO: settara gli attributi del nuovo cibo
-			$cont = $cont + 1;
 		}
 
 		my $xpath_exp = "//zoo:cibo[\@id='".$cibo_id."']";#rimuovo il vecchio cibo
 		my $cibo = $xpc->findnodes($xpath_exp, $doc)->get_node(0);
-		my $zoo = $cibo->parentNode();
-		$zoo->removeChild($cibo);
+		#my $zoo = $cibo->parentNode();
+		#$zoo->replaceChild($new_cibo, $cibo);
+		$cibo->replaceNode($new_cibo);
+
 
 		$root->appendChild($new_cibo);#appendo il nuovo cibo
 		open(XML,'>../xml/warehouse.xml') || die("Cannot Open file $!");
 		print XML $root->toString();
 		close(XML);
 
-		print Functions::warehouse_table;
-	}
-	if ($action eq "remove") {
-    print $page->header(-charset => 'utf-8');
-		print "vuoi rimuovere $amount al cibo $cibo_id";
 		print Functions::warehouse_table;
 	}
 	if ($action eq "destroy") {
