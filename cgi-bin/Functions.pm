@@ -92,7 +92,6 @@ sub get_areas{
 		}
 	}
 	return @stuff;
-
 }
 
 sub max_area_id{
@@ -189,7 +188,7 @@ sub warehouse_table(){
 	$find = quotemeta $find; # escape regex metachars if present
 	$text =~ s/$find/$replace/g;
 
-#sostituisco nella tabella gli id con il nome delle aree
+	#sostituisco nella tabella gli id con il nome delle aree
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
 	my $idlist = $xp->find('//@id');
 	if (my @idarray = $idlist->get_nodelist) {

@@ -7,7 +7,7 @@ use CGI;
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use partials;
 use XML::LibXML;
-
+use Scalar::Util::Numeric qw(isint isfloat);
 
 
 my $page = new CGI;
@@ -143,22 +143,18 @@ if ($watDo eq "warehouse"){
 		print '<h2>Richiesta errata - parametro cibo non definito</h2>';
 		exit;
 	}
-	if(!$amount) {
+=pod
+	if(!$amount | $amount < 0 | (!($amount =~ /^[+-]?\d+$/) && !($amount =~ m/^\d+.\d+$/))){# se $amount esiste, è > 0 e !(è un intero o un float)
 		print $page->header(-charset => 'utf-8');
-		print '<h2>Richiesta errata - quantità non inserita</h2>';
+		print '<h3>Richiesta errata - "quantità" inserita non correttamente, deve essere un numero positivo</h3>';
+		exit;
+	} #meglio usare Scalar::Util::Numeric qw(isint isfloat)
+=cut
+	if(!$amount | $amount < 0 | ( !isint($amount) && !isfloat($amount))){# se $amount esiste, è > 0 e !(è un intero o un float)
+		print $page->header(-charset => 'utf-8');
+		print '<h3>Richiesta errata - "quantità" inserita non correttamente, deve essere un numero positivo</h3>';
 		exit;
 	}
-	if($amount < 0) {
-		print $page->header(-charset => 'utf-8');
-		print '<h2>Richiesta errata - la quantità di cibo deve essere maggiore di 0, per rimuovere del cibo utilizzare l\'apposita funzione "rimuovi"</h2>';
-		exit;
-	}
-	if(!$amount =~ /^[+-]?\d+$/ | !$amount =~ m/^\d+.\d+$/) {
-		print $page->header(-charset => 'utf-8');
-		print '<h2>Richiesta errata - quantità deve essere un numero positivo"</h2>';
-		exit;
-	}
-	#--------------------TO DO: controllare che $amount sia un double
 	if ($action eq "add" | $action eq "remove" ) {
 		print $page->header(-charset => 'utf-8');
 
@@ -207,7 +203,9 @@ if ($watDo eq "warehouse"){
 		print XML $root->toString();
 		close(XML);
 
-		print Functions::warehouse_table;
+		if($noscript){
+			print $page->redirect( -URL => "gestione_magazzino.cgi");
+		}
 	}
 	if ($action eq "destroy") {
 		my $parser = XML::LibXML->new;
@@ -227,6 +225,9 @@ if ($watDo eq "warehouse"){
 		print XML $root->toString();
 		close(XML);
 		print Functions::warehouse_table;
+		if($noscript){
+			print $page->redirect( -URL => "gestione_magazzino.cgi");
+		}
 		exit;
 	}
 }
