@@ -249,7 +249,7 @@ sub manageArea{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
 	print '<div id = "right">';
-	areaList(Functions::get_areas);
+	print Functions::area_table;
 	print '</div>';
 	footer;
 	print '</div>';
@@ -263,26 +263,14 @@ sub newArea{
 		<h3>Nuova Area</h3>
 		<div class = "form-wrapper">
 			<form action="_nuova_area.cgi" method="post" accept-charset="utf-8">
-			  <label for="name">Nome</label><input type="text" name="nome" value="" placeholder="nome"><br />
-			  <label for="posizione">Posizione</label><input type="text" name="posizione" value="" placeholder="Posizione">
-			  <p><input type="submit" value="Crea Area"></p>
+			  <fieldset>
+			    <label for="name">Nome</label><input type="text" name="nome" value="" placeholder="nome"><br />
+			    <label for="posizione">Posizione</label><input type="text" name="posizione" value="" placeholder="Posizione">
+			    <label for="cibo">Cibo giornaliero (Kg)</label><input type="text" name="cibo" value="">
+			    <p><input type="submit" value="Crea Area"></p>
+			  </fieldset>
 			</form>
 		</div>
-	</div>';
-	footer;
-	print '</div>';
-}
-
-sub viewWarehouse{
-	print '<div id = "content">';
-	privateMenu($_[0], $_[1]);
-	print '
-	<div id = "right">
-		<h3>Contenuto del magazzino</h3>
-		<table>
-			<tr><th>Esempio</th></tr>
-			<tr<td>CIBO</td></tr>
-		</table>
 	</div>';
 	footer;
 	print '</div>';
@@ -291,14 +279,12 @@ sub viewWarehouse{
 sub updateWarehouse{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
-	print '
-	<div id = "right">
-		<h3>Aggiorna Magazzino</h3>
-		<h4>Aggiungi rifornimento</h4>
+	print '	<div id = "right">
+		<h4>Aggiungi tipologia di cibo:</h4>
 		<div class = "form-wrapper">
 			<form action="_aggiungi_specialita.cgi" method="post" accept-charset="utf-8">
-			  <label for="specialita">Specialità</label><select name ="specialita"><option value="banane">Banane</option></select><br />
-			  <label for="quanitita">Quantita</label><input type="text" name="quantita" value="" placeholder="Quantita" />
+			  <label for="nome">Nome: </label><input type="text" name="nome" value="" placeholder="Nome" />
+			  <label for="quanitita">Quantita: </label><input type="text" name="quantita" value="" placeholder="Quantita" />
 			  <p><input type="submit" value="Aggiungi" /></p>
 			</form>
 		</div>
@@ -327,15 +313,6 @@ sub manageUsers{
 	print '</div>';
 }
 
-sub manageMagazzino{
-	print '<div id = "content">';
-	privateMenu($_[0], $_[1]);
-	print '<div id = "right">';
-	print Functions::users_table();
-	print '</div>';
-	footer;
-	print '</div>';
-}
 
 sub newUser{
 	print '<div id = "content">';
@@ -346,8 +323,10 @@ sub newUser{
 		<div class = "form-wrapper">
 			<form action="_nuovo_utente.cgi" method="post" accept-charset="utf-8">
 			  <fieldset>
-			  <label for="tipo">Tipo</label><select name="tipo"><option value="dipendente">Dipendente</option><option value="manager">Manager</option></select><br />
+			  <label for="tipo">Tipo</label><select name="tipo"><option value="impiegato">Impiegato</option><option value="manager">Manager</option></select><br />
 			  <label for="nome">Nome</label><input type="text" name="nome" value="" placeholder="Nome e cognome"><br />
+			  <label for="sesso">Sesso</label><select name="sesso"><option value="M">M</option><option value="F">F</option></select><br />
+			  <label for="eta">Et&agrave;</label><input type="text" name="eta" value=""><br />
 			  <label for="username">Username</label><input type="text" name="username" value="" placeholder="Username"><br />
 			  <label for="password">Password</label><input type="password" name="password" value="" placeholder="Password">
 			  <label for="password">Conferma </label><input type="password" name="password2" value="" placeholder="Una diversa da prima">
@@ -496,7 +475,6 @@ sub privateMenu{
 	}
 	print'<li><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
 	if (Functions::is_manager($sid)){
-		print'<li><a href="gestione_utenti.cgi">Gestione Utenti</a>';
 		if ($watDo eq "users"){
 			print'
 							<ul>
@@ -504,14 +482,10 @@ sub privateMenu{
 								<li><a href="modifica_password.cgi">Modifica password</a></li>
 							</ul>';
 		}
-		print '</li>';
 	}
 	print'
 					</ul>
 				</div>';
 }
-
-
-
 1;
 

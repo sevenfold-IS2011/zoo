@@ -1,21 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="warehouse_table_template.xsl"?>
+<zoo xmlns="http://www.zoo.com" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.zoo.com warehouse.xsd">
 
-<zoo
-    xmlns="http://www.zoo.com"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
-    xs:schemaLocation="http://www.zoo.com magazzino.xsd">
-
-    <cibo id="1" nome="banane" area="scimmie">
-        <quantita>34</quantita>
+    <cibo id="1" nome="banane" quantita="33">
+        <area>1</area>
     </cibo>
 
-    <cibo id="2" nome="arbusti" area="cammelli">
-        <quantita>55</quantita>
+    <cibo id="2" nome="arbusti" quantita="44">
+       <area>3</area>
     </cibo>
 
-    <cibo id="3" nome="erba" area="giraffe">
-        <quantita>34</quantita>
+    <cibo id="3" nome="erba" quantita="55">
+       <area>2</area>
+       <area>3</area>
     </cibo>
 </zoo>
 

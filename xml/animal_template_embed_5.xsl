@@ -5,7 +5,7 @@
 	xmlns:zoo="http://www.zoo.com">
 	<xsl:template match="zoo:zoo">
 			<xsl:for-each select="zoo:area">
-			<xsl:if test="@id=4">
+			<xsl:if test="@id=5">
 				<h2>Area <xsl:value-of select="./@nome"/>:</h2>
 					<xsl:for-each select="zoo:animale">
 

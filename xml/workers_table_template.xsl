@@ -12,7 +12,6 @@
 					<td>Età</td>
 					<td>Sesso</td>
 					<td>Tipo</td>
-					<td>Salario</td>
 				</tr>
 				<xsl:for-each select="zoo:employee">
 					<tr>
@@ -20,7 +19,6 @@
 						<td><xsl:value-of select="zoo:age"/></td>
 						<td><xsl:value-of select="zoo:gender"/></td>
 						<td>Impiegato</td>
-						<td>nd</td>
 					</tr>
 				</xsl:for-each>
 				<xsl:for-each select="zoo:manager">
@@ -28,8 +26,7 @@
 						<td><xsl:value-of select="zoo:name"/></td>
 						<td><xsl:value-of select="zoo:age"/></td>
 						<td><xsl:value-of select="zoo:gender"/></td>
-						<td>Managrer</td>
-						<td><xsl:value-of select="zoo:salary"/></td>
+						<td>Manager</td>
 					</tr>
 				</xsl:for-each>
 			</table>

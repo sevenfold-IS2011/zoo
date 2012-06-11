@@ -8,9 +8,9 @@ use File::Spec;
 my $page = new CGI;
 my $sid = $page->cookie("CGISESSID") || undef;
 
-if (!$sid eq undef){
-	my $session = new CGI::Session(undef, $_[0], {File::Spec->tmpdir});
+if ($sid){
+	my $session = new CGI::Session(undef, $sid, {File::Spec->tmpdir});
 	$session -> delete();
 }
-print $page->redirect( -URL => "animali.cgi");
+print $page->redirect( -URL => "index.cgi");
 exit;

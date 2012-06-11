@@ -2,7 +2,6 @@ function handle_response(){
 	document.getElementById('right').innerHTML = xmlhttp.responseText;
 }
 
-
 function edit(button){
 	location.reload("modifica_utente.cgi?username="+button.getAttribute("username"));
 }

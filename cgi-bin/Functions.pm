@@ -30,7 +30,7 @@ sub check_credentials{
 	my $username = $_[0];
 	my $pswd = $_[1];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
-	my $nodeset = $xp->find("//employee[username=\"$username\"]/password | //manager[username=\"$username\"]/password");
+	my $nodeset = $xp->find("//impiegato[username=\"$username\"]/password | //manager[username=\"$username\"]/password");
 	my @password;
 	my $password;
 	my $salt = "zxcluywe6r78w6rusdgfbkejwqytri8esyr mhgdku5u65i75687tdluytosreasky6";
@@ -45,10 +45,16 @@ sub check_credentials{
 	}
 }
 
+sub crypt_password{
+	my $password = $_[0];
+	my $salt = "zxcluywe6r78w6rusdgfbkejwqytri8esyr mhgdku5u65i75687tdluytosreasky6";
+	return crypt($password, $salt);
+}
+
 sub get_employee_name{
 	my $username = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
-	my $nodeset = $xp->find("//employee[username=\"$username\"]/name | //manager[username=\"$username\"]/name");
+	my $nodeset = $xp->find("//impiegato[username=\"$username\"]/nome | //manager[username=\"$username\"]/nome");
 	my @name;
 	my $name;
 	if (my @nodelist = $nodeset->get_nodelist) {
@@ -61,7 +67,7 @@ sub get_employee_name{
 sub is_manager{
 	my $username = get_username_from_sid($_[0]);
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
-	my $nodeset = $xp->find("//manager[username=\"$username\"]/name");
+	my $nodeset = $xp->find("//manager[username=\"$username\"]/nome");
 	if ($nodeset->size() > 0) {
 		return 1;
 	}else{
@@ -133,12 +139,12 @@ sub name_in_area_taken{
 sub animal_table{
 	my $source = XML::LibXML->load_xml(location => '../xml/animals.xml');
 	my $xslt = XML::LibXSLT->new();
-	my $style_doc = undef;  
-	if ($_[0] eq "true"){
-	  $style_doc = XML::LibXML->load_xml(location=>"../xml/animals_table_noscript_template.xsl", no_cdata=>1);     
+	my $style_doc;
+	if ($_[0] == "true"){
+	  $style_doc = XML::LibXML->load_xml(location=>"../xml/animals_table_template.xsl", no_cdata=>1);
 	}
 	else{
-	  $style_doc = XML::LibXML->load_xml(location=>"../xml/animals_table_template.xsl", no_cdata=>1);
+	  $style_doc = XML::LibXML->load_xml(location=>"../xml/animals_table_noscript_template.xsl", no_cdata=>1);
 	}
 	my $stylesheet = $xslt->parse_stylesheet($style_doc);
 	my $results = $stylesheet->transform($source);
@@ -182,7 +188,52 @@ sub warehouse_table(){
 	my $replace = "";
 	$find = quotemeta $find; # escape regex metachars if present
 	$text =~ s/$find/$replace/g;
+
+#sostituisco nella tabella gli id con il nome delle aree
+	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+	my $idlist = $xp->find('//@id');
+	if (my @idarray = $idlist->get_nodelist) {
+		my $node;
+		my $tmp;
+		foreach $tmp (@idarray){
+			$node = $tmp->getData;
+			my $namelist = $xp->find("//area[\@id=\"$node\"]/\@nome");
+			if (my @namearray = $namelist->get_nodelist){
+				my $nome;
+				$nome = @namearray[0]->getData;
+				my $find = "<a href=\"area.cgi?id=$node\">$node</a>";
+				my $replace = "<a href=\"area.cgi?id=$node\">$nome</a>";
+				$find = quotemeta $find; # escape regex metachars if present
+				$text =~ s/$find/$replace/g;
+			}
+		}
+	}
 	return $text;
+}
+
+sub area_table(){
+	my $source = XML::LibXML->load_xml(location => '../xml/animals.xml');
+	my $xslt = XML::LibXSLT->new();
+	my $style_doc = XML::LibXML->load_xml(location=>"../xml/area_table_template.xsl", no_cdata=>1);
+	my $stylesheet = $xslt->parse_stylesheet($style_doc);
+	my $results = $stylesheet->transform($source);
+	my $text = $stylesheet->output_as_bytes($results);
+	my $find = '<?xml version="1.0"?>';
+	my $replace = "";
+	$find = quotemeta $find; # escape regex metachars if present
+	$text =~ s/$find/$replace/g;
+	return $text;
+}
+
+sub username_taken{
+	my $username = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
+#	my $nodeset = $xp->find("//username=\"$username\"");
+	if ($xp->find("//username=\"$username\"")){
+		return 1;
+	} else {
+		return undef;
+	}
 }
 
 #sub orderXML{

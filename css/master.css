@@ -61,8 +61,8 @@ table.standard th
 {
 border:1px solid #c3c3c3;
 padding:3px;
-text-align:left;
-vertical-align:top;
+min-width:75px;
+text-align:center;
 }
 
 table.standard td
@@ -79,6 +79,10 @@ background-color:#87A84B;
 table.standard td.button
 {
 border:0px;
+}
+
+table.standard input{
+width:55px;
 }
 div.animale
 {

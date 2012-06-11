@@ -1,55 +1,56 @@
-<workers
-    xmlns="http://www.zoo.com"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
-    xs:schemaLocation="http://www.zoo.com worker.xsd">
-    <employee>
+<workers xmlns="http://www.zoo.com" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.zoo.com worker.xsd">
+    <impiegato>
         <username>mario</username>
         <password>de2f15d014d40b93578d255e6221fd60</password>
-        <name>Mario</name>
-        <gender>M</gender>
-        <age>45</age>
-    </employee>
+        <nome>Mario</nome>
+        <sesso>M</sesso>
+        <eta>45</eta>
+        <stipendio>1285</stipendio>
+    </impiegato>
 
-    <employee>
+    <impiegato>
         <username>maria</username>
         <password>maria</password>
-        <name>Maria</name>
-        <gender>F</gender>
-        <age>44</age>
-    </employee>
+        <nome>Maria</nome>
+        <sesso>F</sesso>
+        <eta>44</eta>
+        <stipendio>1180</stipendio>
+    </impiegato>
 
-    <employee>
+    <impiegato>
         <username>mirco</username>
         <password>mirco</password>
-        <name>Mirco</name>
-        <gender>M</gender>
-        <age>28</age>
-    </employee>
+        <nome>Mirco</nome>
+        <sesso>M</sesso>
+        <eta>28</eta>
+         <stipendio>1120</stipendio>
+    </impiegato>
 
-    <employee>
+    <impiegato>
         <username>martina</username>
         <password>martina</password>
-        <name>Martina</name>
-        <gender>M</gender>
-        <age>26</age>
-    </employee>
+        <nome>Martina</nome>
+        <sesso>M</sesso>
+        <eta>26</eta>
+        <stipendio>1110</stipendio>
+    </impiegato>
 
     <manager>
         <username>marco</username>
         <password>marco</password>
-        <name>Marco</name>
-        <gender>M</gender>
-        <age>25</age>
-        <salary>1650</salary>
+        <nome>Marco</nome>
+        <sesso>M</sesso>
+        <eta>25</eta>
+        <stipendio>1650</stipendio>
     </manager>
 
     <manager>
         <username>giovanna</username>
         <password>zxVcGz0BPdHkY</password>
-        <name>Giovanna</name>
-        <gender>F</gender>
-        <age>24</age>
-        <salary>1600</salary>
+        <nome>Giovanna</nome>
+        <sesso>F</sesso>
+        <eta>24</eta>
+        <stipendio>1600</stipendio>
     </manager>
-</workers>
+<manager><username>lucanervi</username><password>zxePlNSDQjsxg</password><nome>Luca Nervi</nome><sesso>M</sesso><eta>23</eta><stipendio>1175</stipendio></manager><impiegato><username>paolobitta</username><password>zx2kL4qmDw3kg</password><nome>Paolo Bitta</nome><sesso>M</sesso><eta>35</eta><stipendio>1270</stipendio></impiegato></workers>
 
