@@ -130,18 +130,37 @@ if ($watDo eq "users") {
 #----------------------------------------------------------------------WAREHOUSE
 if ($watDo eq "warehouse"){
 	my $action = $page->param("action");
-	check_action($action);
 	my $cibo_id = $page->param("cibo");
-	if(!$cibo_id) {
-	  print $page->header();
-		print '<h2>Richiesta errata - parametro cibo non definit</h2>';
+	my $amount = $page->param("amount");
+	check_action($action);
+	if(!$action) {
+		print $page->header(-charset => 'utf-8');
+		print '<h2>Richiesta errata - azione non esistente</h2>';
 		exit;
 	}
-	my $amount = $page->param("amount");
+	if(!$cibo_id) {
+		print $page->header(-charset => 'utf-8');
+		print '<h2>Richiesta errata - parametro cibo non definito</h2>';
+		exit;
+	}
+	if(!$amount) {
+		print $page->header(-charset => 'utf-8');
+		print '<h2>Richiesta errata - quantità non inserita</h2>';
+		exit;
+	}
+	if($amount < 0) {
+		print $page->header(-charset => 'utf-8');
+		print '<h2>Richiesta errata - la quantità di cibo deve essere maggiore di 0, per rimuovere del cibo utilizzare l\'apposita funzione "rimuovi"</h2>';
+		exit;
+	}
+	if(!$amount =~ /^[+-]?\d+$/ | !$amount =~ m/^\d+.\d+$/) {
+		print $page->header(-charset => 'utf-8');
+		print '<h2>Richiesta errata - quantità deve essere un numero positivo"</h2>';
+		exit;
+	}
 	#--------------------TO DO: controllare che $amount sia un double
 	if ($action eq "add" | $action eq "remove" ) {
 		print $page->header(-charset => 'utf-8');
-		#print "vuoi aggiungere $amount al cibo $cibo_id";
 
 		my $parser = XML::LibXML->new;
 		my $doc = $parser->parse_file("../xml/warehouse.xml");
@@ -151,15 +170,12 @@ if ($watDo eq "warehouse"){
 
 		my $xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/\@nome";#prendo il nome del cibo
 		my $nome = $xpc->findnodes($xpath_exp, $doc)->get_node(0);
-		#print $nome->getData;
 
 		$xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/\@quantita";#prendo la quantità del cibo
 		my $quantita = $xpc->findnodes($xpath_exp, $doc)->get_node(0);
-		#print $quantita->getData;
 
 		$xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/zoo:area";#perchè non funziona?
 		my $arealist = $xpc->findnodes($xpath_exp, $doc);
-		my $size = $xpc->findnodes($xpath_exp, $doc)->size;
 
 		my $new_cibo = $doc->createElement("cibo");
 		my $new_area;
@@ -183,14 +199,9 @@ if ($watDo eq "warehouse"){
 			$new_area->appendTextNode($temp->textContent);
 			$new_cibo->appendChild($new_area);
 		}
-
 		my $xpath_exp = "//zoo:cibo[\@id='".$cibo_id."']";#rimuovo il vecchio cibo
 		my $cibo = $xpc->findnodes($xpath_exp, $doc)->get_node(0);
-		#my $zoo = $cibo->parentNode();
-		#$zoo->replaceChild($new_cibo, $cibo);
 		$cibo->replaceNode($new_cibo);
-
-
 		$root->appendChild($new_cibo);#appendo il nuovo cibo
 		open(XML,'>../xml/warehouse.xml') || die("Cannot Open file $!");
 		print XML $root->toString();

@@ -1,14 +1,2 @@
 <zoo xmlns="http://www.zoo.com" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.zoo.com warehouse.xsd">
-
-
-
-    <cibo id="2" nome="arbusti" quantita="44">
-       <area>3</area>
-    </cibo>
-
-    <cibo id="3" nome="erba" quantita="55">
-       <area>2</area>
-       <area>3</area>
-    </cibo>
-<cibo id="1" nome="banane" quantita="40"><area>1</area></cibo></zoo>
-
+<cibo id="4" nome="carne" quantita="44"><area>4</area></cibo><cibo id="5" nome="foglie" quantita="55"><area>2</area><area>5</area></cibo><cibo id="3" nome="erba" quantita="33"><area>5</area><area>3</area></cibo><cibo id="2" nome="arbusti" quantita="22"><area>3</area></cibo><cibo id="1" nome="banane" quantita="43.3"><area>1</area></cibo></zoo>
