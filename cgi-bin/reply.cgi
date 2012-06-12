@@ -8,6 +8,10 @@ use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use partials;
 use XML::LibXML;
 use Scalar::Util::Numeric qw(isint isfloat);
+use File::Spec;
+use File::Basename;
+
+$CGI::POST_MAX = 1024 * 5000;
 
 
 my $page = new CGI;
@@ -77,6 +81,7 @@ if ($watDo eq "animals")
 
 		if ($noscript eq "true") {
 			$page->redirect(-URL => "gestione_animali.cgi");
+			exit;
 		}
 
 		print $page->header();
@@ -91,8 +96,98 @@ if ($watDo eq "animals")
 	}
 
 	if ($action eq "update") {
-	# aggiorna xml
-	exit;
+		my $parser = XML::LibXML->new;
+		my $doc = $parser->parse_file("../xml/animals.xml");
+		my $root = $doc->getDocumentElement();
+		my $xpc = XML::LibXML::XPathContext->new;
+		$xpc->registerNs('zoo', 'http://www.zoo.com');
+		my $xpath_exp = "//zoo:animale[zoo:nome='".$name."']";
+		my $animal = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
+		if (!$animal) {
+			print $page->header();
+			print '
+						<h2>Richiesta errata - nessun animale con questo nome</h2>';
+			exit;
+		}
+		my $age = $page -> param("age");
+		if (!isint($age)){
+			print $page->header();
+			print '
+						<h2>Richiesta errata - Età non valida</h2>';
+			exit;
+		}
+		my $gender = $page ->param("gender");
+		if (!$gender || ($gender ne "Male" && $gender ne "Female")) {
+			print $page->header();
+			print '
+						<h2>Richiesta errata - Sesso non valido</h2>';
+			exit;
+		}
+		my $find = ' ';
+		my $replace = '';
+		$find = quotemeta $find; # escape regex metachars if present
+		$age =~ s/$find/$replace/g;
+		$xpath_exp = "//zoo:animale[zoo:nome='".$name."']/zoo:eta";
+		my $old_age_node = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
+		my $old_age = $old_age_node -> nodeValue();
+		$old_age =~ s/$find/$replace/g;
+		
+		my $modified = undef;
+	
+		if($age ne $old_age){
+			$modified = 1;
+			my $new_age_node = $doc->createElement("eta");
+			$new_age_node ->appendTextNode($age);
+			$old_age_node ->replaceNode($new_age_node);
+		}
+		$xpath_exp = "//zoo:animale[zoo:nome='".$name."']/zoo:sesso";
+		my $old_gender_node = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
+		my $old_gender = $old_gender_node -> nodeValue();
+		
+		if($gender ne $old_gender){
+			$modified = 1;
+			my $new_gender_node = $doc->createElement("sesso");
+			$new_gender_node -> appendTextNode($gender);
+			$old_gender_node -> replaceNode($new_gender_node);
+		}
+		
+		my $filename = $page->param("image"); 
+		
+		if($filename){
+			my $upload_dir = "../images/animals";
+			my ($fname, $path, $extension) = fileparse($filename, '\..*');
+			$filename = $fname.$extension;
+
+			#manca un check sull'image name, occhio
+
+			my $upload_filehandle = $page->upload("image");
+			open (UPLOADFILE, ">$upload_dir/$filename" ) or die "$!";
+			binmode UPLOADFILE; 
+			while (<$upload_filehandle>){ 
+				print UPLOADFILE;
+			}
+			close UPLOADFILE;
+
+			$xpath_exp = "//zoo:animale[zoo:nome='".$name."']/zoo:img";
+			my $old_image_node = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
+			my $old_image_path = $old_image_node -> nodeValue();
+			if($old_image_path){
+				unlink($old_image_path);
+			}
+			$modified = 1;
+			my $new_image_node = $doc->createElement("img");
+			my $image_path = $upload_dir.'/'.$filename;
+			$new_image_node -> appendTextNode($image_path);
+			$old_image_node -> replaceNode($new_image_node);
+		}
+		
+		if($modified){
+			open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
+			print XML $root->toString();
+			close(XML);
+		}
+		print $page->redirect(-URL => "gestione_animali.cgi");
+		exit;
 	}
 }
 

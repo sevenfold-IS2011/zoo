@@ -356,26 +356,28 @@ sub editAnimal{
 	my $gender = Functions::get_animal_gender($_[2]);
 	print '<div id = "right"> <h3>Modifica '.$_[2].'</h3>
 		<div class = "form-wrapper">
-			<form action="_aggiorna_animale.cgi" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+			<form action="reply.cgi" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+			<input type="hidden" name="watDo" value="animals">
+			<input type="hidden" name="action" value="update">
 				<fieldset>
-			  	<label for="nome">nome: </label><input type="text" name="nome" id="nome" value="'.$_[2].'"/><br />';
+			  	<label for="nome">nome: </label><input type="text" name="name" id="nome" value="'.$_[2].'" readonly/><br />';
 			  	
 	if ($gender eq "Male"){
-		print '	<label for="sesso">sesso: </label><select name="sesso" id="sesso">
+		print '	<label for="sesso">sesso: </label><select name="gender" id="sesso">
 							<option value="Male" default>M</option>
 							<option value="Female">F</option>
 						</select><br />';
 	} elsif ($gender eq "Female") {
 		print '
-						<label for="sesso">sesso: </label><select name="sesso" id="sesso">
-							<option value="Male" >M</option>
+						<label for="sesso">sesso: </label><select name="gender" id="sesso">
+							<option value="Male">M</option>
 							<option value="Female"default>F</option>
 						</select><br />';
 	}
 	my $age = Functions::get_animal_age($_[2]);
 	print'
-					<label for="eta">et&agrave;: </label><input type="text" name="eta"  placeholder="'.$age.'" id="eta"/><br />
-			  	<label for="image">foto:</label> <input type="file" name="image" value="carica foto" id="image"/><br />
+					<label for="eta">et&agrave;: </label><input type="text" name="age"  value="'.$age.'" id="eta"/><br />
+			  	<label for="image">Foto (non selezionarne nessuna se non vuoi sostituirla):</label> <input type="file" name="image" value="carica foto" id="image"/><br />
 			  	<p><input type="submit" value="Modifica animale" /></p>
 				</fieldset>
 			</form>
