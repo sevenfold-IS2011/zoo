@@ -302,6 +302,7 @@ if ($watDo eq "warehouse"){
 		if($noscript){
 			print $page->redirect( -URL => "gestione_magazzino.cgi");
 		}
+
 	}
 	if ($action eq "destroy") {
 		my $parser = XML::LibXML->new;
