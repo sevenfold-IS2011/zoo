@@ -552,8 +552,8 @@ sub edit_user{
 	privateMenu($_[0], $_[1]);
 	my $is_manager = Functions::is_manager_from_username($_[2]);
 	my $gender = Functions::get_user_gender($_[2]);
-=pod
 	my $name = Functions::get_user_name($_[2]);
+	my $age = Functions::get_user_age($_[2]);
 	print '
 	<div id = "right">
 		<h3>Modifica Utente</h3>
@@ -561,6 +561,7 @@ sub edit_user{
 			<form action="reply.cgi" method="post" accept-charset="utf-8">
 				<input type="hidden" name="watDo" value="users">
 				<input type="hidden" name="action" value="update">
+				<input type="hidden" name="username" value="'.$_[2].'">
 			  <fieldset>
 			  	<label for="tipo">Tipo</label>';
 	if ($is_manager){
@@ -581,16 +582,16 @@ sub edit_user{
 					<select name="sesso">';
 	if ($gender eq "Male"){
 		print '
-						<option value="M" default>M</option>
+						<option value="M" selected="selected">M</option>
 						<option value="F">F</option>';
 	} else {
 		print '
 						<option value="M">M</option>
-						<option value="F" default>F</option>';
+						<option value="F" selected="selected">F</option>';
 	}
 	print '
 					</select><br />
-			  	<label for="eta">Et&agrave;</label><input type="text" name="eta" value=""><br />
+			  	<label for="eta">Et&agrave;</label><input type="text" name="eta" value="'.$age.'"><br />
 			  	<p><input type="submit" value="Modifica Utente"></p>
 			  </fieldset>
 			</form>
@@ -598,7 +599,6 @@ sub edit_user{
 	</div>';
 	footer();
 	print '</div>';
-=cut
 }
 1;
 

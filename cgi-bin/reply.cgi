@@ -41,6 +41,11 @@ if ($watDo eq "animals")
 	my $action = $page->param("action");
 	check_action($action);
 	my $name = $page->param("name");
+	my $parser = XML::LibXML->new;
+	my $doc = $parser->parse_file("../xml/animals.xml");
+	my $root = $doc->getDocumentElement();
+	my $xpc = XML::LibXML::XPathContext->new;
+	$xpc->registerNs('zoo', 'http://www.zoo.com');
 	if (!$name) {
 		print $page->header();
 		print '
@@ -50,11 +55,6 @@ if ($watDo eq "animals")
 	if ($action eq "destroy") {
 
 		# hai un parametro noscript = true se devi ricomporre la pagina
-		my $parser = XML::LibXML->new;
-		my $doc = $parser->parse_file("../xml/animals.xml");
-		my $root = $doc->getDocumentElement();
-		my $xpc = XML::LibXML::XPathContext->new;
-		$xpc->registerNs('zoo', 'http://www.zoo.com');
 		my $xpath_exp = "//zoo:animale[zoo:nome='".$name."']";
 		my $animal = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
 		#my $asize = $xpc -> findnodes($xpath_exp, $doc)->size();
@@ -95,11 +95,7 @@ if ($watDo eq "animals")
 	}
 
 	if ($action eq "update") {
-		my $parser = XML::LibXML->new;
-		my $doc = $parser->parse_file("../xml/animals.xml");
-		my $root = $doc->getDocumentElement();
-		my $xpc = XML::LibXML::XPathContext->new;
-		$xpc->registerNs('zoo', 'http://www.zoo.com');
+		
 		my $xpath_exp = "//zoo:animale[zoo:nome='".$name."']";
 		my $animal = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
 		if (!$animal) {
@@ -195,6 +191,11 @@ if ($watDo eq "users") {
 	my $action = $page->param("action");
 	check_action($action);
 	my $username = $page->param("username");
+	my $parser = XML::LibXML->new;
+	my $doc = $parser->parse_file("../xml/workers.xml");
+	my $root = $doc->getDocumentElement();
+	my $xpc = XML::LibXML::XPathContext->new;
+	$xpc->registerNs('zoo', 'http://www.zoo.com');
 	if (!$username) {
 		print $page->header();
 		print '
@@ -202,24 +203,90 @@ if ($watDo eq "users") {
 		exit;
 		}
 	if ($action eq "destroy") {
-		my $parser = XML::LibXML->new;
-		my $doc = $parser->parse_file("../xml/workers.xml");
-		my $root = $doc->getDocumentElement();
-		my $xpc = XML::LibXML::XPathContext->new;
-		$xpc->registerNs('zoo', 'http://www.zoo.com');
 		my $xpath_exp = "//zoo:employee[zoo:username='".$username."'] | //zoo:manager[zoo:username=']".$username."']";
 		my $user = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
 		#my $asize = $xpc -> findnodes($xpath_exp, $doc)->size();
 		if (!$user) {
 			print $page->header();
 			print '
-						<h2>Richiesta errata - nessun animale con questo nome</h2>';
-			#print "il nome era: $name, ho trovato $asize nodi, xpath era $xpath_exp"; #nome univoco in tutto lo zoo o all'interno dell'area??
+						<h2>Richiesta errata - nessun utente con questo nome</h2>';
 			exit;
 		}
 		print $page->header();
 		print 'l\'ho trovato';
+		#da fare la cancellazione
+		exit;
 		}
+	if ($action eq "update"){
+		my $modified = undef;
+		my $age = $page -> param("eta");
+		my $find = ' ';
+		my $replace = '';
+		$find = quotemeta $find; # escape regex metachars if present
+		$age =~ s/$find/$replace/g;
+		if (!isint($age)){
+			print $page->header();
+			print '
+						<h2>Richiesta errata - Età non valida</h2>';
+			exit;
+		}
+		my $role = $page -> param("tipo");
+		if (!$role || ($role ne "manager" && $role ne "impiegato")) {
+			print $page->header();
+			print '<h1> Ruolo non corretto (errori da sistemare)</h1>';
+			exit;
+		}
+		my $name = $page->param("nome");
+		if (!$name){
+			print $page->header();
+			print '<h1> Non hai inserito il nome  (errori da sistemare)</h1>';
+			exit;
+		}
+		my $gender = $page -> param("sesso");
+		if (!$gender || ($gender ne "M" && $gender ne "F")) {
+			print $page->header();
+			print '<h1> Sesso non corretto  (errori da sistemare)</h1>';
+			exit;
+		}
+		my $current_role;
+		if (Functions::is_manager_from_username($username)) {
+			$current_role = "manager";
+		} else {
+			$current_role = "impiegato";
+		}
+		if (($role eq "manager" && $current_role eq "impiegato") || 
+				($role eq "impiegato" && $current_role eq "manager")){
+			$modified = 1;
+			my $xpath_exp = "//zoo:".$current_role."[zoo:username='".$username."']";
+			my $old_user_node = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
+			$old_user_node -> setNodeName($role);
+		}
+		
+		my $xpath_exp = "//zoo:username[. = \"$username\"]/../zoo:nome";
+		my $old_name_node = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
+		my $old_name = $old_name_node -> textContent();
+		if ($old_name ne $name) {
+			$modified = 1;
+			my $new_name_node = $doc->createElement("nome");
+			$new_name_node -> appendTextNode($name);
+			$old_name_node -> replaceNode($new_name_node);
+		}
+		
+		$xpath_exp = "//zoo:username[. = \"$username\"]/../zoo:sesso";
+		my $old_gender_node = $xpc -> findnodes($xpath_exp,$doc)->get_node(1);
+		my $old_gender = $old_gender_node -> textContent();
+		if ($old_gender ne $gender) {
+			$modified = 1;
+			my $new_gender_node = $doc->createElement("sesso");
+			$new_gender_node -> appendTextNode($gender);
+			$old_gender_node -> replaceNode($new_gender_node);
+		}
+		
+		
+		
+		print $page->redirect(-URL => "gestione_utenti.cgi");
+		exit;
+	}
 
 }
 

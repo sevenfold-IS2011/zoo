@@ -271,7 +271,13 @@ sub get_user_gender{
 sub get_user_name{
 	my $username = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
-	return $xp->find("//[username=\"$username\"]/nome")->string_value();
+	return $xp->find("//username[. = \"$username\"]/../nome")->string_value();
+}
+
+sub get_user_age{
+	my $username = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
+	return $xp->find("//username[. = \"$username\"]/../eta")->string_value();
 }
 #sub orderXML{
 #        my $hashParameters = shift;
