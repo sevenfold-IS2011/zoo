@@ -39,9 +39,28 @@ table.striped{
 	width:100%;
 }
 
+table.striped a{
+   text-decoration:none;
+	color:black;
+}
+
 table.striped tr td{
 	width:100%;
+	height:3%;
 	border: 2px solid black;
 	border-radius: 3px;
 	text-align:center;
+}
+
+table.striped tr td:hover{
+	background:black;
+}
+
+table.striped tr td:hover a{
+	color:white;
+}
+
+span.stripe{
+	letter-spacing: 4px;
+	text-transform: uppercase;
 }
