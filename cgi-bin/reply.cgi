@@ -239,21 +239,13 @@ if ($watDo eq "warehouse"){
 		print '<h2>Richiesta errata - parametro cibo non definito</h2>';
 		exit;
 	}
-=pod
-	if(!$amount | $amount < 0 | (!($amount =~ /^[+-]?\d+$/) && !($amount =~ m/^\d+.\d+$/))){# se $amount esiste, è > 0 e !(è un intero o un float)
-		print $page->header(-charset => 'utf-8');
-		print '<h3>Richiesta errata - "quantità" inserita non correttamente, deve essere un numero positivo</h3>';
-		exit;
-	} #meglio usare Scalar::Util::Numeric qw(isint isfloat)
-=cut
+
 	if(!$amount | ( !isint($amount) && !isfloat($amount) | $amount < 0 )){# se $amount esiste, è > 0 e !(è un intero o un float)
 		print $page->header(-charset => 'utf-8');
 		print '<h3>Richiesta errata - "quantità" inserita non correttamente, deve essere un numero positivo</h3>';
 		exit;
 	}
 	if ($action eq "add" | $action eq "remove" ) {
-		print $page->header(-charset => 'utf-8');
-
 		my $parser = XML::LibXML->new;
 		my $doc = $parser->parse_file("../xml/warehouse.xml");
 		my $root = $doc->getDocumentElement();
@@ -272,7 +264,7 @@ if ($watDo eq "warehouse"){
 		my $new_cibo = $doc->createElement("cibo");
 		my $new_area;
 		$new_cibo->setAttribute("id",$cibo_id);
-		$new_cibo->setAttribute("nome",$nome->getData);
+		$new_cibo->setAttribute("nome", $nome->getData);
 		my $new_quantita;
 		if ($action eq "add") {
 			$new_quantita = $quantita->getData + $amount;
@@ -299,9 +291,13 @@ if ($watDo eq "warehouse"){
 		print XML $root->toString();
 		close(XML);
 
-		if($noscript){
+		if($noscript eq "true"){
 			print $page->redirect( -URL => "gestione_magazzino.cgi");
 		}
+		print $page->header();
+		print Functions::warehouse_table;
+
+		exit;
 
 	}
 	if ($action eq "destroy") {
