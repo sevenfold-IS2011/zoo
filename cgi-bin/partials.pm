@@ -282,9 +282,13 @@ sub updateWarehouse{
 	print '	<div id = "right">
 		<h4>Aggiungi tipologia di cibo:</h4>
 		<div class = "form-wrapper">
-			<form action="_aggiungi_specialita.cgi" method="post" accept-charset="utf-8">
+			<form action="_nuovo_cibo.cgi" method="post" accept-charset="utf-8">
 			  <label for="nome">Nome: </label><input type="text" name="nome" value="" placeholder="Nome" />
 			  <label for="quanitita">Quantita: </label><input type="text" name="quantita" value="" placeholder="Quantita" />
+				<label for="area">Area:</label><select name="area" id="area">';
+				areaSelect(Functions::get_areas);
+				print '
+					</select>
 			  <p><input type="submit" value="Aggiungi" /></p>
 			</form>
 		</div>
@@ -469,7 +473,7 @@ sub privateMenu{
 	if ($watDo eq "warehouse"){
 		print'
 						<ul>
-							<li><a href="aggiorna_magazzino.cgi">Aggiungi cibo</a></li>
+							<li><a href="nuovo_cibo.cgi">Aggiungi cibo</a></li>
 						</ul>';
 
 					}
