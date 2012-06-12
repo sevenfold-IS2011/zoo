@@ -550,7 +550,10 @@ sub newUser{
 sub edit_user{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
-	my $is_manager=Functions::is_manager_from_username($_[2]);
+	my $is_manager = Functions::is_manager_from_username($_[2]);
+	my $gender = Functions::get_user_gender($_[2]);
+=pod
+	my $name = Functions::get_user_name($_[2]);
 	print '
 	<div id = "right">
 		<h3>Modifica Utente</h3>
@@ -573,19 +576,29 @@ sub edit_user{
 	}
 	print
 					'<br />
-			  	<label for="nome">Nome</label><input type="text" name="nome" value="" placeholder="Nome e cognome"><br />
-			  	<label for="sesso">Sesso</label><select name="sesso"><option value="M">M</option><option value="F">F</option></select><br />
+			  	<label for="nome">Nome</label><input type="text" name="nome" value="'.$name.'" ><br />
+			  	<label for="sesso">Sesso</label>
+					<select name="sesso">';
+	if ($gender eq "Male"){
+		print '
+						<option value="M" default>M</option>
+						<option value="F">F</option>';
+	} else {
+		print '
+						<option value="M">M</option>
+						<option value="F" default>F</option>';
+	}
+	print '
+					</select><br />
 			  	<label for="eta">Et&agrave;</label><input type="text" name="eta" value=""><br />
-			  	<label for="username">Username</label><input type="text" name="username" value="" placeholder="Username"><br />
-			  	<label for="password">Password</label><input type="password" name="password" value="" placeholder="Password">
-			  	<label for="password">Conferma </label><input type="password" name="password2" value="" placeholder="Una diversa da prima">
-			  	<p><input type="submit" value="Crea Utente"></p>
+			  	<p><input type="submit" value="Modifica Utente"></p>
 			  </fieldset>
 			</form>
 		</div>
 	</div>';
 	footer();
 	print '</div>';
+=cut
 }
 1;
 
