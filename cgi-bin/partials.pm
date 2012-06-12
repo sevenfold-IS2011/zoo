@@ -241,7 +241,7 @@ sub privateArea{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
 	print '<div id = "right"> CONTENUTO </div>';
-	footer;
+	footer();
 	print '</div>';
 }
 
@@ -251,7 +251,7 @@ sub manageArea{
 	print '<div id = "right">';
 	print Functions::area_table;
 	print '</div>';
-	footer;
+	footer();
 	print '</div>';
 }
 
@@ -272,7 +272,7 @@ sub newArea{
 			</form>
 		</div>
 	</div>';
-	footer;
+	footer();
 	print '</div>';
 }
 
@@ -282,14 +282,18 @@ sub updateWarehouse{
 	print '	<div id = "right">
 		<h4>Aggiungi tipologia di cibo:</h4>
 		<div class = "form-wrapper">
-			<form action="_aggiungi_specialita.cgi" method="post" accept-charset="utf-8">
+			<form action="_nuovo_cibo.cgi" method="post" accept-charset="utf-8">
 			  <label for="nome">Nome: </label><input type="text" name="nome" value="" placeholder="Nome" />
 			  <label for="quanitita">Quantita: </label><input type="text" name="quantita" value="" placeholder="Quantita" />
+				<label for="area">Area:</label><select name="area" id="area">';
+				areaSelect(Functions::get_areas);
+				print '
+					</select>
 			  <p><input type="submit" value="Aggiungi" /></p>
 			</form>
 		</div>
 	</div>';
-	footer;
+	footer();
 	print '</div>';
 }
 
@@ -299,7 +303,7 @@ sub manageWarehouse{
 	print '<div id = "right">';
 	print Functions::warehouse_table();
 	print '</div>';
-	footer;
+	footer();
 	print '</div>';
 }
 
@@ -309,7 +313,7 @@ sub manageUsers{
 	print '<div id = "right">';
 	print Functions::users_table($_[0]);
 	print '</div>';
-	footer;
+	footer();
 	print '</div>';
 }
 
@@ -335,34 +339,41 @@ sub newUser{
 			</form>
 		</div>
 	</div>';
-	footer;
+	footer();
 	print '</div>';
 }
 
 sub editAnimal{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
-
+	my $gender = Functions::get_animal_gender($_[2]);
 	print '<div id = "right"> <h3>Modifica '.$_[2].'</h3>
 		<div class = "form-wrapper">
 			<form action="_aggiorna_animale.cgi" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 				<fieldset>
-					<label for="area">area</label><select name="area" id="area">';
-	areaSelect(Functions::get_areas);
-	print '
-					</select><br/>
-			  	<label for="nome">nome: </label><input type="text" name="nome" id="nome" value="'.$_[2].'"/><br />
-			  	<label for="sesso">sesso: </label><select name="sesso" id="sesso">
-						<option value="Male">M</option>
-						<option value="Female">F</option>
-					</select><br />
-			  	<label for="eta">et&agrave;: </label><input type="text" name="eta"  placeholder="5" id="eta"/><br />
+			  	<label for="nome">nome: </label><input type="text" name="nome" id="nome" value="'.$_[2].'"/><br />';
+			  	
+	if ($gender eq "Male"){
+		print '	<label for="sesso">sesso: </label><select name="sesso" id="sesso">
+							<option value="Male" default>M</option>
+							<option value="Female">F</option>
+						</select><br />';
+	} elsif ($gender eq "Female") {
+		print '
+						<label for="sesso">sesso: </label><select name="sesso" id="sesso">
+							<option value="Male" >M</option>
+							<option value="Female"default>F</option>
+						</select><br />';
+	}
+	my $age = Functions::get_animal_age($_[2]);
+	print'
+					<label for="eta">et&agrave;: </label><input type="text" name="eta"  placeholder="'.$age.'" id="eta"/><br />
 			  	<label for="image">foto:</label> <input type="file" name="image" value="carica foto" id="image"/><br />
-			  	<p><input type="submit" value="Aggiungi animale" /></p>
+			  	<p><input type="submit" value="Modifica animale" /></p>
 				</fieldset>
 			</form>
 		</div> </div>';
-		footer;
+		footer();
 		print '</div>';
 }
 
@@ -383,7 +394,7 @@ sub editPassword{
 			</fieldset>
 		</div>
 	</div>';
-	footer;
+	footer();
 	print '</div>';
 }
 
@@ -393,7 +404,7 @@ sub manageAnimals{
 	print '<div id = "right">';
 	print Functions::animal_table();
 	print '</div>';
-	footer;
+	footer();
 	print '</div>';
 }
 
@@ -420,7 +431,7 @@ sub newAnimal{
 				</fieldset>
 			</form>
 		</div> </div>';
-		footer;
+		footer();
 		print '</div>';
 }
 
@@ -462,7 +473,7 @@ sub privateMenu{
 	if ($watDo eq "warehouse"){
 		print'
 						<ul>
-							<li><a href="aggiorna_magazzino.cgi">Aggiungi cibo</a></li>
+							<li><a href="nuovo_cibo.cgi">Aggiungi cibo</a></li>
 						</ul>';
 
 					}

@@ -92,7 +92,6 @@ sub get_areas{
 		}
 	}
 	return @stuff;
-
 }
 
 sub max_area_id{
@@ -124,11 +123,11 @@ sub area_exists{
 	}
 }
 
-sub name_in_area_taken{
+sub animal_name_taken{
 	my $areaid = $_[0];
 	my $name = $_[1];
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
-	my $nodeset = $xp->find("//area[\@id=$areaid]//animale[nome=\"$name\"]");
+	my $nodeset = $xp->find("//animale[nome=\"$name\"]");
 	if ($nodeset->size > 0){
 		return 1;
 	} else {
@@ -183,7 +182,7 @@ sub warehouse_table(){
 	$find = quotemeta $find; # escape regex metachars if present
 	$text =~ s/$find/$replace/g;
 
-#sostituisco nella tabella gli id con il nome delle aree
+	#sostituisco nella tabella gli id con il nome delle aree
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
 	my $idlist = $xp->find('//@id');
 	if (my @idarray = $idlist->get_nodelist) {
@@ -222,12 +221,26 @@ sub area_table(){
 sub username_taken{
 	my $username = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
+	my $idlist = $xp->find('//');
+	
 #	my $nodeset = $xp->find("//username=\"$username\"");
 	if ($xp->find("//username=\"$username\"")){
 		return 1;
 	} else {
 		return undef;
 	}
+}
+
+sub get_animal_gender{
+	my $animal_name = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+	return $xp->find("//animale[nome=\"$animal_name\"]/sesso")->string_value();
+}
+
+sub get_animal_age{
+	my $animal_name = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+	return $xp->find("//animale[nome=\"$animal_name\"]/eta")->string_value();
 }
 
 #sub orderXML{
