@@ -171,10 +171,10 @@ if ($watDo eq "warehouse"){
 		$xpc->registerNs('zoo', 'http://www.zoo.com');
 
 		my $xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/\@nome";#prendo il nome del cibo
-		my $nome = $xpc->findnodes($xpath_exp, $doc)->get_node(0);
+		my $nome = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
 
 		$xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/\@quantita";#prendo la quantità del cibo
-		my $quantita = $xpc->findnodes($xpath_exp, $doc)->get_node(0);
+		my $quantita = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
 
 		$xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/zoo:area";#perchè non funziona?
 		my $arealist = $xpc->findnodes($xpath_exp, $doc);

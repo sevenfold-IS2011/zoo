@@ -4,8 +4,10 @@ function handle_response(){
 
 function add(button){
 	var amount = button.parentNode.parentNode.childNodes[3].childNodes[0].value;
+	alert(amount);
 	xmlhttp.open("GET","reply.cgi?watDo=warehouse&action=add&amount="+amount+"&cibo="+button.getAttribute("id"),true);
 	xmlhttp.send();
+	return false;
 }
 
 function remove(button){
