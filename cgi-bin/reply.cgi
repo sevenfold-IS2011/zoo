@@ -90,9 +90,8 @@ if ($watDo eq "animals")
 	}
 
 	if ($action eq "edit") {
-		my $query=new CGI;
-		print $query->redirect('modifica_animale.cgi?name='.$name);
-	exit;
+		print $page->redirect('modifica_animale.cgi?name='.$name);
+		exit;
 	}
 
 	if ($action eq "update") {
@@ -170,7 +169,7 @@ if ($watDo eq "animals")
 
 			$xpath_exp = "//zoo:animale[zoo:nome='".$name."']/zoo:img";
 			my $old_image_node = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
-			my $old_image_path = $old_image_node -> nodeValue();
+			my $old_image_path = $old_image_node -> textContent();
 			if($old_image_path){
 				unlink($old_image_path);
 			}
@@ -247,7 +246,7 @@ if ($watDo eq "warehouse"){
 		exit;
 	} #meglio usare Scalar::Util::Numeric qw(isint isfloat)
 =cut
-	if(!$amount | ( !isint($amount) && !isfloat($amount) | $amount < 0 ){# se $amount esiste, è > 0 e !(è un intero o un float)
+	if(!$amount | ( !isint($amount) && !isfloat($amount) | $amount < 0 )){# se $amount esiste, è > 0 e !(è un intero o un float)
 		print $page->header(-charset => 'utf-8');
 		print '<h3>Richiesta errata - "quantità" inserita non correttamente, deve essere un numero positivo</h3>';
 		exit;
@@ -267,7 +266,7 @@ if ($watDo eq "warehouse"){
 		$xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/\@quantita";#prendo la quantità del cibo
 		my $quantita = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
 
-		$xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/zoo:area";#perchè non funziona?
+		$xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/zoo:area";
 		my $arealist = $xpc->findnodes($xpath_exp, $doc);
 
 		my $new_cibo = $doc->createElement("cibo");

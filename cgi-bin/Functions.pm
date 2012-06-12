@@ -210,7 +210,7 @@ sub warehouse_table(){
 			if (my @namearray = $namelist->get_nodelist){
 				my $nome;
 				$nome = @namearray[0]->getData;
-				my $find = "<a href=\"area.cgi?id=$node\">$node</a>";
+				my $find = "<a href=\"area.cgi?id=$node\">$node</a>";#metodo meglio ma che si incasina con xsl
 				my $replace = "<a href=\"area.cgi?id=$node\">$nome</a>";
 				$find = quotemeta $find; # escape regex metachars if present
 				$text =~ s/$find/$replace/g;
@@ -251,7 +251,7 @@ sub username_taken{
 	my $username = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
 	my $idlist = $xp->find('//');
-	
+
 #	my $nodeset = $xp->find("//username=\"$username\"");
 	if ($xp->find("//username=\"$username\"")){
 		return 1;

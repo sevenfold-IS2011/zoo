@@ -465,7 +465,7 @@ sub areaCheckbox{
 	for(my $k = 0 ; $k < $size ; $k = $k + 1){
 		my $id = @stuff[$k];
 		my $name = @stuff[$k+1];
-		print "<tr><td><input type=\"checkbox\" name=\"$id\" value=\"true\"/>$name</td></tr>";
+		print "<tr><td><input type=\"checkbox\" name=\"$id\" value=\"$id\"/>$name</td></tr>";
 		$k = $k + 1;
 	}
 	print '</table>';
