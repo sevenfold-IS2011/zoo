@@ -48,7 +48,7 @@ sub header{
 	'</div>
 			<div id="nav">
 				<ul class="nav">
-					<li class="item"><a href="#">Chi siamo</a></li>
+					<li class="item"><a href="chi-siamo.cgi">Chi siamo</a></li>
 					<li class="item"><a href="area.cgi">Aree</a></li>
 					<li class="item"><a href="animali.cgi">Animali</a></li>
 					<li class="item"><a href="servizi.cgi">Servizi</a></li>';
@@ -215,7 +215,7 @@ sub privateHeader{
 		</div>
 		<div id="nav">
 			<ul class="nav">
-				<li class="item"><a href="#">Chi siamo</a></li>
+				<li class="item"><a href="chi-siamo.cgi">Chi siamo</a></li>
 				<li class="item"><a href="area.cgi">Aree</a></li>
 				<li class="item"><a href="animali.cgi">Animali</a></li>
 				<li class="item"><a href="servizi.cgi">Servizi</a></li>
