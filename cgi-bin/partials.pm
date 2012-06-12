@@ -366,7 +366,7 @@ sub editAnimal{
 			<input type="hidden" name="action" value="update">
 				<fieldset>
 			  	<label for="nome">nome: </label><input type="text" name="name" id="nome" value="'.$_[2].'" readonly/><br />';
-			  	
+
 	if ($gender eq "Male"){
 		print '	<label for="sesso">sesso: </label><select name="gender" id="sesso">
 							<option value="Male" default>M</option>
@@ -466,21 +466,21 @@ sub areaSelect{
 sub areaCheckbox{
 	my @stuff = @_;
 	my $size = scalar @stuff;
-	print '<table class="standard">';
+	print "<div class=\"checkbox\">Aree:<br>";
 	for(my $k = 0 ; $k < $size ; $k = $k + 1){
 		my $id = @stuff[$k];
 		my $name = @stuff[$k+1];
-		print "<tr><td><input type=\"checkbox\" name=\"$id\" value=\"$id\"/>$name</td></tr>";
+		print "<input  type=\"checkbox\" name=\"$id\" value=\"$id\"/>$name<br>";
 		$k = $k + 1;
 	}
-	print '</table>';
+	print '</table></div>';
 }
 
 
 sub noscript{
 	print '<noscript>
 	                <meta http-equiv="Refresh" content="1;url='.$_[0].'" />
-	        </noscript>';
+	       </noscript>';
 }
 
 sub privateMenu{
@@ -525,6 +525,85 @@ sub privateMenu{
 	print'
 					</ul>
 				</div>';
+}
+
+sub newUser{
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+	print '
+	<div id = "right">
+		<h3>Nuovo Utente</h3>
+		<div class = "form-wrapper">
+			<form action="_nuovo_utente.cgi" method="post" accept-charset="utf-8">
+			  <fieldset>
+			  <label for="tipo">Tipo</label><select name="tipo"><option value="impiegato">Impiegato</option><option value="manager">Manager</option></select><br />
+			  <label for="nome">Nome</label><input type="text" name="nome" value="" placeholder="Nome e cognome"><br />
+			  <label for="sesso">Sesso</label><select name="sesso"><option value="M">M</option><option value="F">F</option></select><br />
+			  <label for="eta">Et&agrave;</label><input type="text" name="eta" value=""><br />
+			  <label for="username">Username</label><input type="text" name="username" value="" placeholder="Username"><br />
+			  <label for="password">Password</label><input type="password" name="password" value="" placeholder="Password">
+			  <label for="password">Conferma </label><input type="password" name="password2" value="" placeholder="Una diversa da prima">
+			  <p><input type="submit" value="Crea Utente"></p>
+			  </fieldset>
+			</form>
+		</div>
+	</div>';
+	footer();
+	print '</div>';
+}
+
+sub edit_user{
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+	my $is_manager = Functions::is_manager_from_username($_[2]);
+	my $gender = Functions::get_user_gender($_[2]);
+=pod
+	my $name = Functions::get_user_name($_[2]);
+	print '
+	<div id = "right">
+		<h3>Modifica Utente</h3>
+		<div class = "form-wrapper">
+			<form action="reply.cgi" method="post" accept-charset="utf-8">
+				<input type="hidden" name="watDo" value="users">
+				<input type="hidden" name="action" value="update">
+			  <fieldset>
+			  	<label for="tipo">Tipo</label>';
+	if ($is_manager){
+		print'<select name="tipo">
+							<option value="impiegato">Impiegato</option>
+							<option value="manager" selected = "selected">Manager</option>
+					</select>'
+	}else{
+		print'<select name="tipo">
+							<option value="impiegato" selected = "selected">Impiegato</option>
+							<option value="manager">Manager</option>
+					</select>'
+	}
+	print
+					'<br />
+			  	<label for="nome">Nome</label><input type="text" name="nome" value="'.$name.'" ><br />
+			  	<label for="sesso">Sesso</label>
+					<select name="sesso">';
+	if ($gender eq "Male"){
+		print '
+						<option value="M" default>M</option>
+						<option value="F">F</option>';
+	} else {
+		print '
+						<option value="M">M</option>
+						<option value="F" default>F</option>';
+	}
+	print '
+					</select><br />
+			  	<label for="eta">Et&agrave;</label><input type="text" name="eta" value=""><br />
+			  	<p><input type="submit" value="Modifica Utente"></p>
+			  </fieldset>
+			</form>
+		</div>
+	</div>';
+	footer();
+	print '</div>';
+=cut
 }
 1;
 

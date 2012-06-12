@@ -15,15 +15,28 @@ if($session->is_expired() || $session->is_empty()){
 	exit;
 }
 my $sid = $session->id();
-#TO DO: tutti i controlli sui parametri
-my $nome_cibo = $page->param("nome");
-my $quantita_cibo = $page->param("quantita");
+my $nome_cibo = $page->param("nome");#nome non inserito
+if(!$nome_cibo){
+	print $page->header();
+	print "Nome del cibo non inserito correttamente.";
+	exit;
+}
+if(Functions::cibo_name_taken($nome_cibo)){#nome già presente
+	print $page->header();
+	print "Nome già presente. Questi errori andranno gestiti con un div apposito nella pagina precedente";
+	exit;
+}
+my $quantita_cibo = $page->param("quantita");#quantita non inserito
+if(!$quantita_cibo | ( !isint($quantita_cibo) && !isfloat($quantita_cibo) | $quantita_cibo < 0 )){
+	print $page->header();
+	print "Quantità non inserita correttamente.";
+	exit;
+}
 
 my @all_area = Functions::get_areas;
 my @area_list;
 my $cont = 0;
 my $size = scalar @all_area;
-
 for(my $k = 0 ; $k < $size ; $k = $k + 2){
 	my $pos = @all_area[$k];
 	@area_list[$cont] = $page->param("$pos");

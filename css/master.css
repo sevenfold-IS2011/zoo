@@ -41,12 +41,14 @@ div.boxes .center{
 	right:0px;
 }
 
-div.boxes h3{
-	margin-left: 5%;
+div .checkbox{
+text-align:left;
+background-color:#F2F1F0;
+border:1px solid #B9B9B7;
 }
 
-div.boxes dl dt{
-
+div.boxes h3{
+margin-left: 5%;
 }
 
 table.standard
@@ -55,36 +57,36 @@ background-color:#ffffff;
 border:0px solid #c3c3c3;
 border-collapse:collapse;
 margin:10px;
+text-align:center;
+min-width:75px;
 }
 
 table.standard th
 {
 border:1px solid #c3c3c3;
 padding:3px;
-min-width:75px;
-text-align:center;
 }
 
 table.standard td
 {
 border:1px solid #c3c3c3;
 padding:3px;
-min-width:75px;
 max-width:150px;
-text-align:center;
 }
 table.standard tr.title
 {
 background-color:#87A84B;
 }
+
 table.standard td.button
 {
 border:0px;
 }
-table.standard input{
-width:55px;
-}
 
+table.standard input.checkbox{
+text-align:right;
+min-width:75px;
+}
 div.animale
 {
 margin:5px;

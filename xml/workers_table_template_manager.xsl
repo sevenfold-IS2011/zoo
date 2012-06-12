@@ -21,7 +21,7 @@
 						<td>Impiegato</td>
 						<td><xsl:value-of select="zoo:stipendio"/></td>
 						<td class="button">
-							<a class="button" onclick='edit(this);return false'>
+							<a class="button">
 								<xsl:attribute name="username">
 									<xsl:value-of select="zoo:username"/>
 								</xsl:attribute>
