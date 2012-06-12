@@ -21,7 +21,7 @@ print $page->header,
 												-style=>{'src'=>'../css/master.css'});
 partials::privateHeader($sid);
 my $watDo = "users";
-partials::editUsers($sid, $watDo, $page->param("name") );
+partials::editUsers($sid, $watDo, $page->param("user") );
 print $page->end_html;
 
 exit;

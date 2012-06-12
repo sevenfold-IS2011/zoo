@@ -166,38 +166,15 @@ sub animal_table{
 }
 
 sub users_table{
-	my $source = XML::LibXML->load_xml(location => '../xml/workers.xml');
-	my $xslt = XML::LibXSLT->new();
- 	my $sid = $_[0];
- 	my $style_doc;
- 	if (Functions::is_manager($sid)){
-		$style_doc = XML::LibXML->load_xml(location=>"../xml/workers_table_template_manager.xsl", no_cdata=>1);
+	if (Functions::is_manager($_[0])){
+		return rendered_template('../xml/workers.xml','../xml/workers_table_template_manager.xsl');
+	} else{
+		return rendered_template('../xml/workers.xml','../xml/workers_table_template.xsl');
 	}
-	else{
-		$style_doc = XML::LibXML->load_xml(location=>"../xml/workers_table_template.xsl", no_cdata=>1);
-	}
-	my $stylesheet = $xslt->parse_stylesheet($style_doc);
-	my $results = $stylesheet->transform($source);
-	my $text = $stylesheet->output_as_bytes($results);
-	my $find = '<?xml version="1.0"?>';
-	my $replace = "";
-	$find = quotemeta $find; # escape regex metachars if present
-	$text =~ s/$find/$replace/g;
-	return $text;
 }
 
 sub warehouse_table(){
-	my $source = XML::LibXML->load_xml(location => '../xml/warehouse.xml');
-	my $xslt = XML::LibXSLT->new();
-	my $style_doc = XML::LibXML->load_xml(location=>"../xml/warehouse_table_template.xsl", no_cdata=>1);
-	my $stylesheet = $xslt->parse_stylesheet($style_doc);
-	my $results = $stylesheet->transform($source);
-	my $text = $stylesheet->output_as_bytes($results);
-	my $find = '<?xml version="1.0"?>';
-	my $replace = "";
-	$find = quotemeta $find; # escape regex metachars if present
-	$text =~ s/$find/$replace/g;
-
+	my $text = rendered_template('../xml/warehouse.xml',"../xml/warehouse_table_template.xsl");
 	#sostituisco nella tabella gli id con il nome delle aree
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
 	my $idlist = $xp->find('//@id');
@@ -221,7 +198,7 @@ sub warehouse_table(){
 }
 # 0->source, 1->template
 sub rendered_template{
-   	my $source = XML::LibXML->load_xml(location => $_[0]);
+  my $source = XML::LibXML->load_xml(location => $_[0]);
 	my $xslt = XML::LibXSLT->new();
 	my $style_doc = XML::LibXML->load_xml(location=>$_[1], no_cdata=>1);
 	my $stylesheet = $xslt->parse_stylesheet($style_doc);
@@ -234,17 +211,7 @@ sub rendered_template{
 	return $text; 
 }
 sub area_table(){
-	my $source = XML::LibXML->load_xml(location => '../xml/animals.xml');
-	my $xslt = XML::LibXSLT->new();
-	my $style_doc = XML::LibXML->load_xml(location=>"../xml/area_table_template.xsl", no_cdata=>1);
-	my $stylesheet = $xslt->parse_stylesheet($style_doc);
-	my $results = $stylesheet->transform($source);
-	my $text = $stylesheet->output_as_bytes($results);
-	my $find = '<?xml version="1.0"?>';
-	my $replace = "";
-	$find = quotemeta $find; # escape regex metachars if present
-	$text =~ s/$find/$replace/g;
-	return $text;
+	return rendered_template('../xml/animals.xml','../xml/area_table_template.xsl');
 }
 
 sub username_taken{
