@@ -29,7 +29,12 @@
 					</td>
 					<td><xsl:value-of select="@quantita"/></td>
 					<td class="button">
-						<a class="button">Rimuovi</a>
+						<a class="button" onclick="destroy(this)">
+							<xsl:attribute name="href">
+								reply.cgi?noscript=true&amp;watDo=warehouse&amp;action=destroy&amp;id=<xsl:value-of select="."/>
+							</xsl:attribute>
+							Rimuovi
+						</a>
 					</td>
 				</tr>
 			</xsl:for-each>
@@ -37,6 +42,7 @@
 		<h4>Aggiornamento magazzino</h4>
 		<form action = "reply.cgi" method="get">
 			<input type="hidden" name="watDo" value="warehouse" />
+			<input type="hidden" name="noscript" value="true" />
 			<select name="cibo">
 				<xsl:for-each select="zoo:cibo">
 					<xsl:sort select="@id"/>                       
