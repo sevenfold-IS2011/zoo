@@ -239,6 +239,17 @@ sub get_animal_age{
 	return $xp->find("//animale[nome=\"$animal_name\"]/eta")->string_value();
 }
 
+sub is_manager_from_username{
+	my $username = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
+	my $size = $xp->find("//manager[username=\"$username\"]")->size();
+	if ($size > 0){
+		return 1;
+	}else{
+		return undef;
+	}
+	
+}
 #sub orderXML{
 #        my $hashParameters = shift;
 #        my $encoding = $hashParameters->{encoding};
