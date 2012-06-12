@@ -48,10 +48,10 @@ sub header{
 	'</div>
 			<div id="nav">
 				<ul class="nav">
-					<li class="item"><a href="#">Chi siamo</a></li>
+					<li class="item"><a href="chi-siamo.cgi">Chi siamo</a></li>
 					<li class="item"><a href="area.cgi">Aree</a></li>
 					<li class="item"><a href="animali.cgi">Animali</a></li>
-					<li class="item"><a href="#">Servizi</a></li>';
+					<li class="item"><a href="servizi.cgi">Servizi</a></li>';
 	if ($_[0] eq undef){
 					print '<li class="item"><a href="login.cgi">Login dipendenti</a></li>';
 				}else{
@@ -87,18 +87,23 @@ sub _index{
 }
 
 sub animali{
+	print Functions::rendered_template("../xml/animals.xml", "../xml/external_animals_template.xsl");
+}
+
+sub animale{
 	print
-	'<div id="content">
-		<h3>I nostri animali</h3>
-		<dl>
-			<dt><a href="animali/orangotango.html">Orangotango</a></dt>
-				<dd>Pretto in due parole orango e tango</dd>
-			<dt><a href="animali/maiale.html">Maiale</a></dt>
-				<dd>Siamo uno zoo e i maiali non ci dovrebbero essere. Ma sono ottimi da mangiare allora ogni tanto copemo el mascio.</dd>
-			<dt><a href="animali/struzzo.html">Struzzo</a></dt>
-				<dd>Un oseo a caso e se magna i so ovi.</dd>
-		</dl>
-	</div>'
+	'<div id = "content">
+		<div class="animale">
+			<img class="animal" src='.Functions::get_animal_img($_[0]).' />
+			<div class="testo">
+				<h4>Scheda:</h4>
+				<p>Nome: '.$_[0].'</p>
+				<p>Età: '.Functions::get_animal_age($_[0]).'</p>
+				<p>Sesso: '.Functions::get_animal_gender($_[0]).'</p>
+				<h4>Storia:</h4>
+			</div>
+		</div>
+	 </div>';
 }
 
 sub servizi{
@@ -210,10 +215,10 @@ sub privateHeader{
 		</div>
 		<div id="nav">
 			<ul class="nav">
-				<li class="item"><a href="#">Chi siamo</a></li>
+				<li class="item"><a href="chi-siamo.cgi">Chi siamo</a></li>
 				<li class="item"><a href="area.cgi">Aree</a></li>
 				<li class="item"><a href="animali.cgi">Animali</a></li>
-				<li class="item"><a href="#">Servizi</a></li>
+				<li class="item"><a href="servizi.cgi">Servizi</a></li>
 				<li class="item"><a href="logout.cgi">Logout</a></li>
 			</ul>
 		</div>
