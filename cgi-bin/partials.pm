@@ -241,7 +241,7 @@ sub privateArea{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
 	print '<div id = "right"> CONTENUTO </div>';
-	footer;
+	footer();
 	print '</div>';
 }
 
@@ -251,7 +251,29 @@ sub manageArea{
 	print '<div id = "right">';
 	print Functions::area_table;
 	print '</div>';
-	footer;
+	footer();
+	print '</div>';
+}
+
+sub editArea{
+	# pescare nome area
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+	print '
+	<div id = "right">
+		<h3>Modifica Area '.$_[2].'</h3>
+		<div class = "form-wrapper">
+			<form action="update_area.cgi" method="post" accept-charset="utf-8">
+			  <fieldset>
+			    <label for="name">Nome</label><input type="text" name="nome" value="'.$_['2'].'" placeholder="nome"><br />
+			    <label for="posizione">Posizione</label><input type="text" name="posizione" value="" placeholder="Posizione">
+			    <label for="cibo">Cibo giornaliero (Kg)</label><input type="text" name="cibo" value="">
+			    <p><input type="submit" value="Crea Area"></p>
+			  </fieldset>
+			</form>
+		</div>
+	</div>';
+	footer();
 	print '</div>';
 }
 
@@ -272,7 +294,7 @@ sub newArea{
 			</form>
 		</div>
 	</div>';
-	footer;
+	footer();
 	print '</div>';
 }
 
@@ -302,7 +324,7 @@ sub manageWarehouse{
 	print '<div id = "right">';
 	print Functions::warehouse_table();
 	print '</div>';
-	footer;
+	footer();
 	print '</div>';
 }
 
@@ -312,7 +334,7 @@ sub manageUsers{
 	print '<div id = "right">';
 	print Functions::users_table($_[0]);
 	print '</div>';
-	footer;
+	footer();
 	print '</div>';
 }
 
@@ -338,33 +360,41 @@ sub newUser{
 			</form>
 		</div>
 	</div>';
-	footer;
+	footer();
 	print '</div>';
 }
 
 sub editAnimal{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
-	my $gender = Functions::get_animal_gender($_[2], $_[3]);
-	print $gender;
-
-
+	my $gender = Functions::get_animal_gender($_[2]);
 	print '<div id = "right"> <h3>Modifica '.$_[2].'</h3>
 		<div class = "form-wrapper">
 			<form action="_aggiorna_animale.cgi" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 				<fieldset>
-			  	<label for="nome">nome: </label><input type="text" name="nome" id="nome" value="'.$_[2].'"/><br />
-			  	<label for="sesso">sesso: </label><select name="sesso" id="sesso">
-						<option value="Male">M</option>
-						<option value="Female">F</option>
-					</select><br />
-			  	<label for="eta">et&agrave;: </label><input type="text" name="eta"  placeholder="5" id="eta"/><br />
+			  	<label for="nome">nome: </label><input type="text" name="nome" id="nome" value="'.$_[2].'"/><br />';
+			  	
+	if ($gender eq "Male"){
+		print '	<label for="sesso">sesso: </label><select name="sesso" id="sesso">
+							<option value="Male" default>M</option>
+							<option value="Female">F</option>
+						</select><br />';
+	} elsif ($gender eq "Female") {
+		print '
+						<label for="sesso">sesso: </label><select name="sesso" id="sesso">
+							<option value="Male" >M</option>
+							<option value="Female"default>F</option>
+						</select><br />';
+	}
+	my $age = Functions::get_animal_age($_[2]);
+	print'
+					<label for="eta">et&agrave;: </label><input type="text" name="eta"  placeholder="'.$age.'" id="eta"/><br />
 			  	<label for="image">foto:</label> <input type="file" name="image" value="carica foto" id="image"/><br />
-			  	<p><input type="submit" value="Aggiungi animale" /></p>
+			  	<p><input type="submit" value="Modifica animale" /></p>
 				</fieldset>
 			</form>
 		</div> </div>';
-		footer;
+		footer();
 		print '</div>';
 }
 
@@ -385,7 +415,7 @@ sub editPassword{
 			</fieldset>
 		</div>
 	</div>';
-	footer;
+	footer();
 	print '</div>';
 }
 
@@ -395,7 +425,7 @@ sub manageAnimals{
 	print '<div id = "right">';
 	print Functions::animal_table();
 	print '</div>';
-	footer;
+	footer();
 	print '</div>';
 }
 
@@ -422,7 +452,7 @@ sub newAnimal{
 				</fieldset>
 			</form>
 		</div> </div>';
-		footer;
+		footer();
 		print '</div>';
 }
 

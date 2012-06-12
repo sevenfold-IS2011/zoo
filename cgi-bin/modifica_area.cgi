@@ -1,9 +1,9 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
+
 use CGI;
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
-use XML::XPath;
 use partials;
 my $page = new CGI;
 my $session = CGI::Session->load();
@@ -20,21 +20,8 @@ print $page->header,
 												-author => '?????????',
 												-style=>{'src'=>'../css/master.css'});
 partials::privateHeader($sid);
-my $watDo = "animals";
-my $animal_name = $page -> param("name");
-
-if (!$animal_name){
-	print "<h1> Nome animale non presente</h1>";
-	exit;
-}
-my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
-my $size = $xp->find("//animale[nome=\"$animal_name\"]")->size();
-
-if ($size < 1){
-	print "<h1> Animale richiesto non trovato</h1>";
-	exit;
-}
-partials::editAnimal($sid, $watDo, $animal_name);
+my $watDo = "areas";
+partials::editArea($sid, $watDo, $page->param("id") );
 print $page->end_html;
 
 exit;

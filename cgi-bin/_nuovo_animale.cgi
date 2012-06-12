@@ -29,9 +29,9 @@ if(!Functions::area_exists($area)){
 	exit;
 }
 my $animal_name = $page->param("nome");
-if(Functions::name_in_area_taken($area, $animal_name)){
+if(Functions::animal_name_taken($animal_name)){
 	print $page->header();
-	print "Nome già presoin quell'area. Questi errori andranno gestiti con un div apposito nella pagina precedente";
+	print "Nome già preso. Questi errori andranno gestiti con un div apposito nella pagina precedente";
 	exit;
 }
 my $gender = $page->param("sesso");
