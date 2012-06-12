@@ -41,12 +41,14 @@ div.boxes .center{
 	right:0px;
 }
 
-div.boxes h3{
-	margin-left: 5%;
+div .checkbox{
+text-align:left;
+background-color:#F2F1F0;
+border:1px solid #B9B9B7;
 }
 
-div.boxes dl dt{
-
+div.boxes h3{
+margin-left: 5%;
 }
 
 table.standard
@@ -85,12 +87,6 @@ table.standard input.checkbox{
 text-align:right;
 min-width:75px;
 }
-
-table.standard form{
-text-align:left;
-min-width:75px;
-}
-
 div.animale
 {
 margin:5px;

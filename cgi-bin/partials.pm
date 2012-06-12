@@ -461,14 +461,14 @@ sub areaSelect{
 sub areaCheckbox{
 	my @stuff = @_;
 	my $size = scalar @stuff;
-	print '<table class="standard"><tr><td>Aree:</tr></td>';
+	print "<div class=\"checkbox\">Aree:<br>";
 	for(my $k = 0 ; $k < $size ; $k = $k + 1){
 		my $id = @stuff[$k];
 		my $name = @stuff[$k+1];
-		print "<tr><td><input class=\"checkbox\" type=\"checkbox\" name=\"$id\" value=\"$id\"/>$name</td></tr>";
+		print "<input  type=\"checkbox\" name=\"$id\" value=\"$id\"/>$name<br>";
 		$k = $k + 1;
 	}
-	print '</table>';
+	print '</table></div>';
 }
 
 
