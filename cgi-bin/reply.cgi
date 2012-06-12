@@ -239,7 +239,6 @@ if ($watDo eq "warehouse"){
 		print '<h2>Richiesta errata - parametro cibo non definito</h2>';
 		exit;
 	}
-
 	if(!$amount | ( !isint($amount) && !isfloat($amount) | $amount < 0 )){# se $amount esiste, è > 0 e !(è un intero o un float)
 		print $page->header(-charset => 'utf-8');
 		print '<h3>Richiesta errata - "quantità" inserita non correttamente, deve essere un numero positivo</h3>';
@@ -264,7 +263,7 @@ if ($watDo eq "warehouse"){
 		my $new_cibo = $doc->createElement("cibo");
 		my $new_area;
 		$new_cibo->setAttribute("id",$cibo_id);
-		$new_cibo->setAttribute("nome", $nome->getData);
+		$new_cibo->setAttribute("nome",$nome->getData);
 		my $new_quantita;
 		if ($action eq "add") {
 			$new_quantita = $quantita->getData + $amount;
