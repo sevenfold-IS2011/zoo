@@ -14,8 +14,14 @@ print $page->header(-charset => 'utf-8'),
 												-style=>{'src'=>'../css/master.css'});
 my $session = CGI::Session->load();
 my $sid = $session->id();
+my $animal = $page -> param("name") || undef;
 partials::header($sid);
-partials::animali();					
+if ($animal){
+  partials::animale($animal);  
+}
+else{
+	partials::animali();
+} 			
 partials::footer();
 							
 

@@ -13,7 +13,9 @@ print $page->header(-charset => 'utf-8'),
 																	'author' => '?????????'},
 												-author => '?????????',
 												-style=>{'src'=>'../css/master.css'});
-my $sid = $page->cookie("CGISESSID") || undef;
+my $session = CGI::Session->load();
+my $sid = $session->id();
+my $animal = $page -> param("name") || undef;
 partials::header($sid);
 partials::area(CGI::param('id'));
 partials::footer();

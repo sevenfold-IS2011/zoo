@@ -25,6 +25,11 @@ sub edit_animal{
 	print '';
 }
 
+# 1-> xml, 2-> xpath, ritorna nodeset
+sub run_xpath{
+   	my $xp = XML::XPath->new(filename=>$_[0]);
+	return $xp->find($_[1]); 	
+}
 
 sub check_credentials{
 	my $username = $_[0];
@@ -270,6 +275,11 @@ sub get_animal_age{
 	my $animal_name = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
 	return $xp->find("//animale[nome=\"$animal_name\"]/eta")->string_value();
+}
+sub get_animal_img{
+	my $animal_name = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+	return $xp->find("//animale[nome=\"$animal_name\"]/img")->string_value();
 }
 
 #sub orderXML{
