@@ -375,7 +375,7 @@ sub editAnimal{
 			<input type="hidden" name="action" value="update">
 				<fieldset>
 			  	<label for="nome">nome: </label><input type="text" name="name" id="nome" value="'.$_[2].'" readonly/><br />';
-			  	
+
 	if ($gender eq "Male"){
 		print '	<label for="sesso">sesso: </label><select name="gender" id="sesso">
 							<option value="Male" default>M</option>
@@ -475,11 +475,11 @@ sub areaSelect{
 sub areaCheckbox{
 	my @stuff = @_;
 	my $size = scalar @stuff;
-	print '<table class="standard">';
+	print '<table class="standard"><tr><td>Aree:</tr></td>';
 	for(my $k = 0 ; $k < $size ; $k = $k + 1){
 		my $id = @stuff[$k];
 		my $name = @stuff[$k+1];
-		print "<tr><td><input type=\"checkbox\" name=\"$id\" value=\"$id\"/>$name</td></tr>";
+		print "<tr><td><input class=\"checkbox\" type=\"checkbox\" name=\"$id\" value=\"$id\"/>$name</td></tr>";
 		$k = $k + 1;
 	}
 	print '</table>';
@@ -489,7 +489,7 @@ sub areaCheckbox{
 sub noscript{
 	print '<noscript>
 	                <meta http-equiv="Refresh" content="1;url='.$_[0].'" />
-	        </noscript>';
+	       </noscript>';
 }
 
 sub privateMenu{

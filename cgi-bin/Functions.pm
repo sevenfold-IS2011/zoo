@@ -143,7 +143,19 @@ sub animal_name_taken{
 	my $areaid = $_[0];
 	my $name = $_[1];
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
-	my $nodeset = $xp->find("//animale[nome=\"$name\"]");
+	my $nodeset = $xp->find("//animale[\@nome=\"$name\"]");
+	if ($nodeset->size > 0){
+		return 1;
+	} else {
+		return undef;
+	}
+}
+
+sub cibo_name_taken{
+	my $name = $_[0];
+	print 'nome: '.$name;
+	my $xp = XML::XPath->new(filename=>'../xml/warehouse.xml');
+	my $nodeset = $xp->find("//cibo[\@nome=\"$name\"]");
 	if ($nodeset->size > 0){
 		return 1;
 	} else {
