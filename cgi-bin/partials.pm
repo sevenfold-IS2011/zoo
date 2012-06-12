@@ -242,19 +242,25 @@ sub manageArea{
 }
 
 sub editArea{
-	# pescare nome area
+	my $area_name = Functions::get_areaName_from_id($_[2]);
+	my $area_posizione = Functions::get_areaPosizione_from_id($_[2]);
+	my $area_cibo = Functions::get_areaCibo_from_id($_[2]);
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
 	print '
 	<div id = "right">
-		<h3>Modifica Area '.$_[2].'</h3>
+		<h4>Modifica area '.$area_name.'</h4>
 		<div class = "form-wrapper">
-			<form action="update_area.cgi" method="post" accept-charset="utf-8">
+			<form action="reply.cgi" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+			<input type="hidden" name="watDo" value="areas">
+			<input type="hidden" name="action" value="update">';
+			print "<input type=\"hidden\" name=\"id\" value=\"$_[2]\">
 			  <fieldset>
-			    <label for="name">Nome</label><input type="text" name="nome" value="'.$_['2'].'" placeholder="nome"><br />
-			    <label for="posizione">Posizione</label><input type="text" name="posizione" value="" placeholder="Posizione">
-			    <label for="cibo">Cibo giornaliero (Kg)</label><input type="text" name="cibo" value="">
-			    <p><input type="submit" value="Crea Area"></p>
+			    <label for=\"name\">Nome: </label><input type=\"text\" name=\"nome\" value=\"$area_name\"><br/>
+			    <label for=\"posizione\">Posizione: </label><input type=\"text\" name=\"posizione\" value=\"$area_posizione\"><br/>
+			    <label for=\"cibo\">Cibo giornaliero (Kg): </label><input type=\"text\" name=\"cibo\" value=\"$area_cibo\"><br/>
+			    <p><input type=\"submit\" value=\"modifica area\"></p>";
+			    print '
 			  </fieldset>
 			</form>
 		</div>

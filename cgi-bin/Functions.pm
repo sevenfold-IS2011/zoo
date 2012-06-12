@@ -9,7 +9,6 @@ use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 #use HTML::Tidy;
 use strict;
 
-
 sub get_name_from_sid{
 	my $session = new CGI::Session(undef, $_[0], {File::Spec->tmpdir});
   return $session->param("name");
@@ -25,6 +24,29 @@ sub edit_animal{
 	print '';
 }
 
+sub get_areaName_from_id{
+	my $id = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+	my $nodeset = $xp->find("//area[@\id=\"$id\"]/\@nome");
+	my $node = $nodeset->get_node(1);
+	return $node->getData;
+}
+
+sub get_areaPosizione_from_id{
+	my $id = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+	my $nodeset = $xp->find("//area[@\id=\"$id\"]/\@posizione");
+	my $node = $nodeset->get_node(1);
+	return $node->getData;
+}
+
+sub get_areaCibo_from_id{
+	my $id = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+	my $nodeset = $xp->find("//area[@\id=\"$id\"]/\@cibo_giornaliero");
+	my $node = $nodeset->get_node(1);
+	return $node->getData;
+}
 
 sub check_credentials{
 	my $username = $_[0];
@@ -220,7 +242,7 @@ sub rendered_template{
 	my $replace = "";
 	$find = quotemeta $find; # escape regex metachars if present
 	$text =~ s/$find/$replace/g;
-	return $text; 
+	return $text;
 }
 sub area_table(){
 	return rendered_template('../xml/animals.xml','../xml/area_table_template.xsl');
@@ -260,7 +282,7 @@ sub is_manager_from_username{
 	}else{
 		return undef;
 	}
-	
+
 }
 #sub orderXML{
 #        my $hashParameters = shift;

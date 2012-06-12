@@ -130,9 +130,9 @@ if ($watDo eq "animals")
 		my $old_age_node = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
 		my $old_age = $old_age_node -> nodeValue();
 		$old_age =~ s/$find/$replace/g;
-		
+
 		my $modified = undef;
-	
+
 		if($age ne $old_age){
 			$modified = 1;
 			my $new_age_node = $doc->createElement("eta");
@@ -142,16 +142,16 @@ if ($watDo eq "animals")
 		$xpath_exp = "//zoo:animale[zoo:nome='".$name."']/zoo:sesso";
 		my $old_gender_node = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
 		my $old_gender = $old_gender_node -> nodeValue();
-		
+
 		if($gender ne $old_gender){
 			$modified = 1;
 			my $new_gender_node = $doc->createElement("sesso");
 			$new_gender_node -> appendTextNode($gender);
 			$old_gender_node -> replaceNode($new_gender_node);
 		}
-		
-		my $filename = $page->param("image"); 
-		
+
+		my $filename = $page->param("image");
+
 		if($filename){
 			my $upload_dir = "../images/animals";
 			my ($fname, $path, $extension) = fileparse($filename, '\..*');
@@ -161,8 +161,8 @@ if ($watDo eq "animals")
 
 			my $upload_filehandle = $page->upload("image");
 			open (UPLOADFILE, ">$upload_dir/$filename" ) or die "$!";
-			binmode UPLOADFILE; 
-			while (<$upload_filehandle>){ 
+			binmode UPLOADFILE;
+			while (<$upload_filehandle>){
 				print UPLOADFILE;
 			}
 			close UPLOADFILE;
@@ -179,7 +179,7 @@ if ($watDo eq "animals")
 			$new_image_node -> appendTextNode($image_path);
 			$old_image_node -> replaceNode($new_image_node);
 		}
-		
+
 		if($modified){
 			open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
 			print XML $root->toString();
@@ -297,7 +297,6 @@ if ($watDo eq "warehouse"){
 		print Functions::warehouse_table;
 
 		exit;
-
 	}
 	if ($action eq "destroy") {
 		my $parser = XML::LibXML->new;
@@ -324,6 +323,41 @@ if ($watDo eq "warehouse"){
 	}
 }
 
+#--------------------------------------------------------------------------AREAS
+if ($watDo eq "areas"){
+	my $action = $page->param("action");
+	my $id = $page->param("id");
+	my $area_nome = $page->param("nome");
+	my $area_posizione = $page->param("posizione");
+	my $area_cibo = $page->param("cibo");
+#TO DO: controlli sui parametri
+
+	if($action eq "update"){
+		my $parser = XML::LibXML->new;
+		my $doc = $parser->parse_file("../xml/animals.xml");
+		my $root = $doc->getDocumentElement();
+		my $xpc = XML::LibXML::XPathContext->new;
+		$xpc->registerNs('zoo', 'http://www.zoo.com');
+		my $xpath_exp = "//zoo:area[\@id=\"$id\"]/.";
+		my $area = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
+
+		my $xpath_exp = "//zoo:area[\@$id=\"$id\"]/\@nome";#old nome
+		my $node = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
+		my $old_nome = $node -> nodeValue();
+
+
+		my $xpath_exp = "//zoo:area[\@$id=\"$id\"]/\@posizione";#old posizione
+		my $node = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
+		my $old_posizione = $node -> nodeValue();
+
+
+
+		my $xpath_exp = "//zoo:area[\@$id=\"$id\"]/\@cibo_giornaliero";#old quantità di cibo
+		my $node = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
+		my $old_cibo = $node -> nodeValue();
+
+	}
+}
 sub check_action{
 	my $action = $_[0];
 	if ($action eq undef || (!$action eq "destroy" && !$action eq "edit" && !$action eq "update")) {
