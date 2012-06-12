@@ -266,7 +266,7 @@ if ($watDo eq "warehouse"){
 		$xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/\@quantita";#prendo la quantità del cibo
 		my $quantita = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
 
-		$xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/zoo:area";#perchè non funziona?
+		$xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/zoo:area";
 		my $arealist = $xpc->findnodes($xpath_exp, $doc);
 
 		my $new_cibo = $doc->createElement("cibo");
