@@ -43,8 +43,8 @@ if ($watDo eq "animals")
 					<h2>Richiesta errata - parametro name undefined</h2>';
 		exit;
 		}
-	if ($action eq "destroy") { 
-		
+	if ($action eq "destroy") {
+
 		# hai un parametro noscript = true se devi ricomporre la pagina
 		my $parser = XML::LibXML->new;
 		my $doc = $parser->parse_file("../xml/animals.xml");
@@ -152,7 +152,7 @@ if ($watDo eq "warehouse"){
 		exit;
 	} #meglio usare Scalar::Util::Numeric qw(isint isfloat)
 =cut
-	if(!$amount | $amount < 0 | ( !isint($amount) && !isfloat($amount))){# se $amount esiste, è > 0 e !(è un intero o un float)
+	if(!$amount | ( !isint($amount) && !isfloat($amount) | $amount < 0 ){# se $amount esiste, è > 0 e !(è un intero o un float)
 		print $page->header(-charset => 'utf-8');
 		print '<h3>Richiesta errata - "quantità" inserita non correttamente, deve essere un numero positivo</h3>';
 		exit;

@@ -111,7 +111,23 @@ sub max_area_id{
 		return 1;
 	}
 }
-
+sub max_cibo_id{
+	my $xp = XML::XPath->new(filename=>'../xml/warehouse.xml');
+	my $nodeset = $xp->find('//@id');
+	if (my @nodelist = $nodeset->get_nodelist) {
+		my $max_id = 0;
+		my $j = 0;
+		my $id;
+		foreach $id (@nodelist){
+			if ($id->getData() > $max_id){
+				$max_id = $id->getData();
+			}
+		}
+		return $max_id + 1;
+	} else {
+		return 1;
+	}
+}
 sub area_exists{
 	my $areaid = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
@@ -222,7 +238,7 @@ sub username_taken{
 	my $username = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
 	my $idlist = $xp->find('//');
-	
+
 #	my $nodeset = $xp->find("//username=\"$username\"");
 	if ($xp->find("//username=\"$username\"")){
 		return 1;
@@ -236,7 +252,7 @@ sub get_animal_gender{
 	my $area = $_[1];
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
 	return $xp->find("//area[\@id=$area]/animale[nome=\"$animal_name\"]\sesso")->string_value();
-	
+
 }
 
 #sub orderXML{
