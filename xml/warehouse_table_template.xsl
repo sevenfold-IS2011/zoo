@@ -47,6 +47,9 @@
 				<xsl:for-each select="zoo:cibo">
 					<xsl:sort select="@id"/>                       
 					<option>
+						<xsl:attribute name="value">
+							<xsl:value-of select="@id" /> 
+						</xsl:attribute>
 						<xsl:value-of select="@nome" />
 					</option>
 				</xsl:for-each>
