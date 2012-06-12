@@ -236,18 +236,21 @@ if ($watDo eq "users") {
 			print '<h1> Ruolo non corretto (errori da sistemare)</h1>';
 			exit;
 		}
+		
 		my $name = $page->param("nome");
 		if (!$name){
 			print $page->header();
 			print '<h1> Non hai inserito il nome  (errori da sistemare)</h1>';
 			exit;
 		}
+		
 		my $gender = $page -> param("sesso");
 		if (!$gender || ($gender ne "M" && $gender ne "F")) {
 			print $page->header();
 			print '<h1> Sesso non corretto  (errori da sistemare)</h1>';
 			exit;
 		}
+		
 		my $current_role;
 		if (Functions::is_manager_from_username($username)) {
 			$current_role = "manager";
@@ -282,7 +285,21 @@ if ($watDo eq "users") {
 			$old_gender_node -> replaceNode($new_gender_node);
 		}
 		
+		$xpath_exp = "//zoo:username[. = \"$username\"]/../zoo:eta";
+		my $old_age_node = $xpc -> findnodes($xpath_exp,$doc)->get_node(1);
+		my $old_age = $old_age_node -> textContent();
+		if ($old_age ne $age) {
+			$modified = 1;
+			my $new_age_node = $doc->createElement("eta");
+			$new_age_node -> appendTextNode($age);
+			$old_age_node -> replaceNode($new_age_node);
+		}
 		
+		if($modified){
+			open(XML,'>../xml/workers.xml') || die("Cannot Open file $!");
+			print XML $root->toString();
+			close(XML);
+		}
 		
 		print $page->redirect(-URL => "gestione_utenti.cgi");
 		exit;
