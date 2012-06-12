@@ -130,9 +130,9 @@ if ($watDo eq "animals")
 		my $old_age_node = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
 		my $old_age = $old_age_node -> nodeValue();
 		$old_age =~ s/$find/$replace/g;
-
+		
 		my $modified = undef;
-
+	
 		if($age ne $old_age){
 			$modified = 1;
 			my $new_age_node = $doc->createElement("eta");
@@ -142,16 +142,16 @@ if ($watDo eq "animals")
 		$xpath_exp = "//zoo:animale[zoo:nome='".$name."']/zoo:sesso";
 		my $old_gender_node = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
 		my $old_gender = $old_gender_node -> nodeValue();
-
+		
 		if($gender ne $old_gender){
 			$modified = 1;
 			my $new_gender_node = $doc->createElement("sesso");
 			$new_gender_node -> appendTextNode($gender);
 			$old_gender_node -> replaceNode($new_gender_node);
 		}
-
-		my $filename = $page->param("image");
-
+		
+		my $filename = $page->param("image"); 
+		
 		if($filename){
 			my $upload_dir = "../images/animals";
 			my ($fname, $path, $extension) = fileparse($filename, '\..*');
@@ -161,8 +161,8 @@ if ($watDo eq "animals")
 
 			my $upload_filehandle = $page->upload("image");
 			open (UPLOADFILE, ">$upload_dir/$filename" ) or die "$!";
-			binmode UPLOADFILE;
-			while (<$upload_filehandle>){
+			binmode UPLOADFILE; 
+			while (<$upload_filehandle>){ 
 				print UPLOADFILE;
 			}
 			close UPLOADFILE;
@@ -179,7 +179,7 @@ if ($watDo eq "animals")
 			$new_image_node -> appendTextNode($image_path);
 			$old_image_node -> replaceNode($new_image_node);
 		}
-
+		
 		if($modified){
 			open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
 			print XML $root->toString();
@@ -245,8 +245,6 @@ if ($watDo eq "warehouse"){
 		exit;
 	}
 	if ($action eq "add" | $action eq "remove" ) {
-		print $page->header(-charset => 'utf-8');
-
 		my $parser = XML::LibXML->new;
 		my $doc = $parser->parse_file("../xml/warehouse.xml");
 		my $root = $doc->getDocumentElement();
@@ -292,9 +290,14 @@ if ($watDo eq "warehouse"){
 		print XML $root->toString();
 		close(XML);
 
-		if($noscript){
+		if($noscript eq "true"){
 			print $page->redirect( -URL => "gestione_magazzino.cgi");
 		}
+		print $page->header();
+		print Functions::warehouse_table;
+
+		exit;
+
 	}
 	if ($action eq "destroy") {
 		my $parser = XML::LibXML->new;
