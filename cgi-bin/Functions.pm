@@ -111,7 +111,23 @@ sub max_area_id{
 		return 1;
 	}
 }
-
+sub max_cibo_id{
+	my $xp = XML::XPath->new(filename=>'../xml/warehouse.xml');
+	my $nodeset = $xp->find('//@id');
+	if (my @nodelist = $nodeset->get_nodelist) {
+		my $max_id = 0;
+		my $j = 0;
+		my $id;
+		foreach $id (@nodelist){
+			if ($id->getData() > $max_id){
+				$max_id = $id->getData();
+			}
+		}
+		return $max_id + 1;
+	} else {
+		return 1;
+	}
+}
 sub area_exists{
 	my $areaid = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
