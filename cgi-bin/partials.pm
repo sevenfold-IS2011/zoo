@@ -51,7 +51,7 @@ sub header{
 					<li class="item"><a href="#">Chi siamo</a></li>
 					<li class="item"><a href="area.cgi">Aree</a></li>
 					<li class="item"><a href="animali.cgi">Animali</a></li>
-					<li class="item"><a href="#">Servizi</a></li>';
+					<li class="item"><a href="servizi.cgi">Servizi</a></li>';
 	if ($_[0] eq undef){
 					print '<li class="item"><a href="login.cgi">Login dipendenti</a></li>';
 				}else{
@@ -218,7 +218,7 @@ sub privateHeader{
 				<li class="item"><a href="#">Chi siamo</a></li>
 				<li class="item"><a href="area.cgi">Aree</a></li>
 				<li class="item"><a href="animali.cgi">Animali</a></li>
-				<li class="item"><a href="#">Servizi</a></li>
+				<li class="item"><a href="servizi.cgi">Servizi</a></li>
 				<li class="item"><a href="logout.cgi">Logout</a></li>
 			</ul>
 		</div>
