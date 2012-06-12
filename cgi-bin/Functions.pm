@@ -219,7 +219,20 @@ sub warehouse_table(){
 	}
 	return $text;
 }
-
+# 0->source, 1->template
+sub rendered_template{
+   	my $source = XML::LibXML->load_xml(location => $_[0]);
+	my $xslt = XML::LibXSLT->new();
+	my $style_doc = XML::LibXML->load_xml(location=>$_[1], no_cdata=>1);
+	my $stylesheet = $xslt->parse_stylesheet($style_doc);
+	my $results = $stylesheet->transform($source);
+	my $text = $stylesheet->output_as_bytes($results);
+	my $find = '<?xml version="1.0"?>';
+	my $replace = "";
+	$find = quotemeta $find; # escape regex metachars if present
+	$text =~ s/$find/$replace/g;
+	return $text; 
+}
 sub area_table(){
 	my $source = XML::LibXML->load_xml(location => '../xml/animals.xml');
 	my $xslt = XML::LibXSLT->new();

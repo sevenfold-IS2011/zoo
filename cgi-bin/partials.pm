@@ -160,24 +160,10 @@ sub area{
 		$text =~ s/$find/$replace/g;
 		print $text;
 	} else {
-		print '<div id="content">
-			<h3>Il nostro parco</h3>
-			<p>All&apos;interno dello spazio dedicato ai visitatori &egrave; possibile visitare il percorso safari o a piedi. Si possono trovare zone di ristoro e divertimento per i pi&ugrave; piccoli.</p>
-			<h3>Mappa</h3>
-			<div class="figure">
-				<img src="../images/map.png">
-				<p>La mappa del parco Monkey Island</p>
-			</div>
-			<div class="list">
-				<h3>Aree dello Zoo:</h3>';
-			areaList(Functions::get_areas);
-			print'
-			</div>
-		</div>';
+		print Functions::rendered_template("../xml/animals.xml", "../xml/external_area_template.xsl");
 	}
 }
-
-
+=mascio
 sub areaList{
 	my @stuff = @_;
 	my $item;
@@ -191,7 +177,7 @@ sub areaList{
 		$j = $j + 1;
 	}
 }
-
+=cut
 sub userForm{
 	my $action = $_[0];
 	if($action eq "new"){
