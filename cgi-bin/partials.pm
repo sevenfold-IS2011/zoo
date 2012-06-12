@@ -159,7 +159,7 @@ sub area{
 		$find = quotemeta $find; # escape regex metachars if present
 		$text =~ s/$find/$replace/g;
 		print $text;
-	} else {
+		} else {
 		print '<div id="content">
 			<h3>Il nostro parco</h3>
 			<p>All&apos;interno dello spazio dedicato ai visitatori &egrave; possibile visitare il percorso safari o a piedi. Si possono trovare zone di ristoro e divertimento per i pi&ugrave; piccoli.</p>
