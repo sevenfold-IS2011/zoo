@@ -13,11 +13,13 @@
 				<p>La mappa del parco Monkey Island</p>
 			</div>
 			<h3>Aree</h3>
-			<xsl:for-each select="zoo:area">
-
-				<h4>Area <xsl:value-of select="./@nome"/></h4>
-
-			</xsl:for-each>
+			<table class="striped">
+				<xsl:for-each select="zoo:area">
+					<tr>
+						<td><h4>Area <xsl:value-of select="./@nome"/></h4></td>
+					</tr>
+				</xsl:for-each>
+			</table>
 		</div>
 	</xsl:template>
 </xsl:stylesheet>

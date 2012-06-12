@@ -34,4 +34,14 @@ a.button{
 	-moz-border-radius: 15px;
 	border-radius: 15px;
 }
+      
+table.striped{
+	width:100%;
+}
 
+table.striped tr td{
+	width:100%;
+	border: 2px solid black;
+	border-radius: 3px;
+	text-align:center;
+}
