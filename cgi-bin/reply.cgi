@@ -47,8 +47,8 @@ if ($watDo eq "animals")
 					<h2>Richiesta errata - parametro name undefined</h2>';
 		exit;
 		}
-	if ($action eq "destroy") { 
-		
+	if ($action eq "destroy") {
+
 		# hai un parametro noscript = true se devi ricomporre la pagina
 		my $parser = XML::LibXML->new;
 		my $doc = $parser->parse_file("../xml/animals.xml");
@@ -247,7 +247,7 @@ if ($watDo eq "warehouse"){
 		exit;
 	} #meglio usare Scalar::Util::Numeric qw(isint isfloat)
 =cut
-	if(!$amount | $amount < 0 | ( !isint($amount) && !isfloat($amount))){# se $amount esiste, è > 0 e !(è un intero o un float)
+	if(!$amount | ( !isint($amount) && !isfloat($amount) | $amount < 0 ){# se $amount esiste, è > 0 e !(è un intero o un float)
 		print $page->header(-charset => 'utf-8');
 		print '<h3>Richiesta errata - "quantità" inserita non correttamente, deve essere un numero positivo</h3>';
 		exit;
@@ -262,10 +262,10 @@ if ($watDo eq "warehouse"){
 		$xpc->registerNs('zoo', 'http://www.zoo.com');
 
 		my $xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/\@nome";#prendo il nome del cibo
-		my $nome = $xpc->findnodes($xpath_exp, $doc)->get_node(0);
+		my $nome = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
 
 		$xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/\@quantita";#prendo la quantità del cibo
-		my $quantita = $xpc->findnodes($xpath_exp, $doc)->get_node(0);
+		my $quantita = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
 
 		$xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/zoo:area";#perchè non funziona?
 		my $arealist = $xpc->findnodes($xpath_exp, $doc);

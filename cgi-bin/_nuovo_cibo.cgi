@@ -18,15 +18,24 @@ my $sid = $session->id();
 #TO DO: tutti i controlli sui parametri
 my $nome_cibo = $page->param("nome");
 my $quantita_cibo = $page->param("quantita");
+my @area_list = $page->param("area");
+
+
 my $parser = XML::LibXML->new;
 my $doc = $parser->parse_file("../xml/warehouse.xml");
 my $root = $doc->getDocumentElement();
 my $xpc = XML::LibXML::XPathContext->new;
 $xpc->registerNs('zoo', 'http://www.zoo.com');
 my $new_cibo = $doc->createElement("cibo");
-#$new_cibo->setAttribute("id",$cibo_id);
+$new_cibo->setAttribute("id",Functions::max_cibo_id);
 $new_cibo->setAttribute("nome",$nome_cibo);
 $new_cibo->setAttribute("quantita",$quantita_cibo);
+my $new_area;
+foreach my $temp (@area_list){
+	$new_area = $doc->createElement("area");
+	$new_area->appendTextNode($temp);
+	$new_cibo->appendChild($new_area);
+}
 $root->appendChild($new_cibo);
 open(XML,'>../xml/warehouse.xml') || die("Cannot Open file $!");
 print XML $root->toString();

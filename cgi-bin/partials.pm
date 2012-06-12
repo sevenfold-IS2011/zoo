@@ -255,6 +255,28 @@ sub manageArea{
 	print '</div>';
 }
 
+sub editArea{
+	# pescare nome area
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+	print '
+	<div id = "right">
+		<h3>Modifica Area '.$_[2].'</h3>
+		<div class = "form-wrapper">
+			<form action="update_area.cgi" method="post" accept-charset="utf-8">
+			  <fieldset>
+			    <label for="name">Nome</label><input type="text" name="nome" value="'.$_['2'].'" placeholder="nome"><br />
+			    <label for="posizione">Posizione</label><input type="text" name="posizione" value="" placeholder="Posizione">
+			    <label for="cibo">Cibo giornaliero (Kg)</label><input type="text" name="cibo" value="">
+			    <p><input type="submit" value="Crea Area"></p>
+			  </fieldset>
+			</form>
+		</div>
+	</div>';
+	footer();
+	print '</div>';
+}
+
 sub newArea{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
@@ -284,16 +306,15 @@ sub updateWarehouse{
 		<div class = "form-wrapper">
 			<form action="_nuovo_cibo.cgi" method="post" accept-charset="utf-8">
 			  <label for="nome">Nome: </label><input type="text" name="nome" value="" placeholder="Nome" />
-			  <label for="quanitita">Quantita: </label><input type="text" name="quantita" value="" placeholder="Quantita" />
-				<label for="area">Area:</label><select name="area" id="area">';
-				areaSelect(Functions::get_areas);
+			  <label for="quanitita">Quantita: </label><input type="text" name="quantita" value="" placeholder="Quantita" />';
+				areaCheckbox(Functions::get_areas);
 				print '
-					</select>
-			  <p><input type="submit" value="Aggiungi" /></p>
+			  <p><input type="submit" value="Aggiungi"/></p>
 			</form>
 		</div>
 	</div>';
-	footer();
+
+	footer;
 	print '</div>';
 }
 
@@ -450,6 +471,20 @@ sub areaSelect{
 		$j = $j + 1;
 	}
 }
+
+sub areaCheckbox{
+	my @stuff = @_;
+	my $size = scalar @stuff;
+	print '<table class="standard">';
+	for(my $k = 0 ; $k < $size ; $k = $k + 1){
+		my $id = @stuff[$k];
+		my $name = @stuff[$k+1];
+		print "<tr><td><input type=\"checkbox\" name=\"$id\" value=\"true\"/>$name</td></tr>";
+		$k = $k + 1;
+	}
+	print '</table>';
+}
+
 
 sub noscript{
 	print '<noscript>
