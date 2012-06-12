@@ -124,11 +124,11 @@ sub area_exists{
 	}
 }
 
-sub name_in_area_taken{
+sub animal_name_taken{
 	my $areaid = $_[0];
 	my $name = $_[1];
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
-	my $nodeset = $xp->find("//area[\@id=$areaid]//animale[nome=\"$name\"]");
+	my $nodeset = $xp->find("//animale[nome=\"$name\"]");
 	if ($nodeset->size > 0){
 		return 1;
 	} else {
@@ -234,10 +234,14 @@ sub username_taken{
 
 sub get_animal_gender{
 	my $animal_name = $_[0];
-	my $area = $_[1];
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
-	return $xp->find("//area[\@id=$area]/animale[nome=\"$animal_name\"]\sesso")->string_value();
-	
+	return $xp->find("//animale[nome=\"$animal_name\"]/sesso")->string_value();
+}
+
+sub get_animal_age{
+	my $animal_name = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+	return $xp->find("//animale[nome=\"$animal_name\"]/eta")->string_value();
 }
 
 #sub orderXML{
