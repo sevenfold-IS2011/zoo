@@ -18,8 +18,17 @@ my $sid = $session->id();
 #TO DO: tutti i controlli sui parametri
 my $nome_cibo = $page->param("nome");
 my $quantita_cibo = $page->param("quantita");
-my @area_list = $page->param("area");
 
+my @all_area = Functions::get_areas;
+my @area_list;
+my $cont = 0;
+my $size = scalar @all_area;
+
+for(my $k = 0 ; $k < $size ; $k = $k + 2){
+	my $pos = @all_area[$k];
+	@area_list[$cont] = $page->param("$pos");
+	$cont = $cont +1 ;
+}
 
 my $parser = XML::LibXML->new;
 my $doc = $parser->parse_file("../xml/warehouse.xml");
@@ -32,9 +41,11 @@ $new_cibo->setAttribute("nome",$nome_cibo);
 $new_cibo->setAttribute("quantita",$quantita_cibo);
 my $new_area;
 foreach my $temp (@area_list){
-	$new_area = $doc->createElement("area");
-	$new_area->appendTextNode($temp);
-	$new_cibo->appendChild($new_area);
+	if($temp){
+		$new_area = $doc->createElement("area");
+		$new_area->appendTextNode($temp);
+		$new_cibo->appendChild($new_area);
+	}
 }
 $root->appendChild($new_cibo);
 open(XML,'>../xml/warehouse.xml') || die("Cannot Open file $!");
