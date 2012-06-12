@@ -60,7 +60,7 @@ if (!$filename){
 	exit;
 	}
 
-my $upload_dir = "../images/animals";
+my $upload_dir = "/images/animals";
 
 my ($name, $path, $extension) = fileparse($filename, '\..*');
 $filename = $name.$extension;

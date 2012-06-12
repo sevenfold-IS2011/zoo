@@ -18,22 +18,22 @@
 		<animale>
 			<nome>Gir1</nome>
 			<sesso>Male</sesso>
-			<eta>6</eta>
+			<eta>12</eta>
 			<img>../images/gir1.jpg</img>
 		</animale>
 
 		<animale>
 			<nome>Gir2</nome>
 			<sesso>Male</sesso>
-			<eta>6</eta>
-			<img>../images/gir2.jpg</img>
+			<eta>14</eta>
+			<img>../images/animals/1331155252572.gif</img>
 		</animale>
 
 		<animale>
 			<nome>Gir3</nome>
 			<sesso>Male</sesso>
 			<eta>6</eta>
-			<img>../images/gir3.jpg</img>
+			<img>../images/animals/1328370845355.gif</img>
 		</animale>
 	</area>
 
@@ -62,4 +62,3 @@
 	</area>
 
 <area id="4" posizione="18" nome="tigri" cibo_giornaliero="24.3"/><area id="5" posizione="B-8" nome="canguri" cibo_giornaliero="12.3"/></zoo>
-
