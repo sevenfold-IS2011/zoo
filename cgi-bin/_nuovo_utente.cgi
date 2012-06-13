@@ -21,67 +21,65 @@ if($session->is_expired() || $session->is_empty()){
 my $sid = $session->id();
 
 if (!Functions::is_manager($sid)){
-  print $page->redirect( -URL => "area_privata.cgi");
+  print $page->redirect(-URL=>"gestione_utenti.cgi?error=Creazione utente non permesso - non sei un manager");
 	exit;
 }
 
 my $role = $page -> param("tipo");
 
 if (!$role || ($role ne "manager" && $role ne "impiegato"))) {
-	print $page->header();
-	print '<h1> Ruolo non corretto (errori da sistemare)</h1>';
+	print $page->redirect(-URL=>"nuovo_utente.cgi?error=Creazione utente non riuscita - tipologia utente insensata");
 	exit;
 }
 
 my $name = $page->param("nome");
 if (!$name){
-	print $page->header();
-	print '<h1> Non hai inserito il nome  (errori da sistemare)</h1>';
+	print $page->redirect(-URL=>"nuovo_utente.cgi?error=Creazione utente non riuscita - nome non inserito");
 	exit;
 }
 
 my $username = $page->param("username");
 if (!$username){
-	print $page->header();
-	print '<h1> Non hai inserito l\'username  (errori da sistemare)</h1>';
+	print $page->redirect(-URL=>"nuovo_utente.cgi?error=Creazione utente non riuscita - username non inserito");
 	exit;
 }
 
 if(Functions::username_taken($username)){
-	print $page->header();
-	print '<h1> username già preso (errori da sistemare)</h1>';
+	print $page->redirect(-URL=>"nuovo_utente.cgi?error=Creazione utente non riuscita - username già in uso");
 	exit;
 }
 
 my $password = $page->param("password");
 
 if (!$password) {
-	print $page->header();
-	print '<h1> Non hai inserito la password  (errori da sistemare)</h1>';
+	print $page->redirect(-URL=>"nuovo_utente.cgi?error=Creazione utente non riuscita - password non inserita");
 	exit;
 }
 
 my $confirm = $page->param("password2");
 
 if (!$confirm) {
-	print $page->header();
-	print '<h1> Non hai inserito la conferma della password  (errori da sistemare)</h1>';
+	print $page->redirect(-URL=>"nuovo_utente.cgi?error=Creazione utente non riuscita - conferma password non inserita");
 	exit;
 }
 
 if (!($password eq $confirm)) {
-	print $page->header();
-	print '<h1> La password e la conferma non corrispondono  (errori da sistemare)</h1>';
+	print $page->redirect(-URL=>"nuovo_utente.cgi?error=Creazione utente non riuscita - la password e la conferma non erano uguali");
 	exit;
 }
+
+if (length($password) < 6) {
+	print $page->redirect(-URL=>"nuovo_utente.cgi?error=Creazione utente non riuscita - la password deve essere di almeno 6 caratteri");
+	exit;
+}
+
 
 $password = Functions::crypt_password($password);
 
 my $gender = $page -> param("sesso");
 
 if (!$gender || ($gender ne "M" && $gender ne "F")) {
-	print $page->header();
-	print '<h1> Sesso non corretto  (errori da sistemare)</h1>';
+	print $page->redirect(-URL=>"nuovo_utente.cgi?error=Creazione utente non riuscita - sesso insensato");
 	exit;
 }
 
@@ -91,21 +89,14 @@ my $replace = '';
 $find = quotemeta $find; # escape regex metachars if present
 $age =~ s/$find/$replace/g;
 
-if (!isint($age)){ # bisogna fare il controllo o con una regexp o con scalar::utils
-	print $page->header();
-	print "age insensato. Questi errori andranno gestiti con un div apposito nella pagina precedente";
-	exit;
-}
 
-my $salary = $page -> param("stipendio");
 my $find = ' ';
 my $replace = '';
 $find = quotemeta $find; # escape regex metachars if present
 $age =~ s/$find/$replace/g;
 
 if (!isint($age)){ # bisogna fare il controllo o con una regexp o con scalar::utils
-	print $page->header();
-	print "Stipendio insensato. Questi errori andranno gestiti con un div apposito nella pagina precedente";
+	print $page->redirect(-URL=>"nuovo_utente.cgi?error=Creazione utente non riuscita - età insensata");
 	exit;
 }
 
@@ -131,9 +122,6 @@ $gender_element->appendTextNode($gender);
 my $age_element = $doc->createElement("eta");
 $age_element->appendTextNode($age);
 
-my $salary_element = $doc->createElement("stipendio");
-$salary_element->appendTextNode($salary);
-
 
 $new_worker->appendChild($username_element);
 $new_worker->appendChild($password_element);
@@ -144,7 +132,7 @@ $new_worker->appendChild($salary_element);
 
 
 $root->appendChild($new_worker);
-open(XML,'>../xml/workers.xml') || die("Cannot Open file $!");
+open(XML,'>../xml/workers.xml') || file_error();
 print XML $root->toString();
 close(XML);
 
@@ -153,6 +141,11 @@ print $page->redirect("gestione_utenti.cgi")
 
 exit;
 
+
+sub file_error{
+	print $page->redirect(-URL=>"nuovo_utente.cgi?error=Creazione utente non riuscita - errore nella scrittura del file: $!");
+	exit;
+}
 
 
 

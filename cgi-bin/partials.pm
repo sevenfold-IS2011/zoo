@@ -303,8 +303,8 @@ sub newArea{
 			<form action="_nuova_area.cgi" method="post" accept-charset="utf-8">
 			  <fieldset>
 			    <label for="name">Nome</label><input type="text" name="nome" value="" placeholder="nome"><br />
-			    <label for="posizione">Posizione</label><input type="text" name="posizione" value="" placeholder="Posizione">
-			    <label for="cibo">Cibo giornaliero (Kg)</label><input type="text" name="cibo" value="">
+			    <label for="posizione">Posizione</label><input type="text" name="posizione" value="" placeholder="posizione">
+			    <label for="cibo">Cibo giornaliero (Kg)</label><input type="text" name="cibo" value="" placeholder="quantità">
 			    <p><input type="submit" value="Crea Area"></p>
 			  </fieldset>
 			</form>
