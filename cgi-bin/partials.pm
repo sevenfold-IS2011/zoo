@@ -205,7 +205,18 @@ sub userForm{
 
 }
 
-
+sub chi_siamo{
+   	print
+	'<div id="content">
+		<h3>Il nostro zoo</h3>
+		<h4>Location</h4>
+		<p>Situato nel mezzo della campagna veneta, lo zoo Mokey Island garantisce comodità di parcheggio e accoglienza per tutta la famiglia.</p>
+		<h4>Gli inizi</h4>
+		<p>Nato nel 1990 da un\'idea di Pinco Pallo lo zoo offre momenti indimenticabili per tutta la famiglia. </p>
+		<h4>Segreteria clienti:</h4>
+		<p><strong>045-593755<br /><a mailto="info@monkeyisland.it">info@monkeyisland.it</a></strong></p>
+	</div>' 
+}
 sub privateHeader{
 	print '<div id="header">
 		<div id="logo">

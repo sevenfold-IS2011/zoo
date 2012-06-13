@@ -23,6 +23,10 @@ ul.nav li.item a{
 	color:black;
 }
 
+ul.nav li.item a:visited{
+	color:#872700;
+}
+
 ul.nav li.item:hover a{
 	color: white;
 }

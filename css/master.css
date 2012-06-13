@@ -42,65 +42,64 @@ div.boxes .center{
 }
 
 div .checkbox{
-text-align:left;
-background-color:#F2F1F0;
-border:1px solid #B9B9B7;
+	text-align:left;
+	background-color:#F2F1F0;
+	border:1px solid #B9B9B7;
 }
 
 div.boxes h3{
-margin-left: 5%;
+	margin-left: 5%;
 }
 
 table.standard
 {
-background-color:#ffffff;
-border:0px solid #c3c3c3;
-border-collapse:collapse;
-margin:10px;
-text-align:center;
-min-width:75px;
+	background-color:#ffffff;
+	border:0px solid #c3c3c3;
+	border-collapse:collapse;
+	margin:10px;
+	text-align:center;
+	min-width:75px;
 }
 
 table.standard th
 {
-border:1px solid #c3c3c3;
-padding:3px;
+	border:1px solid #c3c3c3;
+	padding:3px;
 }
 
 table.standard td
 {
-border:1px solid #c3c3c3;
-padding:3px;
-max-width:150px;
+	border:1px solid #c3c3c3;
+	padding:3px;
+	max-width:150px;
 }
 table.standard tr.title
 {
-background-color:#87A84B;
+	background-color:#87A84B;
 }
 
 table.standard td.button
 {
-border:0px;
+	border:0px;
 }
 
 table.standard input.checkbox{
-text-align:right;
-min-width:75px;
+	text-align:right;
+	min-width:75px;
 }
 div.animale
 {
-margin:5px;
-overflow:auto;
-background-color:#F5C659;
+	margin:5px;
+	overflow:auto;
+	background-color:#F5C659;
 }
 div.animale div.testo
 {
-float:left;
-margin:15px;
+	float:left;
+	margin:15px;
 }
 img.animal
 {
-margin:15px;
-float:right;
+	margin:15px;
+	float:right;
 }
-
