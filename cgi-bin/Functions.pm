@@ -9,6 +9,7 @@ use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 #use HTML::Tidy;
 use strict;
 
+
 sub get_name_from_sid{
 	my $session = new CGI::Session(undef, $_[0], {File::Spec->tmpdir});
   return $session->param("name");
@@ -24,28 +25,10 @@ sub edit_animal{
 	print '';
 }
 
-sub get_areaName_from_id{
-	my $id = $_[0];
-	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
-	my $nodeset = $xp->find("//area[@\id=\"$id\"]/\@nome");
-	my $node = $nodeset->get_node(1);
-	return $node->getData;
-}
-
-sub get_areaPosizione_from_id{
-	my $id = $_[0];
-	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
-	my $nodeset = $xp->find("//area[@\id=\"$id\"]/\@posizione");
-	my $node = $nodeset->get_node(1);
-	return $node->getData;
-}
-
-sub get_areaCibo_from_id{
-	my $id = $_[0];
-	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
-	my $nodeset = $xp->find("//area[@\id=\"$id\"]/\@cibo_giornaliero");
-	my $node = $nodeset->get_node(1);
-	return $node->getData;
+# 1-> xml, 2-> xpath, ritorna nodeset
+sub run_xpath{
+   	my $xp = XML::XPath->new(filename=>$_[0]);
+	return $xp->find($_[1]); 	
 }
 
 sub check_credentials{
@@ -242,7 +225,7 @@ sub rendered_template{
 	my $replace = "";
 	$find = quotemeta $find; # escape regex metachars if present
 	$text =~ s/$find/$replace/g;
-	return $text;
+	return $text; 
 }
 sub area_table(){
 	return rendered_template('../xml/animals.xml','../xml/area_table_template.xsl');
@@ -272,6 +255,11 @@ sub get_animal_age{
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
 	return $xp->find("//animale[nome=\"$animal_name\"]/eta")->string_value();
 }
+sub get_animal_img{
+	my $animal_name = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+	return $xp->find("//animale[nome=\"$animal_name\"]/img")->string_value();
+}
 
 sub is_manager_from_username{
 	my $username = $_[0];
@@ -282,7 +270,24 @@ sub is_manager_from_username{
 	}else{
 		return undef;
 	}
+}
 
+sub get_user_gender{
+	my $username = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
+	return $xp->find("//username[. = \"$username\"]/../sesso")->string_value();
+}
+
+sub get_user_name{
+	my $username = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
+	return $xp->find("//username[. = \"$username\"]/../nome")->string_value();
+}
+
+sub get_user_age{
+	my $username = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
+	return $xp->find("//username[. = \"$username\"]/../eta")->string_value();
 }
 #sub orderXML{
 #        my $hashParameters = shift;

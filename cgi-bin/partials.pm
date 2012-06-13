@@ -48,10 +48,10 @@ sub header{
 	'</div>
 			<div id="nav">
 				<ul class="nav">
-					<li class="item"><a href="#">Chi siamo</a></li>
+					<li class="item"><a href="chi-siamo.cgi">Chi siamo</a></li>
 					<li class="item"><a href="area.cgi">Aree</a></li>
 					<li class="item"><a href="animali.cgi">Animali</a></li>
-					<li class="item"><a href="#">Servizi</a></li>';
+					<li class="item"><a href="servizi.cgi">Servizi</a></li>';
 	if ($_[0] eq undef){
 					print '<li class="item"><a href="login.cgi">Login dipendenti</a></li>';
 				}else{
@@ -87,18 +87,23 @@ sub _index{
 }
 
 sub animali{
+	print Functions::rendered_template("../xml/animals.xml", "../xml/external_animals_template.xsl");
+}
+
+sub animale{
 	print
-	'<div id="content">
-		<h3>I nostri animali</h3>
-		<dl>
-			<dt><a href="animali/orangotango.html">Orangotango</a></dt>
-				<dd>Pretto in due parole orango e tango</dd>
-			<dt><a href="animali/maiale.html">Maiale</a></dt>
-				<dd>Siamo uno zoo e i maiali non ci dovrebbero essere. Ma sono ottimi da mangiare allora ogni tanto copemo el mascio.</dd>
-			<dt><a href="animali/struzzo.html">Struzzo</a></dt>
-				<dd>Un oseo a caso e se magna i so ovi.</dd>
-		</dl>
-	</div>'
+	'<div id = "content">
+		<div class="animale">
+			<img class="animal" src='.Functions::get_animal_img($_[0]).' />
+			<div class="testo">
+				<h4>Scheda:</h4>
+				<p>Nome: '.$_[0].'</p>
+				<p>Età: '.Functions::get_animal_age($_[0]).'</p>
+				<p>Sesso: '.Functions::get_animal_gender($_[0]).'</p>
+				<h4>Storia:</h4>
+			</div>
+		</div>
+	 </div>';
 }
 
 sub servizi{
@@ -210,10 +215,10 @@ sub privateHeader{
 		</div>
 		<div id="nav">
 			<ul class="nav">
-				<li class="item"><a href="#">Chi siamo</a></li>
+				<li class="item"><a href="chi-siamo.cgi">Chi siamo</a></li>
 				<li class="item"><a href="area.cgi">Aree</a></li>
 				<li class="item"><a href="animali.cgi">Animali</a></li>
-				<li class="item"><a href="#">Servizi</a></li>
+				<li class="item"><a href="servizi.cgi">Servizi</a></li>
 				<li class="item"><a href="logout.cgi">Logout</a></li>
 			</ul>
 		</div>
@@ -556,7 +561,10 @@ sub newUser{
 sub edit_user{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
-	my $is_manager=Functions::is_manager_from_username($_[2]);
+	my $is_manager = Functions::is_manager_from_username($_[2]);
+	my $gender = Functions::get_user_gender($_[2]);
+	my $name = Functions::get_user_name($_[2]);
+	my $age = Functions::get_user_age($_[2]);
 	print '
 	<div id = "right">
 		<h3>Modifica Utente</h3>
@@ -564,6 +572,7 @@ sub edit_user{
 			<form action="reply.cgi" method="post" accept-charset="utf-8">
 				<input type="hidden" name="watDo" value="users">
 				<input type="hidden" name="action" value="update">
+				<input type="hidden" name="username" value="'.$_[2].'">
 			  <fieldset>
 			  	<label for="tipo">Tipo</label>';
 	if ($is_manager){
@@ -579,13 +588,22 @@ sub edit_user{
 	}
 	print
 					'<br />
-			  	<label for="nome">Nome</label><input type="text" name="nome" value="" placeholder="Nome e cognome"><br />
-			  	<label for="sesso">Sesso</label><select name="sesso"><option value="M">M</option><option value="F">F</option></select><br />
-			  	<label for="eta">Et&agrave;</label><input type="text" name="eta" value=""><br />
-			  	<label for="username">Username</label><input type="text" name="username" value="" placeholder="Username"><br />
-			  	<label for="password">Password</label><input type="password" name="password" value="" placeholder="Password">
-			  	<label for="password">Conferma </label><input type="password" name="password2" value="" placeholder="Una diversa da prima">
-			  	<p><input type="submit" value="Crea Utente"></p>
+			  	<label for="nome">Nome</label><input type="text" name="nome" value="'.$name.'" ><br />
+			  	<label for="sesso">Sesso</label>
+					<select name="sesso">';
+	if ($gender eq "Male"){
+		print '
+						<option value="M" selected="selected">M</option>
+						<option value="F">F</option>';
+	} else {
+		print '
+						<option value="M">M</option>
+						<option value="F" selected="selected">F</option>';
+	}
+	print '
+					</select><br />
+			  	<label for="eta">Et&agrave;</label><input type="text" name="eta" value="'.$age.'"><br />
+			  	<p><input type="submit" value="Modifica Utente"></p>
 			  </fieldset>
 			</form>
 		</div>
