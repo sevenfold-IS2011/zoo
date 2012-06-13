@@ -112,7 +112,7 @@ print $page->redirect( -URL => "gestione_animali.cgi");
 exit;
 
 sub file_error{
-	print $page->redirect(-URL=>"nuova_area.cgi?error=Creazione area fallita - errore nella scrittura del file: $!");
+	print $page->redirect(-URL=>"nuovo_animale.cgi?error=Creazione animale fallita - errore nella scrittura del file: $!");
 	exit;
 }
 

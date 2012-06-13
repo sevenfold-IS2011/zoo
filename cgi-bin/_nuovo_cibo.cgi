@@ -17,19 +17,16 @@ if($session->is_expired() || $session->is_empty()){
 my $sid = $session->id();
 my $nome_cibo = $page->param("nome");#nome non inserito
 if(!$nome_cibo){
-	print $page->header();
-	print "Nome del cibo non inserito correttamente.";
+	print $page->redirect(-URL=>"nuovo_cibo.cgi?error=Inserimento in magazzino non riuscito - nome non specificato");
 	exit;
 }
 if(Functions::cibo_name_taken($nome_cibo)){#nome già presente
-	print $page->header();
-	print "Nome già presente. Questi errori andranno gestiti con un div apposito nella pagina precedente";
+	print $page->redirect(-URL=>"nuovo_cibo.cgi?error=Inserimento in magazzino non riuscito - nome già in uso");
 	exit;
 }
 my $quantita_cibo = $page->param("quantita");#quantita non inserito
 if(!$quantita_cibo | ( !isint($quantita_cibo) && !isfloat($quantita_cibo) | $quantita_cibo < 0 )){
-	print $page->header();
-	print "Quantità non inserita correttamente.";
+	print $page->redirect(-URL=>"nuovo_cibo.cgi?error=Inserimento in magazzino non riuscito - quantità insensata");
 	exit;
 }
 
@@ -61,10 +58,14 @@ foreach my $temp (@area_list){
 	}
 }
 $root->appendChild($new_cibo);
-open(XML,'>../xml/warehouse.xml') || die("Cannot Open file $!");
+open(XML,'>../xml/warehouse.xml') || file_error();
 print XML $root->toString();
 close(XML);
 
 print $page->redirect( -URL => "gestione_magazzino.cgi");
 exit;
 
+sub file_error{
+	print $page->redirect(-URL=>"nuovo_cibo.cgi?error=Inserimento in magazzino non riuscito - errore nella scrittura del file: $!");
+	exit;
+}
