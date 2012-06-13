@@ -429,10 +429,20 @@ if ($watDo eq "warehouse"){
 		exit;
 	}
 	if ($action eq "update") {
-		print $page->header();
-		print 'id: ';
-		print $cibo_id;
-		partials::areaCheckbox(Functions::get_areas);
+		my $cibo_nome = $page->param("nome");
+		if(!$cibo_nome || isint($cibo_nome) || isfloat($amount)){
+			print $page->header();
+			print '<h2>Richiesta errata - nome inserito non valido</h2>';
+			exit;
+		}
+print $page->header();
+print 'id: ';
+print $cibo_id;
+		
+		#prelevare il vecchio chibo
+		#vedere se è uguale
+		#se diverso sostituire
+		#scrivere su xml
 	}
 }
 

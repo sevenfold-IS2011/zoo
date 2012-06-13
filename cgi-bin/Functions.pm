@@ -237,7 +237,7 @@ sub warehouse_table(){
 				my $nome;
 				$nome = @namearray[0]->getData;
 				my $find = "$node\[_\]";
-				my $replace = "$nome";
+				my $replace = $nome;
 				$find = quotemeta $find; # escape regex metachars if present
 				$text =~ s/$find/$replace/g;
 			}
