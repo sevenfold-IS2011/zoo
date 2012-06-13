@@ -37,7 +37,7 @@
 									<xsl:value-of select="zoo:username"/>
 								</xsl:attribute>
 								<xsl:attribute name="href">
-									reply.cgi?noscript=true&amp;watDo=users&amp;action=destroy&amp;user=<xsl:value-of select="zoo:username"/>
+									reply.cgi?noscript=true&amp;watDo=users&amp;action=destroy&amp;username=<xsl:value-of select="zoo:username"/>
 								</xsl:attribute>
 								Rimuovi
 							</a>
