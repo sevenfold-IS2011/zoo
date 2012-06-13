@@ -29,21 +29,14 @@ sub login{
 }
 
 sub header{
+	my $sid = $_[0];
+	my $error = $_[1];
 	print
 	' <div id="header">
   		<div id="logo">
 				<div style="text-align:center;">
 					<a href="index.cgi"><img src="../images/logo.png" width="300" alt="logo"/></a>
 				</div>';
-
-#	if (!$_[0] eq undef){
-#	  my $name=Functions::get_name_from_sid($_[0]);
-#		if($name){
-#			print "<p>Ciao $name !</p>";
-#			print '<p><a href="logout.cgi">Logout</a></p>';
-#		}
-#	}
-
 	print
 	'</div>
 			<div id="nav">
@@ -52,18 +45,18 @@ sub header{
 					<li class="item"><a href="area.cgi">Aree</a></li>
 					<li class="item"><a href="animali.cgi">Animali</a></li>
 					<li class="item"><a href="servizi.cgi">Servizi</a></li>';
-	if ($_[0] eq undef){
+	if (!$sid){
 					print '<li class="item"><a href="login.cgi">Login dipendenti</a></li>';
 				}else{
 					print '<li class="item"><a href="area_privata.cgi">Area privata</a></li>';
 				}
 	print'
 				</ul>
-			</div>
-			<div class="errors">
-				<p>errore</p>
-			</div>
-		</div>	';
+			</div>';
+	if($error){
+	print 	'<div class="errors"><p>'.$error.'</p></div>'	;
+	}
+	print '</div>	';
 }
 
 sub footer{
@@ -226,7 +219,7 @@ sub privateHeader{
 	</div>';
 	if ($error) {
 		print '
-		<div class="error"><p>'.$error.'</p></div>';
+		<div class="errors"><p>'.$error.'</p></div>';
 	}
 	
 
