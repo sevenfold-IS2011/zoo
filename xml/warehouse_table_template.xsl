@@ -53,8 +53,8 @@
 				</xsl:for-each>
 			</select>
 			<input type="text" name="amount" placeholder="Quantità" />
-			<input type="submit" name="action" value="add" />
-			<input type="submit" name="action" value ="remove" />
+			<input type="submit" name="action" value="Aggiungi" />
+			<input type="submit" name="action" value ="Rimuovi" />
 		</form>
 	</xsl:template>
 </xsl:stylesheet>

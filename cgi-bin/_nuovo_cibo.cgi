@@ -11,7 +11,7 @@ use Scalar::Util::Numeric qw(isnum isint isfloat);
 my $page = new CGI;
 my $session = CGI::Session->load();
 if($session->is_expired() || $session->is_empty()){
-  print $page->redirect( -URL => "login.cgi");
+  print $page->redirect( -URL => "login.cgi?error=Sessione scaduta o inesistente. Prego rieffettuare il login.");
 	exit;
 }
 my $sid = $session->id();

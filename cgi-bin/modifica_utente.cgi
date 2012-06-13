@@ -8,10 +8,13 @@ use partials;
 my $page = new CGI;
 my $session = CGI::Session->load();
 if($session->is_expired() || $session->is_empty()){
-  print $page->redirect( -URL => "login.cgi");
+  print $page->redirect( -URL => "login.cgi?error=Sessione scaduta o inesistente. Prego rieffettuare il login.");
 	exit;
 }
 my $sid = $session->id();
+
+#DA AGGIUNGERE CONTROLLO COME SU MODIFICA ANIMALE
+
 print $page->header,
 			$page->start_html(-title => "Monkey Island || Lo zoo di Padova",
 			 									-meta => {'keywords' => 'zoo padova animali monkey island',
@@ -19,7 +22,8 @@ print $page->header,
 																	'author' => '?????????'},
 												-author => '?????????',
 												-style=>{'src'=>'../css/master.css'});
-partials::privateHeader($sid);
+my $error = $page -> param("error") || undef;
+partials::privateHeader($error);
 my $watDo = "users";
 partials::edit_user($sid, $watDo, $page->param("user") );
 print $page->end_html;

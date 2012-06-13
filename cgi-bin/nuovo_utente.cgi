@@ -8,7 +8,7 @@ use partials;
 my $page = new CGI;
 my $session = CGI::Session->load();
 if($session->is_expired() || $session->is_empty()){
-  print $page->redirect( -URL => "login.cgi");
+  print $page->redirect( -URL => "login.cgi?error=Sessione scaduta o inesistente. Prego rieffettuare il login.");
 	exit;
 }
 my $sid = $session->id();
@@ -19,7 +19,8 @@ print $page->header,
 																	'author' => '?????????'},
 												-author => '?????????',
 												-style=>{'src'=>'../css/master.css'});
-partials::privateHeader($sid);
+my $error = $page -> param("error") || undef;
+partials::privateHeader($error);
 my $watDo = "users";
 partials::newUser($sid, $watDo);
 print $page->end_html;

@@ -9,7 +9,7 @@ use partials;
 my $page = new CGI;
 my $session = CGI::Session->load();
 if($session->is_expired() || $session->is_empty()){
-  print $page->redirect( -URL => "login.cgi");
+  print $page->redirect( -URL => "login.cgi?error=Sessione scaduta o inesistente. Prego rieffettuare il login.");
 	exit;
 }
 my $sid = $session->id();
@@ -21,7 +21,8 @@ print $page->header(-charset => 'utf-8'),
 												-author => 'gaggi@math.unipd.it',
 												-script=>[{-type=>'JAVASCRIPT', -src=>'../javascript/ajax.js'},{-type=>'javascript', -src=>'../javascript/gestione_aree.js'}],
 												-style=>{'src'=>'../css/master.css'});
-partials::privateHeader($sid);
+my $error = $page -> param("error") || undef;
+partials::privateHeader($error);
 my $watDo = "areas";
 partials::manageArea($sid, $watDo);
 print $page->end_html;

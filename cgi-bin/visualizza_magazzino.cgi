@@ -20,7 +20,8 @@ print $page->header,
 																	'author' => '?????????'},
 												-author => 'gaggi@math.unipd.it',
 												-style=>{'src'=>'../css/master.css'});
-partials::privateHeader($sid);
+my $error = $page -> param("error") || undef;
+partials::privateHeader($error);
 my $watDo = "warehouse";
 partials::viewWarehouse($sid, $watDo);
 print $page->end_html;

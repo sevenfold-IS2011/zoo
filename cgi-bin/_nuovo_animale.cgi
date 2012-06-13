@@ -16,7 +16,7 @@ $CGI::POST_MAX = 1024 * 5000;
 my $page = new CGI; 
 my $session = CGI::Session->load();
 if($session->is_expired() || $session->is_empty()){
-  print $page->redirect( -URL => "login.cgi");
+  print $page->redirect( -URL => "login.cgi?error=Sessione scaduta o inesistente. Prego rieffettuare il login.");
 	exit;
 }
 my $sid = $session->id();
@@ -24,20 +24,17 @@ my $sid = $session->id();
 
 my $area = $page->param("area");
 if(!Functions::area_exists($area)){
-	print $page->header();
-	print "Area non esistente. Questi errori andranno gestiti con un div apposito nella pagina precedente";
+	print $page->redirect(-URL=>"nuovo_animale.cgi?error=Creazione animale fallita - l'area specificata non esiste");
 	exit;
 }
 my $animal_name = $page->param("nome");
 if(Functions::animal_name_taken($animal_name)){
-	print $page->header();
-	print "Nome già preso. Questi errori andranno gestiti con un div apposito nella pagina precedente";
+	print $page->redirect(-URL=>"nuovo_animale.cgi?error=Creazione animale fallita - esiste già un animale con questo nome");
 	exit;
 }
 my $gender = $page->param("sesso");
 if($gender != "Female" && $gender !="Male"){
-	print $page->header();
-	print "Gender insensato. Questi errori andranno gestiti con un div apposito nella pagina precedente";
+	print $page->redirect(-URL=>"nuovo_animale.cgi?error=Creazione animale fallita - sesso insensato");
 	exit;
 }
 
@@ -48,15 +45,13 @@ $find = quotemeta $find; # escape regex metachars if present
 $age =~ s/$find/$replace/g;
 
 if (!isint($age)){ # bisogna fare il controllo o con una regexp o con scalar::utils
-	print $page->header();
-	print "age insensato. Questi errori andranno gestiti con un div apposito nella pagina precedente";
+	print $page->redirect(-URL=>"nuovo_animale.cgi?error=Creazione animale fallita - sesso insensato");
 	exit;
 }
 
 my $filename = $page->param("image"); 
 if (!$filename){ 
-	print $page->header();
-	print "There was a problem uploading your photo (try a smaller file). Questi errori andranno gestiti con un div apposito nella pagina precedente";
+	print $page->redirect(-URL=>"nuovo_animale.cgi?error=Caricamento immagine fallito, prova un'immagine più piccola");
 	exit;
 	}
 
@@ -105,14 +100,8 @@ $xpc->registerNs('zoo', 'http://www.zoo.com');
 
 
 my $area_element = $xpc -> findnodes("//zoo:area[\@id=$area]", $doc)->get_node(1); #xpath parte da 1 
-#my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
-#my @nodelist = ($xp->find("//area[\@id=$area]")->get_nodelist);
-#my $area_element = @nodelist[0];
-#print $page->header();
-#print $area_element;
 $area_element->appendChild($new_animal);
-##print $root->toString(1);
-open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
+open(XML,'>../xml/animals.xml') || file_error();
 print XML $root->toString();
 close(XML);
 
@@ -120,9 +109,10 @@ close(XML);
 
 print $page->redirect( -URL => "gestione_animali.cgi");
 
-#print $area_element->toString();
-#print $area_element->toString();
-#print $new_animal -> toString();
-
 exit;
+
+sub file_error{
+	print $page->redirect(-URL=>"nuova_area.cgi?error=Creazione area fallita - errore nella scrittura del file: $!");
+	exit;
+}
 
