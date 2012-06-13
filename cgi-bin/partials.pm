@@ -93,7 +93,6 @@ sub animale{
 				<p>Nome: '.$_[0].'</p>
 				<p>Età: '.Functions::get_animal_age($_[0]).'</p>
 				<p>Sesso: '.Functions::get_animal_gender($_[0]).'</p>
-				<h4>Storia:</h4>
 			</div>
 		</div>
 	 </div>';
