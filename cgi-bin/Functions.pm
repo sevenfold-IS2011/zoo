@@ -28,7 +28,7 @@ sub edit_animal{
 sub get_areaName_from_id{
 	my $id = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
-	my $nodeset = $xp->find("//area[@\id=\"$id\"]/\@nome");
+	my $nodeset = $xp->find("//area[\@id=\"$id\"]/\@nome");
 	my $node = $nodeset->get_node(1);
 	return $node->getData;
 }
@@ -36,7 +36,7 @@ sub get_areaName_from_id{
 sub get_areaPosizione_from_id{
 	my $id = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
-	my $nodeset = $xp->find("//area[@\id=\"$id\"]/\@posizione");
+	my $nodeset = $xp->find("//area[\@id=\"$id\"]/\@posizione");
 	my $node = $nodeset->get_node(1);
 	return $node->getData;
 }
@@ -44,7 +44,15 @@ sub get_areaPosizione_from_id{
 sub get_areaCibo_from_id{
 	my $id = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
-	my $nodeset = $xp->find("//area[@\id=\"$id\"]/\@cibo_giornaliero");
+	my $nodeset = $xp->find("//area[\@id=\"$id\"]/\@cibo_giornaliero");
+	my $node = $nodeset->get_node(1);
+	return $node->getData;
+}
+
+sub get_ciboNome_from_id{
+	my $id = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/warehouse.xml');
+	my $nodeset = $xp->find("//cibo[\@id=\"$id\"]/\@nome");
 	my $node = $nodeset->get_node(1);
 	return $node->getData;
 }
