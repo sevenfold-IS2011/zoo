@@ -508,7 +508,6 @@ if ($watDo eq "areas"){
 	if($action eq "destroy"){
 		my $id = $page->param("id");
 
-		
 		my $parser = XML::LibXML->new;
 		my $doc = $parser->parse_file("../xml/animals.xml");
 		my $root = $doc->getDocumentElement();
@@ -522,15 +521,13 @@ if ($watDo eq "areas"){
 			exit;
 		}
 		else{
-			my $doc = $parser->parse_file("../xml/animals.xml");#rimuovo le immagini degli animali che sono nell'area da cancellare
-			my $xpath_exp = "//zoo:area[\@id=\"$id\"]/zoo:animale/zoo:img";
+			my $xpath_exp = "//zoo:area[\@id=\"$id\"]/zoo:animale/zoo:img";#rimuovo le immagini degli animali che sono nell'area da cancellare
 			my @image_path =  $xpc -> findnodes($xpath_exp, $doc);
 			if(@image_path) {
 				foreach my $temp (@image_path){
 					unlink($temp->textContent());
 				}
 			}
-			
 			my $zoo = $area->parentNode();
 			$zoo->removeChild($area);
 			open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
@@ -539,6 +536,7 @@ if ($watDo eq "areas"){
 		}
 
 		my $doc = $parser->parse_file("../xml/warehouse.xml");#rimuovo dal magazzino il collegamento tra i cibi e le aree appena cancellate
+		my $root = $doc->getDocumentElement();
 		my $xpath_exp = "//zoo:area[.=\"$id\"]";
 		my @area = $xpc->findnodes($xpath_exp, $doc);
 		if(@area) {
