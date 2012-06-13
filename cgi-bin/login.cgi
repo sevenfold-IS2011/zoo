@@ -12,7 +12,8 @@ print $page->header,
 																	'author' => '?????????'}, 
 												-author => 'gaggi@math.unipd.it',
 												-style=>{'src'=>'../css/master.css'});
-partials::header();
+my $error = $page -> param("error") || undef;
+partials::header(undef, $error);
 partials::login();					
 partials::footer();
 							
