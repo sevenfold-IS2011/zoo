@@ -203,18 +203,24 @@ if ($watDo eq "users") {
 		exit;
 		}
 	if ($action eq "destroy") {
-		my $xpath_exp = "//zoo:employee[zoo:username='".$username."'] | //zoo:manager[zoo:username=']".$username."']";
+		my $xpath_exp = "//zoo:username[. = \"$username\"]/..";
 		my $user = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
-		#my $asize = $xpc -> findnodes($xpath_exp, $doc)->size();
 		if (!$user) {
 			print $page->header();
 			print '
 						<h2>Richiesta errata - nessun utente con questo nome</h2>';
 			exit;
 		}
-		print $page->header();
-		print 'l\'ho trovato';
-		#da fare la cancellazione
+		$user->parentNode()->removeChild($user);
+		open(XML,'>../xml/workers.xml') || die("Cannot Open file $!");
+		print XML $root->toString();
+		close(XML);
+		
+		if ($noscript eq "true") {
+			print $page->redirect(-URL => "gestione_utenti.cgi");
+			exit;
+		}
+		print Functions::users_table();
 		exit;
 		}
 	if ($action eq "update"){

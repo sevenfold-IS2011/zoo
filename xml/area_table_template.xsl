@@ -19,7 +19,7 @@
 					<td><xsl:value-of select="@nome"/></td>
 					<td><xsl:value-of select="@id"/></td>
 					<td><xsl:value-of select="@posizione"/></td>
-					<td><xsl:value-of select="@cibo_giornaliero"/></td>
+					<td><xsl:value-of select="@cibo_giornaliero"/> Kg</td>
 					<td class="button">
 						<a class="button" onclick='edit(this)'>
 							<xsl:attribute name="id">

@@ -19,7 +19,8 @@ print $page->header,
 																	'author' => '?????????'},
 												-author => '?????????',
 												-style=>{'src'=>'../css/master.css'});
-partials::privateHeader($sid);
+my $error = $page -> param("error") || undef;
+partials::privateHeader($error);
 my $watDo = "users";
 partials::newUser($sid, $watDo);
 print $page->end_html;

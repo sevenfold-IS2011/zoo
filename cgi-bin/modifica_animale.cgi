@@ -12,6 +12,19 @@ if($session->is_expired() || $session->is_empty()){
 	exit;
 }
 my $sid = $session->id();
+
+my $animal_name = $page -> param("name");
+if (!$animal_name){
+	print $page->redirect(-URL=>"gestione_animali.cgi?error=Modifica animale fallita - animale non specificato");
+	exit;
+}
+my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+my $size = $xp->find("//animale[nome=\"$animal_name\"]")->size();
+if ($size < 1){
+	print $page->redirect(-URL=>"gestione_animali.cgi?error=Modifica animale fallita - animale non trovato");
+	exit;
+}
+
 print $page->header,
 			$page->start_html(-title => "Monkey Island || Lo zoo di Padova",
 			 									-meta => {'keywords' => 'zoo padova animali monkey island',
@@ -19,21 +32,10 @@ print $page->header,
 																	'author' => '?????????'},
 												-author => '?????????',
 												-style=>{'src'=>'../css/master.css'});
-partials::privateHeader($sid);
+my $error = $page -> param("error") || undef;
+partials::privateHeader($error);
 my $watDo = "animals";
-my $animal_name = $page -> param("name");
 
-if (!$animal_name){
-	print "<h1> Nome animale non presente</h1>";
-	exit;
-}
-my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
-my $size = $xp->find("//animale[nome=\"$animal_name\"]")->size();
-
-if ($size < 1){
-	print "<h1> Animale richiesto non trovato</h1>";
-	exit;
-}
 partials::editAnimal($sid, $watDo, $animal_name);
 print $page->end_html;
 

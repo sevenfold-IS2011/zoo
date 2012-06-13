@@ -207,6 +207,7 @@ sub userForm{
 
 
 sub privateHeader{
+	my $error = $_[0];
 	print '<div id="header">
 		<div id="logo">
 			<div style="text-align:center;">
@@ -222,10 +223,13 @@ sub privateHeader{
 				<li class="item"><a href="logout.cgi">Logout</a></li>
 			</ul>
 		</div>
-	</div>
-	<div class ="errors">
-		<p>errore</p>
 	</div>';
+	if ($error) {
+		print '
+		<div class="error"><p>'.$error.'</p></div>';
+	}
+	
+
 }
 
 sub privateArea{

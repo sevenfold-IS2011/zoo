@@ -12,6 +12,10 @@ if($session->is_expired() || $session->is_empty()){
 	exit;
 }
 my $sid = $session->id();
+
+
+
+#DA AGGIUNGERE CONTROLLO COME SU MODIFICA ANIMALE
 print $page->header,
 			$page->start_html(-title => "Monkey Island || Lo zoo di Padova",
 			 									-meta => {'keywords' => 'zoo padova animali monkey island',
@@ -19,7 +23,8 @@ print $page->header,
 																	'author' => '?????????'},
 												-author => '?????????',
 												-style=>{'src'=>'../css/master.css'});
-partials::privateHeader($sid);
+my $error = $page -> param("error") || undef;
+partials::privateHeader($error);
 my $watDo = "areas";
 partials::editArea($sid, $watDo, $page->param("id") );
 print $page->end_html;

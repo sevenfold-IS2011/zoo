@@ -21,7 +21,8 @@ print $page->header(-charset => 'utf-8'),
 												-author => '?????????',
 												-script=>[{-type=>'JAVASCRIPT', -src=>'../javascript/ajax.js'},{-type=>'javascript', -src=>'../javascript/gestione_utenti.js'}],
 												-style=>{'src'=>'../css/master.css'});
-partials::privateHeader($sid);
+my $error = $page -> param("error") || undef;
+partials::privateHeader($error);
 my $watDo = "users";
 partials::manageUsers($sid, $watDo);
 print $page->end_html;

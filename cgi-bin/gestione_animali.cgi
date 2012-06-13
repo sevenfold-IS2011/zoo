@@ -23,8 +23,8 @@ print $page->header(-charset => 'utf-8'),
 														  {-type=>'javascript', -src=>'../javascript/gestione_animali.js'},
 														  {-type=>'javascript', -src=>'../javascript/images.js'},],
 												-style=>{'src'=>'../css/master.css'});
-
-partials::privateHeader($sid);
+my $error = $page -> param("error") || undef;
+partials::privateHeader($error);
 my $watDo = "animals";
 
 partials::manageAnimals($sid, $watDo);					

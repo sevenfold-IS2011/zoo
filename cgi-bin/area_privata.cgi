@@ -22,7 +22,8 @@ print $page->header(-charset => 'utf-8'),
 												-author => 'gaggi@math.unipd.it',
 												-style=>{'src'=>'../css/master.css'});
 my $sid = $session->id();
-partials::privateHeader($sid);
+my $error = $page -> param("error") || undef;
+partials::privateHeader($error);
 partials::privateArea($sid);					
 print $page->end_html;
 
