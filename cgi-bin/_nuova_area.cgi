@@ -20,15 +20,13 @@ my $sid = $session->id();
 
 my $area_name = $page->param("nome");
 if (!$area_name) {
-	print $page->header();
-	print "<h2>Non hai inserito il nome. Questi errori andranno gestiti con un div apposito nella pagina precedente<h2>";
+	print $page->redirect(-URL=>"nuova_area.cgi?error=Creazione area fallita - non hai inserito il nome");
 	exit;
 }
 
 my $area_pos = $page->param("posizione");
 if (!$area_pos) {
-	print $page->header();
-	print "<h2>Non hai inserito la posizione. Questi errori andranno gestiti con un div apposito nella pagina precedente<h2>";
+	print $page->redirect(-URL=>"nuova_area.cgi?error=Creazione area fallita - non hai inserito la posizione");
 	exit;
 }
 
@@ -40,8 +38,7 @@ $find = quotemeta $find; # escape regex metachars if present
 $area_food =~ s/$find/$replace/g;
 
 if (!isfloat($area_food) && !isint($area_food)){ 
-	print $page->header();
-	print "quantità di cibo insensato. Questi errori andranno gestiti con un div apposito nella pagina precedente - $area_food";
+	print $page->redirect(-URL=>"nuova_area.cgi?error=Creazione area fallita - la quantità di cibo non è un valore valido");
 	exit;
 }
 
@@ -57,10 +54,15 @@ $new_element->setAttribute("nome", $area_name);
 $new_element->setAttribute("cibo_giornaliero", $area_food);
 $root->appendChild($new_element);
 
-open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
+open(XML,'>../xml/animals.xml') || file_error();
 print XML $root->toString();
 close(XML);	
 print $page->redirect( -URL => "gestione_area.cgi");
   
-
 exit;
+
+
+sub file_error{
+	print $page->redirect(-URL=>"nuova_area.cgi?error=Creazione area fallita - errore nella scrittura del file: $!");
+	exit;
+}

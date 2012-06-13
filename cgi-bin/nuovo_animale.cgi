@@ -19,7 +19,8 @@ print $page->header,
 																	'author' => '?????????'},
 												-author => '?????????',
 												-style=>{'src'=>'../css/master.css'});
-partials::privateHeader($sid);
+my $error = $page -> param("error") || undef;
+partials::privateHeader($error);
 my $watDo = "animals";
 partials::newAnimal($sid, $watDo);
 print $page->end_html;

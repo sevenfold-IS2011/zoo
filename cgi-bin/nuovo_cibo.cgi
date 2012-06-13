@@ -19,7 +19,8 @@ print $page->header(-charset => 'utf-8'),
 																	'author' => '?????????'},
 												-author => 'gaggi@math.unipd.it',
 												-style=>{'src'=>'../css/master.css'});
-partials::privateHeader($sid);
+my $error = $page -> param("error") || undef;
+partials::privateHeader($error);
 my $watDo = "warehouse";
 partials::updateWarehouse($sid, $watDo);
 print $page->end_html;
