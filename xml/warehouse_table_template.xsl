@@ -20,7 +20,7 @@
 					<td>
 						<xsl:for-each select="zoo:area">
 							<a><xsl:attribute name="href">area.cgi?id=<xsl:value-of select="."/></xsl:attribute><!-- Non mandare a capo -->
-								<xsl:value-of select="."/>
+								<xsl:value-of select="."/>[_]
 							</a>&#160;
 						</xsl:for-each>
 					</td>

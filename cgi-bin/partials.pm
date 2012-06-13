@@ -341,7 +341,7 @@ sub editWarehouse{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
 	print '	<div id = "right">
-		<h4>Aggiungi tipologia di cibo:</h4>
+		<h4>Modifica l\'alimento '."$cibo_nome".':</h4>
 		<div class = "form-wrapper">
 			<form action="reply.cgi" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 			<input type="hidden" name="watDo" value="warehouse">
