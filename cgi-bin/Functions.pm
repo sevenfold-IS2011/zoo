@@ -258,10 +258,8 @@ sub area_table(){
 sub username_taken{
 	my $username = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
-	my $idlist = $xp->find('//');
-
-#	my $nodeset = $xp->find("//username=\"$username\"");
-	if ($xp->find("//username=\"$username\"")){
+	
+if ($xp->find("//username=\"$username\"")){ #funziona perché torna un booleano
 		return 1;
 	} else {
 		return undef;

@@ -27,7 +27,7 @@ if (!Functions::is_manager($sid)){
 
 my $role = $page -> param("tipo");
 
-if (!$role || ($role ne "manager" && $role ne "impiegato"))) {
+if (!$role || ($role ne "manager" && $role ne "impiegato")) {
 	print $page->redirect(-URL=>"nuovo_utente.cgi?error=Creazione utente non riuscita - tipologia utente insensata");
 	exit;
 }
@@ -128,7 +128,6 @@ $new_worker->appendChild($password_element);
 $new_worker->appendChild($name_element);
 $new_worker->appendChild($gender_element);
 $new_worker->appendChild($age_element);
-$new_worker->appendChild($salary_element);
 
 
 $root->appendChild($new_worker);
@@ -136,7 +135,7 @@ open(XML,'>../xml/workers.xml') || file_error();
 print XML $root->toString();
 close(XML);
 
-print $page->redirect("gestione_utenti.cgi")
+print $page->redirect("gestione_utenti.cgi");
 
 
 exit;
