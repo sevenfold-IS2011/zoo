@@ -338,24 +338,43 @@ if ($watDo eq "areas"){
 		my $root = $doc->getDocumentElement();
 		my $xpc = XML::LibXML::XPathContext->new;
 		$xpc->registerNs('zoo', 'http://www.zoo.com');
-		my $xpath_exp = "//zoo:area[\@id=\"$id\"]/.";
+		my $xpath_exp = "//zoo:area[\@id=\"$id\"]";
 		my $area = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
 
-		my $xpath_exp = "//zoo:area[\@$id=\"$id\"]/\@nome";#old nome
-		my $node = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
-		my $old_nome = $node -> nodeValue();
+		my $modified = undef;
 
+		my $xpath_exp = "//zoo:area[\@id=\"$id\"]/\@nome";#old nome
+		my $old_nome = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
+		if($area_nome ne $old_nome->getData()){
+			my $nuovo_nome = $doc->createElement("nome");
+			$nuovo_nome->appendTextNode($area_nome);
+			$old_nome->parentNode->replaceChild($nuovo_nome,$old_nome);
+			$modified = 1;
+		}
 
-		my $xpath_exp = "//zoo:area[\@$id=\"$id\"]/\@posizione";#old posizione
-		my $node = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
-		my $old_posizione = $node -> nodeValue();
+		my $xpath_exp = "//zoo:area[\@id=\"$id\"]/\@posizione";#old posizione
+		my $old_posizione = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
+		if($area_posizione ne $old_posizione->getData()){
+			my $nuova_posizione = $doc->createElement("posizione");
+			$nuova_posizione->appendTextNode($area_posizione);
+			$old_posizione->parentNode->replaceChild($nuova_posizione,$old_posizione);
+			$modified = 1;
+		}
 
-
-
-		my $xpath_exp = "//zoo:area[\@$id=\"$id\"]/\@cibo_giornaliero";#old quantità di cibo
-		my $node = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
-		my $old_cibo = $node -> nodeValue();
-
+		my $xpath_exp = "//zoo:area[\@id=\"$id\"]/\@cibo_giornaliero";#old quantità di cibo
+		my $old_cibo = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
+		if($area_cibo ne $old_cibo->getData()){
+			my $nuovo_cibo = $doc->createElement("cibo_giornaliero");
+			$nuovo_cibo->appendTextNode($area_cibo);
+			$old_cibo->parentNode->replaceChild($nuovo_cibo,$old_cibo);
+			$modified = 1;
+		}
+		if($modified){
+			open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
+			print XML $root->toString();
+			close(XML);
+		}
+		print $page->redirect( -URL => "gestione_area.cgi");
 	}
 }
 sub check_action{
