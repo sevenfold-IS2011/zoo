@@ -16,8 +16,16 @@ $CGI::POST_MAX = 1024 * 5000;
 
 my $page = new CGI;
 my $session = CGI::Session->load();
+my $noscript = $page->param("noscript");
+my $action = $page->param("action");
+
 if($session->is_expired() || $session->is_empty()){
   print $page->header();
+	if ($noscript eq "true") {
+		print $page->redirect( -URL => "login.cgi?error=Sessione scaduta o inesistente. Prego rieffettuare il login.");
+		exit;
+	}
+	
 	print '
 				<h2> Risorsa non accessibile - probabilmente la sessione è stata chiusa od è scaduta.</h2>
 					<br />
@@ -26,19 +34,21 @@ if($session->is_expired() || $session->is_empty()){
 }
 
 my $watDo = $page->param("watDo");
-my $noscript = $page->param("noscript");
 
 if ($watDo eq undef || (!$watDo eq "animals" && !$watDo eq "warehouse" && !$watDo eq "areas" && !$watDo eq "users") ){
+	if ($noscript eq "true" || $action eq "update") {
+		print $page->redirect( -URL => "area_privata.cgi?error=Richiesta errata - azione non definita.");
+		exit;
+	}
 	print $page->header();
 	print '
-				<h2>Richiesta errata - parametro watDo incorretto</h2>';
+				<h3>Richiesta errata - parametro watDo incorretto</h3>';
 	exit;
 }
 
 #------------------------------------------------------------------------ANIMALS
 if ($watDo eq "animals")
 {
-	my $action = $page->param("action");
 	check_action($action);
 	my $name = $page->param("name");
 	my $parser = XML::LibXML->new;
@@ -47,9 +57,13 @@ if ($watDo eq "animals")
 	my $xpc = XML::LibXML::XPathContext->new;
 	$xpc->registerNs('zoo', 'http://www.zoo.com');
 	if (!$name) {
+		if ($noscript eq "true" || $action eq "update") {
+			print $page->redirect( -URL => "gestione_animali.cgi?error=Richiesta errata - nome non definito.");
+			exit;
+		}
 		print $page->header();
 		print '
-					<h2>Richiesta errata - parametro name undefined</h2>';
+					<h3>Richiesta errata - parametro nome indefinito</h3>';
 		exit;
 		}
 	if ($action eq "destroy") {
@@ -59,10 +73,13 @@ if ($watDo eq "animals")
 		my $animal = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
 		#my $asize = $xpc -> findnodes($xpath_exp, $doc)->size();
 		if (!$animal) {
+			if ($noscript eq "true") {
+				print $page->redirect( -URL => "gestione_animali.cgi?error=Richiesta errata - animale non trovato.");
+				exit;
+			}
 			print $page->header();
 			print '
-						<h2>Richiesta errata - nessun animale con questo nome</h2>';
-			#print "il nome era: $name, ho trovato $asize nodi, xpath era $xpath_exp"; #nome univoco in tutto lo zoo o all'interno dell'area??
+						<h3>Richiesta errata - animale non trovato</h3>';
 			exit;
 		}
 
@@ -99,23 +116,17 @@ if ($watDo eq "animals")
 		my $xpath_exp = "//zoo:animale[zoo:nome='".$name."']";
 		my $animal = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
 		if (!$animal) {
-			print $page->header();
-			print '
-						<h2>Richiesta errata - nessun animale con questo nome</h2>';
+			print $page->redirect( -URL => "gestione_animali.cgi?error=Impossibile modificare l'animale - animale non trovato.");
 			exit;
 		}
 		my $age = $page -> param("age");
 		if (!isint($age)){
-			print $page->header();
-			print '
-						<h2>Richiesta errata - Età non valida</h2>';
+			print $page->redirect( -URL => "gestione_animali.cgi?error=Impossibile modificare l'animale - età non valida");
 			exit;
 		}
 		my $gender = $page ->param("gender");
 		if (!$gender || ($gender ne "Male" && $gender ne "Female")) {
-			print $page->header();
-			print '
-						<h2>Richiesta errata - Sesso non valido</h2>';
+			print $page->redirect( -URL => "gestione_animali.cgi?error=Impossibile modificare l'animale - sesso insensato");
 			exit;
 		}
 		my $find = ' ';
@@ -197,6 +208,10 @@ if ($watDo eq "users") {
 	my $xpc = XML::LibXML::XPathContext->new;
 	$xpc->registerNs('zoo', 'http://www.zoo.com');
 	if (!$username) {
+		if ($noscript eq "true" || $action eq "update") {
+			print $page->redirect( -URL => "gestione_utenti.cgi?error=Richiesta errata - nome non definito.");
+			exit;
+		}
 		print $page->header();
 		print '
 					<h2>Richiesta errata - parametro username undefined</h2>';
@@ -206,6 +221,10 @@ if ($watDo eq "users") {
 		my $xpath_exp = "//zoo:username[. = \"$username\"]/..";
 		my $user = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
 		if (!$user) {
+			if ($noscript eq "true") {
+				print $page->redirect( -URL => "gestione_utenti.cgi?error=Richiesta errata - utente non trovato.");
+				exit;
+			}
 			print $page->header();
 			print '
 						<h2>Richiesta errata - nessun utente con questo nome</h2>';
@@ -230,31 +249,26 @@ if ($watDo eq "users") {
 		my $replace = '';
 		$find = quotemeta $find; # escape regex metachars if present
 		$age =~ s/$find/$replace/g;
-		if (!isint($age)){
-			print $page->header();
-			print '
-						<h2>Richiesta errata - Età non valida</h2>';
+		if (!isint($age) || $age <= 0){
+			print $page->redirect( -URL => "gestione_utenti.cgi?error=Richiesta errata - età insensata.");
 			exit;
 		}
 		my $role = $page -> param("tipo");
 		if (!$role || ($role ne "manager" && $role ne "impiegato")) {
-			print $page->header();
-			print '<h1> Ruolo non corretto (errori da sistemare)</h1>';
-			exit;
+			print $page->redirect( -URL => "gestione_utenti.cgi?error=Richiesta errata - tipo insensata.");
+			exit
 		}
 
 		my $name = $page->param("nome");
 		if (!$name){
-			print $page->header();
-			print '<h1> Non hai inserito il nome  (errori da sistemare)</h1>';
-			exit;
+			print $page->redirect( -URL => "gestione_utenti.cgi?error=Richiesta errata - nome indefinito.");
+			exit
 		}
 
 		my $gender = $page -> param("sesso");
 		if (!$gender || ($gender ne "M" && $gender ne "F")) {
-			print $page->header();
-			print '<h1> Sesso non corretto  (errori da sistemare)</h1>';
-			exit;
+			print $page->redirect( -URL => "gestione_utenti.cgi?error=Richiesta errata - genere insensato.");
+			exit
 		}
 
 		my $current_role;
