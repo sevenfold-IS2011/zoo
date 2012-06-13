@@ -485,6 +485,34 @@ if ($watDo eq "areas"){
 		}
 		print $page->redirect( -URL => "gestione_area.cgi");
 	}
+	if($action eq "destroy"){
+		my $id = $page->param("id");
+
+		my $parser = XML::LibXML->new;
+		my $doc = $parser->parse_file("../xml/animals.xml");
+		my $root = $doc->getDocumentElement();
+		my $xpc = XML::LibXML::XPathContext->new;
+		$xpc->registerNs('zoo', 'http://www.zoo.com');
+		my $xpath_exp = "//zoo:area[\@id=\"$id\"]";
+		my $area = $xpc->findnodes($xpath_exp, $doc)->get_node(0);
+		if (!$area) {
+			print '<h2>Richiesta errata - nessua area ha questo id</h2>';
+			exit;
+		}
+		my $zoo = $area->parentNode();
+		$zoo->removeChild($area);
+		open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
+		print XML $root->toString();
+		close(XML);
+		
+		if($noscript eq "true"){
+			print $page->redirect( -URL => "gestione_area.cgi");
+		}
+		print $page->header();
+		print Functions::animals_table;
+
+		exit;
+	}
 }
 sub check_action{
 	my $action = $_[0];
