@@ -41,6 +41,11 @@ if ($watDo eq "animals")
 	my $action = $page->param("action");
 	check_action($action);
 	my $name = $page->param("name");
+	my $parser = XML::LibXML->new;
+	my $doc = $parser->parse_file("../xml/animals.xml");
+	my $root = $doc->getDocumentElement();
+	my $xpc = XML::LibXML::XPathContext->new;
+	$xpc->registerNs('zoo', 'http://www.zoo.com');
 	if (!$name) {
 		print $page->header();
 		print '
@@ -50,11 +55,6 @@ if ($watDo eq "animals")
 	if ($action eq "destroy") {
 
 		# hai un parametro noscript = true se devi ricomporre la pagina
-		my $parser = XML::LibXML->new;
-		my $doc = $parser->parse_file("../xml/animals.xml");
-		my $root = $doc->getDocumentElement();
-		my $xpc = XML::LibXML::XPathContext->new;
-		$xpc->registerNs('zoo', 'http://www.zoo.com');
 		my $xpath_exp = "//zoo:animale[zoo:nome='".$name."']";
 		my $animal = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
 		#my $asize = $xpc -> findnodes($xpath_exp, $doc)->size();
@@ -95,11 +95,7 @@ if ($watDo eq "animals")
 	}
 
 	if ($action eq "update") {
-		my $parser = XML::LibXML->new;
-		my $doc = $parser->parse_file("../xml/animals.xml");
-		my $root = $doc->getDocumentElement();
-		my $xpc = XML::LibXML::XPathContext->new;
-		$xpc->registerNs('zoo', 'http://www.zoo.com');
+
 		my $xpath_exp = "//zoo:animale[zoo:nome='".$name."']";
 		my $animal = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
 		if (!$animal) {
@@ -130,9 +126,9 @@ if ($watDo eq "animals")
 		my $old_age_node = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
 		my $old_age = $old_age_node -> nodeValue();
 		$old_age =~ s/$find/$replace/g;
-		
+
 		my $modified = undef;
-	
+
 		if($age ne $old_age){
 			$modified = 1;
 			my $new_age_node = $doc->createElement("eta");
@@ -142,16 +138,16 @@ if ($watDo eq "animals")
 		$xpath_exp = "//zoo:animale[zoo:nome='".$name."']/zoo:sesso";
 		my $old_gender_node = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
 		my $old_gender = $old_gender_node -> nodeValue();
-		
+
 		if($gender ne $old_gender){
 			$modified = 1;
 			my $new_gender_node = $doc->createElement("sesso");
 			$new_gender_node -> appendTextNode($gender);
 			$old_gender_node -> replaceNode($new_gender_node);
 		}
-		
-		my $filename = $page->param("image"); 
-		
+
+		my $filename = $page->param("image");
+
 		if($filename){
 			my $upload_dir = "../images/animals";
 			my ($fname, $path, $extension) = fileparse($filename, '\..*');
@@ -161,8 +157,8 @@ if ($watDo eq "animals")
 
 			my $upload_filehandle = $page->upload("image");
 			open (UPLOADFILE, ">$upload_dir/$filename" ) or die "$!";
-			binmode UPLOADFILE; 
-			while (<$upload_filehandle>){ 
+			binmode UPLOADFILE;
+			while (<$upload_filehandle>){
 				print UPLOADFILE;
 			}
 			close UPLOADFILE;
@@ -179,7 +175,7 @@ if ($watDo eq "animals")
 			$new_image_node -> appendTextNode($image_path);
 			$old_image_node -> replaceNode($new_image_node);
 		}
-		
+
 		if($modified){
 			open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
 			print XML $root->toString();
@@ -195,6 +191,11 @@ if ($watDo eq "users") {
 	my $action = $page->param("action");
 	check_action($action);
 	my $username = $page->param("username");
+	my $parser = XML::LibXML->new;
+	my $doc = $parser->parse_file("../xml/workers.xml");
+	my $root = $doc->getDocumentElement();
+	my $xpc = XML::LibXML::XPathContext->new;
+	$xpc->registerNs('zoo', 'http://www.zoo.com');
 	if (!$username) {
 		print $page->header();
 		print '
@@ -202,24 +203,107 @@ if ($watDo eq "users") {
 		exit;
 		}
 	if ($action eq "destroy") {
-		my $parser = XML::LibXML->new;
-		my $doc = $parser->parse_file("../xml/workers.xml");
-		my $root = $doc->getDocumentElement();
-		my $xpc = XML::LibXML::XPathContext->new;
-		$xpc->registerNs('zoo', 'http://www.zoo.com');
 		my $xpath_exp = "//zoo:employee[zoo:username='".$username."'] | //zoo:manager[zoo:username=']".$username."']";
 		my $user = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
 		#my $asize = $xpc -> findnodes($xpath_exp, $doc)->size();
 		if (!$user) {
 			print $page->header();
 			print '
-						<h2>Richiesta errata - nessun animale con questo nome</h2>';
-			#print "il nome era: $name, ho trovato $asize nodi, xpath era $xpath_exp"; #nome univoco in tutto lo zoo o all'interno dell'area??
+						<h2>Richiesta errata - nessun utente con questo nome</h2>';
 			exit;
 		}
 		print $page->header();
 		print 'l\'ho trovato';
+		#da fare la cancellazione
+		exit;
 		}
+	if ($action eq "update"){
+		my $modified = undef;
+		my $age = $page -> param("eta");
+		my $find = ' ';
+		my $replace = '';
+		$find = quotemeta $find; # escape regex metachars if present
+		$age =~ s/$find/$replace/g;
+		if (!isint($age)){
+			print $page->header();
+			print '
+						<h2>Richiesta errata - Età non valida</h2>';
+			exit;
+		}
+		my $role = $page -> param("tipo");
+		if (!$role || ($role ne "manager" && $role ne "impiegato")) {
+			print $page->header();
+			print '<h1> Ruolo non corretto (errori da sistemare)</h1>';
+			exit;
+		}
+
+		my $name = $page->param("nome");
+		if (!$name){
+			print $page->header();
+			print '<h1> Non hai inserito il nome  (errori da sistemare)</h1>';
+			exit;
+		}
+
+		my $gender = $page -> param("sesso");
+		if (!$gender || ($gender ne "M" && $gender ne "F")) {
+			print $page->header();
+			print '<h1> Sesso non corretto  (errori da sistemare)</h1>';
+			exit;
+		}
+
+		my $current_role;
+		if (Functions::is_manager_from_username($username)) {
+			$current_role = "manager";
+		} else {
+			$current_role = "impiegato";
+		}
+		if (($role eq "manager" && $current_role eq "impiegato") ||
+				($role eq "impiegato" && $current_role eq "manager")){
+			$modified = 1;
+			my $xpath_exp = "//zoo:".$current_role."[zoo:username='".$username."']";
+			my $old_user_node = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
+			$old_user_node -> setNodeName($role);
+		}
+
+		my $xpath_exp = "//zoo:username[. = \"$username\"]/../zoo:nome";
+		my $old_name_node = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
+		my $old_name = $old_name_node -> textContent();
+		if ($old_name ne $name) {
+			$modified = 1;
+			my $new_name_node = $doc->createElement("nome");
+			$new_name_node -> appendTextNode($name);
+			$old_name_node -> replaceNode($new_name_node);
+		}
+
+		$xpath_exp = "//zoo:username[. = \"$username\"]/../zoo:sesso";
+		my $old_gender_node = $xpc -> findnodes($xpath_exp,$doc)->get_node(1);
+		my $old_gender = $old_gender_node -> textContent();
+		if ($old_gender ne $gender) {
+			$modified = 1;
+			my $new_gender_node = $doc->createElement("sesso");
+			$new_gender_node -> appendTextNode($gender);
+			$old_gender_node -> replaceNode($new_gender_node);
+		}
+
+		$xpath_exp = "//zoo:username[. = \"$username\"]/../zoo:eta";
+		my $old_age_node = $xpc -> findnodes($xpath_exp,$doc)->get_node(1);
+		my $old_age = $old_age_node -> textContent();
+		if ($old_age ne $age) {
+			$modified = 1;
+			my $new_age_node = $doc->createElement("eta");
+			$new_age_node -> appendTextNode($age);
+			$old_age_node -> replaceNode($new_age_node);
+		}
+
+		if($modified){
+			open(XML,'>../xml/workers.xml') || die("Cannot Open file $!");
+			print XML $root->toString();
+			close(XML);
+		}
+
+		print $page->redirect(-URL => "gestione_utenti.cgi");
+		exit;
+	}
 
 }
 
@@ -297,7 +381,6 @@ if ($watDo eq "warehouse"){
 		print Functions::warehouse_table;
 
 		exit;
-
 	}
 	if ($action eq "destroy") {
 		my $parser = XML::LibXML->new;
@@ -324,6 +407,133 @@ if ($watDo eq "warehouse"){
 	}
 }
 
+#--------------------------------------------------------------------------AREAS
+if ($watDo eq "areas"){
+	my $action = $page->param("action");
+
+	if($action eq "update"){#modifica area
+		my $id = $page->param("id");
+		my $area_nome = $page->param("nome");
+		my $area_posizione = $page->param("posizione");
+		my $area_cibo = $page->param("cibo");
+
+		if(!$area_nome || isint($area_nome) || isfloat($area_nome)){
+			print $page->header;
+			print '<h3>Richiesta errata - nome area inserirto NON correttamente, deve essere una stringa di testo.</h3>';
+			exit;
+		}
+
+		if(!$area_posizione || isint($area_posizione) || isfloat($area_posizione)){
+			print $page->header;
+			print '<h3>Richiesta errata - posizione area inserirto NON correttamente, deve essere una stringa di testo.</h3>';
+			exit;
+		}
+
+		if(!$area_cibo || (!isint($area_cibo) && !isfloat($area_cibo) || $area_cibo < 0)){
+			print $page->header;
+			print '<h3>Richiesta errata - cibo giornaliero inserirto NON correttamente, deve essere un reale positivo.</h3>';
+			exit;
+		}
+
+		my $find = ' ';
+		my $replace = '';
+		$find = quotemeta $find; # escape regex metachars if present
+		$area_nome =~ s/$find/$replace/g;
+		$area_posizione =~ s/$find/$replace/g;
+		$area_cibo =~ s/$find/$replace/g;
+
+		my $parser = XML::LibXML->new;
+		my $doc = $parser->parse_file("../xml/animals.xml");
+		my $root = $doc->getDocumentElement();
+		my $xpc = XML::LibXML::XPathContext->new;
+		$xpc->registerNs('zoo', 'http://www.zoo.com');
+		my $xpath_exp = "//zoo:area[\@id=\"$id\"]";
+		my $area = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
+
+		my $modified = undef;
+
+		my $xpath_exp = "//zoo:area[\@id=\"$id\"]/\@nome";#old nome
+		my $old_nome = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
+		if($area_nome ne $old_nome->getData()){
+			my $nuovo_nome = $doc->createElement("nome");
+			$nuovo_nome->appendTextNode($area_nome);
+			$old_nome->parentNode->replaceChild($nuovo_nome,$old_nome);
+			$modified = 1;
+		}
+
+		my $xpath_exp = "//zoo:area[\@id=\"$id\"]/\@posizione";#old posizione
+		my $old_posizione = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
+		if($area_posizione ne $old_posizione->getData()){
+			my $nuova_posizione = $doc->createElement("posizione");
+			$nuova_posizione->appendTextNode($area_posizione);
+			$old_posizione->parentNode->replaceChild($nuova_posizione,$old_posizione);
+			$modified = 1;
+		}
+
+		my $xpath_exp = "//zoo:area[\@id=\"$id\"]/\@cibo_giornaliero";#old quantità di cibo
+		my $old_cibo = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
+		if($area_cibo ne $old_cibo->getData()){
+			my $nuovo_cibo = $doc->createElement("cibo_giornaliero");
+			$nuovo_cibo->appendTextNode($area_cibo);
+			$old_cibo->parentNode->replaceChild($nuovo_cibo,$old_cibo);
+			$modified = 1;
+		}
+		if($modified){
+			open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
+			print XML $root->toString();
+			close(XML);
+		}
+		print $page->redirect( -URL => "gestione_area.cgi");
+	}
+	if($action eq "destroy"){
+		my $id = $page->param("id");
+
+		my $parser = XML::LibXML->new;
+		my $doc = $parser->parse_file("../xml/animals.xml");
+		my $root = $doc->getDocumentElement();
+		my $xpc = XML::LibXML::XPathContext->new;
+		$xpc->registerNs('zoo', 'http://www.zoo.com');
+		my $xpath_exp = "//zoo:area[\@id=\"$id\"]";
+		my $area = $xpc->findnodes($xpath_exp, $doc)->get_node(0);
+		if (!$area) {
+			print '<h2>Richiesta errata - nessua area ha questo id</h2>';
+			exit;
+		}
+		my $zoo = $area->parentNode();
+		$zoo->removeChild($area);
+		open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
+		print XML $root->toString();
+		close(XML);
+	
+		
+		my $parser = XML::LibXML->new;#rimuovo dal magazzino il collegamento tra i cibi e le aree appena cancellate
+		my $doc = $parser->parse_file("../xml/warehouse.xml");
+		my $root = $doc->getDocumentElement();
+		my $xpc = XML::LibXML::XPathContext->new;
+		$xpc->registerNs('zoo', 'http://www.zoo.com');
+		my $xpath_exp = "//zoo:area[.=\"$id\"]";
+		my @area = $xpc->findnodes($xpath_exp, $doc);
+		if(@area) {
+			foreach my $temp (@area){
+				print $temp->textContent;
+				my $parent = $temp->parentNode;
+				$parent->removeChild($temp);
+			}
+		}
+
+		open(XML,'>../xml/warehouse.xml') || die("Cannot Open file $!");
+		print XML $root->toString();
+		close(XML);
+		
+		if($noscript eq "true"){
+			print $page->redirect( -URL => "gestione_area.cgi");
+		}
+		print $page->header();
+		print Functions::animals_table;
+
+		exit;
+	}
+}
 sub check_action{
 	my $action = $_[0];
 	if ($action eq undef || (!$action eq "destroy" && !$action eq "edit" && !$action eq "update")) {

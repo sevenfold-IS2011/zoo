@@ -29,7 +29,7 @@
 							</a>
 						</td>
 						<td>
-							<a href="reply.cgi?.." class="button" onclick='destroy(this);return false'>                         <xsl:attribute name="href">
+							<a href="reply.cgi?.." class="button" onclick='destroy(this);return false'><xsl:attribute name="href">
 								reply.cgi?noscript=true&amp;watDo=animals&amp;action=destroy&amp;name=<xsl:value-of select="zoo:nome"/>
 								</xsl:attribute>
 								<xsl:attribute name="animal_name">
