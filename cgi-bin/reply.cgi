@@ -49,7 +49,7 @@ if ($watDo eq undef || (!$watDo eq "animals" && !$watDo eq "warehouse" && !$watD
 #------------------------------------------------------------------------ANIMALS
 if ($watDo eq "animals")
 {
-	check_action($action);
+	check_action();
 	my $name = $page->param("name");
 	my $parser = XML::LibXML->new;
 	my $doc = $parser->parse_file("../xml/animals.xml");
@@ -199,8 +199,7 @@ if ($watDo eq "animals")
 
 #--------------------------------------------------------------------------USERS
 if ($watDo eq "users") {
-	my $action = $page->param("action");
-	check_action($action);
+	check_action();
 	my $username = $page->param("username");
 	my $parser = XML::LibXML->new;
 	my $doc = $parser->parse_file("../xml/workers.xml");
@@ -329,10 +328,9 @@ if ($watDo eq "users") {
 
 #----------------------------------------------------------------------WAREHOUSE
 if ($watDo eq "warehouse"){
-	my $action = $page->param("action");
 	my $cibo_id = $page->param("cibo");
 	my $amount = $page->param("amount");
-	check_action($action);
+	check_action();
 	if(!$cibo_id) {
 		if ($noscript eq "true" || $action eq "update") {
 			print $page->redirect( -URL => "gestione_magazzino.cgi?error=Richiesta errata - id non definito.");
@@ -434,8 +432,6 @@ if ($watDo eq "warehouse"){
 
 #--------------------------------------------------------------------------AREAS
 if ($watDo eq "areas"){
-	my $action = $page->param("action");
-
 	if($action eq "update"){#modifica area
 		my $id = $page->param("id");
 		my $area_nome = $page->param("nome");
@@ -561,7 +557,6 @@ if ($watDo eq "areas"){
 	}
 }
 sub check_action{
-	my $action = $_[0];
 	if ($action eq undef || (!$action eq "destroy" && !$action eq "edit" && !$action eq "update")) {
 		print $page->header();
 		print '
@@ -571,7 +566,12 @@ sub check_action{
 }
 
 sub file_error{
-	print $page->redirect(-URL=>"area_privata.cgi?error=Operazione fallita - errore nella scrittura del file: $!");
+	if ($noscript eq "true" || $action eq "update"){
+		print $page->redirect(-URL=>"area_privata.cgi?error=Operazione fallita - errore nella scrittura del file: $!");
+		exit;
+	}
+	print $page -> header();
+	print "<h3>Operazione fallita - errore nella scrittura del file: $!</h3>";
 	exit;
 }
 
