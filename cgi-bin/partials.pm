@@ -211,6 +211,7 @@ sub userForm{
 
 }
 
+=cut
 sub chi_siamo{
    	print
 	'<div id="content">
