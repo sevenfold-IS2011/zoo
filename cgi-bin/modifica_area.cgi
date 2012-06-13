@@ -13,9 +13,18 @@ if($session->is_expired() || $session->is_empty()){
 }
 my $sid = $session->id();
 
+my $area_id = $page -> param("id");
+if (!$area_id){
+	print $page->redirect(-URL=>"gestione_area.cgi?error=Modifica area fallita - area non specificata");
+	exit;
+}
+my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+my $size = $xp->find("//area[\@id=\"$area_id\"]")->size();
+if ($size < 1){
+	print $page->redirect(-URL=>"gestione_area.cgi?error=Modifica area fallita - area non trovata");
+	exit;
+}
 
-
-#DA AGGIUNGERE CONTROLLO COME SU MODIFICA ANIMALE
 print $page->header,
 			$page->start_html(-title => "Monkey Island || Lo zoo di Padova",
 			 									-meta => {'keywords' => 'zoo padova animali monkey island',
@@ -26,7 +35,7 @@ print $page->header,
 my $error = $page -> param("error") || undef;
 partials::privateHeader($error);
 my $watDo = "areas";
-partials::editArea($sid, $watDo, $page->param("id") );
+partials::editArea($sid, $watDo, $area_id );
 print $page->end_html;
 
 exit;

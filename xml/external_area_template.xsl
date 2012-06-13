@@ -8,7 +8,7 @@
 			<h3>Il nostro parco: </h3>
 			<p>All&apos;interno dello spazio dedicato ai visitatori &#232; possibile visitare il percorso safari o a piedi. Si possono trovare zone di ristoro e divertimento per i pi&#249; piccoli.</p>
 			<h3>Aree: </h3>
-			<table class="striped">
+			<table class="striped" summary="tabella contenente la lista delle aree presenti nello zoo">
 				<xsl:for-each select="zoo:area">
 					<tr>
 						<td>

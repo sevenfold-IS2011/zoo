@@ -62,7 +62,7 @@ sub header{
 sub footer{
 	print '
 	<div id="footer">
-    <p>Monkey Island S.r.l. | P.I. 0349034129384 | Via le man dae simie 32 | Curtarolo (PD)</p>
+    <p>Monkey Island S.r.l. | P.I. 0349034129384 | Via le man dae simie 32 | Curtarolo (PD) | <a href="mappa.html">mappa del sito</a></p>
   </div>'
 }
 
@@ -102,14 +102,25 @@ sub animale{
 sub servizi{
 	print
 	'<div id="content">
+		<a href="#accessibilita"><img src="../images/icons/handicap.png"  alt="icona handicap" /></a> 
+		<a href="#pronto-soccorso"><img src="../images/icons/first-aid.png"  alt="icona pronto soccorso" /></a>
+		<a href="#accoglienza"><img src="../images/icons/parking.png"  alt="icona parcheggio" /></a>
+		<a href="#ristoro><img src="../images/icons/snack-bar.png" " alt="icona snack bar" /></a>
+		<a href="#bus"><img src="../images/icons/bus-service.png"  alt="icona servizio bus" /></a>
 		<h3>I nostri servizi</h3>
-		<h4>Eventi</h4>
+		<h4 id="eventi">Eventi</h4>
 		<p>Il nostro personale è preparato alla gestione di ogni tipo di eventi. Se la tua famiglia festeggia qualche evenienza particolare, mettiti in contatto con la nostra gestione eventi per organizzare al meglio la vostra giornata!</p>
-		<h4>Accoglienza gruppi</h4>
+		<h4 id="accoglienza">Accoglienza gruppi</h4>
 		<p>Lo zoo prevede uno sconto per grandi gruppi di visitatori. E&apos; attrezzato inoltre con un parcheggio per bus e vengono organizzati su richiesta guide turistiche specializzate che offriranno alla vostra comitiva la loro conoscenza sulle specie e la loro vita selvatica. Per ulteriori informazioni visitare la pagina <a href="contatti.html">contatti</a>
-		<h4>Sicurezza</h4>
+		<h4 id="bus">Servizio bus</h4>
+		<p>Lo zoo è collegato via bus alla città di Padova e ai suoi punti di maggior interesse.</p>
+		<h4 id="pronto-soccorso">Primo soccorso</h4>
+		<p>Disponiamo di personale qualificato a intervenire in caso di malessere dei nostri clienti. Siamo attrezzati a norma di legge per sopperire alle necessità sanitarie in attesa dell\'eventuale arrivo di personale medico professionale</p>
+		<h4 id="sicurezza">Sicurezza</h4>
 		<p>Il nostro zoo è conforme a tutte le normative europee in materia di sicurezza. Gli animali pericolosi sono gestiti da personale preparato secondo processi professionali. Le nostre attrezzature sono le più moderne nel mercato e garantiscono la sicurezza del personale, dei visitatori e degli animali.</p>
-		<h4>Accessibilità</h4>
+		<h4 id="ristoro">Ristoro</h4>
+		<p>All\'interno dello zoo è possibile trovare vari punti di ristoro e fontane d\'acqua potabile gratuite.</p>
+		<h4 id="accessibilita">Accessibilità</h4>
 		<p>Lo zoo è attrezzato per accogliere tutti, dai grandi ai piccini senza dimenticare le persone con difficoltà a deambulare.
 		In particolare abbiamo: <br />
 		<ul>
@@ -119,7 +130,7 @@ sub servizi{
 			<li>Servizio touchscreen su totem per l&apos;accesso alle informazioni dello zoo</li>
 			<li>Mini club</li>
 			<li>Fontane disperse per il parco per le giornate di calura</li>
-		</ul>
+		</ul>    
 	</div>'
 }
 
@@ -200,9 +211,18 @@ sub userForm{
 
 }
 
-=cut
-
-
+sub chi_siamo{
+   	print
+	'<div id="content">
+		<h3>Il nostro zoo</h3>
+		<h4>Location</h4>
+		<p>Situato nel mezzo della campagna veneta, lo zoo Mokey Island garantisce comodità di parcheggio e accoglienza per tutta la famiglia.</p>
+		<h4>Gli inizi</h4>
+		<p>Nato nel 1990 da un\'idea di Pinco Pallo lo zoo offre momenti indimenticabili per tutta la famiglia. </p>
+		<h4>Segreteria clienti:</h4>
+		<p><strong>045-593755<br /><a mailto="info@monkeyisland.it">info@monkeyisland.it</a></strong></p>
+	</div>' 
+}
 sub privateHeader{
 	my $error = $_[0];
 	print '<div id="header">
@@ -232,7 +252,7 @@ sub privateHeader{
 sub privateArea{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
-	print '<div id = "right"> CONTENUTO </div>';
+	print '<div id = "right"><h4>Per favore utilizzare il menù a sinistra per accedere all\'area desiderata</h4></div>';
 	footer();
 	print '</div>';
 }
@@ -285,8 +305,8 @@ sub newArea{
 			<form action="_nuova_area.cgi" method="post" accept-charset="utf-8">
 			  <fieldset>
 			    <label for="name">Nome</label><input type="text" name="nome" value="" placeholder="nome"><br />
-			    <label for="posizione">Posizione</label><input type="text" name="posizione" value="" placeholder="Posizione">
-			    <label for="cibo">Cibo giornaliero (Kg)</label><input type="text" name="cibo" value="">
+			    <label for="posizione">Posizione</label><input type="text" name="posizione" value="" placeholder="posizione">
+			    <label for="cibo">Cibo giornaliero (Kg)</label><input type="text" name="cibo" value="" placeholder="quantità">
 			    <p><input type="submit" value="Crea Area"></p>
 			  </fieldset>
 			</form>

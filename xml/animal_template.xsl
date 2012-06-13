@@ -15,7 +15,7 @@
 
 				<h4>Area <xsl:value-of select="./@nome"/>:</h4>
 				<xsl:for-each select="zoo:animale">
-					<table class="animal">
+					<table class="animal" summary="tabella contenente la lista degli animali e tutti i loro attributi">
 						<tr>
 							<td>Nome</td>
 							<td><xsl:value-of select="zoo:nome"/></td>

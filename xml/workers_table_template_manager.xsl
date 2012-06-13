@@ -5,7 +5,7 @@
 	<xsl:template match="zoo:workers">
 
 			<h4>Di seguito è riportata la lista del personale dello zoo con i relativi dati modificabili (solo per Manager).</h4>
-			<table class="standard">
+			<table class="standard" summary="tabella contenete la ista del personale dello zoo">
 				<tr class="title">
 					<td>Nome</td>
 					<td>Età</td>
