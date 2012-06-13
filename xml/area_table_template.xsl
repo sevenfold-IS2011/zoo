@@ -6,7 +6,7 @@
 	<xsl:template match="zoo:zoo">
 
 		<h4>Di seguito è riportata la lista delle aree presenti nello zoo.</h4>
-		<table class = "standard">
+		<table class = "standard" summary="tabella contenente la lista delle aree presenti nello zoo">
 			<tr class="title">
 				<td>Area</td>
 				<td>Id</td>

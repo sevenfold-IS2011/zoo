@@ -6,7 +6,7 @@
 	<xsl:template match="zoo:zoo">
 
 		<h4>Di seguito è riportata la lista delle scorte presenti nel magazzino.</h4>
-		<table class="standard">
+		<table class="standard" summary="tabella contenente la lista lista delle scorte presenti nel magazzino">
 			<tr class="title">
 				<td>Nome</td>
 				<td>Area</td>

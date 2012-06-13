@@ -5,7 +5,7 @@
 	xmlns:zoo="http://www.zoo.com">
 	<xsl:template match="zoo:zoo">
 		<h3>Animali:</h3>
-		<table class = "standard">
+		<table class = "standard" summary="tabella contenente la lista degli animali e tutti i loro attributi">
 			<tr class="title">
 				<th colspan="2">Azioni</th>
 				<th>Area</th>

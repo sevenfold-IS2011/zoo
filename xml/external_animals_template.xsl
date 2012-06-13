@@ -9,7 +9,7 @@
 			<h3>Aree: </h3>
 			<xsl:for-each select="zoo:area">
 				<h4><xsl:value-of select="./@nome"/>: </h4>
-				<table class="striped">
+				<table class="striped" summary="tabella contenente la lista degli animali di una certa area">
 					<xsl:for-each select="zoo:animale">
 						<tr>
 							<td>
