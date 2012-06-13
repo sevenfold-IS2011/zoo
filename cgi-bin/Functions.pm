@@ -25,10 +25,34 @@ sub edit_animal{
 	print '';
 }
 
+sub get_areaName_from_id{
+	my $id = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+	my $nodeset = $xp->find("//area[@\id=\"$id\"]/\@nome");
+	my $node = $nodeset->get_node(1);
+	return $node->getData;
+}
+
+sub get_areaPosizione_from_id{
+	my $id = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+	my $nodeset = $xp->find("//area[@\id=\"$id\"]/\@posizione");
+	my $node = $nodeset->get_node(1);
+	return $node->getData;
+}
+
+sub get_areaCibo_from_id{
+	my $id = $_[0];
+	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+	my $nodeset = $xp->find("//area[@\id=\"$id\"]/\@cibo_giornaliero");
+	my $node = $nodeset->get_node(1);
+	return $node->getData;
+}
+
 # 1-> xml, 2-> xpath, ritorna nodeset
 sub run_xpath{
    	my $xp = XML::XPath->new(filename=>$_[0]);
-	return $xp->find($_[1]); 	
+	return $xp->find($_[1]);
 }
 
 sub check_credentials{
@@ -225,7 +249,7 @@ sub rendered_template{
 	my $replace = "";
 	$find = quotemeta $find; # escape regex metachars if present
 	$text =~ s/$find/$replace/g;
-	return $text; 
+	return $text;
 }
 sub area_table(){
 	return rendered_template('../xml/animals.xml','../xml/area_table_template.xsl');
