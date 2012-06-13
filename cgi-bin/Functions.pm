@@ -319,6 +319,35 @@ sub get_user_age{
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
 	return $xp->find("//username[. = \"$username\"]/../eta")->string_value();
 }
+
+sub exhaustion_table{
+	$days = $_[0];
+	my $parser = XML::LibXML->new;
+	my $doc = $parser->parse_file("../xml/warehouse.xml");
+	my $root = $doc->getDocumentElement();
+	my $xpc = XML::LibXML::XPathContext->new();
+	$xpc->registerNs('zoo', 'http://www.zoo.com');
+	my $xpath_exp = "//zoo:cibo";
+	my $foods = $xpc -> findnodes($xpath_exp, $doc);
+	my $foods_amount = $foods -> size();
+	my $food;
+	for(;$foods->size() > 0;){
+		$food = $foods -> pop();
+		if check_availability($food, $days){
+			
+		}
+	}
+}
+
+sub check_availability{
+	my $food = $_[0];
+	my $days = $_[1];
+	if (!$food->hasChildNodes) {
+		# body...
+	}
+	
+	
+}
 #sub orderXML{
 #        my $hashParameters = shift;
 #        my $encoding = $hashParameters->{encoding};

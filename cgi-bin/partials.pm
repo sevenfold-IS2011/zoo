@@ -552,6 +552,7 @@ sub privateMenu{
 		print'
 						<ul>
 							<li><a href="nuovo_cibo.cgi">Aggiungi cibo</a></li>
+							<li><a href="check_cibo.cgi">Controlla disponibilità</a></li>
 						</ul>';
 
 					}
@@ -593,7 +594,7 @@ sub newUser{
 			  <label for="username">Username</label><input type="text" name="username" value="" placeholder="Username"><br />
 			  <label for="password">Password</label><input type="password" name="password" value="" placeholder="Password">
 			  <label for="password">Conferma </label><input type="password" name="password2" value="" placeholder="Una diversa da prima">
-			  <p><input type="submit" value="Crea Utente"></p>
+			  <p><input type="submit" value="Crea Utente"/></p>
 			  </fieldset>
 			</form>
 		</div>
@@ -614,9 +615,9 @@ sub edit_user{
 		<h3>Modifica Utente</h3>
 		<div class = "form-wrapper">
 			<form action="reply.cgi" method="post" accept-charset="utf-8">
-				<input type="hidden" name="watDo" value="users">
-				<input type="hidden" name="action" value="update">
-				<input type="hidden" name="username" value="'.$_[2].'">
+				<input type="hidden" name="watDo" value="users"/>
+				<input type="hidden" name="action" value="update"/>
+				<input type="hidden" name="username" value="'.$_[2].'"/>
 			  <fieldset>
 			  	<label for="tipo">Tipo</label>';
 	if ($is_manager){
@@ -647,13 +648,46 @@ sub edit_user{
 	print '
 					</select><br />
 			  	<label for="eta">Et&agrave;</label><input type="text" name="eta" value="'.$age.'"><br />
-			  	<p><input type="submit" value="Modifica Utente"></p>
+			  	<p><input type="submit" value="Modifica Utente"/></p>
 			  </fieldset>
 			</form>
 		</div>
 	</div>';
 	footer();
 	print '</div>';
+}
+
+sub check_food{
+	my $days = $_[2];
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+	print '<div id = "right">';
+	if (!$days){
+		check_food_form();
+	}else{
+		check_food_table($days);
+	}
+	print '</div>';
+	footer();
+	print '</div>';
+}
+
+sub check_food_form{
+	print'
+			<h2>Inserisci il numero di giorni per il quale vuoi controllare la disponibilità in magazzino</h2>
+			<form action="check_cibo.cgi" method="get" accept-charset="utf-8">
+				<fieldset>
+					<label for="giorni">Giorni:<input type="text" name="giorni" placeholder="7" id="giorni">
+					<p><input type="submit" value="Controlla"/></p>
+				</fieldet>
+			</form>
+			'
+}
+
+sub check_food_table{
+	my $days = $_[0];
+	print '<h3>Scorte che andranno in esaurimento in '.$days.' giorni: </h3>';
+	print Functions::exhaustion_table($days);
 }
 1;
 
