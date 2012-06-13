@@ -504,6 +504,26 @@ if ($watDo eq "areas"){
 		open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
 		print XML $root->toString();
 		close(XML);
+	
+		
+		my $parser = XML::LibXML->new;#rimuovo dal magazzino il collegamento tra i cibi e le aree appena cancellate
+		my $doc = $parser->parse_file("../xml/warehouse.xml");
+		my $root = $doc->getDocumentElement();
+		my $xpc = XML::LibXML::XPathContext->new;
+		$xpc->registerNs('zoo', 'http://www.zoo.com');
+		my $xpath_exp = "//zoo:area[.=\"$id\"]";
+		my @area = $xpc->findnodes($xpath_exp, $doc);
+		if(@area) {
+			foreach my $temp (@area){
+				print $temp->textContent;
+				my $parent = $temp->parentNode;
+				$parent->removeChild($temp);
+			}
+		}
+
+		open(XML,'>../xml/warehouse.xml') || die("Cannot Open file $!");
+		print XML $root->toString();
+		close(XML);
 		
 		if($noscript eq "true"){
 			print $page->redirect( -URL => "gestione_area.cgi");
