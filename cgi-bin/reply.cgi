@@ -333,17 +333,17 @@ if ($watDo eq "warehouse"){
 	my $cibo_id = $page->param("cibo");
 	my $amount = $page->param("amount");
 	check_action($action);
-	if(!$action) {
-		print $page->header(-charset => 'utf-8');
-		print '<h2>Richiesta errata - azione non esistente</h2>';
-		exit;
-	}
 	if(!$cibo_id) {
-		print $page->header(-charset => 'utf-8');
-		print '<h2>Richiesta errata - parametro cibo non definito</h2>';
+		if ($noscript eq "true" || $action eq "update") {
+			print $page->redirect( -URL => "gestione_magazzino.cgi?error=Richiesta errata - id non definito.");
+			exit;
+		}
+		print $page->header();
+		print '
+					<h3>Richiesta errata - parametro id non definito</h3>';
 		exit;
 	}
-	if(!$amount | ( !isint($amount) && !isfloat($amount) | $amount < 0 )){# se $amount esiste, è > 0 e !(è un intero o un float)
+	if(!$amount || (!isint($amount) && !isfloat($amount)) || $amount < 0 ){# se $amount esiste, è > 0 e !(è un intero o un float)
 		print $page->header(-charset => 'utf-8');
 		print '<h3>Richiesta errata - "quantità" inserita non correttamente, deve essere un numero positivo</h3>';
 		exit;
