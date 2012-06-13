@@ -7,12 +7,12 @@
 		<h3>Animali:</h3>
 		<table class = "standard" summary="tabella contenente la lista degli animali e tutti i loro attributi">
 			<tr class="title">
-				<th colspan="2">Azioni</th>
-				<th>Area</th>
-				<th>Nome</th>
-				<th>Eta'</th>
-				<th>Sesso</th>
-				<th>Immagine</th>
+				<th scope="col" colspan="2">Azioni</th>
+				<th scope="col">Area</th>
+				<th scope="col">Nome</th>
+				<th scope="col">Eta'</th>
+				<th scope="col">Sesso</th>
+				<th scope="col">Immagine</th>
 			</tr>
 			<xsl:for-each select="zoo:area">
 				<xsl:for-each select="zoo:animale">
@@ -38,7 +38,7 @@
 								Elimina
 							</a>
 						</td>
-						<td><xsl:value-of select="../@nome"/></td>
+						<td scope="row"><xsl:value-of select="../@nome"/></td>
 						<td><xsl:value-of select="zoo:nome"/></td>
 						<td><xsl:value-of select="zoo:eta"/></td>
 						<td><xsl:value-of select="zoo:sesso"/></td>
