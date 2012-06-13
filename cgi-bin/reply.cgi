@@ -329,12 +329,12 @@ if ($watDo eq "warehouse"){
 		print '<h2>Richiesta errata - parametro cibo non definito</h2>';
 		exit;
 	}
-	if(!$amount | ( !isint($amount) && !isfloat($amount) | $amount < 0 )){# se $amount esiste, è > 0 e !(è un intero o un float)
-		print $page->header(-charset => 'utf-8');
-		print '<h3>Richiesta errata - "quantità" inserita non correttamente, deve essere un numero positivo</h3>';
-		exit;
-	}
 	if ($action eq "add" | $action eq "remove" ) {
+		if(!$amount | ( !isint($amount) && !isfloat($amount) | $amount < 0 )){# se $amount esiste, è > 0 e !(è un intero o un float)
+			print $page->header(-charset => 'utf-8');
+			print '<h3>Richiesta errata - "quantità" inserita non correttamente, deve essere un numero positivo</h3>';
+			exit;
+		}
 		my $parser = XML::LibXML->new;
 		my $doc = $parser->parse_file("../xml/warehouse.xml");
 		my $root = $doc->getDocumentElement();
@@ -405,10 +405,10 @@ if ($watDo eq "warehouse"){
 		open(XML,'>../xml/warehouse.xml') || die("Cannot Open file $!");
 		print XML $root->toString();
 		close(XML);
-		print Functions::warehouse_table;
 		if($noscript){
 			print $page->redirect( -URL => "gestione_magazzino.cgi");
 		}
+		print Functions::warehouse_table;
 		exit;
 	}
 }

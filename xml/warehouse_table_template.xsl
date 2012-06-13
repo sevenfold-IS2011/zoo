@@ -19,8 +19,7 @@
 					<td><xsl:value-of select="@nome"/></td>
 					<td>
 						<xsl:for-each select="zoo:area">
-							<a>
-								<xsl:attribute name="href">area.cgi?id=<xsl:value-of select="."/></xsl:attribute><!-- Non mandare a capo -->
+							<a><xsl:attribute name="href">area.cgi?id=<xsl:value-of select="."/></xsl:attribute><!-- Non mandare a capo -->
 								<xsl:value-of select="."/>
 							</a>&#160;
 						</xsl:for-each>
@@ -28,8 +27,7 @@
 					<td><xsl:value-of select="@quantita"/></td>
 					<td class="button">
 						<a class="button" onclick="destroy(this)">
-							<xsl:attribute name="href">
-								reply.cgi?noscript=true&amp;watDo=warehouse&amp;action=destroy&amp;id=<xsl:value-of select="."/>
+							<xsl:attribute name="href">reply.cgi?noscript=true&amp;watDo=warehouse&amp;action=destroy&amp;cibo=<xsl:value-of select="@id" /> 
 							</xsl:attribute>
 							Rimuovi
 						</a>
