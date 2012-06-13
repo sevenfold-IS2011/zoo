@@ -6,17 +6,17 @@
 	<xsl:template match="zoo:zoo">
 
 		<h4>Di seguito è riportata la lista delle aree presenti nello zoo.</h4>
-		<table class = "standard">
+		<table class = "standard" summary="La tabella contiene un listato delle aree dello zoo con le loro caratteristiche registrate. &#200; possibile inoltre eliminare o modificare dati seguendo i link nell'ultima parte di ogni riga.">
 			<tr class="title">
-				<td>Area</td>
-				<td>Id</td>
-				<td>Posizione</td>
-				<td>Cibo giornaliero</td>
-				<td colspan="2">Azioni</td>
+				<th scope="col">Area</th>
+				<th scope="col">Id</th>
+				<th scope="col">Posizione</th>
+				<th scope="col">Cibo giornaliero</th>
+				<th scope="col" colspan="2">Azioni</th>
 			</tr>
 			<xsl:for-each select="zoo:area">
 				<tr>
-					<td><xsl:value-of select="@nome"/></td>
+					<td scope="row"><xsl:value-of select="@nome"/></td>
 					<td><xsl:value-of select="@id"/></td>
 					<td><xsl:value-of select="@posizione"/></td>
 					<td><xsl:value-of select="@cibo_giornaliero"/></td>
