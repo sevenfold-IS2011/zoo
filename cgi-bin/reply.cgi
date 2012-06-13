@@ -494,43 +494,49 @@ if ($watDo eq "areas"){
 	if($action eq "destroy"){
 		my $id = $page->param("id");
 
+		
 		my $parser = XML::LibXML->new;
 		my $doc = $parser->parse_file("../xml/animals.xml");
 		my $root = $doc->getDocumentElement();
 		my $xpc = XML::LibXML::XPathContext->new;
 		$xpc->registerNs('zoo', 'http://www.zoo.com');
+		
 		my $xpath_exp = "//zoo:area[\@id=\"$id\"]";
 		my $area = $xpc->findnodes($xpath_exp, $doc)->get_node(0);
 		if (!$area) {
 			print '<h2>Richiesta errata - nessua area ha questo id</h2>';
 			exit;
 		}
-		my $zoo = $area->parentNode();
-		$zoo->removeChild($area);
-		open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
-		print XML $root->toString();
-		close(XML);
-	
-		
-		my $parser = XML::LibXML->new;#rimuovo dal magazzino il collegamento tra i cibi e le aree appena cancellate
-		my $doc = $parser->parse_file("../xml/warehouse.xml");
-		my $root = $doc->getDocumentElement();
-		my $xpc = XML::LibXML::XPathContext->new;
-		$xpc->registerNs('zoo', 'http://www.zoo.com');
+		else{
+			my $doc = $parser->parse_file("../xml/animals.xml");#rimuovo le immagini degli animali che sono nell'area da cancellare
+			my $xpath_exp = "//zoo:area[\@id=\"$id\"]/zoo:animale/zoo:img";
+			my @image_path =  $xpc -> findnodes($xpath_exp, $doc);
+			if(@image_path) {
+				foreach my $temp (@image_path){
+					unlink($temp->textContent());
+				}
+			}
+			
+			my $zoo = $area->parentNode();
+			$zoo->removeChild($area);
+			open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
+			print XML $root->toString();
+			close(XML);
+		}
+
+		my $doc = $parser->parse_file("../xml/warehouse.xml");#rimuovo dal magazzino il collegamento tra i cibi e le aree appena cancellate
 		my $xpath_exp = "//zoo:area[.=\"$id\"]";
 		my @area = $xpc->findnodes($xpath_exp, $doc);
 		if(@area) {
 			foreach my $temp (@area){
-				print $temp->textContent;
 				my $parent = $temp->parentNode;
 				$parent->removeChild($temp);
 			}
 		}
-
 		open(XML,'>../xml/warehouse.xml') || die("Cannot Open file $!");
 		print XML $root->toString();
 		close(XML);
-		
+
 		if($noscript eq "true"){
 			print $page->redirect( -URL => "gestione_area.cgi");
 		}
