@@ -425,6 +425,12 @@ if ($watDo eq "warehouse"){
 		print Functions::warehouse_table;
 		exit;
 	}
+	if ($action eq "update") {
+		print $page->header();
+		print 'id: ';
+		print $cibo_id;
+		partials::areaCheckbox(Functions::get_areas);
+	}
 }
 
 #--------------------------------------------------------------------------AREAS

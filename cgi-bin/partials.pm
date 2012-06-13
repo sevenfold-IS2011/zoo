@@ -336,6 +336,29 @@ sub updateWarehouse{
 	print '</div>';
 }
 
+sub editWarehouse{
+	my $cibo_nome = Functions::get_ciboNome_from_id($_[2]);
+	print '<div id = "content">';
+	privateMenu($_[0], $_[1]);
+	print '	<div id = "right">
+		<h4>Aggiungi tipologia di cibo:</h4>
+		<div class = "form-wrapper">
+			<form action="reply.cgi" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+			<input type="hidden" name="watDo" value="warehouse">
+			<input type="hidden" name="action" value="update">
+			<input type='."hidden".' name="cibo" value='."$_[2]".'>
+			  <label for="nome">Nome: </label><input type="text" name="nome" value='."$cibo_nome".' placeholder="Nome" />';
+				areaCheckbox(Functions::get_areas);
+				print '
+			  <p><input type="submit" value="Modifica"/></p>
+			</form>
+		</div>
+	</div>';
+
+	footer;
+	print '</div>';
+}
+
 sub manageWarehouse{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
