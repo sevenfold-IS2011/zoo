@@ -16,8 +16,16 @@ $CGI::POST_MAX = 1024 * 5000;
 
 my $page = new CGI;
 my $session = CGI::Session->load();
+my $noscript = $page->param("noscript");
+my $action = $page->param("action");
+
 if($session->is_expired() || $session->is_empty()){
   print $page->header();
+	if ($noscript eq "true") {
+		print $page->redirect( -URL => "login.cgi?error=Sessione scaduta o inesistente. Prego rieffettuare il login.");
+		exit;
+	}
+	
 	print '
 				<h2> Risorsa non accessibile - probabilmente la sessione è stata chiusa od è scaduta.</h2>
 					<br />
@@ -26,20 +34,22 @@ if($session->is_expired() || $session->is_empty()){
 }
 
 my $watDo = $page->param("watDo");
-my $noscript = $page->param("noscript");
 
 if ($watDo eq undef || (!$watDo eq "animals" && !$watDo eq "warehouse" && !$watDo eq "areas" && !$watDo eq "users") ){
+	if ($noscript eq "true" || $action eq "update") {
+		print $page->redirect( -URL => "area_privata.cgi?error=Richiesta errata - azione non definita.");
+		exit;
+	}
 	print $page->header();
 	print '
-				<h2>Richiesta errata - parametro watDo incorretto</h2>';
+				<h3>Richiesta errata - parametro watDo incorretto</h3>';
 	exit;
 }
 
 #------------------------------------------------------------------------ANIMALS
 if ($watDo eq "animals")
 {
-	my $action = $page->param("action");
-	check_action($action);
+	check_action();
 	my $name = $page->param("name");
 	my $parser = XML::LibXML->new;
 	my $doc = $parser->parse_file("../xml/animals.xml");
@@ -47,9 +57,13 @@ if ($watDo eq "animals")
 	my $xpc = XML::LibXML::XPathContext->new;
 	$xpc->registerNs('zoo', 'http://www.zoo.com');
 	if (!$name) {
+		if ($noscript eq "true" || $action eq "update") {
+			print $page->redirect( -URL => "gestione_animali.cgi?error=Richiesta errata - nome non definito.");
+			exit;
+		}
 		print $page->header();
 		print '
-					<h2>Richiesta errata - parametro name undefined</h2>';
+					<h3>Richiesta errata - parametro nome indefinito</h3>';
 		exit;
 		}
 	if ($action eq "destroy") {
@@ -59,10 +73,13 @@ if ($watDo eq "animals")
 		my $animal = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
 		#my $asize = $xpc -> findnodes($xpath_exp, $doc)->size();
 		if (!$animal) {
+			if ($noscript eq "true") {
+				print $page->redirect( -URL => "gestione_animali.cgi?error=Richiesta errata - animale non trovato.");
+				exit;
+			}
 			print $page->header();
 			print '
-						<h2>Richiesta errata - nessun animale con questo nome</h2>';
-			#print "il nome era: $name, ho trovato $asize nodi, xpath era $xpath_exp"; #nome univoco in tutto lo zoo o all'interno dell'area??
+						<h3>Richiesta errata - animale non trovato</h3>';
 			exit;
 		}
 
@@ -75,7 +92,7 @@ if ($watDo eq "animals")
 		my $area = $animal->parentNode();
 		$area->removeChild($animal); #non suicidi, ma figlicidi
 
-		open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
+		open(XML,'>../xml/animals.xml') || file_error();
 		print XML $root->toString();
 		close(XML);
 
@@ -99,23 +116,17 @@ if ($watDo eq "animals")
 		my $xpath_exp = "//zoo:animale[zoo:nome='".$name."']";
 		my $animal = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
 		if (!$animal) {
-			print $page->header();
-			print '
-						<h2>Richiesta errata - nessun animale con questo nome</h2>';
+			print $page->redirect( -URL => "gestione_animali.cgi?error=Impossibile modificare l'animale - animale non trovato.");
 			exit;
 		}
 		my $age = $page -> param("age");
 		if (!isint($age)){
-			print $page->header();
-			print '
-						<h2>Richiesta errata - Età non valida</h2>';
+			print $page->redirect( -URL => "gestione_animali.cgi?error=Impossibile modificare l'animale - età non valida");
 			exit;
 		}
 		my $gender = $page ->param("gender");
 		if (!$gender || ($gender ne "Male" && $gender ne "Female")) {
-			print $page->header();
-			print '
-						<h2>Richiesta errata - Sesso non valido</h2>';
+			print $page->redirect( -URL => "gestione_animali.cgi?error=Impossibile modificare l'animale - sesso insensato");
 			exit;
 		}
 		my $find = ' ';
@@ -156,7 +167,7 @@ if ($watDo eq "animals")
 			#manca un check sull'image name, occhio
 
 			my $upload_filehandle = $page->upload("image");
-			open (UPLOADFILE, ">$upload_dir/$filename" ) or die "$!";
+			open (UPLOADFILE, ">$upload_dir/$filename" ) or file_error();
 			binmode UPLOADFILE;
 			while (<$upload_filehandle>){
 				print UPLOADFILE;
@@ -177,7 +188,7 @@ if ($watDo eq "animals")
 		}
 
 		if($modified){
-			open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
+			open(XML,'>../xml/animals.xml') || file_error();
 			print XML $root->toString();
 			close(XML);
 		}
@@ -188,8 +199,7 @@ if ($watDo eq "animals")
 
 #--------------------------------------------------------------------------USERS
 if ($watDo eq "users") {
-	my $action = $page->param("action");
-	check_action($action);
+	check_action();
 	my $username = $page->param("username");
 	my $parser = XML::LibXML->new;
 	my $doc = $parser->parse_file("../xml/workers.xml");
@@ -197,6 +207,10 @@ if ($watDo eq "users") {
 	my $xpc = XML::LibXML::XPathContext->new;
 	$xpc->registerNs('zoo', 'http://www.zoo.com');
 	if (!$username) {
+		if ($noscript eq "true" || $action eq "update") {
+			print $page->redirect( -URL => "gestione_utenti.cgi?error=Richiesta errata - nome non definito.");
+			exit;
+		}
 		print $page->header();
 		print '
 					<h2>Richiesta errata - parametro username undefined</h2>';
@@ -206,13 +220,17 @@ if ($watDo eq "users") {
 		my $xpath_exp = "//zoo:username[. = \"$username\"]/..";
 		my $user = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
 		if (!$user) {
+			if ($noscript eq "true") {
+				print $page->redirect( -URL => "gestione_utenti.cgi?error=Richiesta errata - utente non trovato.");
+				exit;
+			}
 			print $page->header();
 			print '
 						<h2>Richiesta errata - nessun utente con questo nome</h2>';
 			exit;
 		}
 		$user->parentNode()->removeChild($user);
-		open(XML,'>../xml/workers.xml') || die("Cannot Open file $!");
+		open(XML,'>../xml/workers.xml') || file_error();
 		print XML $root->toString();
 		close(XML);
 		
@@ -230,31 +248,26 @@ if ($watDo eq "users") {
 		my $replace = '';
 		$find = quotemeta $find; # escape regex metachars if present
 		$age =~ s/$find/$replace/g;
-		if (!isint($age)){
-			print $page->header();
-			print '
-						<h2>Richiesta errata - Età non valida</h2>';
+		if (!isint($age) || $age <= 0){
+			print $page->redirect( -URL => "gestione_utenti.cgi?error=Richiesta errata - età insensata.");
 			exit;
 		}
 		my $role = $page -> param("tipo");
 		if (!$role || ($role ne "manager" && $role ne "impiegato")) {
-			print $page->header();
-			print '<h1> Ruolo non corretto (errori da sistemare)</h1>';
-			exit;
+			print $page->redirect( -URL => "gestione_utenti.cgi?error=Richiesta errata - tipo insensata.");
+			exit
 		}
 
 		my $name = $page->param("nome");
 		if (!$name){
-			print $page->header();
-			print '<h1> Non hai inserito il nome  (errori da sistemare)</h1>';
-			exit;
+			print $page->redirect( -URL => "gestione_utenti.cgi?error=Richiesta errata - nome indefinito.");
+			exit
 		}
 
 		my $gender = $page -> param("sesso");
 		if (!$gender || ($gender ne "M" && $gender ne "F")) {
-			print $page->header();
-			print '<h1> Sesso non corretto  (errori da sistemare)</h1>';
-			exit;
+			print $page->redirect( -URL => "gestione_utenti.cgi?error=Richiesta errata - genere insensato.");
+			exit
 		}
 
 		my $current_role;
@@ -302,7 +315,7 @@ if ($watDo eq "users") {
 		}
 
 		if($modified){
-			open(XML,'>../xml/workers.xml') || die("Cannot Open file $!");
+			open(XML,'>../xml/workers.xml') || file_error();
 			print XML $root->toString();
 			close(XML);
 		}
@@ -315,26 +328,30 @@ if ($watDo eq "users") {
 
 #----------------------------------------------------------------------WAREHOUSE
 if ($watDo eq "warehouse"){
-	my $action = $page->param("action");
 	my $cibo_id = $page->param("cibo");
 	my $amount = $page->param("amount");
-	check_action($action);
-	if(!$action) {
-		print $page->header(-charset => 'utf-8');
-		print '<h2>Richiesta errata - azione non esistente</h2>';
-		exit;
-	}
+	check_action();
 	if(!$cibo_id) {
-		print $page->header(-charset => 'utf-8');
-		print '<h2>Richiesta errata - parametro cibo non definito</h2>';
+		if ($noscript eq "true" || $action eq "update") {
+			print $page->redirect( -URL => "gestione_magazzino.cgi?error=Richiesta errata - id non definito.");
+			exit;
+		}
+		print $page->header();
+		print '
+					<h3>Richiesta errata - parametro id non definito</h3>';
 		exit;
 	}
-	if(!$amount | ( !isint($amount) && !isfloat($amount) | $amount < 0 )){# se $amount esiste, è > 0 e !(è un intero o un float)
-		print $page->header(-charset => 'utf-8');
-		print '<h3>Richiesta errata - "quantità" inserita non correttamente, deve essere un numero positivo</h3>';
-		exit;
-	}
-	if ($action eq "add" | $action eq "remove" ) {
+	if ($action eq "add" || $action eq "remove" ) {
+		if(!$amount || (!isint($amount) && !isfloat($amount)) || $amount < 0 ){# se $amount esiste, è > 0 e !(è un intero o un float)
+			if ($noscript eq "true") {
+				print $page->redirect( -URL => "gestione_magazzino.cgi?error=Richiesta errata - quantità non corretta.");
+				exit;
+			}
+			print $page->header();
+			print '
+						<h3>Richiesta errata - quantità non corretta</h3>';
+			exit;
+		}
 		my $parser = XML::LibXML->new;
 		my $doc = $parser->parse_file("../xml/warehouse.xml");
 		my $root = $doc->getDocumentElement();
@@ -376,7 +393,7 @@ if ($watDo eq "warehouse"){
 		my $cibo = $xpc->findnodes($xpath_exp, $doc)->get_node(0);
 		$cibo->replaceNode($new_cibo);
 		$root->appendChild($new_cibo);#appendo il nuovo cibo
-		open(XML,'>../xml/warehouse.xml') || die("Cannot Open file $!");
+		open(XML,'>../xml/warehouse.xml') || file_error();
 		print XML $root->toString();
 		close(XML);
 
@@ -402,21 +419,35 @@ if ($watDo eq "warehouse"){
 		}
 		my $zoo = $cibo->parentNode();
 		$zoo->removeChild($cibo);
-		open(XML,'>../xml/warehouse.xml') || die("Cannot Open file $!");
+		open(XML,'>../xml/warehouse.xml') || file_error();
 		print XML $root->toString();
 		close(XML);
-		print Functions::warehouse_table;
 		if($noscript){
 			print $page->redirect( -URL => "gestione_magazzino.cgi");
 		}
+		print Functions::warehouse_table;
 		exit;
+	}
+	if ($action eq "update") {
+		my $cibo_nome = $page->param("nome");
+		if(!$cibo_nome || isint($cibo_nome) || isfloat($amount)){
+			print $page->header();
+			print '<h2>Richiesta errata - nome inserito non valido</h2>';
+			exit;
+		}
+print $page->header();
+print 'id: ';
+print $cibo_id;
+		
+		#prelevare il vecchio chibo
+		#vedere se è uguale
+		#se diverso sostituire
+		#scrivere su xml
 	}
 }
 
 #--------------------------------------------------------------------------AREAS
 if ($watDo eq "areas"){
-	my $action = $page->param("action");
-
 	if($action eq "update"){#modifica area
 		my $id = $page->param("id");
 		my $area_nome = $page->param("nome");
@@ -424,20 +455,17 @@ if ($watDo eq "areas"){
 		my $area_cibo = $page->param("cibo");
 
 		if(!$area_nome || isint($area_nome) || isfloat($area_nome)){
-			print $page->header;
-			print '<h3>Richiesta errata - nome area inserirto NON correttamente, deve essere una stringa di testo.</h3>';
+			print $page->redirect( -URL => "gestione_area.cgi?error=Richiesta errata - nome non definito o errato.");
 			exit;
 		}
 
 		if(!$area_posizione || isint($area_posizione) || isfloat($area_posizione)){
-			print $page->header;
-			print '<h3>Richiesta errata - posizione area inserirto NON correttamente, deve essere una stringa di testo.</h3>';
+			print $page->redirect( -URL => "gestione_area.cgi?error=Richiesta errata - posizione non definita o errata.");
 			exit;
 		}
 
 		if(!$area_cibo || (!isint($area_cibo) && !isfloat($area_cibo) || $area_cibo < 0)){
-			print $page->header;
-			print '<h3>Richiesta errata - cibo giornaliero inserirto NON correttamente, deve essere un reale positivo.</h3>';
+			print $page->redirect( -URL => "gestione_area.cgi?error=Richiesta errata - quantità di cibo giornaliero non definita o errata.");
 			exit;
 		}
 
@@ -485,7 +513,7 @@ if ($watDo eq "areas"){
 			$modified = 1;
 		}
 		if($modified){
-			open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
+			open(XML,'>../xml/animals.xml') || file_error();
 			print XML $root->toString();
 			close(XML);
 		}
@@ -494,7 +522,6 @@ if ($watDo eq "areas"){
 	if($action eq "destroy"){
 		my $id = $page->param("id");
 
-		
 		my $parser = XML::LibXML->new;
 		my $doc = $parser->parse_file("../xml/animals.xml");
 		my $root = $doc->getDocumentElement();
@@ -508,23 +535,22 @@ if ($watDo eq "areas"){
 			exit;
 		}
 		else{
-			my $doc = $parser->parse_file("../xml/animals.xml");#rimuovo le immagini degli animali che sono nell'area da cancellare
-			my $xpath_exp = "//zoo:area[\@id=\"$id\"]/zoo:animale/zoo:img";
+			my $xpath_exp = "//zoo:area[\@id=\"$id\"]/zoo:animale/zoo:img";#rimuovo le immagini degli animali che sono nell'area da cancellare
 			my @image_path =  $xpc -> findnodes($xpath_exp, $doc);
 			if(@image_path) {
 				foreach my $temp (@image_path){
 					unlink($temp->textContent());
 				}
 			}
-			
 			my $zoo = $area->parentNode();
 			$zoo->removeChild($area);
-			open(XML,'>../xml/animals.xml') || die("Cannot Open file $!");
+			open(XML,'>../xml/animals.xml') || file_error();
 			print XML $root->toString();
 			close(XML);
 		}
 
 		my $doc = $parser->parse_file("../xml/warehouse.xml");#rimuovo dal magazzino il collegamento tra i cibi e le aree appena cancellate
+		my $root = $doc->getDocumentElement();
 		my $xpath_exp = "//zoo:area[.=\"$id\"]";
 		my @area = $xpc->findnodes($xpath_exp, $doc);
 		if(@area) {
@@ -533,7 +559,7 @@ if ($watDo eq "areas"){
 				$parent->removeChild($temp);
 			}
 		}
-		open(XML,'>../xml/warehouse.xml') || die("Cannot Open file $!");
+		open(XML,'>../xml/warehouse.xml') || file_error();
 		print XML $root->toString();
 		close(XML);
 
@@ -547,7 +573,6 @@ if ($watDo eq "areas"){
 	}
 }
 sub check_action{
-	my $action = $_[0];
 	if ($action eq undef || (!$action eq "destroy" && !$action eq "edit" && !$action eq "update")) {
 		print $page->header();
 		print '
@@ -555,4 +580,15 @@ sub check_action{
 		exit;
 	}
 }
+
+sub file_error{
+	if ($noscript eq "true" || $action eq "update"){
+		print $page->redirect(-URL=>"area_privata.cgi?error=Operazione fallita - errore nella scrittura del file: $!");
+		exit;
+	}
+	print $page -> header();
+	print "<h3>Operazione fallita - errore nella scrittura del file: $!</h3>";
+	exit;
+}
+
 

@@ -18,8 +18,6 @@
 							<p>Nome: <xsl:value-of select="zoo:nome"/></p>
 							<p>Età: <xsl:value-of select="zoo:eta"/></p>
 							<p>Sesso: <xsl:value-of select="zoo:sesso"/></p>
-
-							<h4>Storia:</h4>
 						</div>
 					</div>
 

@@ -8,28 +8,29 @@
 		<h4>Di seguito è riportata la lista delle scorte presenti nel magazzino.</h4>
 		<table class="standard" summary="tabella contenente la lista lista delle scorte presenti nel magazzino">
 			<tr class="title">
-				<td>Nome</td>
-				<td>Area</td>
-				<td>Quantità</td>
-				<td>Elimina</td>
+				<th>Nome</th>
+				<th>Area</th>
+				<th>Quantità</th>
+				<th colspan="2">Modifica/Rimuovi</th>
 			</tr>
 			<xsl:for-each select="zoo:cibo">
 				<xsl:sort select="@id"/>
 				<tr>
 					<td><xsl:value-of select="@nome"/></td>
 					<td>
-						<xsl:for-each select="zoo:area">
-							<a>
-								<xsl:attribute name="href">area.cgi?id=<xsl:value-of select="."/></xsl:attribute><!-- Non mandare a capo -->
-								<xsl:value-of select="."/>
-							</a>&#160;
-						</xsl:for-each>
+						<xsl:for-each select="zoo:area"><a><xsl:attribute name="href">area.cgi?id=<xsl:value-of select="."/></xsl:attribute><xsl:value-of select="."/>[_]</a>&#160;</xsl:for-each><!-- Non mandare a capo -->
 					</td>
 					<td><xsl:value-of select="@quantita"/></td>
 					<td class="button">
 						<a class="button" onclick="destroy(this)">
-							<xsl:attribute name="href">
-								reply.cgi?noscript=true&amp;watDo=warehouse&amp;action=destroy&amp;id=<xsl:value-of select="."/>
+							<xsl:attribute name="href">modifica_magazzino.cgi?id=<xsl:value-of select="@id" /> 
+							</xsl:attribute>
+							Modifica
+						</a>
+					</td>
+					<td class="button">
+						<a class="button" onclick="destroy(this)">
+							<xsl:attribute name="href">reply.cgi?noscript=true&amp;watDo=warehouse&amp;action=destroy&amp;cibo=<xsl:value-of select="@id" /> 
 							</xsl:attribute>
 							Rimuovi
 						</a>
@@ -53,8 +54,8 @@
 				</xsl:for-each>
 			</select>
 			<input type="text" name="amount" placeholder="Quantità" />
-			<input type="submit" name="action" value="Aggiungi" />
-			<input type="submit" name="action" value ="Rimuovi" />
+			<input type="submit" name="action" value="add" />
+			<input type="submit" name="action" value ="remove" />
 		</form>
 	</xsl:template>
 </xsl:stylesheet>
