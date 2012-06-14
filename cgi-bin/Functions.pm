@@ -123,12 +123,30 @@ sub get_areas{
 		my $j = 0;
 		foreach $node (@nodelist){
 			@stuff[$j]=$node->getData;
-			#print $node->getData;
-			#print $j;
 			$j = $j + 1;
 		}
 	}
 	return @stuff;
+}
+
+sub get_areas_checked{
+ 	my $cibo_id = $_[0];
+
+	my $parser = XML::LibXML->new;
+	my $doc = $parser->parse_file("../xml/warehouse.xml");
+	my $root = $doc->getDocumentElement();
+	my $xpc = XML::LibXML::XPathContext->new;
+	$xpc->registerNs('zoo', 'http://www.zoo.com');
+	my $xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/zoo:area";
+	my $old_aree = $xpc->findnodes($xpath_exp, $doc);	
+	my $size = $old_aree->size;
+	my @aree;
+	for(my $count = 0; $count <= $size ; $count = $count+1){
+		my $temp = $old_aree->get_node($count);
+		@aree[$count] = $temp->textContent;
+		#print @aree[$count];
+	}
+	return @aree;
 }
 
 sub max_area_id{
