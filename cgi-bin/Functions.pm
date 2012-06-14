@@ -321,7 +321,7 @@ sub get_user_age{
 }
 
 sub exhaustion_table{
-	$days = $_[0];
+	my $days = $_[0];
 	my $parser = XML::LibXML->new;
 	my $doc = $parser->parse_file("../xml/warehouse.xml");
 	my $root = $doc->getDocumentElement();
@@ -331,12 +331,12 @@ sub exhaustion_table{
 	my $foods = $xpc -> findnodes($xpath_exp, $doc);
 	my $foods_amount = $foods -> size();
 	my $food;
-	for(;$foods->size() > 0;){
-		$food = $foods -> pop();
-		if check_availability($food, $days){
-			
-		}
-	}
+#	for(;$foods->size() > 0;){
+#		$food = $foods -> pop();
+#		if check_availability($food, $days){
+#			
+#		}
+#	}
 }
 
 sub check_availability{
