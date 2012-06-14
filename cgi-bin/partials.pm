@@ -72,13 +72,11 @@ sub footer{
 sub _index{
 	print
 	'<div id="content">
-     <h3>I nostri eventi</h3>
-  	 <dl>
-	     <dt>Caccia al tesoro</dt>
-		   <dd>Ogni primo sabato del mese, organizziamo per i pi&ugrave; piccoli una caccia al tesoro</dd>
-		   <dt>L&apos;isola selvaggia</dt>
-		   <dd>Ogni sabato sera, organizziamo serate tematiche con musica e drink</dd>
-	 	 </dl>
+     <h3>News</h3>
+  	 <p><strong>10/06/2009</strong> &mdash; &#200; arrivata l\'a giraffa Roberta! Vieni a visitarla nella sezione animali!</p>
+	 <p><strong>15/02/2009</strong> &mdash; Abbiamo ingrandito le piscine e quindi ospiteremo nuovi pesci a partire dal prossimo mese! Stay tuned!</p>
+	<p><strong>23/12/2008</strong> &mdash; Da oggi sono disponibili i totem di informazione all\'interno dello zoo!</p>   
+	<p><strong>23/12/2008</strong> &mdash; Da oggi sono disponibili i totem di informazione all\'interno dello zoo!</p>   
 	</div>';
 }
 
@@ -90,7 +88,7 @@ sub animale{
 	print
 	'<div id = "content">
 		<div class="animale">
-			<img class="animal" src='.Functions::get_animal_img($_[0]).' />
+			<img class="animal" src='.Functions::get_animal_img($_[0]).' alt="Fotografia di '.$_[0].'"/>
 			<div class="testo">
 				<h4>Scheda:</h4>
 				<p>Nome: '.$_[0].'</p>
