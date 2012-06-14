@@ -143,8 +143,10 @@ sub get_areas_checked{
 	my @aree;
 	for(my $count = 0; $count <= $size ; $count = $count+1){
 		my $temp = $old_aree->get_node($count);
-		@aree[$count] = $temp->textContent;
-		#print @aree[$count];
+		if($temp){
+			@aree[$count] = $temp->textContent;
+			#print @aree[$count];
+		}
 	}
 	return @aree;
 }
