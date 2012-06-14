@@ -319,7 +319,7 @@ sub get_user_age{
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
 	return $xp->find("//username[. = \"$username\"]/../eta")->string_value();
 }
-
+=da
 sub exhaustion_table{
 	$days = $_[0];
 	my $parser = XML::LibXML->new;
@@ -338,7 +338,7 @@ sub exhaustion_table{
 		}
 	}
 }
-
+=cut
 sub check_availability{
 	my $food = $_[0];
 	my $days = $_[1];

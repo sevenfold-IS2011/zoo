@@ -430,19 +430,57 @@ if ($watDo eq "warehouse"){
 	}
 	if ($action eq "update") {
 		my $cibo_nome = $page->param("nome");
-		if(!$cibo_nome || isint($cibo_nome) || isfloat($amount)){
+		if(!$cibo_nome || isint($cibo_nome) || isfloat($amount)){#controllo se il nome del cibo è accettabile
 			print $page->header();
 			print '<h2>Richiesta errata - nome inserito non valido</h2>';
 			exit;
 		}
-print $page->header();
-print 'id: ';
-print $cibo_id;
+		my $find = ' ';#tolgo eventuali spazi del nome del cibo
+		my $replace = '';
+		$find = quotemeta $find; # escape regex metachars if present
+		$cibo_nome =~ s/$find/$replace/g;
+	
+		my $parser = XML::LibXML->new;
+		my $doc = $parser->parse_file("../xml/warehouse.xml");
+		my $root = $doc->getDocumentElement();
+		my $xpc = XML::LibXML::XPathContext->new;
+		$xpc->registerNs('zoo', 'http://www.zoo.com');
+		my $xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]";#prelevo il cibo da modificare
+		my $old_cibo = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
 		
-		#prelevare il vecchio chibo
-		#vedere se è uguale
-		#se diverso sostituire
-		#scrivere su xml
+		my $modified = undef;
+
+		my $xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/\@nome";#old nome
+		my $old_nome = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
+		
+		if($cibo_nome ne $old_nome->getData()){
+			my $xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/\@quantita";#old quantita
+			my $old_quantita = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
+			
+			my $xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/zoo:area";#old aree
+			my $old_aree = $xpc->findnodes($xpath_exp, $doc);
+
+			my $nuovo_cibo = $doc->createElement("cibo");#creo nuovo elemento e ci setto il nuovo nome e i vecchi attributi
+			$nuovo_cibo->setAttribute("nome",$cibo_nome);
+			$nuovo_cibo->setAttribute("quantita",$old_quantita->getData());
+			my $temp;
+			my $size = $old_aree->size;
+			for(my $count = 1; $count <= $size ; $count = $count+1){
+				$temp = $old_aree->get_node($count);
+				my $nuova_area = $doc->createElement("area");#creo il nuovo cibo
+				$nuova_area->appendTextNode($temp->textContent);
+				$nuovo_cibo->appendChild($nuova_area);
+			}
+			
+			$old_nome->parentNode->replaceChild($nuovo_cibo,$old_cibo);
+			$modified = 1;
+		}
+		if($modified){
+			open(XML,'>../xml/warehouse.xml') || file_error();
+			print XML $root->toString();
+			close(XML);
+		}
+		print $page->redirect( -URL => "gestione_magazzino.cgi");	
 	}
 }
 
