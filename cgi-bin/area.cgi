@@ -12,11 +12,12 @@ print $page->header(-charset => 'utf-8'),
 																	'description' => 'sito ad utilizzo interno dello zoo Monkey Island di Padova',
 																	'author' => '?????????'},
 												-author => '?????????',
+												-class => "aree",
 												-style=>{'src'=>'../css/master.css'});
 my $session = CGI::Session->load();
 my $sid = $session->id();
 my $animal = $page -> param("name") || undef;
-partials::header($sid);
+partials::header($sid, "area");
 partials::area(CGI::param('id'));
 partials::footer();
 

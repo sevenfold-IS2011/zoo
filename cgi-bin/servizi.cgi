@@ -9,6 +9,7 @@ print $page->header(-charset => 'utf-8'),
 																	'description' => 'sito ad utilizzo interno dello zoo Monkey Island di Padova',
 																	'author' => '?????????'}, 
 												-author => 'gaggi@math.unipd.it',
+												-class => "servizi",
 												-style=>{'src'=>'../css/master.css'});
 my $session = CGI::Session->load();
 my $sid = $session->id();

@@ -35,6 +35,15 @@ h1 a{
 	text-decoration: none;
 }
 
+body.chi-siamo ul.nav li.chi-siamo, 
+body.aree ul.nav li.aree,  
+body.animali ul.nav li.animali,
+body.servizi ul.nav li.servizi,
+body.area-privata ul.nav li.area-privata{
+	border:4px solid black;
+	background-color:black;
+	color: white;
+}      
 
 div#logo{
 	text-align: center;
