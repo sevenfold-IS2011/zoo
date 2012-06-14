@@ -17,7 +17,7 @@ print $page->header(-charset => 'utf-8'),
 my $session = CGI::Session->load();
 my $sid = $session->id();
 my $animal = $page -> param("name") || undef;
-partials::header($sid, "area");
+partials::header($sid);
 partials::area(CGI::param('id'));
 partials::footer();
 
