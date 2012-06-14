@@ -236,8 +236,8 @@ sub warehouse_table(){
 			if (my @namearray = $namelist->get_nodelist){
 				my $nome;
 				$nome = @namearray[0]->getData;
-				my $find = "<a href=\"area.cgi?id=$node\">$node</a>";#metodo meglio ma che si incasina con xsl
-				my $replace = "<a href=\"area.cgi?id=$node\">$nome</a>";
+				my $find = "$node\[_\]";
+				my $replace = $nome;
 				$find = quotemeta $find; # escape regex metachars if present
 				$text =~ s/$find/$replace/g;
 			}

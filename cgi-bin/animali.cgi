@@ -10,7 +10,8 @@ print $page->header(-charset => 'utf-8'),
 			 									-meta => {'keywords' => 'zoo padova animali monkey island',
 																	'description' => 'sito ad utilizzo interno dello zoo Monkey Island di Padova',
 																	'author' => '?????????'}, 
-												-author => 'gaggi@math.unipd.it',
+												-author => 'gaggi@math.unipd.it', 
+												-class => "animali",
 												-style=>{'src'=>'../css/master.css'});
 my $session = CGI::Session->load();
 my $sid = $session->id();

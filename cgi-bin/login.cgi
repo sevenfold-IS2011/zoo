@@ -11,6 +11,7 @@ print $page->header,
 																	'description' => 'sito ad utilizzo interno dello zoo Monkey Island di Padova',
 																	'author' => '?????????'}, 
 												-author => 'gaggi@math.unipd.it',
+												-class => "login",
 												-style=>{'src'=>'../css/master.css'});
 my $error = $page -> param("error") || undef;
 partials::header(undef, $error);

@@ -20,6 +20,7 @@ print $page->header(-charset => 'utf-8'),
 																	'description' => 'sito ad utilizzo interno dello zoo Monkey Island di Padova',
 																	'author' => '?????????'}, 
 												-author => 'gaggi@math.unipd.it',
+												-class => "area-privata",
 												-style=>{'src'=>'../css/master.css'});
 my $sid = $session->id();
 my $error = $page -> param("error") || undef;
