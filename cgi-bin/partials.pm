@@ -349,7 +349,7 @@ sub editWarehouse{
 			<input type="hidden" name="action" value="update">
 			<input type='."hidden".' name="cibo" value='."$_[2]".'>
 			  <label for="nome">Nome: </label><input type="text" name="nome" value='."$cibo_nome".' placeholder="Nome" />';
-				areaCheckbox(Functions::get_areas);
+				areaCheckbox_checked($_[2]);
 				print '
 			  <p><input type="submit" value="Modifica"/></p>
 			</form>
@@ -514,6 +514,7 @@ sub areaSelect{
 	}
 }
 
+
 sub areaCheckbox{
 	my @stuff = @_;
 	my $size = scalar @stuff;
@@ -522,6 +523,27 @@ sub areaCheckbox{
 		my $id = @stuff[$k];
 		my $name = @stuff[$k+1];
 		print "<input  type=\"checkbox\" name=\"$id\" value=\"$id\"/>$name<br>";
+		$k = $k + 1;
+	}
+	print '</table></div>';
+}
+
+sub areaCheckbox_checked{
+	my $cibo_id = $_[0];
+	my @aree = Functions::get_areas;
+	my @check = Functions::get_areas_checked($cibo_id);
+	my %params = map { $_ => 1 } @check;
+	my $size = scalar @aree;
+	print "<div class=\"checkbox\">Aree:<br>";
+	for(my $k = 0 ; $k < $size ; $k = $k + 1){
+		my $id = @aree[$k];
+		my $name = @aree[$k+1];
+		if(exists($params{$id})){
+			print "<input  type=\"checkbox\" name=\"$id\" value=\"$id\" checked=\"checked\"/>$name<br>";
+		}
+		else{
+			print "<input  type=\"checkbox\" name=\"$id\" value=\"$id\"/>$name<br>";
+		}
 		$k = $k + 1;
 	}
 	print '</table></div>';

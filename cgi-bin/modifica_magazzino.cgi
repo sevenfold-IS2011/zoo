@@ -36,7 +36,7 @@ print $page->header,
 my $error = $page -> param("error") || undef;
 partials::privateHeader($error);
 my $watDo = "warehouse";
-partials::editWarehouse($sid, $watDo, $cibo_id );
+partials::editWarehouse($sid, $watDo, $cibo_id);
 print $page->end_html;
 
 exit;
