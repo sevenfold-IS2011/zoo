@@ -383,7 +383,7 @@ if ($watDo eq "warehouse"){
 		$new_cibo->setAttribute("quantita",$new_quantita);
 		my $temp;
 		my $size = $arealist->size;
-		for(my $count = 1; $count <= $size ; $count = $count+1){
+		for(my $count = 0; $count <= $size ; $count = $count+1){
 			$temp = $arealist->get_node($count);
 			$new_area = $doc->createElement("area");#creo il nuovo cibo
 			$new_area->appendTextNode($temp->textContent);
@@ -453,7 +453,7 @@ if ($watDo eq "warehouse"){
 		my $xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/\@nome";#old nome
 		my $old_nome = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
 		
-		if($cibo_nome ne $old_nome->getData()){
+		#if($cibo_nome ne $old_nome->getData()){
 			my $xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/\@quantita";#old quantita
 			my $old_quantita = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
 			
@@ -463,18 +463,38 @@ if ($watDo eq "warehouse"){
 			my $nuovo_cibo = $doc->createElement("cibo");#creo nuovo elemento e ci setto il nuovo nome e i vecchi attributi
 			$nuovo_cibo->setAttribute("nome",$cibo_nome);
 			$nuovo_cibo->setAttribute("quantita",$old_quantita->getData());
-			my $temp;
-			my $size = $old_aree->size;
-			for(my $count = 1; $count <= $size ; $count = $count+1){
-				$temp = $old_aree->get_node($count);
-				my $nuova_area = $doc->createElement("area");#creo il nuovo cibo
-				$nuova_area->appendTextNode($temp->textContent);
-				$nuovo_cibo->appendChild($nuova_area);
+			$nuovo_cibo->setAttribute("id",$cibo_id);
+
+	#		my $temp;
+	#		my $size = $old_aree->size;
+	#		for(my $count = 1; $count <= $size ; $count = $count+1){#rimetto le vecchie aree al cibo
+	#			$temp = $old_aree->get_node($count);
+	#			my $nuova_area = $doc->createElement("area");
+	#			$nuova_area->appendTextNode($temp->textContent);
+	#			$nuovo_cibo->appendChild($nuova_area);
+	#		}
+				
+			my @all_area = Functions::get_areas;
+			my @area_list;
+			my $cont = 0;
+			my $size = scalar @all_area;
+			for(my $k = 0 ; $k < $size ; $k = $k + 2){
+				my $pos = @all_area[$k];
+				@area_list[$cont] = $page->param("$pos");
+				$cont = $cont +1 ;
 			}
-			
-			$old_nome->parentNode->replaceChild($nuovo_cibo,$old_cibo);
+	
+			foreach my $temp (@area_list){
+				if($temp){
+					my $nuova_area = $doc->createElement("area");
+					$nuova_area->appendTextNode($temp);
+					$nuovo_cibo->appendChild($nuova_area);
+				}
+			}
+
+			$old_cibo->parentNode->replaceChild($nuovo_cibo,$old_cibo);
 			$modified = 1;
-		}
+		#}
 		if($modified){
 			open(XML,'>../xml/warehouse.xml') || file_error();
 			print XML $root->toString();
