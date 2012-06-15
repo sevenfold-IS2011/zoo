@@ -1,5 +1,6 @@
 #!/usr/bin/perl
 use strict;
+use warnings;
 use CGI;
 use CGI::Session;
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);

@@ -5,6 +5,7 @@ use CGI::Session;
 use File::Spec;
 use Functions;
 use strict;
+use warnings;
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use XML::LibXML;
 use Scalar::Util::Numeric qw(isnum isint isfloat);

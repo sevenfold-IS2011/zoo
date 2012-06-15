@@ -562,44 +562,44 @@ sub privateMenu{
 	print
 				'<div id ="left">
 					<ul>
-				  	<li><a href="gestione_area.cgi">Gestione Aree</a></li>';
+				  	<li class="item"><a href="gestione_area.cgi">Gestione Aree</a></li>';
 	if ($watDo eq "areas"){
 		print'
 					<li>	
 						<ul>
-							<li><a href="nuova_area.cgi">Nuova Area</a></li>
+							<li class="item"><a href="nuova_area.cgi">Nuova Area</a></li>
 						</ul>
 					</li>';
 
 					}
-	print'		<li><a href="gestione_magazzino.cgi">Gestione Magazzino</a></li>';
+	print'		<li class="item"><a href="gestione_magazzino.cgi">Gestione Magazzino</a></li>';
 	if ($watDo eq "warehouse"){
 		print'
 					<li>
 						<ul>
-							<li><a href="nuovo_cibo.cgi">Aggiungi cibo</a></li>
-							<li><a href="check_cibo.cgi">Controlla disponibilità</a></li>
+							<li class="item"><a href="nuovo_cibo.cgi">Aggiungi cibo</a></li>
+							<li class="item"><a href="check_cibo.cgi">Controlla disponibilità</a></li>
 						</ul>
 					</li>';
 
 					}
-	print'    <li><a href="gestione_animali.cgi">Gestione Animali</a></li>';
+	print'    <li class="item"><a href="gestione_animali.cgi">Gestione Animali</a></li>';
 	if ($watDo eq "animals"){
 		print'
 					<li>
 						<ul>
-							<li><a href="nuovo_animale.cgi">Inserisci animale</a></li>
+							<li class="item"><a href="nuovo_animale.cgi">Inserisci animale</a></li>
 						</ul>
 					<li>';
 	}
-	print'<li><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
+	print'<li class="item"><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
 	if (Functions::is_manager($sid)){
 		if ($watDo eq "users"){
 			print'
 						<li>
 							<ul>
-								<li><a href="nuovo_utente.cgi">Inserisci utente</a></li>
-								<li><a href="modifica_password.cgi">Modifica password</a></li>
+								<li class="item"><a href="nuovo_utente.cgi">Inserisci utente</a></li>
+								<li class="item"><a href="modifica_password.cgi">Modifica password</a></li>
 							</ul>
 						</li>';
 		}

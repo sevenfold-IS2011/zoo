@@ -1,10 +1,10 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
-
 use CGI;
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use partials;
+
 my $page = new CGI;
 my $session = CGI::Session->load();
 if($session->is_expired() || $session->is_empty()){

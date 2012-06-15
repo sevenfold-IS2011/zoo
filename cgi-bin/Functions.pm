@@ -6,8 +6,8 @@ use File::Spec;
 use CGI::Session;
 use XML::XPath;
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
-#use HTML::Tidy;
 use strict;
+use warnings;
 
 
 sub get_name_from_sid{

@@ -4,6 +4,7 @@ use CGI::Session qw/-ip-match/;
 use File::Spec;
 use Functions;
 use strict;
+use warnings;
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 
 my $buffer;
