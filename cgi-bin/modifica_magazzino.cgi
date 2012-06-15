@@ -25,7 +25,7 @@ if ($size < 1){
 	exit;
 }
 
-print $page->header,
+print $page->header(-charset => 'utf-8'),
 			$page->start_html(-dtd => ['-//W3C//DTD XHTML 1.0 Strict//EN', "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"],
 												-title => "Monkey Island || Lo zoo di Padova",
 			 									-meta => {'keywords' => 'zoo padova animali monkey island',
