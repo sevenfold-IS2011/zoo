@@ -260,6 +260,10 @@ sub warehouse_table(){
 				my $replace = $nome;
 				$find = quotemeta $find; # escape regex metachars if present
 				$text =~ s/$find/$replace/g;
+				my $find = "</a>";
+				my $replace = '</a> ';
+				$find = quotemeta $find; # escape regex metachars if present
+				$text =~ s/$find/$replace/g;
 			}
 		}
 	}
