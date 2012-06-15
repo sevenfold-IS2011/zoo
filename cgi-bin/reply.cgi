@@ -383,7 +383,7 @@ if ($watDo eq "warehouse"){
 		$new_cibo->setAttribute("quantita",$new_quantita);
 		my $temp;
 		my $size = $arealist->size;
-		for(my $count = 0; $count <= $size ; $count = $count+1){
+		for(my $count = 0; $count < $size ; $count = $count+1){
 			$temp = $arealist->get_node($count);
 			$new_area = $doc->createElement("area");#creo il nuovo cibo
 			$new_area->appendTextNode($temp->textContent);
@@ -464,15 +464,6 @@ if ($watDo eq "warehouse"){
 			$nuovo_cibo->setAttribute("nome",$cibo_nome);
 			$nuovo_cibo->setAttribute("quantita",$old_quantita->getData());
 			$nuovo_cibo->setAttribute("id",$cibo_id);
-
-	#		my $temp;
-	#		my $size = $old_aree->size;
-	#		for(my $count = 1; $count <= $size ; $count = $count+1){#rimetto le vecchie aree al cibo
-	#			$temp = $old_aree->get_node($count);
-	#			my $nuova_area = $doc->createElement("area");
-	#			$nuova_area->appendTextNode($temp->textContent);
-	#			$nuovo_cibo->appendChild($nuova_area);
-	#		}
 				
 			my @all_area = Functions::get_areas;
 			my @area_list;

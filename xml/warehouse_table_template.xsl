@@ -18,7 +18,9 @@
 				<tr>
 					<td><xsl:value-of select="@nome"/></td>
 					<td>
-						<xsl:for-each select="zoo:area"><a><xsl:attribute name="href">area.cgi?id=<xsl:value-of select="."/></xsl:attribute><xsl:value-of select="."/>[_]</a>&#160;</xsl:for-each><!-- Non mandare a capo -->
+						<xsl:for-each select="zoo:area">
+							<a><xsl:attribute name="href">area.cgi?id=<xsl:value-of select="."/></xsl:attribute><xsl:value-of select="."/>[_]</a><!-- Non mandare a capo -->
+						</xsl:for-each>
 					</td>
 					<td><xsl:value-of select="@quantita"/></td>
 					<td class="button">
