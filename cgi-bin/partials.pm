@@ -565,35 +565,43 @@ sub privateMenu{
 				  	<li><a href="gestione_area.cgi">Gestione Aree</a></li>';
 	if ($watDo eq "areas"){
 		print'
+					<li>	
 						<ul>
 							<li><a href="nuova_area.cgi">Nuova Area</a></li>
-						</ul>';
+						</ul>
+					</li>';
 
 					}
 	print'		<li><a href="gestione_magazzino.cgi">Gestione Magazzino</a></li>';
 	if ($watDo eq "warehouse"){
 		print'
+					<li>
 						<ul>
 							<li><a href="nuovo_cibo.cgi">Aggiungi cibo</a></li>
 							<li><a href="check_cibo.cgi">Controlla disponibilità</a></li>
-						</ul>';
+						</ul>
+					</li>';
 
 					}
 	print'    <li><a href="gestione_animali.cgi">Gestione Animali</a></li>';
 	if ($watDo eq "animals"){
 		print'
+					<li>
 						<ul>
 							<li><a href="nuovo_animale.cgi">Inserisci animale</a></li>
-						</ul>';
+						</ul>
+					<li>';
 	}
 	print'<li><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
 	if (Functions::is_manager($sid)){
 		if ($watDo eq "users"){
 			print'
+						<li>
 							<ul>
 								<li><a href="nuovo_utente.cgi">Inserisci utente</a></li>
 								<li><a href="modifica_password.cgi">Modifica password</a></li>
-							</ul>';
+							</ul>
+						</li>';
 		}
 	}
 	print'
