@@ -1,0 +1,4 @@
+Cose da fare:
+-nome del file uploadato (immagini animali) univoco
+-controlli su modifica_password e modifica_utente
+-_modifica_password
