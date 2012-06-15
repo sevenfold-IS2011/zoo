@@ -383,7 +383,7 @@ if ($watDo eq "warehouse"){
 		$new_cibo->setAttribute("quantita",$new_quantita);
 		my $temp;
 		my $size = $arealist->size;
-		for(my $count = 0; $count < $size ; $count = $count+1){
+		for(my $count = 1; $count <= $size ; $count = $count+1){
 			$temp = $arealist->get_node($count);
 			$new_area = $doc->createElement("area");#creo il nuovo cibo
 			$new_area->appendTextNode($temp->textContent);
