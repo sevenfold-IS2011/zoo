@@ -710,7 +710,7 @@ sub check_food_form{
 sub check_food_table{
 	my $days = $_[0];
 	print '<h3>Scorte che andranno in esaurimento in '.$days.' giorni: </h3>';
-	print Functions::exhaustion_table($days);
+	print Functions::exhaustion_list($days);
 }
 1;
 
