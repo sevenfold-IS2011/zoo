@@ -11,7 +11,6 @@
 					<td>Età</td>
 					<td>Sesso</td>
 					<td>Tipo</td>
-					<td>Stipendio</td>
 				</tr>
 				<xsl:for-each select="zoo:impiegato">
 					<tr>
@@ -19,7 +18,6 @@
 						<td><xsl:value-of select="zoo:eta"/></td>
 						<td><xsl:value-of select="zoo:sesso"/></td>
 						<td>Impiegato</td>
-						<td><xsl:value-of select="zoo:stipendio"/></td>
 						<td class="button">
 							<a class="button">
 								<xsl:attribute name="username">
@@ -50,7 +48,6 @@
 						<td><xsl:value-of select="zoo:eta"/></td>
 						<td><xsl:value-of select="zoo:sesso"/></td>
 						<td>Manager</td>
-						<td><xsl:value-of select="zoo:stipendio"/></td>
 						<td class="button">
 							<a class="button" onclick='edit(this);return false'>
 								<xsl:attribute name="username">
