@@ -367,26 +367,43 @@ sub check_availability{
 	if (!$food->hasChildNodes) {
 		return undef;
 	}
-	my $arealist = $food -> childNodes();
+	my $xpc = XML::LibXML::XPathContext->new;
+	$xpc->registerNs('zoo', 'http://www.zoo.com');
+	my $arealist = $xpc->find('./zoo:area',$food);
 	my $daily_use = 0;
 	my $area;
-	for(;$arealist->size() >0;){
-		$area = $arealist->pop();
-		print "checkcoso - controllo ".$area->getAttribute("nome")."area è una...".$area."<br/>";
-		$daily_use = $daily_use + daily_area_food($area);
+	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
+	my $xpath_exp;
+	my $areanode;
+
+	for(;$arealist->size > 0;){
+		$areanode = $arealist->pop();
+		print "checkcoso - controllo ".$areanode->toString()." area è una...".$areanode."<br/>";
+		$daily_use = $daily_use + daily_area_food($areanode->textContent());
 	}
 	if ($availability < ($daily_use * $days)){
+		print "checkcoso: --------------------FINISCE------------<br/>";
 		return undef;
 	}
+	print "checkcoso: --------------ABBASTANZA--------------<br/>";
 	return 1;
 }
 
 
 sub daily_area_food{
-	my $area = $_[0];
+	my $area_id = $_[0];
+	my $parser = XML::LibXML->new;
+	my $doc = $parser->parse_file("../xml/animals.xml");
+	my $root = $doc->getDocumentElement();
+	my $xpc = XML::LibXML::XPathContext->new();
+	$xpc->registerNs('zoo', 'http://www.zoo.com');
+	my $xpath_exp = "//zoo:area[\@id=\"$area_id\"]";
+	my $area = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
 	my $n_animals = $area->childNodes()->size();
+	my $animal;
 	my $daily_animal_need = $area -> getAttribute("cibo_giornaliero");
-	return ($n_animals * $daily_animal_need);
+	#print "dailycoso: daily_need: $daily_animal_need, n_animals: $n_animals <br/>";	
+	return ($daily_animal_need * $n_animals);
 }
 #sub orderXML{
 #        my $hashParameters = shift;
