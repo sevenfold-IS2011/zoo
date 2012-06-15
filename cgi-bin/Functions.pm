@@ -360,7 +360,7 @@ sub exhaustion_list{
 		$food = $foods -> pop();
 		#print "exhaustion - controllo ".$food->getAttribute("nome")."<br/>";
 		if (!check_availability($food, $days)){
-			print "<ul> ".$food->getAttribute("nome")."</ul>";
+			print "<li> ".$food->getAttribute("nome")."</li>";
 		}
 	}
 	print "</ul>";

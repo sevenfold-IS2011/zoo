@@ -700,7 +700,7 @@ sub check_food_form{
 			<h2>Inserisci il numero di giorni per il quale vuoi controllare la disponibilità in magazzino</h2>
 			<form action="check_cibo.cgi" method="get" accept-charset="utf-8">
 				<fieldset>
-					<label for="giorni">Giorni:<input type="text" name="giorni" placeholder="7" id="giorni">
+					<label for="giorni">Giorni:<input type="text" name="giorni" id="giorni">
 					<p><input type="submit" value="Controlla"/></p>
 				</fieldet>
 			</form>
@@ -710,7 +710,7 @@ sub check_food_form{
 sub check_food_table{
 	my $days = $_[0];
 	print '<h3>Scorte che andranno in esaurimento in '.$days.' giorni: </h3>';
-	print Functions::exhaustion_list($days);
+	Functions::exhaustion_list($days);
 }
 1;
 
