@@ -44,6 +44,8 @@ if ($watDo eq undef || (!$watDo eq "animals" && !$watDo eq "warehouse" && !$watD
 	exit;
 }
 
+my $xpc = XML::LibXML::XPathContext->new;
+$xpc->registerNs('zoo', 'http://www.zoo.com');
 #------------------------------------------------------------------------ANIMALS
 if ($watDo eq "animals")
 {
@@ -52,8 +54,6 @@ if ($watDo eq "animals")
 	my $parser = XML::LibXML->new;
 	my $doc = $parser->parse_file("../xml/animals.xml");
 	my $root = $doc->getDocumentElement();
-	my $xpc = XML::LibXML::XPathContext->new;
-	$xpc->registerNs('zoo', 'http://www.zoo.com');
 	if (!$name) {
 		if ($noscript eq "true" || $action eq "update") {
 			print $page->redirect( -URL => "gestione_animali.cgi?error=Richiesta errata - nome non definito.");
@@ -202,8 +202,6 @@ if ($watDo eq "users") {
 	my $parser = XML::LibXML->new;
 	my $doc = $parser->parse_file("../xml/workers.xml");
 	my $root = $doc->getDocumentElement();
-	my $xpc = XML::LibXML::XPathContext->new;
-	$xpc->registerNs('zoo', 'http://www.zoo.com');
 	if (!$username) {
 		if ($noscript eq "true" || $action eq "update") {
 			print $page->redirect( -URL => "gestione_utenti.cgi?error=Richiesta errata - nome non definito.");
@@ -353,8 +351,7 @@ if ($watDo eq "warehouse"){
 		my $parser = XML::LibXML->new;
 		my $doc = $parser->parse_file("../xml/warehouse.xml");
 		my $root = $doc->getDocumentElement();
-		my $xpc = XML::LibXML::XPathContext->new;
-		$xpc->registerNs('zoo', 'http://www.zoo.com');
+
 
 		my $xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]/\@nome";#prendo il nome del cibo
 		my $nome = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
@@ -407,8 +404,6 @@ if ($watDo eq "warehouse"){
 		my $parser = XML::LibXML->new;
 		my $doc = $parser->parse_file("../xml/warehouse.xml");
 		my $root = $doc->getDocumentElement();
-		my $xpc = XML::LibXML::XPathContext->new;
-		$xpc->registerNs('zoo', 'http://www.zoo.com');
 		my $xpath_exp = "//zoo:cibo[\@id='".$cibo_id."']";
 		my $cibo = $xpc->findnodes($xpath_exp, $doc)->get_node(0);
 		if (!$cibo) {
@@ -441,8 +436,6 @@ if ($watDo eq "warehouse"){
 		my $parser = XML::LibXML->new;
 		my $doc = $parser->parse_file("../xml/warehouse.xml");
 		my $root = $doc->getDocumentElement();
-		my $xpc = XML::LibXML::XPathContext->new;
-		$xpc->registerNs('zoo', 'http://www.zoo.com');
 		my $xpath_exp = "//zoo:cibo[\@id=\"$cibo_id\"]";#prelevo il cibo da modificare
 		my $old_cibo = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
 		
@@ -526,8 +519,6 @@ if ($watDo eq "areas"){
 		my $parser = XML::LibXML->new;
 		my $doc = $parser->parse_file("../xml/animals.xml");
 		my $root = $doc->getDocumentElement();
-		my $xpc = XML::LibXML::XPathContext->new;
-		$xpc->registerNs('zoo', 'http://www.zoo.com');
 		my $xpath_exp = "//zoo:area[\@id=\"$id\"]";
 		my $area = $xpc->findnodes($xpath_exp, $doc)->get_node(1);
 
@@ -572,8 +563,6 @@ if ($watDo eq "areas"){
 		my $parser = XML::LibXML->new;
 		my $doc = $parser->parse_file("../xml/animals.xml");
 		my $root = $doc->getDocumentElement();
-		my $xpc = XML::LibXML::XPathContext->new;
-		$xpc->registerNs('zoo', 'http://www.zoo.com');
 		
 		my $xpath_exp = "//zoo:area[\@id=\"$id\"]";
 		my $area = $xpc->findnodes($xpath_exp, $doc)->get_node(0);
