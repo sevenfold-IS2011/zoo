@@ -6,6 +6,7 @@ use File::Spec;
 use File::Basename;
 use Functions;
 use strict;
+use warnings;
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use XML::LibXML;
 use Scalar::Util::Numeric qw(isnum isint isfloat);

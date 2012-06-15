@@ -1,8 +1,6 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
-
-
 use CGI;
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use partials;
@@ -14,7 +12,10 @@ if($session->is_expired() || $session->is_empty()){
 }
 my $sid = $session->id();
 print $page->header(-charset => 'utf-8'),
-			$page->start_html(-title => "Monkey Island || Lo zoo di Padova",
+			$page->start_html(-title => "Monkey Island || Lo zoo di Padova || Gestione animali",
+												-head => $page->Link({-rel => 'shortcut icon',
+												 											-href => '../favicon.ico',
+												 											-type => 'image/x-icon'}),
 			 									-meta => {'keywords' => 'zoo padova animali monkey island',
 																	'description' => 'sito ad utilizzo interno dello zoo Monkey Island di Padova',
 																	'author' => '?????????'}, 
