@@ -344,7 +344,7 @@ sub get_user_age{
 	return $xp->find("//username[. = \"$username\"]/../eta")->string_value();
 }
 
-sub exhaustion_table{
+sub exhaustion_list{
 	my $days = $_[0];
 	my $parser = XML::LibXML->new;
 	my $doc = $parser->parse_file("../xml/warehouse.xml");
@@ -355,13 +355,15 @@ sub exhaustion_table{
 	my $foods = $xpc -> findnodes($xpath_exp, $doc);
 	my $foods_amount = $foods -> size();
 	my $food;
+	print "<ul>";
 	for(;$foods->size() > 0;){
 		$food = $foods -> pop();
-		print "exhaustion - controllo ".$food->getAttribute("nome")."<br/>";
+		#print "exhaustion - controllo ".$food->getAttribute("nome")."<br/>";
 		if (!check_availability($food, $days)){
-			print $food->getAttribute("nome");
+			print "<ul> ".$food->getAttribute("nome")."</ul>";
 		}
 	}
+	print "</ul>";
 }
 
 sub check_availability{
@@ -382,14 +384,14 @@ sub check_availability{
 
 	for(;$arealist->size > 0;){
 		$areanode = $arealist->pop();
-		print "checkcoso - controllo ".$areanode->toString()." area è una...".$areanode."<br/>";
+	#	print "checkcoso - controllo ".$areanode->toString()." area è una...".$areanode."<br/>";
 		$daily_use = $daily_use + daily_area_food($areanode->textContent());
 	}
 	if ($availability < ($daily_use * $days)){
-		print "checkcoso: --------------------FINISCE------------<br/>";
+	#	print "checkcoso: --------------------FINISCE------------<br/>";
 		return undef;
 	}
-	print "checkcoso: --------------ABBASTANZA--------------<br/>";
+	#print "checkcoso: --------------ABBASTANZA--------------<br/>";
 	return 1;
 }
 
@@ -406,7 +408,7 @@ sub daily_area_food{
 	my $n_animals = $area->childNodes()->size();
 	my $animal;
 	my $daily_animal_need = $area -> getAttribute("cibo_giornaliero");
-	#print "dailycoso: daily_need: $daily_animal_need, n_animals: $n_animals <br/>";	
+#	print "dailycoso: daily_need: $daily_animal_need, n_animals: $n_animals <br/>";	
 	return ($daily_animal_need * $n_animals);
 }
 #sub orderXML{
