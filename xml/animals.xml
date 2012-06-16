@@ -80,7 +80,7 @@
 			<eta>2</eta>
 			<img>../images/animals/tigre2.jpg</img>
 		</animale>
-<animale><nome>lalalala</nome><sesso>Male</sesso><eta>32</eta><img>../images/animals/1331155921305.gif</img></animale></area>
+<animale><nome>ROARRR</nome><sesso>Male</sesso><eta>32</eta><img>../images/animals/1331155921305.gif</img></animale></area>
 <area id="5" posizione="est" nome="canguri" cibo_giornaliero="12.3">
 		<animale>
 			<nome>Guru</nome>
