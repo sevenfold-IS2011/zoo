@@ -253,6 +253,20 @@ if ($watDo eq "users") {
 			exit;
 		}
 		$user->parentNode()->removeChild($user);
+		
+		my $doc2 = $parser->parse_string($root->toString());
+		my $xmlschema = XML::LibXML::Schema->new( location => "../xml/workers.xsd" );
+		if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
+			if ($noscript eq "true") {
+				print $page->redirect( -URL => "gestione_utenti.cgi?error=Richiesta errata - validazione xml non riuscita.");
+				exit;
+			}
+			print $page->header();
+			print '
+						<h3>Richiesta errata - validazione xml non riuscita</h3>';
+			exit;
+		}
+		
 		open(XML,'>../xml/workers.xml') || file_error();
 		print XML $root->toString();
 		close(XML);
@@ -338,6 +352,19 @@ if ($watDo eq "users") {
 		}
 
 		if($modified){
+			my $doc2 = $parser->parse_string($root->toString());
+			my $xmlschema = XML::LibXML::Schema->new( location => "../xml/workers.xsd" );
+			if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
+				if ($noscript eq "true") {
+					print $page->redirect( -URL => "gestione_utenti.cgi?error=Richiesta errata - validazione xml non riuscita.");
+					exit;
+				}
+				print $page->header();
+				print '
+							<h3>Richiesta errata - validazione xml non riuscita</h3>';
+				exit;
+			}
+			
 			open(XML,'>../xml/workers.xml') || file_error();
 			print XML $root->toString();
 			close(XML);
@@ -415,6 +442,19 @@ if ($watDo eq "warehouse"){
 		my $cibo = $xpc->findnodes($xpath_exp, $doc)->get_node(0);
 		$cibo->replaceNode($new_cibo);
 		$root->appendChild($new_cibo);#appendo il nuovo cibo
+		
+		my $doc2 = $parser->parse_string($root->toString());
+		my $xmlschema = XML::LibXML::Schema->new( location => "../xml/warehouse.xsd" );
+		if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
+			if ($noscript eq "true") {
+				print $page->redirect( -URL => "gestione_magazzino.cgi?error=Richiesta errata - validazione xml non riuscita.");
+				exit;
+			}
+			print $page->header();
+			print '
+						<h3>Richiesta errata - validazione xml non riuscita</h3>';
+			exit;
+		}
 		open(XML,'>../xml/warehouse.xml') || file_error();
 		print XML $root->toString();
 		close(XML);
@@ -505,6 +545,18 @@ if ($watDo eq "warehouse"){
 			$modified = 1;
 		#}
 		if($modified){
+			my $doc2 = $parser->parse_string($root->toString());
+			my $xmlschema = XML::LibXML::Schema->new( location => "../xml/workers.xsd" );
+			if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
+				if ($noscript eq "true") {
+					print $page->redirect( -URL => "gestione_magazzino.cgi?error=Richiesta errata - validazione xml non riuscita.");
+					exit;
+				}
+				print $page->header();
+				print '
+							<h3>Richiesta errata - validazione xml non riuscita</h3>';
+				exit;
+			}
 			open(XML,'>../xml/warehouse.xml') || file_error();
 			print XML $root->toString();
 			close(XML);
@@ -578,6 +630,18 @@ if ($watDo eq "areas"){
 			$modified = 1;
 		}
 		if($modified){
+			my $doc2 = $parser->parse_string($root->toString());
+			my $xmlschema = XML::LibXML::Schema->new( location => "../xml/animal.xsd" );
+			if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
+				if ($noscript eq "true") {
+					print $page->redirect( -URL => "gestione_animali.cgi?error=Richiesta errata - validazione xml non riuscita.");
+					exit;
+				}
+				print $page->header();
+				print '
+							<h3>Richiesta errata - validazione xml non riuscita</h3>';
+				exit;
+			}
 			open(XML,'>../xml/animals.xml') || file_error();
 			print XML $root->toString();
 			close(XML);
@@ -607,6 +671,19 @@ if ($watDo eq "areas"){
 			}
 			my $zoo = $area->parentNode();
 			$zoo->removeChild($area);
+			if($modified){
+				my $doc2 = $parser->parse_string($root->toString());
+				my $xmlschema = XML::LibXML::Schema->new( location => "../xml/animal.xsd" );
+				if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
+					if ($noscript eq "true") {
+						print $page->redirect( -URL => "gestione_animali.cgi?error=Richiesta errata - validazione xml non riuscita.");
+						exit;
+					}
+					print $page->header();
+					print '
+								<h3>Richiesta errata - validazione xml non riuscita</h3>';
+					exit;
+				}
 			open(XML,'>../xml/animals.xml') || file_error();
 			print XML $root->toString();
 			close(XML);
@@ -622,6 +699,19 @@ if ($watDo eq "areas"){
 				$parent->removeChild($temp);
 			}
 		}
+		if($modified){
+			my $doc2 = $parser->parse_string($root->toString());
+			my $xmlschema = XML::LibXML::Schema->new( location => "../xml/animal.xsd" );
+			if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
+				if ($noscript eq "true") {
+					print $page->redirect( -URL => "gestione_animali.cgi?error=Richiesta errata - validazione xml non riuscita.");
+					exit;
+				}
+				print $page->header();
+				print '
+							<h3>Richiesta errata - validazione xml non riuscita</h3>';
+				exit;
+			}
 		open(XML,'>../xml/warehouse.xml') || file_error();
 		print XML $root->toString();
 		close(XML);
