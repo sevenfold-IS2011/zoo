@@ -8,30 +8,30 @@
 <xs:element name="workers" type="zoo:Tworkers"/>
 
 <xs:complexType name="Tworkers">
-    <xs:sequence>
-        <xs:element name="impiegato" type ="zoo:Timpiegato"/>
-        <xs:element name="manager" type ="zoo:Tmanager"/>
+    <xs:sequence  maxOccurs="unbounded">
+        <xs:element name="impiegato" type ="zoo:Timpiegato"  maxOccurs="unbounded"/>
+        <xs:element name="manager" type ="zoo:Tmanager"  maxOccurs="unbounded"/>
     </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="Timpiegato">
-    <xs:all>
+    <xs:sequence>
         <xs:element name="username" type ="xs:string"/>
         <xs:element name="password" type ="xs:string"/>
         <xs:element name="nome" type ="xs:string"/>
         <xs:element name="sesso" type ="xs:string"/>
         <xs:element name="eta" type ="xs:integer"/>
-    </xs:all>
+    </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="Tmanager">
-    <xs:all>
+    <xs:sequence>
         <xs:element name="username" type ="xs:string"/>
         <xs:element name="password" type ="xs:string"/>
         <xs:element name="nome" type ="xs:string"/>
         <xs:element name="sesso" type ="xs:string"/>
         <xs:element name="eta" type ="xs:integer"/>
-    </xs:all>
+    </xs:sequence>
 </xs:complexType>
 
 </xs:schema>

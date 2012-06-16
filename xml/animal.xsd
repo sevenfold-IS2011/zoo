@@ -9,24 +9,24 @@
 
 <xs:complexType name="Tzoo">
     <xs:sequence>
-        <xs:element name="area" type="zoo:Tarea" />
+        <xs:element name="area" type="zoo:Tarea" maxOccurs="unbounded"/>
     </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="Tarea">
     <xs:sequence>
-        <xs:element name="animale" type="zoo:Tanimale"/>
+        <xs:element name="animale" type="zoo:Tanimale" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:integer" use="required"/>
-    <xs:attribute name="posizione" type="xs:integer" use="required"/>
-    <xs:attribute name="nome" type="xs:integer" use="required"/>
-    <xs:attribute name="cibo_giornaliero" type="xs:integer"/>
+    <xs:attribute name="posizione" type="xs:string" use="required"/>
+    <xs:attribute name="nome" type="xs:string" use="required"/>
+    <xs:attribute name="cibo_giornaliero" type="xs:float"/>
 </xs:complexType>
 
 <xs:complexType name="Tanimale">
     <xs:sequence>
         <xs:element name="nome" type="xs:string"/>
-        <xs:element name="esso" type="xs:string"/>
+        <xs:element name="sesso" type="xs:string"/>
         <xs:element name="eta" type="xs:integer" default="-1"/>
         <xs:element name="img" type="xs:string"/>
     </xs:sequence>
