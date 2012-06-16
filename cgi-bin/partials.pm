@@ -182,7 +182,7 @@ sub chi_siamo{
 		<h4>Gli inizi</h4>
 		<p>Nato nel 1990 da un\'idea di Pinco Pallo lo zoo offre momenti indimenticabili per tutta la famiglia. </p>
 		<h4>Segreteria clienti:</h4>
-		<p><strong>045-593755<br /><a mailto="info@monkeyisland.it">info@monkeyisland.it</a></strong></p>
+		<p><strong>045-593755<br /><a href="mailto:info@monkeyisland.it">info@monkeyisland.it</a></strong></p>
 	</div>' 
 }
 sub privateHeader{

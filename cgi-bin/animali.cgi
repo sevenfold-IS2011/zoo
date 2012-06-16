@@ -1,6 +1,4 @@
 #!/usr/bin/perl
-
-
 use CGI;
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use partials;
