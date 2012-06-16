@@ -553,7 +553,7 @@ sub privateMenu{
 						<ul>
 							<li class="item"><a href="nuovo_animale.cgi">Inserisci animale</a></li>
 						</ul>
-					<li>';
+					</li>';
 	}
 	print'<li class="item"><a href="gestione_utenti.cgi">Gestione Utenti</a></li>';
 	if (Functions::is_manager($sid)){

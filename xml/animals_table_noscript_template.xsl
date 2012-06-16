@@ -46,12 +46,10 @@
 						<td><xsl:value-of select="zoo:sesso"/></td>
 						<td>
 							<button onclick='show_image(this)'>
-								<xsl:attribute name="image_path">
-									<xsl:value-of select="zoo:img"/>
-								</xsl:attribute>
 								Visualizza
 							</button>
 						</td>
+						<td class="hidden"><xsl:value-of select="zoo:img"/></td>
 					</tr>
 				</xsl:for-each>
 			</xsl:for-each>
