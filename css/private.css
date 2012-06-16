@@ -57,7 +57,19 @@ div#right{
 /* form nuova area */
 
 div.form-wrapper{
-width: 20%;
-text-align: right;
+    min-width: 35%;
+    text-align: left;
+    background-color:#DFE6E1;
+    padding:10px;
+    margin:3px;
 }
-
+div.form-wrapper label{
+    float:left;
+    margin:5px;
+    text-align:right;
+    width:15%;
+}
+div.form-wrapper input, select{
+    clear:both;
+    margin:5px;
+}
