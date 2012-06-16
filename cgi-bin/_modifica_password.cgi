@@ -58,6 +58,13 @@ my $new_password_node = $doc->createElement("password");
 $new_password_node -> appendTextNode(Functions::crypt_password($password));
 $old_password_node -> replaceNode($new_password_node);
 
+my $doc2 = $parser->parse_string($root->toString());
+my $xmlschema = XML::LibXML::Schema->new( location => "../xml/workers.xsd" );
+if ($xmlschema->validate( $doc2 )) {
+	print $page->redirect(-URL=>"nuova_area.cgi?error=Impossibile modificare la password - validazione xml fallita");
+	exit;
+}
+
 open(XML,'>../xml/workers.xml') || file_error();
 print XML $root->toString();
 close(XML);

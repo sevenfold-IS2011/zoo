@@ -55,6 +55,13 @@ $new_element->setAttribute("nome", $area_name);
 $new_element->setAttribute("cibo_giornaliero", $area_food);
 $root->appendChild($new_element);
 
+my $doc2 = $parser->parse_string($root->toString());
+my $xmlschema = XML::LibXML::Schema->new( location => "../xml/animal.xsd" );
+if ($xmlschema->validate( $doc2 )) {
+	print $page->redirect(-URL=>"nuova_area.cgi?error=Creazione area non riuscita - validazione xml fallita");
+	exit;
+}
+
 open(XML,'>../xml/animals.xml') || file_error();
 print XML $root->toString();
 close(XML);	
