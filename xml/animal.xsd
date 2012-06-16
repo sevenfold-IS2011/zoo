@@ -1,20 +1,21 @@
 <?xml version="1.0"?>
 <xs:schema
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    targetNamespace="http://www.zoo.com"
+    xmlns:zoo="http://www.zoo.com"
+		targetNamespace="http://www.zoo.com"
     elementFormDefault="qualified">
 
-<xs:element name="zoo" type="Tzoo"/>
+<xs:element name="zoo" type="zoo:Tzoo"/>
 
-<xs:complexType type="Tzoo">
+<xs:complexType name="Tzoo">
     <xs:sequence>
-        <xs:element name="area" type="Tarea" />
+        <xs:element name="area" type="zoo:Tarea" />
     </xs:sequence>
 </xs:complexType>
 
-<xs:complexType type="Tarea">
+<xs:complexType name="Tarea">
     <xs:sequence>
-        <xs:element name="animale" type="Tanimale"/>
+        <xs:element name="animale" type="zoo:Tanimale"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="posizione" type="xs:integer" use="required"/>
@@ -22,12 +23,12 @@
     <xs:attribute name="cibo_giornaliero" type="xs:integer"/>
 </xs:complexType>
 
-<xs:complexType type="Tanimale">
+<xs:complexType name="Tanimale">
     <xs:sequence>
         <xs:element name="nome" type="xs:string"/>
         <xs:element name="esso" type="xs:string"/>
         <xs:element name="eta" type="xs:integer" default="-1"/>
-        <xs:element name="img" type="xs:string">
+        <xs:element name="img" type="xs:string"/>
     </xs:sequence>
 </xs:complexType>
 

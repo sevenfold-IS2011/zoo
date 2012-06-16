@@ -56,7 +56,7 @@ if (!$filename){
 	exit;
 	}
 
-my $upload_dir = "/images/animals";
+my $upload_dir = "../images/animals";
 
 my ($name, $path, $extension) = fileparse($filename, '\..*');
 $filename = $name.$extension;
@@ -64,12 +64,7 @@ $filename = $name.$extension;
 #manca un check sull'image name, occhio
 
 my $upload_filehandle = $page->upload("image");
-open (UPLOADFILE, ">$upload_dir/$filename" ) or die "$!";
-binmode UPLOADFILE; 
-while (<$upload_filehandle>){ 
-	print UPLOADFILE;
-	 }
-close UPLOADFILE;
+
 
 my $parser = XML::LibXML->new;
 my $doc = $parser->parse_file("../xml/animals.xml");
@@ -102,9 +97,24 @@ $xpc->registerNs('zoo', 'http://www.zoo.com');
 
 my $area_element = $xpc -> findnodes("//zoo:area[\@id=$area]", $doc)->get_node(1); #xpath parte da 1 
 $area_element->appendChild($new_animal);
+
+my $xmlschema = XML::LibXML::Schema->new( location => "../xml/animal.xsd" );
+if (!eval { $xmlschema->validate( $doc ); }) {
+	print $page->redirect(-URL=>"nuovo_animale.cgi?error=Creazione animale non riuscita - validazione xml non riuscita");
+	unlink("$upload_dir/$filename");
+	exit;
+}
+
 open(XML,'>../xml/animals.xml') || file_error();
 print XML $root->toString();
 close(XML);
+
+open (UPLOADFILE, ">$upload_dir/$filename" ) || file_error();
+binmode UPLOADFILE; 
+while (<$upload_filehandle>){ 
+	print UPLOADFILE;
+	 }
+close UPLOADFILE;
 
 
 

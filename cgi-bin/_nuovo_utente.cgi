@@ -134,7 +134,8 @@ $new_worker->appendChild($age_element);
 $root->appendChild($new_worker);
 
 my $xmlschema = XML::LibXML::Schema->new( location => "../xml/worker.xsd" );
-if (!eval { $xmlschema->validate( $doc ); }) {
+#if (!eval { $xmlschema->validate( $doc ); }) {  
+if ($xmlschema->validate( $doc)) { #messo questo per leggere direttamente gli errori
 	print $page->redirect(-URL=>"nuovo_utente.cgi?error=Creazione utente non riuscita - validazione xml non riuscita");
 	exit;
 }
