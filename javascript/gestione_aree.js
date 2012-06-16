@@ -3,7 +3,14 @@ function handle_response(){
 }
 
 function edit(button){
-	xmlhttp.open("GET","reply.cgi?watDo=areas&action=edit$id="+button.getAttribute("id"),true);
+	id = button.parentNode.parentNode.childNodes[1].innerHTML;
+	xmlhttp.open("GET","reply.cgi?watDo=areas&action=edit$id="+id,true);
+	xmlhttp.send();
+}
+
+function destroy(button){
+	id = button.parentNode.parentNode.childNodes[1].innerHTML;
+	xmlhttp.open("GET","reply.cgi?watDo=areas&action=destroy$id="+id,true);
 	xmlhttp.send();
 }
 

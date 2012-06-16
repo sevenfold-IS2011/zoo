@@ -192,7 +192,7 @@ sub privateHeader{
 	print '<div id="header">
 		<div id="logo">
 			<div style="text-align:center;">
-				<a href= "area_privata.cgi"><img src="../images/logo-privato.png" width="300" alt = "logo privato" tabindex="1"/></a>
+				<a href= "area_privata.cgi"><img src="../images/logo-privato.png" width="300" alt = "logo privato" /></a>
 			</div>
 		</div>
 		<div id="nav">
