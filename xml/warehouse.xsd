@@ -11,14 +11,16 @@
     <xs:sequence>
         <xs:element name="cibo" type="zoo:Tcibo" maxOccurs="unbounded" minOccurs="0"/>
     </xs:sequence>
-    <xs:attribute name="id" type="xs:integer" use="required"/>
-    <xs:attribute name="nome" type="xs:integer" use="required"/>
+    
 </xs:complexType>
 
 <xs:complexType name="Tcibo">
     <xs:sequence>
         <xs:element name="area" type="xs:string" maxOccurs="unbounded" minOccurs="0"/>
     </xs:sequence>
+		<xs:attribute name="quantita" type="xs:float" use="required"/>
+    <xs:attribute name="nome" type="xs:string" use="required"/>
+		<xs:attribute name="id" type="xs:integer" use="required"/>
 </xs:complexType>
 
 </xs:schema>
