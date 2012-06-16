@@ -137,13 +137,8 @@ my $doc2 = $parser->parse_string($root->toString());
 my $xmlschema = XML::LibXML::Schema->new( location => "../xml/worker.xsd" );
 
 
-$xmlschema->validate( $doc2 );
-
 if (eval { $xmlschema->validate( $doc2 ); } eq undef) {  
-	print $page->header();
-	print $doc2->toString();
 	print $page->redirect(-URL=>"nuovo_utente.cgi?error=Creazione utente non riuscita - validazione xml non riuscita");
-	print $!;
 	exit;
 }
 
