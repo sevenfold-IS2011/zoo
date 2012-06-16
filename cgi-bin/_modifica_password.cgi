@@ -60,7 +60,7 @@ $old_password_node -> replaceNode($new_password_node);
 
 my $doc2 = $parser->parse_string($root->toString());
 my $xmlschema = XML::LibXML::Schema->new( location => "../xml/workers.xsd" );
-if ($xmlschema->validate( $doc2 )) {
+if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
 	print $page->redirect(-URL=>"nuova_area.cgi?error=Impossibile modificare la password - validazione xml fallita");
 	exit;
 }

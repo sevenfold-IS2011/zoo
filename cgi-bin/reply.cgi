@@ -89,6 +89,19 @@ if ($watDo eq "animals")
 
 		my $area = $animal->parentNode();
 		$area->removeChild($animal); #non suicidi, ma figlicidi
+		
+		my $doc2 = $parser->parse_string($root->toString());
+		my $xmlschema = XML::LibXML::Schema->new( location => "../xml/animal.xsd" );
+		if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
+			if ($noscript eq "true") {
+				print $page->redirect( -URL => "gestione_animali.cgi?error=Richiesta errata - validazione xml non riuscita.");
+				exit;
+			}
+			print $page->header();
+			print '
+						<h3>Richiesta errata - validazione xml non riuscita</h3>';
+			exit;
+		}
 
 		open(XML,'>../xml/animals.xml') || file_error();
 		print XML $root->toString();
@@ -186,6 +199,20 @@ if ($watDo eq "animals")
 		}
 
 		if($modified){
+			
+			my $doc2 = $parser->parse_string($root->toString());
+			my $xmlschema = XML::LibXML::Schema->new( location => "../xml/animal.xsd" );
+			if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
+				if ($noscript eq "true") {
+					print $page->redirect( -URL => "gestione_animali.cgi?error=Richiesta errata - validazione xml non riuscita.");
+					exit;
+				}
+				print $page->header();
+				print '
+							<h3>Richiesta errata - validazione xml non riuscita</h3>';
+				exit;
+			}
+			
 			open(XML,'>../xml/animals.xml') || file_error();
 			print XML $root->toString();
 			close(XML);

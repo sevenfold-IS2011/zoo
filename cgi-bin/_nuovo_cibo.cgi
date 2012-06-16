@@ -62,7 +62,7 @@ $root->appendChild($new_cibo);
 
 my $doc2 = $parser->parse_string($root->toString());
 my $xmlschema = XML::LibXML::Schema->new( location => "../xml/warehouse.xsd" );
-if ($xmlschema->validate( $doc2 )) {
+if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
 	print $page->redirect(-URL=>"nuovo_cibo.cgi?error=Creazione cibo non riuscita - validazione xml fallita");
 	exit;
 }

@@ -100,7 +100,7 @@ $area_element->appendChild($new_animal);
 
 my $doc2 = $parser->parse_string($root->toString());
 my $xmlschema = XML::LibXML::Schema->new( location => "../xml/animal.xsd" );
-if ($xmlschema->validate( $doc2 )) {
+if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
 	print $page->redirect(-URL=>"nuovo_animale.cgi?error=Creazione animale non riuscita - validazione xml non riuscita");
 	exit;
 }

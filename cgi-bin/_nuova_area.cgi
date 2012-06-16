@@ -57,7 +57,7 @@ $root->appendChild($new_element);
 
 my $doc2 = $parser->parse_string($root->toString());
 my $xmlschema = XML::LibXML::Schema->new( location => "../xml/animal.xsd" );
-if ($xmlschema->validate( $doc2 )) {
+if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
 	print $page->redirect(-URL=>"nuova_area.cgi?error=Creazione area non riuscita - validazione xml fallita");
 	exit;
 }
