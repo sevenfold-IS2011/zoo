@@ -26,39 +26,41 @@
 					<td class="button">
 						<a class="button" onclick="destroy(this)">
 							<xsl:attribute name="href">modifica_magazzino.cgi?id=<xsl:value-of select="@id" /> 
-							</xsl:attribute>
-							Modifica
-						</a>
-					</td>
-					<td class="button">
-						<a class="button" onclick="destroy(this)">
-							<xsl:attribute name="href">reply.cgi?noscript=true&amp;watDo=warehouse&amp;action=destroy&amp;cibo=<xsl:value-of select="@id" /> 
-							</xsl:attribute>
-							Rimuovi
-						</a>
-					</td>
-				</tr>
-			</xsl:for-each>
-		</table>
-		<h4>Aggiornamento magazzino</h4>
-		<form action = "reply.cgi" method="get">
-			<input type="hidden" name="watDo" value="warehouse" />
-			<input type="hidden" name="noscript" value="true" />
-			<select name="cibo">
-				<xsl:for-each select="zoo:cibo">
-					<xsl:sort select="@id"/>
-					<option>
-						<xsl:attribute name="value">
-							<xsl:value-of select="@id" /> 
 						</xsl:attribute>
-						<xsl:value-of select="@nome" />
-					</option>
-				</xsl:for-each>
-			</select>
-			<input type="text" name="amount" placeholder="Quantità" />
-			<input type="submit" name="action" value="Aggiungi" />
-			<input type="submit" name="action" value ="Rimuovi" />
-		</form>
-	</xsl:template>
+						Modifica
+					</a>
+				</td>
+				<td class="button">
+					<a class="button" onclick="destroy(this)">
+						<xsl:attribute name="href">reply.cgi?noscript=true&amp;watDo=warehouse&amp;action=destroy&amp;cibo=<xsl:value-of select="@id" /> 
+					</xsl:attribute>
+					Rimuovi
+				</a>
+			</td>
+		</tr>
+	</xsl:for-each>
+</table>
+<h4>Aggiornamento magazzino</h4>
+<form action = "reply.cgi" method="get">
+	<fieldset>
+		<input type="hidden" name="watDo" value="warehouse" />
+		<input type="hidden" name="noscript" value="true" />
+		<select name="cibo">
+			<xsl:for-each select="zoo:cibo">
+				<xsl:sort select="@id"/>
+				<option>
+					<xsl:attribute name="value">
+						<xsl:value-of select="@id" /> 
+					</xsl:attribute>
+					<xsl:value-of select="@nome" />
+				</option>
+			</xsl:for-each>
+		</select>
+		<input type="text" name="amount" />
+		<input type="submit" name="action" value="Aggiungi" />
+		<input type="submit" name="action" value ="Rimuovi" />
+	</fieldset>
+</form>
+</xsl:template>
 </xsl:stylesheet>
 
