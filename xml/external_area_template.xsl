@@ -24,7 +24,7 @@
 			</table>
 			<h3>Mappa: </h3>
 			<div class="figure">
-				<img src="../images/map.png" />
+				<img src="../images/map.png" alt="mappa dello zoo"/>
 				<p>La mappa del parco Monkey Island</p>
 			</div>
 		</div>

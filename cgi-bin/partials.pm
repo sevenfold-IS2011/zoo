@@ -88,7 +88,7 @@ sub animale{
 	print
 	'<div id = "content">
 		<div class="animale">
-			<img class="animal" src='.Functions::get_animal_img($_[0]).' alt="Fotografia di '.$_[0].'"/>
+			<img class="animal" src="'.Functions::get_animal_img($_[0]).'" alt="Fotografia di '.$_[0].'" />
 			<div class="testo">
 				<h4>Scheda:</h4>
 				<p>Nome: '.$_[0].'</p>
@@ -105,13 +105,13 @@ sub servizi{
 		<a href="#accessibilita"><img src="../images/icons/handicap.png"  alt="icona handicap" /></a> 
 		<a href="#pronto-soccorso"><img src="../images/icons/first-aid.png"  alt="icona pronto soccorso" /></a>
 		<a href="#accoglienza"><img src="../images/icons/parking.png"  alt="icona parcheggio" /></a>
-		<a href="#ristoro><img src="../images/icons/snack-bar.png" " alt="icona snack bar" /></a>
+		<a href="#ristoro"><img src="../images/icons/snack-bar.png" alt="icona snack bar" /></a>
 		<a href="#bus"><img src="../images/icons/bus-service.png"  alt="icona servizio bus" /></a>
 		<h3>I nostri servizi</h3>
 		<h4 id="eventi">Eventi</h4>
 		<p>Il nostro personale è preparato alla gestione di ogni tipo di eventi. Se la tua famiglia festeggia qualche evenienza particolare, mettiti in contatto con la nostra gestione eventi per organizzare al meglio la vostra giornata!</p>
 		<h4 id="accoglienza">Accoglienza gruppi</h4>
-		<p>Lo zoo prevede uno sconto per grandi gruppi di visitatori. E&apos; attrezzato inoltre con un parcheggio per bus e vengono organizzati su richiesta guide turistiche specializzate che offriranno alla vostra comitiva la loro conoscenza sulle specie e la loro vita selvatica. Per ulteriori informazioni visitare la pagina <a href="contatti.html">contatti</a>
+		<p>Lo zoo prevede uno sconto per grandi gruppi di visitatori. E&apos; attrezzato inoltre con un parcheggio per bus e vengono organizzati su richiesta guide turistiche specializzate che offriranno alla vostra comitiva la loro conoscenza sulle specie e la loro vita selvatica. Per ulteriori informazioni visitare la pagina <a href="contatti.html">contatti</a></p>
 		<h4 id="bus">Servizio bus</h4>
 		<p>Lo zoo è collegato via bus alla città di Padova e ai suoi punti di maggior interesse.</p>
 		<h4 id="pronto-soccorso">Primo soccorso</h4>
@@ -122,7 +122,7 @@ sub servizi{
 		<p>All\'interno dello zoo è possibile trovare vari punti di ristoro e fontane d\'acqua potabile gratuite.</p>
 		<h4 id="accessibilita">Accessibilità</h4>
 		<p>Lo zoo è attrezzato per accogliere tutti, dai grandi ai piccini senza dimenticare le persone con difficoltà a deambulare.
-		In particolare abbiamo: <br />
+		In particolare abbiamo:</p> <br />
 		<ul>
 			<li>Servizi igienici attrezzati con fasciatoio</li>
 			<li>Servizi igienici per portatori di handicap</li>
