@@ -99,9 +99,8 @@ my $area_element = $xpc -> findnodes("//zoo:area[\@id=$area]", $doc)->get_node(1
 $area_element->appendChild($new_animal);
 
 my $xmlschema = XML::LibXML::Schema->new( location => "../xml/animal.xsd" );
-if (!eval { $xmlschema->validate( $doc ); }) {
+if ($xmlschema->validate( $doc )) {
 	print $page->redirect(-URL=>"nuovo_animale.cgi?error=Creazione animale non riuscita - validazione xml non riuscita");
-	unlink("$upload_dir/$filename");
 	exit;
 }
 
