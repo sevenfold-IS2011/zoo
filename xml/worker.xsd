@@ -29,7 +29,7 @@
         <xs:element name="username" type ="xs:string"/>
         <xs:element name="password" type ="xs:string"/>
         <xs:element name="nome" type ="xs:string"/>
-        <xs:element name="esso" type ="xs:string"/>
+        <xs:element name="sesso" type ="xs:string"/>
         <xs:element name="eta" type ="xs:integer" default="-1"/>
     </xs:sequence>
 </xs:complexType>
