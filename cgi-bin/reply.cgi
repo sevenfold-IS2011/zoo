@@ -671,19 +671,19 @@ if ($watDo eq "areas"){
 			}
 			my $zoo = $area->parentNode();
 			$zoo->removeChild($area);
-			if($modified){
-				my $doc2 = $parser->parse_string($root->toString());
-				my $xmlschema = XML::LibXML::Schema->new( location => "../xml/animal.xsd" );
-				if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
-					if ($noscript eq "true") {
-						print $page->redirect( -URL => "gestione_animali.cgi?error=Richiesta errata - validazione xml non riuscita.");
-						exit;
-					}
-					print $page->header();
-					print '
-								<h3>Richiesta errata - validazione xml non riuscita</h3>';
+			
+			my $doc2 = $parser->parse_string($root->toString());
+			my $xmlschema = XML::LibXML::Schema->new( location => "../xml/animal.xsd" );
+			if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
+				if ($noscript eq "true") {
+					print $page->redirect( -URL => "gestione_animali.cgi?error=Richiesta errata - validazione xml non riuscita.");
 					exit;
 				}
+				print $page->header();
+				print '
+							<h3>Richiesta errata - validazione xml non riuscita</h3>';
+				exit;
+			}	
 			open(XML,'>../xml/animals.xml') || file_error();
 			print XML $root->toString();
 			close(XML);
@@ -699,7 +699,6 @@ if ($watDo eq "areas"){
 				$parent->removeChild($temp);
 			}
 		}
-		if($modified){
 			my $doc2 = $parser->parse_string($root->toString());
 			my $xmlschema = XML::LibXML::Schema->new( location => "../xml/animal.xsd" );
 			if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
