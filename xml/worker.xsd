@@ -8,10 +8,10 @@
 <xs:element name="workers" type="zoo:Tworkers"/>
 
 <xs:complexType name="Tworkers">
-    <xs:all>
-        <xs:element name="impiegato" type ="zoo:Timpiegato" maxOccurs="unbounded" />
-        <xs:element name="manager" type ="zoo:Tmanager" maxOccurs="unbounded" />
-    </xs:all>
+    <xs:sequence  maxOccurs="unbounded">
+        <xs:element name="impiegato" type ="zoo:Timpiegato"  maxOccurs="unbounded"/>
+        <xs:element name="manager" type ="zoo:Tmanager"  maxOccurs="unbounded"/>
+    </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="Timpiegato">
