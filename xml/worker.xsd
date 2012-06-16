@@ -9,8 +9,8 @@
 
 <xs:complexType name="Tworkers">
     <xs:sequence  maxOccurs="unbounded">
-        <xs:element name="impiegato" type ="zoo:Timpiegato"  maxOccurs="unbounded"/>
-        <xs:element name="manager" type ="zoo:Tmanager"  maxOccurs="unbounded"/>
+        <xs:element name="impiegato" type ="zoo:Timpiegato" minOccurs="0" />
+        <xs:element name="manager" type ="zoo:Tmanager" minOccurs="0"/>
     </xs:sequence>
 </xs:complexType>
 
