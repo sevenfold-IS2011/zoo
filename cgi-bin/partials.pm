@@ -139,9 +139,11 @@ sub login{
 	'<div id="login">
 		 <h2>Per favore autenticarsi per l&apos;accesso all&apos;area riservata</h2>
 		 <form action="_login.cgi" method="post" accept-charset="utf-8">
-			 <label for="username">Username</label><input type="text" name="username" value="" placeholder="username"><br />
-			 <label for="password">Password</label><input type="password" name="password" value=""placeholder="password">
-			 <p><input type="submit" value="Login &rarr;"></p>
+			 <fieldset>
+			 <label for="username">Username</label><input type="text" id ="username" name="username" value="" /><br />
+			 <label for="password">Password</label><input type="password" id="password" name="password" value="" />
+			 <br /><input type="submit" value="Login &rarr;" />
+			</fieldset>
 		 </form>
 	 </div>';
 }
