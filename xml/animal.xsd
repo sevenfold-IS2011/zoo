@@ -9,13 +9,13 @@
 
 <xs:complexType name="Tzoo">
     <xs:sequence>
-        <xs:element name="area" type="zoo:Tarea" maxOccurs="unbounded"/>
+        <xs:element name="area" type="zoo:Tarea" maxOccurs="unbounded" minOccurs="0"/>
     </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="Tarea">
     <xs:sequence>
-        <xs:element name="animale" type="zoo:Tanimale" maxOccurs="unbounded"/>
+        <xs:element name="animale" type="zoo:Tanimale" maxOccurs="unbounded" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="posizione" type="xs:string" use="required"/>
