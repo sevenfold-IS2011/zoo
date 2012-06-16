@@ -35,20 +35,20 @@ sub header{
 	' <div id="header">
   		<div id="logo">
 				<div style="text-align:center;">
-					<a href="index.cgi"><img src="../images/logo.png" width="300" accesskey="h" tabindex="1" alt="logo"/></a>
+					<a href="index.cgi"><img src="../images/logo.png" width="300" alt="logo"/></a>
 				</div>';
 	print
 	'</div>
 			<div id="nav">
 				<ul class="nav">
-					<li class="item chi-siamo"><a href="chi-siamo.cgi" accesskey="c" tabindex="2" >Chi siamo</a></li>
-					<li class="item aree"><a href="area.cgi" accesskey="a" tabindex="3" >Aree</a></li>
-					<li class="item animali"><a href="animali.cgi" accesskey="n" tabindex="4" >Animali</a></li>
-					<li class="item servizi"><a href="servizi.cgi" accesskey="s" tabindex="5" >Servizi</a></li>';
+					<li class="item chi-siamo"><a href="chi-siamo.cgi" >Chi siamo</a></li>
+					<li class="item aree"><a href="area.cgi" >Aree</a></li>
+					<li class="item animali"><a href="animali.cgi" >Animali</a></li>
+					<li class="item servizi"><a href="servizi.cgi">Servizi</a></li>';
 	if (!$sid){
-					print '<li class="item login"><a href="login.cgi" accesskey="l" tabindex="6">Login dipendenti</a></li>';
+					print '<li class="item login"><a href="login.cgi" >Login dipendenti</a></li>';
 				}else{
-					print '<li class="item area-privata"><a href="area_privata.cgi" accesskey="p" tabindex="7">Area privata</a></li>';
+					print '<li class="item area-privata"><a href="area_privata.cgi">Area privata</a></li>';
 				}
 	print'
 				</ul>
@@ -139,9 +139,11 @@ sub login{
 	'<div id="login">
 		 <h2>Per favore autenticarsi per l&apos;accesso all&apos;area riservata</h2>
 		 <form action="_login.cgi" method="post" accept-charset="utf-8">
-			 <label for="username">Username</label><input type="text" name="username" value="" placeholder="username"><br />
-			 <label for="password">Password</label><input type="password" name="password" value=""placeholder="password">
-			 <p><input type="submit" value="Login &rarr;"></p>
+			 <fieldset>
+			 <label for="username">Username</label><input type="text" id ="username" name="username" value="" /><br />
+			 <label for="password">Password</label><input type="password" id="password" name="password" value="" />
+			 <br /><input type="submit" value="Login &rarr;" />
+			</fieldset>
 		 </form>
 	 </div>';
 }
@@ -195,11 +197,11 @@ sub privateHeader{
 		</div>
 		<div id="nav">
 			<ul class="nav">
-				<li class="item chi-siamo"><a href="chi-siamo.cgi" accesskey="c" tabindex="2">Chi siamo</a></li>
-				<li class="item aree"><a href="area.cgi" accesskey="a" tabindex="3">Aree</a></li>
-				<li class="item animali"><a href="animali.cgi" accesskey="n" tabindex="4">Animali</a></li>
-				<li class="item servizi"><a href="servizi.cgi" accesskey="s" tabindex="5">Servizi</a></li>
-				<li class="item logout"><a href="logout.cgi" accesskey="l" tabindex="6">Logout</a></li>
+				<li class="item chi-siamo"><a href="chi-siamo.cgi" >Chi siamo</a></li>
+				<li class="item aree"><a href="area.cgi">Aree</a></li>
+				<li class="item animali"><a href="animali.cgi" >Animali</a></li>
+				<li class="item servizi"><a href="servizi.cgi" >Servizi</a></li>
+				<li class="item logout"><a href="logout.cgi">Logout</a></li>
 			</ul>
 		</div>
 	</div>';
@@ -214,7 +216,7 @@ sub privateHeader{
 sub privateArea{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
-	print '<div id = "right"><h4>Per favore utilizzare il menù a sinistra per accedere all\'area desiderata</h4></div>';
+	print '<div id = "right"><h4>Per favore utilizzare il menù di navigazione per accedere all\'area desiderata</h4></div>';
 	footer();
 	print '</div>';
 }
