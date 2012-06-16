@@ -35,7 +35,7 @@ if (Functions::check_credentials($input{"username"}, $input{"password"})){
 	my $cookie = $page->cookie(CGISESSID => $session->id);
 	print $page->redirect( -URL => "area_privata.cgi", -cookie=>$cookie);
 }else{
-	print $page->redirect( -URL => "animali.cgi");
+	print $page->redirect( -URL => "login.cgi?error=Combinazione username/password errata.");
 }
 
 exit;

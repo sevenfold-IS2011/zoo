@@ -410,14 +410,14 @@ sub editPassword{
 	<div id = "right">
 		<h3>Modifica password</h3>
 		<div class = "form-wrapper">
-			<fieldset>
-				<form action="_modifica_password.cgi" method="post" accept-charset="utf-8">
-			  	<label for="old_password">Vecchia password</label><input type="password" name="old_password" value="" placeholder="Vecchia password"><br />
-			  	<label for="password">Nuova password</label><input type="password" name="password" value="" placeholder="Nuova password">
-			  	<label for="password_confirm">Conferma nuova Password:</label><input type="password" name="password_confirm" value="" placeholder="Nuova password">
+			<form action="_modifica_password.cgi" method="post" accept-charset="utf-8">
+				<fieldset>
+			  	<label for="old_password">Vecchia password</label><input type="password" name="old_password" value="" placeholder="Vecchia password" id="old_password"><br />
+			  	<label for="password">Nuova password</label><input type="password" name="password" value="" placeholder="Nuova password" id="password">
+			  	<label for="password_confirm">Conferma nuova Password:</label><input type="password" name="password_confirm" value="" placeholder="Nuova password" id="password_confirm">
 			  	<p><input type="submit" value="Modifica password"></p>
-				</form>
-			</fieldset>
+				</fieldset>
+			</form>
 		</div>
 	</div>';
 	footer();
