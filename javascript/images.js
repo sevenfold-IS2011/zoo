@@ -1,5 +1,5 @@
 function show_image(button){
-	var path = button.getAttribute("image_path");
+	var path = button.parentNode.parentNode.childNodes[7].innerHTML;
 	//alert(path);
 	show(path);
 }
