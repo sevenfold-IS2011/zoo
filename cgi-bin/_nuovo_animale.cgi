@@ -98,8 +98,9 @@ $xpc->registerNs('zoo', 'http://www.zoo.com');
 my $area_element = $xpc -> findnodes("//zoo:area[\@id=$area]", $doc)->get_node(1); #xpath parte da 1 
 $area_element->appendChild($new_animal);
 
+my $doc2 = $parser->parse_string($root->toString());
 my $xmlschema = XML::LibXML::Schema->new( location => "../xml/animal.xsd" );
-if ($xmlschema->validate( $doc )) {
+if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
 	print $page->redirect(-URL=>"nuovo_animale.cgi?error=Creazione animale non riuscita - validazione xml non riuscita");
 	exit;
 }

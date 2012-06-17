@@ -1,29 +1,26 @@
 <?xml version="1.0"?>
 <xs:schema
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		xmlns:zoo="http://www.zoo.com"
     targetNamespace="http://www.zoo.com"
     elementFormDefault="qualified">
 
-<xs:element name="zoo" type="Tzoo"/>
+<xs:element name="magazzino" type="zoo:Tmagazzino"/>
 
-<xs:complexType type="Tzoo">
+<xs:complexType name="Tmagazzino">
     <xs:sequence>
-        <xs:element name="magazzino" type="Tmagazzino" />
+        <xs:element name="cibo" type="zoo:Tcibo" maxOccurs="unbounded" minOccurs="0"/>
     </xs:sequence>
+    
 </xs:complexType>
 
-<xs:complexType type="Tmagazzino">
+<xs:complexType name="Tcibo">
     <xs:sequence>
-        <xs:element name="cibo" type="Tcibo"/>
+        <xs:element name="area" type="xs:string" maxOccurs="unbounded" minOccurs="0"/>
     </xs:sequence>
-    <xs:attribute name="id" type="xs:integer" use="required"/>
-    <xs:attribute name="nome" type="xs:integer" use="required"/>
-</xs:complexType>
-
-<xs:complexType type="Tcibo">
-    <xs:sequence>
-        <xs:element name="area" type="xs:string"/>
-    </xs:sequence>
+		<xs:attribute name="quantita" type="xs:float" use="required"/>
+    <xs:attribute name="nome" type="xs:string" use="required"/>
+		<xs:attribute name="id" type="xs:integer" use="required"/>
 </xs:complexType>
 
 </xs:schema>

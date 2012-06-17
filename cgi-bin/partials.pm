@@ -268,10 +268,10 @@ sub newArea{
 		<div class = "form-wrapper">
 			<form action="_nuova_area.cgi" method="post" accept-charset="utf-8">
 			  <fieldset>
-			    <label for="name">Nome</label><input type="text" name="nome" value="" /><br />
-			    <label for="posizione">Posizione</label><input type="text" name="posizione" value="" />
-			    <label for="cibo">Cibo giornaliero (Kg)</label><input type="text" name="cibo" value="" />
-			    <p><input type="submit" value="Crea Area" /></p>
+			    <label for="name">Nome:</label><input type="text" name="nome" /><br/>
+			   <label for="posizione">Posizione:</label><input type="text" name="posizione" /><br/>
+			   <label for="cibo">Cibo giornaliero (Kg):</label><input type="text" name="cibo" /><br/>
+			   <input type="submit" value="Crea Area" />
 			  </fieldset>
 			</form>
 		</div>
@@ -287,8 +287,8 @@ sub updateWarehouse{
 		<h4>Aggiungi tipologia di cibo:</h4>
 		<div class = "form-wrapper">
 			<form action="_nuovo_cibo.cgi" method="post" accept-charset="utf-8">
-			  <label for="nome">Nome: </label><input type="text" name="nome" value=""  />
-			  <label for="quanitita">Quantita: </label><input type="text" name="quantita" value="" />';
+			  <label for="nome">Nome: </label><input type="text" name="nome" value=""  /></br>
+			  <label for="quanitita">Quantita: </label><input type="text" name="quantita" value="" /></br>';
 				areaCheckbox(Functions::get_areas);
 				print '
 			  <p><input type="submit" value="Aggiungi"/></p>
@@ -353,14 +353,14 @@ sub newUser{
 		<div class = "form-wrapper">
 			<form action="_nuovo_utente.cgi" method="post" accept-charset="utf-8">
 			  <fieldset>
-			  <label for="tipo">Tipo</label><select name="tipo"><option value="impiegato">Impiegato</option><option value="manager">Manager</option></select><br />
-			  <label for="nome">Nome</label><input type="text" name="nome" value="" ><br />
-			  <label for="sesso">Sesso</label><select name="sesso"><option value="M">M</option><option value="F">F</option></select><br />
-			  <label for="eta">Et&agrave;</label><input type="text" name="eta" value=""><br />
-			  <label for="username">Username</label><input type="text" name="username" value="" ><br />
-			  <label for="password">Password</label><input type="password" name="password" value="" >
-			  <label for="password">Conferma </label><input type="password" name="password2" value="" >
-			  <p><input type="submit" value="Crea Utente"></p>
+			  <label for="tipo">Tipo:</label><select name="tipo"><option value="impiegato">Impiegato</option><option value="manager">Manager</option></select><br />
+			  <label for="nome">Nome:</label><input type="text" name="nome" value="" ><br />
+			  <label for="sesso">Sesso:</label><select name="sesso"><option value="M">M</option><option value="F">F</option></select><br />
+			  <label for="eta">Et&agrave;:</label><input type="text" name="eta" value=""><br />
+			  <label for="username">Username:</label><input type="text" name="username" value="" ><br />
+			  <label for="password">Password:</label><input type="password" name="password" value="" ><br />
+			  <label for="password">Conferma:</label><input type="password" name="password2" value="" ><br />
+			  <input type="submit" value="Crea Utente">
 			  </fieldset>
 			</form>
 		</div>
@@ -414,9 +414,9 @@ sub editPassword{
 		<div class = "form-wrapper">
 			<form action="_modifica_password.cgi" method="post" accept-charset="utf-8">
 				<fieldset>
-			  	<label for="old_password">Vecchia password</label><input type="password" name="old_password" value=""  id="old_password"><br />
-			  	<label for="password">Nuova password</label><input type="password" name="password" value=""  id="password">
-			  	<label for="password_confirm">Conferma nuova Password:</label><input type="password" name="password_confirm" value=""  id="password_confirm">
+			  	<label for="old_password">Vecchia password:</label><input type="password" name="old_password" value=""  id="old_password"><br />
+			  	<label for="password">Nuova password:</label><input type="password" name="password" value=""  id="password"><br />
+			  	<label for="password_confirm">Conferma nuova Password:</label><input type="password" name="password_confirm" value=""  id="password_confirm"><br />
 			  	<p><input type="submit" value="Modifica password"></p>
 				</fieldset>
 			</form>
@@ -572,6 +572,7 @@ sub privateMenu{
 				</div>';
 }
 
+=d
 sub newUser{
 	print '<div id = "content">';
 	privateMenu($_[0], $_[1]);
@@ -596,6 +597,7 @@ sub newUser{
 	footer();
 	print '</div>';
 }
+=cut
 
 sub edit_user{
 	print '<div id = "content">';

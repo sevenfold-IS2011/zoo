@@ -1,4 +1,4 @@
 Cose da fare:
 -nome del file uploadato (immagini animali) univoco
 -controlli su modifica_password e modifica_utente
--_modifica_password
+-link in giro per le pagine (esempio: quando vai da un animale serve un link per l'area)

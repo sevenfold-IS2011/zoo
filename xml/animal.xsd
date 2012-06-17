@@ -3,7 +3,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:zoo="http://www.zoo.com"
 		targetNamespace="http://www.zoo.com"
-    elementFormDefault="qualified">
+		elementFormDefault="qualified">
 
 <xs:element name="zoo" type="zoo:Tzoo"/>
 
