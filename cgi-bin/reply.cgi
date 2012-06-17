@@ -108,7 +108,7 @@ if ($watDo eq "animals")
 		close(XML);
 
 		if ($noscript eq "true") {
-			$page->redirect(-URL => "gestione_animali.cgi");
+			print $page->redirect(-URL => "gestione_animali.cgi");
 			exit;
 		}
 
