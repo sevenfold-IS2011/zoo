@@ -16,7 +16,10 @@
 			</tr>
 			<xsl:for-each select="zoo:area">
 				<tr>
-					<td scope="row"><xsl:value-of select="@nome"/></td>
+					<td scope="row"><a><xsl:attribute name="href">area.cgi?id=<xsl:value-of select="@id"/></xsl:attribute><xsl:value-of select="@nome"/></a></td>
+					
+					
+					
 					<td><xsl:value-of select="@id"/></td>
 					<td><xsl:value-of select="@posizione"/></td>
 					<td><xsl:value-of select="@cibo_giornaliero"/> Kg</td>
