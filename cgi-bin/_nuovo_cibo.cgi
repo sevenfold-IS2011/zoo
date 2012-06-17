@@ -53,9 +53,13 @@ $new_cibo->setAttribute("quantita",$quantita_cibo);
 my $new_area;
 foreach my $temp (@area_list){
 	if($temp){
-		$new_area = $doc->createElement("area");
-		$new_area->appendTextNode($temp);
-		$new_cibo->appendChild($new_area);
+			my $xpath_exp = "//zoo:cibo/zoo:area[.=\"$temp\"]";
+			my $area_used = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
+			if(!$area_used){
+				$new_area = $doc->createElement("area");
+				$new_area->appendTextNode($temp);
+				$new_cibo->appendChild($new_area);
+			}
 	}
 }
 $root->appendChild($new_cibo);

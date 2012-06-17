@@ -537,9 +537,13 @@ if ($watDo eq "warehouse"){
 	
 			foreach my $temp (@area_list){
 				if($temp){
-					my $nuova_area = $doc->createElement("area");
-					$nuova_area->appendTextNode($temp);
-					$nuovo_cibo->appendChild($nuova_area);
+					my $xpath_exp = "//zoo:cibo/zoo:area[.=\"$temp\"]";
+					my $area_used = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
+					if(!$area_used){
+						my $nuova_area = $doc->createElement("area");
+						$nuova_area->appendTextNode($temp);
+						$nuovo_cibo->appendChild($nuova_area);
+					}
 				}
 			}
 
