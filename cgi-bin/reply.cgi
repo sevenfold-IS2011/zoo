@@ -255,7 +255,7 @@ if ($watDo eq "users") {
 		$user->parentNode()->removeChild($user);
 		
 		my $doc2 = $parser->parse_string($root->toString());
-		my $xmlschema = XML::LibXML::Schema->new( location => "../xml/workers.xsd" );
+		my $xmlschema = XML::LibXML::Schema->new( location => "../xml/worker.xsd" );
 		if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
 			if ($noscript eq "true") {
 				print $page->redirect( -URL => "gestione_utenti.cgi?error=Richiesta errata - validazione xml non riuscita.");
@@ -353,7 +353,7 @@ if ($watDo eq "users") {
 
 		if($modified){
 			my $doc2 = $parser->parse_string($root->toString());
-			my $xmlschema = XML::LibXML::Schema->new( location => "../xml/workers.xsd" );
+			my $xmlschema = XML::LibXML::Schema->new( location => "../xml/worker.xsd" );
 			if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
 				if ($noscript eq "true") {
 					print $page->redirect( -URL => "gestione_utenti.cgi?error=Richiesta errata - validazione xml non riuscita.");
@@ -391,7 +391,7 @@ if ($watDo eq "warehouse"){
 					<h3>Richiesta errata - parametro id non definito</h3>';
 		exit;
 	}
-	if ($action eq "add" || $action eq "remove" ) {
+	if ($action eq "Aggiungi" || $action eq "Rimuovi" ) {
 		if(!$amount || (!isint($amount) && !isfloat($amount)) || $amount < 0 ){# se $amount esiste, è > 0 e !(è un intero o un float)
 			if ($noscript eq "true") {
 				print $page->redirect( -URL => "gestione_magazzino.cgi?error=Richiesta errata - quantità non corretta.");
@@ -421,11 +421,11 @@ if ($watDo eq "warehouse"){
 		$new_cibo->setAttribute("id",$cibo_id);
 		$new_cibo->setAttribute("nome",$nome->getData);
 		my $new_quantita;
-		if ($action eq "add") {
+		if ($action eq "Aggiungi") {
 			$new_quantita = $quantita->getData + $amount;
 		}
 		else{
-			if ($action eq "remove") {
+			if ($action eq "Rimuovi") {
 				$new_quantita = $quantita->getData - $amount;
 			}
 		}
@@ -445,6 +445,7 @@ if ($watDo eq "warehouse"){
 		
 		my $doc2 = $parser->parse_string($root->toString());
 		my $xmlschema = XML::LibXML::Schema->new( location => "../xml/warehouse.xsd" );
+		
 		if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
 			if ($noscript eq "true") {
 				print $page->redirect( -URL => "gestione_magazzino.cgi?error=Richiesta errata - validazione xml non riuscita.");
@@ -455,6 +456,7 @@ if ($watDo eq "warehouse"){
 						<h3>Richiesta errata - validazione xml non riuscita</h3>';
 			exit;
 		}
+
 		open(XML,'>../xml/warehouse.xml') || file_error();
 		print XML $root->toString();
 		close(XML);
@@ -546,7 +548,7 @@ if ($watDo eq "warehouse"){
 		#}
 		if($modified){
 			my $doc2 = $parser->parse_string($root->toString());
-			my $xmlschema = XML::LibXML::Schema->new( location => "../xml/workers.xsd" );
+			my $xmlschema = XML::LibXML::Schema->new( location => "../xml/warehouse.xsd" );
 			if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
 				if ($noscript eq "true") {
 					print $page->redirect( -URL => "gestione_magazzino.cgi?error=Richiesta errata - validazione xml non riuscita.");
