@@ -64,5 +64,11 @@
 			<eta>35</eta>
 		</impiegato>
 		
-
+	<manager>
+		<username>ombretta</username>
+		<password>zxFSwnannEpRc</password>
+		<nome>Ombretta Gaggi</nome>
+		<sesso>F</sesso>
+		<eta>35</eta>
+	</manager>
 </workers>
