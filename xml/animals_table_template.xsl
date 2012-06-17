@@ -18,10 +18,7 @@
 				<xsl:for-each select="zoo:animale">
 					<tr>
 						<td>
-							<a class="button" onclick='edit(this);return false'>
-								<xsl:attribute name="animal_name">
-									<xsl:value-of select="zoo:nome"/>
-								</xsl:attribute> 
+							<a class="button" onclick='edit(this);return false'> 
 								<xsl:attribute name="href">
 									modifica_animale.cgi?noscript=true&amp;name=<xsl:value-of select="zoo:nome"/>
 								</xsl:attribute>
@@ -29,32 +26,31 @@
 							</a>
 						</td>
 						<td>
-							<a href="reply.cgi?.." class="button" onclick='destroy(this);return false'><xsl:attribute name="href">
+							<a class="button" onclick='destroy(this);return false'>
+								<xsl:attribute name="href">
 								reply.cgi?noscript=true&amp;watDo=animals&amp;action=destroy&amp;name=<xsl:value-of select="zoo:nome"/>
 								</xsl:attribute>
-								<xsl:attribute name="animal_name">
-									<xsl:value-of select="zoo:nome"/>
-								</xsl:attribute>
 								Elimina
-							</a>
-						</td>
-						<td scope="row"><xsl:value-of select="../@nome"/></td>
-						<td><xsl:value-of select="zoo:nome"/></td>
-						<td><xsl:value-of select="zoo:eta"/></td>
-						<td><xsl:value-of select="zoo:sesso"/></td>
-						<td>
-							<a class="button" onclick='show_image(this);return false'>
-								<xsl:attribute name="href">
-									<xsl:value-of select="zoo:img"/>
-								</xsl:attribute>
-								Visualizza
-							</a>
-						</td>
-						<td class="hidden"><xsl:value-of select="zoo:img"/></td>
-					</tr>
-				</xsl:for-each>
+						</a>
+					</td>
+					<td scope="row"><xsl:value-of select="../@nome"/></td>
+					<td><xsl:value-of select="zoo:nome"/></td>
+					<td><xsl:value-of select="zoo:eta"/></td>
+					<td><xsl:value-of select="zoo:sesso"/></td>
+					<td>
+						<a class="button" onclick='show_image(this);return false'>
+							<xsl:attribute name="href">
+								<xsl:value-of select="zoo:img"/>
+							</xsl:attribute>
+							Visualizza
+						</a>
+					</td>
+					<td class="hidden"><xsl:value-of select="zoo:img"/></td>
+					<td class="hidden"><xsl:value-of select="zoo:nome"/></td>
+				</tr>
 			</xsl:for-each>
-		</table>
-	</xsl:template>
+		</xsl:for-each>
+	</table>
+</xsl:template>
 </xsl:stylesheet>
 

@@ -140,6 +140,7 @@ sub login{
 		 <h2>Per favore autenticarsi per l&apos;accesso all&apos;area riservata</h2>
 		 <form action="_login.cgi" method="post" accept-charset="utf-8">
 			 <fieldset>
+			 <legend>Inserisci i dati di autenticazione</legend>
 			 <label for="username">Username</label><input type="text" id ="username" name="username" value="" /><br />
 			 <label for="password">Password</label><input type="password" id="password" name="password" value="" />
 			 <br /><input type="submit" value="Login &rarr;" />
@@ -246,6 +247,7 @@ sub editArea{
 			<input type="hidden" name="action" value="update">';
 			print "<input type=\"hidden\" name=\"id\" value=\"$_[2]\">
 			  <fieldset>
+				<legend>Aggiorna i dati dell\'area</legend>
 			    <label for=\"name\">Nome: </label><input type=\"text\" name=\"nome\" value=\"$area_name\"><br/>
 			    <label for=\"posizione\">Posizione: </label><input type=\"text\" name=\"posizione\" value=\"$area_posizione\"><br/>
 			    <label for=\"cibo\">Cibo giornaliero (Kg): </label><input type=\"text\" name=\"cibo\" value=\"$area_cibo\"><br/>
@@ -268,6 +270,7 @@ sub newArea{
 		<div class = "form-wrapper">
 			<form action="_nuova_area.cgi" method="post" accept-charset="utf-8">
 			  <fieldset>
+				<legend>Inserisci i dati per la nuova area</legend>
 			    <label for="name">Nome:</label><input type="text" name="nome" /><br/>
 			   <label for="posizione">Posizione:</label><input type="text" name="posizione" /><br/>
 			   <label for="cibo">Cibo giornaliero (Kg):</label><input type="text" name="cibo" /><br/>
@@ -353,6 +356,7 @@ sub newUser{
 		<div class = "form-wrapper">
 			<form action="_nuovo_utente.cgi" method="post" accept-charset="utf-8">
 			  <fieldset>
+			  <legend>Inserisci i dati del nuovo utente</legend>
 			  <label for="tipo">Tipo:</label><select name="tipo"><option value="impiegato">Impiegato</option><option value="manager">Manager</option></select><br />
 			  <label for="nome">Nome:</label><input type="text" name="nome" value="" ><br />
 			  <label for="sesso">Sesso:</label><select name="sesso"><option value="M">M</option><option value="F">F</option></select><br />
@@ -379,6 +383,7 @@ sub editAnimal{
 			<input type="hidden" name="watDo" value="animals">
 			<input type="hidden" name="action" value="update">
 				<fieldset>
+				<legend>Inserisci i dati aggiornati per l\'animale</legend>
 			  	<label for="nome">nome: </label><input type="text" name="name" id="nome" value="'.$_[2].'" readonly/><br />';
 
 	if ($gender eq "Male"){
@@ -413,6 +418,7 @@ sub editPassword{
 		<h3>Modifica password</h3>
 		<div class = "form-wrapper">
 			<form action="_modifica_password.cgi" method="post" accept-charset="utf-8">
+			<legend>Inserisci la vecchia e la nuova password</legend>
 				<fieldset>
 			  	<label for="old_password">Vecchia password:</label><input type="password" name="old_password" value=""  id="old_password"><br />
 			  	<label for="password">Nuova password:</label><input type="password" name="password" value=""  id="password"><br />
@@ -444,6 +450,7 @@ sub newAnimal{
 		<div class = "form-wrapper">
 			<form action="_nuovo_animale.cgi" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 				<fieldset>
+					<legend>Inserisci i dati per il nuovo animale</legend>
 					<label for="area">area</label><select name="area" id="area">';
 	areaSelect(Functions::get_areas);
 	print '
@@ -615,6 +622,7 @@ sub edit_user{
 				<input type="hidden" name="action" value="update"/>
 				<input type="hidden" name="username" value="'.$_[2].'"/>
 			  <fieldset>
+				<legend>Inserisci i dati aggiornati per l\'utente</legend>
 			  	<label for="tipo">Tipo</label>';
 	if ($is_manager){
 		print'<select name="tipo">
@@ -673,6 +681,7 @@ sub check_food_form{
 			<h2>Inserisci il numero di giorni per il quale vuoi controllare la disponibilità in magazzino</h2>
 			<form action="check_cibo.cgi" method="get" accept-charset="utf-8">
 				<fieldset>
+					<legend>Controllo cibo</legend>
 					<label for="giorni">Giorni:<input type="text" name="giorni" id="giorni" /></label><br />
 					<input type="submit" value="Controlla"/>
 				</fieldset>
