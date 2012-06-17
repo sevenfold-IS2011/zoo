@@ -6,6 +6,6 @@ function handle_response(){
 
 function destroy(button){
 	name = button.parentNode.parentNode.childNodes[8].innerHTML;
-	xmlhttp.open("GET","reply.cgi?watDo=animals&action=destroy&name="+button.getAttribute("animal_name"),true);
+	xmlhttp.open("GET","reply.cgi?watDo=animals&action=destroy&name="+name,true);
 	xmlhttp.send();
 }
