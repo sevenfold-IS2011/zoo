@@ -7,10 +7,10 @@
 		<h4>Di seguito è riportata la lista del personale dello zoo.</h4>
 			<table class="standard" summary="tabella contenete la ista del personale dello zoo">
 				<tr class="title">
-					<td>Nome</td>
-					<td>Età</td>
-					<td>Sesso</td>
-					<td>Tipo</td>
+					<th>Nome</th>
+					<th>Età</th>
+					<th>Sesso</th>
+					<th>Tipo</th>
 				</tr>
 				<xsl:for-each select="zoo:impiegato">
 					<tr>
