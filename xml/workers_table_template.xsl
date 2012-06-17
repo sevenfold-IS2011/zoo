@@ -4,8 +4,7 @@
 	xmlns:zoo="http://www.zoo.com">
 	<xsl:template match="zoo:workers">
 
-			<h4>Di seguito è riportata la lista del personale dello zoo con i relativi dati modificabili (solo per Manager).</h4>
-
+		<h4>Di seguito è riportata la lista del personale dello zoo.</h4>
 			<table class="standard" summary="tabella contenete la ista del personale dello zoo">
 				<tr class="title">
 					<td>Nome</td>
@@ -13,19 +12,19 @@
 					<td>Sesso</td>
 					<td>Tipo</td>
 				</tr>
-				<xsl:for-each select="zoo:employee">
+				<xsl:for-each select="zoo:impiegato">
 					<tr>
-						<td><xsl:value-of select="zoo:name"/></td>
-						<td><xsl:value-of select="zoo:age"/></td>
-						<td><xsl:value-of select="zoo:gender"/></td>
+						<td><xsl:value-of select="zoo:nome"/></td>
+						<td><xsl:value-of select="zoo:eta"/></td>
+						<td><xsl:value-of select="zoo:sesso"/></td>
 						<td>Impiegato</td>
 					</tr>
 				</xsl:for-each>
 				<xsl:for-each select="zoo:manager">
 					<tr>
-						<td><xsl:value-of select="zoo:name"/></td>
-						<td><xsl:value-of select="zoo:age"/></td>
-						<td><xsl:value-of select="zoo:gender"/></td>
+						<td><xsl:value-of select="zoo:nome"/></td>
+						<td><xsl:value-of select="zoo:eta"/></td>
+						<td><xsl:value-of select="zoo:sesso"/></td>
 						<td>Manager</td>
 					</tr>
 				</xsl:for-each>
