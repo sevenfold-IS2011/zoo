@@ -702,7 +702,7 @@ if ($watDo eq "areas"){
 			}
 		}
 			my $doc2 = $parser->parse_string($root->toString());
-			my $xmlschema = XML::LibXML::Schema->new( location => "../xml/animal.xsd" );
+			my $xmlschema = XML::LibXML::Schema->new( location => "../xml/warehouse.xsd" );
 			if (eval { $xmlschema->validate( $doc2 ); } eq undef) {
 				if ($noscript eq "true") {
 					print $page->redirect( -URL => "gestione_animali.cgi?error=Richiesta errata - validazione xml non riuscita.");

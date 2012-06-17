@@ -673,14 +673,16 @@ sub check_food{
 
 sub check_food_form{
 	print'
-			<h2>Inserisci il numero di giorni per il quale vuoi controllare la disponibilità in magazzino</h2>
+			<h4>Inserisci il numero di giorni per il quale vuoi controllare la disponibilità in magazzino</h4>
+			<div class="form-wrapper">
 			<form action="check_cibo.cgi" method="get" accept-charset="utf-8">
 				<fieldset>
 					<label for="giorni">Giorni:<input type="text" name="giorni" id="giorni">
 					<p><input type="submit" value="Controlla"/></p>
 				</fieldet>
 			</form>
-			'
+			</div>
+			';
 }
 
 sub check_food_table{
