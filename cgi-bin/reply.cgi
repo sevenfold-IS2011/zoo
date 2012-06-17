@@ -539,11 +539,18 @@ if ($watDo eq "warehouse"){
 				if($temp){
 					my $xpath_exp = "//zoo:cibo/zoo:area[.=\"$temp\"]";
 					my $area_used = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
-					if(!$area_used){
+					if($area_used && ($area_used->parentNode->textContent eq $old_cibo->textContent) ){
 						my $nuova_area = $doc->createElement("area");
 						$nuova_area->appendTextNode($temp);
 						$nuovo_cibo->appendChild($nuova_area);
 					}
+					else{
+						if(!$area_used){
+							my $nuova_area = $doc->createElement("area");
+							$nuova_area->appendTextNode($temp);
+							$nuovo_cibo->appendChild($nuova_area);
+						}
+						}
 				}
 			}
 

@@ -1,6 +1,6 @@
 <zoo xmlns="http://www.zoo.com" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.zoo.com animal.xsd">
 
-	<area id="1" posizione="nord" nome="scimmie" cibo_giornaliero="7">
+	<area id="1" posizione="nord" nome="scimmie" cibo_giornaliero="1.2">
 		<animale>
 			<nome>Babba</nome>
 			<sesso>Female</sesso>
@@ -15,7 +15,7 @@
 		</animale>
 	</area>
 
-	<area id="2" posizione="nord-2" nome="giraffe" cibo_giornaliero="31.6">
+	<area id="2" posizione="nord-2" nome="giraffe" cibo_giornaliero="3.3">
 		<animale>
 			<nome>Roberta</nome>
 			<sesso>Female</sesso>
@@ -44,7 +44,7 @@
 		</animale>
 	</area>
 
-	<area id="3" posizione="sud-3" nome="cammelli" cibo_giornaliero="30">
+	<area id="3" posizione="sud-3" nome="cammelli" cibo_giornaliero="4.2">
 		<animale>
 			<nome>Carmelo</nome>
 			<sesso>Male</sesso>
@@ -67,7 +67,7 @@
 		</animale>
 	</area>
 
-<area id="4" posizione="esterno-b" nome="tigri" cibo_giornaliero="24.3">
+<area id="4" posizione="esterno-b" nome="tigri" cibo_giornaliero="4.8">
 		<animale>
 			<nome>Ginger</nome>
 			<sesso>Female</sesso>
@@ -81,7 +81,7 @@
 			<img>../images/animals/tigre2.jpg</img>
 		</animale>
 </area>
-<area id="5" posizione="est" nome="canguri" cibo_giornaliero="12.3">
+<area id="5" posizione="est" nome="canguri" cibo_giornaliero="2.3">
 		<animale>
 			<nome>Guru</nome>
 			<sesso>Male</sesso>
@@ -95,4 +95,4 @@
 			<img>../images/animals/canguro2.jpg</img>
 		</animale>
 </area>
-</zoo>
+<area id="6" posizione="ovest" nome="iene" cibo_giornaliero="2.5"><animale><nome>Kiara</nome><sesso>Female</sesso><eta>2</eta><img>../images/animals/iena1.jpg</img></animale><animale><nome>Ed</nome><sesso>Male</sesso><eta>1</eta><img>../images/animals/iena3.jpg</img></animale><animale><nome>Kovu</nome><sesso>Male</sesso><eta>3</eta><img>../images/animals/iena2.jpg</img></animale></area></zoo>
