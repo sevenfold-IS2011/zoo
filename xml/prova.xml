@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <workers xmlns="http://www.zoo.com" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://www.zoo.com worker.xsd">
     <impiegato>
         <username>mario</username>
@@ -10,9 +11,9 @@
     <impiegato>
         <username>maria</username>
         <password>maria</password>
-        <nome>Maria</nome>
+        <nome>Mariaaa</nome>
         <sesso>F</sesso>
-        <eta>51</eta>
+        <eta>443</eta>
     </impiegato>
 
     <impiegato>
@@ -64,11 +65,5 @@
 			<eta>35</eta>
 		</impiegato>
 		
-	<manager>
-		<username>ombretta</username>
-		<password>zxFSwnannEpRc</password>
-		<nome>Ombretta</nome>
-		<sesso>F</sesso>
-		<eta>35</eta>
-	</manager>
-<impiegato><username>ogaggi</username><password>zxPmex6//Xpx6</password><nome>Gaggi</nome><sesso>F</sesso><eta>35</eta></impiegato></workers>
+
+<impiegato><username>lalala</username><password>zxodopTJec/v2</password><nome>lalala</nome><sesso>M</sesso><eta>23</eta></impiegato></workers>
