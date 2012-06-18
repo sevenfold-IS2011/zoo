@@ -62,7 +62,7 @@ sub header{
 sub footer{
 	print '
 	<div id="footer">
-    <p>Monkey Island S.r.l. | P.I. 0349034129384 | Via le man dae simie 32 | Curtarolo (PD) | <a href="mappa.html">mappa del sito</a> <br />
+    <p>Monkey Island S.r.l. | P.I. 0349034129384 | Via le man dae simie 32 | Curtarolo (PD) | <a href="mappa.cgi">mappa del sito</a> <br />
 	    <a href="http://validator.w3.org/check?uri=referer"><img
 	      src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Transitional" height="31" width="88" /></a>
 	  </p>
@@ -131,6 +131,23 @@ sub servizi{
 			<li>Mini club</li>
 			<li>Fontane disperse per il parco per le giornate di calura</li>
 		</ul>    
+	</div>'
+}
+
+sub mappa{
+	print '<div id="content">
+		<h3>Mappa del sito</h3>
+		<p>I seguenti link ipertestuali guidano l\'utente nella ricerca dei contenuti ai quali è interessato</p>
+		<h4>Contenuti esterni</h4>
+		<ul>
+			<li><a href="chi-siamo.cgi">Chi siamo</a></li>
+			<li><a href="area.cgi">Aree dello zoo</a></li>
+			<li><a href="animali.cgi">Gli animali presenti nel nostro zoo</a></li>
+			<li><a href="servizi.cgi">I servizi che offriamo al nostro pubblico</a></li>
+		</ul>
+		<h4><a href="area_privata.cgi">Area Privata</a></h4>
+		<h4>Segreteria clienti:</h4>
+		<p><strong>045-593755<br /><a mailto="info@monkeyisland.it">info@monkeyisland.it</a></strong></p>
 	</div>'
 }
 
