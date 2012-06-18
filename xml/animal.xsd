@@ -20,17 +20,30 @@
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="posizione" type="xs:string" use="required"/>
     <xs:attribute name="nome" type="xs:string" use="required"/>
-    <xs:attribute name="cibo_giornaliero" type="xs:float"/>
+    <xs:attribute name="cibo_giornaliero" type="xs:float" use="required"/>
 </xs:complexType>
 
 <xs:complexType name="Tanimale">
     <xs:sequence>
         <xs:element name="nome" type="xs:string"/>
-        <xs:element name="sesso" type="xs:string"/>
-        <xs:element name="eta" type="xs:integer" default="-1"/>
+        <xs:element name="sesso" type="zoo:Tsesso"/>
+        <xs:element name="eta" type="zoo:Teta"/>
         <xs:element name="img" type="xs:string"/>
     </xs:sequence>
 </xs:complexType>
+
+<xs:simpleType name="Tsesso">
+    <xs:restriction base="xs:string">
+        <xs:enumeration value="Female"/>
+        <xs:enumeration value="Male"/>
+    </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="Teta">
+    <xs:restriction base="xs:integer">
+        <xs:minInclusive value="0"/>
+    </xs:restriction>
+</xs:simpleType>
 
 </xs:schema>
 

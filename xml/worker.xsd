@@ -19,8 +19,8 @@
         <xs:element name="username" type ="xs:string"/>
         <xs:element name="password" type ="xs:string"/>
         <xs:element name="nome" type ="xs:string"/>
-        <xs:element name="sesso" type ="xs:string"/>
-        <xs:element name="eta" type ="xs:integer"/>
+        <xs:element name="sesso" type ="zoo:Tsesso"/>
+        <xs:element name="eta" type="zoo:Teta"/>
     </xs:sequence>
 </xs:complexType>
 
@@ -29,10 +29,23 @@
         <xs:element name="username" type ="xs:string"/>
         <xs:element name="password" type ="xs:string"/>
         <xs:element name="nome" type ="xs:string"/>
-        <xs:element name="sesso" type ="xs:string"/>
-        <xs:element name="eta" type ="xs:integer"/>
+        <xs:element name="sesso" type ="zoo:Tsesso"/>
+        <xs:element name="eta" type="zoo:Teta"/>
     </xs:sequence>
 </xs:complexType>
+
+<xs:simpleType name="Tsesso">
+    <xs:restriction base="xs:string">
+        <xs:enumeration value="F"/>
+        <xs:enumeration value="M"/>
+    </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="Teta">
+    <xs:restriction base="xs:integer">
+        <xs:minInclusive value="0"/>
+    </xs:restriction>
+</xs:simpleType>
 
 </xs:schema>
 
