@@ -1,7 +1,6 @@
 #!/usr/bin/perl
 
 package Functions;
-
 use File::Spec;
 use CGI::Session;
 use XML::XPath;
@@ -10,22 +9,17 @@ use strict;
 use warnings;
 
 
-sub get_name_from_sid{
+sub get_name_from_sid{ #dato un sid in input, ritorna il nome dell'utente relativo
 	my $session = new CGI::Session(undef, $_[0], {File::Spec->tmpdir});
   return $session->param("name");
 }
 
-sub get_username_from_sid{
+sub get_username_from_sid{#dato un sid in input, ritorna l'username dell'utente relativo
 	my $session = new CGI::Session(undef, $_[0], {File::Spec->tmpdir});
   return $session->param("username");
 }
 
-sub edit_animal{
-	my $name = $_[0];
-	print '';
-}
-
-sub get_areaName_from_id{
+sub get_areaName_from_id{#data l'id dell'area in input, ritorna il nome relativo
 	my $id = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
 	my $nodeset = $xp->find("//area[\@id=\"$id\"]/\@nome");
@@ -33,7 +27,7 @@ sub get_areaName_from_id{
 	return $node->getData;
 }
 
-sub get_areaPosizione_from_id{
+sub get_areaPosizione_from_id{#data l'id dell'area in input, ritorna la posizione sulla mappa relativa
 	my $id = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
 	my $nodeset = $xp->find("//area[\@id=\"$id\"]/\@posizione");
@@ -41,7 +35,7 @@ sub get_areaPosizione_from_id{
 	return $node->getData;
 }
 
-sub get_areaCibo_from_id{
+sub get_areaCibo_from_id{#data l'id dell'area in input, ritorna la quantità di cibo giornaliero necessaria per animale
 	my $id = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
 	my $nodeset = $xp->find("//area[\@id=\"$id\"]/\@cibo_giornaliero");
@@ -49,7 +43,7 @@ sub get_areaCibo_from_id{
 	return $node->getData;
 }
 
-sub get_ciboNome_from_id{
+sub get_ciboNome_from_id{#data l'id del cibo in input, ritorna il nome relativo
 	my $id = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/warehouse.xml');
 	my $nodeset = $xp->find("//cibo[\@id=\"$id\"]/\@nome");
@@ -57,13 +51,8 @@ sub get_ciboNome_from_id{
 	return $node->getData;
 }
 
-# 1-> xml, 2-> xpath, ritorna nodeset
-sub run_xpath{
-   	my $xp = XML::XPath->new(filename=>$_[0]);
-	return $xp->find($_[1]);
-}
 
-sub check_credentials{
+sub check_credentials{ #dati in input username e password, controlla che i dati siano corretti. Torna undef in caso negativo e 1 in caso positivo
 	my $username = $_[0];
 	my $pswd = $_[1];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
@@ -82,14 +71,14 @@ sub check_credentials{
 	}
 }
 
-sub crypt_password{
+sub crypt_password{#cripta la password in input e la ritorna
 	my $password = $_[0];
 	my $salt = "zxcluywe6r78w6rusdgfbkejwqytri8esyr mhgdku5u65i75687tdluytosreasky6";
 	return crypt($password, $salt);
 }
 
 
-sub get_employee_name{
+sub get_employee_name{ #dato un username, ritorna il nome
 	my $username = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
 	my $nodeset = $xp->find("//impiegato[username=\"$username\"]/nome | //manager[username=\"$username\"]/nome");
@@ -102,7 +91,7 @@ sub get_employee_name{
 	return $name;
 }
 
-sub is_manager{
+sub is_manager{ #dato un username, controlla se l'user relativo è un manager
 	my $username = get_username_from_sid($_[0]);
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
 	my $nodeset = $xp->find("//manager[username=\"$username\"]/nome");
@@ -111,11 +100,10 @@ sub is_manager{
 	}else{
 		return undef;
 	}
-
 }
 
 
-sub get_areas{
+sub get_areas{#restituisce in un array nelle quali posizioni pari è presente il nome dell'are e nell'immediata posizione successiva (dispari) l'id relativo
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
 	my $nodeset = $xp->find('//@nome | //@id');
 	my @stuff;
@@ -130,9 +118,8 @@ sub get_areas{
 	return @stuff;
 }
 
-sub get_areas_checked{
+sub get_areas_checked{ #dato un cibo in input, ritorna le aree che consumano quel cibo
  	my $cibo_id = $_[0];
-
 	my $parser = XML::LibXML->new;
 	my $doc = $parser->parse_file("../xml/warehouse.xml");
 	my $root = $doc->getDocumentElement();
@@ -146,13 +133,12 @@ sub get_areas_checked{
 		my $temp = $old_aree->get_node($count);
 		if($temp){
 			@aree[$count] = $temp->textContent;
-			#print @aree[$count];
 		}
 	}
 	return @aree;
 }
 
-sub max_area_id{
+sub max_area_id{ #torna l'id massimo delle aree
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
 	my $nodeset = $xp->find('//@id');
 	if (my @nodelist = $nodeset->get_nodelist) {
@@ -169,7 +155,7 @@ sub max_area_id{
 		return 1;
 	}
 }
-sub max_cibo_id{
+sub max_cibo_id{ #torna l'id massimo dei cibi
 	my $xp = XML::XPath->new(filename=>'../xml/warehouse.xml');
 	my $nodeset = $xp->find('//@id');
 	if (my @nodelist = $nodeset->get_nodelist) {
@@ -186,7 +172,7 @@ sub max_cibo_id{
 		return 1;
 	}
 }
-sub area_exists{
+sub area_exists{ #controlla se esiste un'area con uno specifico id
 	my $areaid = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
 	my $nodeset = $xp->find("//area[\@id=$areaid]");
@@ -197,7 +183,7 @@ sub area_exists{
 	}
 }
 
-sub animal_name_taken{
+sub animal_name_taken{ #controlla se esiste un animale con un determinato nome
 	my $areaid = $_[0];
 	my $name = $_[1];
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
@@ -209,7 +195,7 @@ sub animal_name_taken{
 	}
 }
 
-sub cibo_name_taken{
+sub cibo_name_taken{ #controlla se esiste un cibo con un determinato nome
 	my $name = $_[0];
 	print 'nome: '.$name;
 	my $xp = XML::XPath->new(filename=>'../xml/warehouse.xml');
@@ -221,7 +207,7 @@ sub cibo_name_taken{
 	}
 }
 
-sub animal_table{
+sub animal_table{ #crea la tabella per la gestione degli animali
 	my $source = XML::LibXML->load_xml(location => '../xml/animals.xml');
 	my $xslt = XML::LibXSLT->new();
 	my $style_doc = XML::LibXML->load_xml(location=>"../xml/animals_table_template.xsl", no_cdata=>1);
@@ -235,7 +221,7 @@ sub animal_table{
 	return $text;
 }
 
-sub users_table{
+sub users_table{ #crea la tabella per la gestione degli utenti, in base al tipo di utente connesso, identificato dal sid in input
 	if (Functions::is_manager($_[0])){
 		return rendered_template('../xml/workers.xml','../xml/workers_table_template_manager.xsl');
 	} else{
@@ -243,7 +229,7 @@ sub users_table{
 	}
 }
 
-sub warehouse_table(){
+sub warehouse_table(){ #crea la tabella per la gestione del magazzino
 	my $text = rendered_template('../xml/warehouse.xml',"../xml/warehouse_table_template.xsl");
 	#sostituisco nella tabella gli id con il nome delle aree
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
@@ -271,7 +257,7 @@ sub warehouse_table(){
 	return $text;
 }
 # 0->source, 1->template
-sub rendered_template{
+sub rendered_template{ #dato un path per un xml e del relativo xslt, renderizza l'xml con l'xslt
   my $source = XML::LibXML->load_xml(location => $_[0]);
 	my $xslt = XML::LibXSLT->new();
 	my $style_doc = XML::LibXML->load_xml(location=>$_[1], no_cdata=>1);
@@ -284,11 +270,12 @@ sub rendered_template{
 	$text =~ s/$find/$replace/g;
 	return $text;
 }
-sub area_table(){
+
+sub area_table(){ #crea la tabella per la gestione degli animali
 	return rendered_template('../xml/animals.xml','../xml/area_table_template.xsl');
 }
 
-sub username_taken{
+sub username_taken{ #controlla se un username è già in uso
 	my $username = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
 	
@@ -299,24 +286,24 @@ if ($xp->find("//username=\"$username\"")){ #funziona perché torna un booleano
 	}
 }
 
-sub get_animal_gender{
+sub get_animal_gender{ #dato il nome di un animale in input, ne ritorna il sesso
 	my $animal_name = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
 	return $xp->find("//animale[nome=\"$animal_name\"]/sesso")->string_value();
 }
 
-sub get_animal_age{
+sub get_animal_age{ #dato il nome di un animale in input, ne ritorna l'età
 	my $animal_name = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
 	return $xp->find("//animale[nome=\"$animal_name\"]/eta")->string_value();
 }
-sub get_animal_img{
+sub get_animal_img{ #dato il nome di un animale in input, ne ritorna il path per l'immagine
 	my $animal_name = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/animals.xml');
 	return $xp->find("//animale[nome=\"$animal_name\"]/img")->string_value();
 }
 
-sub is_manager_from_username{
+sub is_manager_from_username{ #dato un username in input, controlla se il relativo utente è un manager
 	my $username = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
 	my $size = $xp->find("//manager[username=\"$username\"]")->size();
@@ -327,25 +314,25 @@ sub is_manager_from_username{
 	}
 }
 
-sub get_user_gender{
+sub get_user_gender{ #dato un username in input, ritorna il rispettivo sesso
 	my $username = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
 	return $xp->find("//username[. = \"$username\"]/../sesso")->string_value();
 }
 
-sub get_user_name{
+sub get_user_name{ #dato un username in input, ritorna il rispettivo nome
 	my $username = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
 	return $xp->find("//username[. = \"$username\"]/../nome")->string_value();
 }
 
-sub get_user_age{
+sub get_user_age{#dato un username in input, ritorna la rispettiva età
 	my $username = $_[0];
 	my $xp = XML::XPath->new(filename=>'../xml/workers.xml');
 	return $xp->find("//username[. = \"$username\"]/../eta")->string_value();
 }
 
-sub exhaustion_list{
+sub exhaustion_list{ #dato un numero di giorni in input, stampa la lista dei cibi che andranno in esaurimento in quei giorni
 	my $days = $_[0];
 	my $parser = XML::LibXML->new;
 	my $doc = $parser->parse_file("../xml/warehouse.xml");
@@ -367,7 +354,7 @@ sub exhaustion_list{
 	print "</ul>";
 }
 
-sub check_availability{
+sub check_availability{ #controlla la disponibilità di un dato cibo rispetto a dei dati giorni
 	my $food = $_[0];
 	my $availability = $food -> getAttribute("quantita");
 	my $days = $_[1];
@@ -385,19 +372,16 @@ sub check_availability{
 
 	for(;$arealist->size > 0;){
 		$areanode = $arealist->pop();
-	#	print "checkcoso - controllo ".$areanode->toString()." area è una...".$areanode."<br/>";
 		$daily_use = $daily_use + daily_area_food($areanode->textContent());
 	}
 	if ($availability < ($daily_use * $days)){
-	#	print "checkcoso: --------------------FINISCE------------<br/>";
 		return undef;
 	}
-	#print "checkcoso: --------------ABBASTANZA--------------<br/>";
 	return 1;
 }
 
 
-sub daily_area_food{
+sub daily_area_food{ #dato un id di un area in input, ritorna quanto cibo quell'area consuma in un giorno
 	my $area_id = $_[0];
 	my $parser = XML::LibXML->new;
 	my $doc = $parser->parse_file("../xml/animals.xml");
@@ -409,42 +393,8 @@ sub daily_area_food{
 	my $n_animals = $area->childNodes()->size();
 	my $animal;
 	my $daily_animal_need = $area -> getAttribute("cibo_giornaliero");
-#	print "dailycoso: daily_need: $daily_animal_need, n_animals: $n_animals <br/>";	
 	return ($daily_animal_need * $n_animals);
 }
-#sub orderXML{
-#        my $hashParameters = shift;
-#        my $encoding = $hashParameters->{encoding};
-#        if (!defined($encoding)){
-#                $encoding = "raw";
-#        }
-#
-#        # use HTML::Tidy to order the HTML generated!
-#        my $tidy = HTML::Tidy->new({
-#                'indent'          => 1,
-#                'break-before-br' => 1,
-#                'output-xhtml'    => 1,
-#                'char-encoding'   => $encoding,
-#                'doctype'         => 'strict',
-#        });
-
-#        my $htmlText = $hashParameters->{htmlText};
-
-        # decode the output to utf-8 so it works correctly
- #       $htmlText = decode("utf-8", $htmlText);
-        # clean the HTML
-  #      $htmlText = $tidy->clean($htmlText);
-        # encode it in utf-8 as used in the html pages
-   #     $htmlText = encode("utf-8", $htmlText);
-        # delete the generator produced by HTML Tidy. It's simply useless. Here it's an example:
-        #<meta name="generator" content="HTML Tidy for Linux/x86 (vers 25 March 2009), see www.w3.org" />
-    #    $htmlText =~ s/<meta name="generator".*? \/>\n//;
-        # the transformation may give this error, an empty (and useless) xmlns attribute, better to delete it
-     #   $htmlText =~ s/ ?xmlns="" ?/ /g;
-      #  return $htmlText;
-#}
-
-
 
 1;
 
