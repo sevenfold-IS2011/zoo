@@ -84,7 +84,12 @@ if ($watDo eq "animals")
 		$xpath_exp = $xpath_exp."/zoo:img";
 		my $image_path =  $xpc -> findnodes($xpath_exp, $doc)->get_node(1)->textContent();
 		if($image_path){
-			unlink($image_path);
+			my $tmp = $image_path;
+			my $find = '\.\.';
+			my $replace = '';
+			$tmp =~ s/$find/$replace/g;
+			my $image_dir = "../public_html".$tmp;
+			unlink($image_dir);
 		}
 
 		my $area = $animal->parentNode();
@@ -171,7 +176,9 @@ if ($watDo eq "animals")
 		my $filename = $page->param("image");
 
 		if($filename){
-			my $upload_dir = "../images/animals";
+			my $upload_dir = "../public_html/images/animals";
+			my $upload_path = "../images/animals";
+
 			my ($fname, $path, $extension) = fileparse($filename, '\..*');
 			$filename = $fname.$extension;
 
@@ -189,11 +196,16 @@ if ($watDo eq "animals")
 			my $old_image_node = $xpc -> findnodes($xpath_exp, $doc)->get_node(1);
 			my $old_image_path = $old_image_node -> textContent();
 			if($old_image_path){
-				unlink($old_image_path);
+				my $tmp = $old_image_path;
+				my $find = '\.\.';
+				my $replace = '';
+				$tmp =~ s/$find/$replace/g;
+				my $image_dir = "../public_html".$tmp;
+				unlink($image_dir);
 			}
 			$modified = 1;
 			my $new_image_node = $doc->createElement("img");
-			my $image_path = $upload_dir.'/'.$filename;
+			my $image_path = $upload_path.'/'.$filename;
 			$new_image_node -> appendTextNode($image_path);
 			$old_image_node -> replaceNode($new_image_node);
 		}
@@ -679,7 +691,13 @@ if ($watDo eq "areas"){
 			my @image_path =  $xpc -> findnodes($xpath_exp, $doc);
 			if(@image_path) {
 				foreach my $temp (@image_path){
-					unlink($temp->textContent());
+				
+				my $tmp = $temp->textContent();
+				my $find = '\.\.';
+				my $replace = '';
+				$tmp =~ s/$find/$replace/g;
+				my $image_dir = "../public_html".$tmp;
+				unlink($image_dir);
 				}
 			}
 			my $zoo = $area->parentNode();

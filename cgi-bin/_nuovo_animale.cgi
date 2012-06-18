@@ -56,7 +56,8 @@ if (!$filename){
 	exit;
 	}
 
-my $upload_dir = "../images/animals";
+my $upload_dir = "../public_html/images/animals";
+my $upload_path = "../images/animals";
 
 my ($name, $path, $extension) = fileparse($filename, '\..*');
 $filename = $name.$extension;
@@ -79,9 +80,8 @@ my $gender_element = $doc->createElement("sesso");
 $gender_element->appendTextNode($gender);
 
 my $img_element = $doc->createElement("img");
-my $img_path = $upload_dir.'/'.$filename;
+my $img_path = $upload_path.'/'.$filename;
 $img_element->appendTextNode($img_path);
-
 
 my $age_element = $doc->createElement("eta");
 $age_element->appendTextNode($age);
