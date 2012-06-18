@@ -9,3 +9,4 @@ function destroy(button){
 	xmlhttp.open("GET","reply.cgi?watDo=animals&action=destroy&name="+name,true);
 	xmlhttp.send();
 }
+
