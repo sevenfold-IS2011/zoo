@@ -19,8 +19,7 @@ print $page->header(-charset => 'utf-8'),
 																					 -type => 'image/x-icon'}),
 			 									-meta => {'keywords' => 'zoo padova animali monkey island',
 																	'description' => 'sito ad utilizzo interno dello zoo Monkey Island di Padova',
-																	'author' => '?????????'},
-												-author => '?????????',
+																	'author' => 'LeChuck’s crew'},  
 												-script=>[{-type=>'JAVASCRIPT', -src=>'../javascript/ajax.js'},{-type=>'javascript', -src=>'../javascript/gestione_utenti.js'}],
 												-style=>{'src'=>'../css/master.css'});
 my $error = $page -> param("error") || undef;
